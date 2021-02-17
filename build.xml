@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<project name="coop" default="war" basedir=".">
+    <property name="jboss.deploy.dir" value="D:/wildfly-8.2.1.Final/standalone/deployments" />   
+    <target name="war" description="Create a war file">
+        <zip destfile="cumis.war" basedir="dist/cumis"/>
+        <copy todir="${jboss.deploy.dir}">
+            <fileset dir="." includes="cumis.war"/>
+        </copy>
+    </target>
+</project>   

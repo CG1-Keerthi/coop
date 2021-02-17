@@ -1,0 +1,212 @@
+<!-- <html class="md-html" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="description" content="User login page" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>MOND Integration Suite</title>
+    <link rel="icon" type="image/png" href="images/favicon/mondicon.png">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+        integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous" />
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Exo+2:300,400,700|Roboto:400,700" rel="stylesheet" />
+      <script src="https://code.jquery.com/jquery-3.3.1.js"
+        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.5/angular.min.js"></script>
+    <script type="text/javascript" src="mondLoginController.js?_=3.17"></script>
+    <script src="js/ds/MDUtils.js?_=3.17"></script>
+    <script type="text/javascript" src="vendorjs/base64.js?_=3.17"
+        integrity="sha256-SWwaXxkEtXxF2OHW3C/KVpYb1VqYEkKsuhXX8pdj10A=" crossorigin="anonymous"></script>
+    <script src="assets/js/jquery.gritter.js?_=4.1.698"></script>
+    <script src="https://code.jquery.com/ui/1.8.5/jquery-ui.min.js" crossorigin="anonymous"></script>
+
+    <style>
+        /* @media(max-width: 768px) {
+            #validateOtpBoxFullDiv {
+                width: 100% !important;
+                margin-bottom: 3 !important;
+                margin-top: 0% !important;
+            }
+            #validateOtpHeading {
+                width: 100% !important;
+                font-size: 20px !important;
+            }
+            #validateOtpPasswordCardbody {
+                padding: 5px 6px !important;
+            }
+            #tarmikaLogo {
+                height: 38px !important;
+                margin-bottom: 2% !important;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+        
+        .ym_forgot_password_container {
+            background: linear-gradient(to right, rgba(169, 33, 121, 1) 0%, rgba(84, 46, 145, 1) 100%);
+            font-family: benton-sans, sans-serif;
+        }
+        
+        .ym_forgot_password_content {
+            margin: 12vh auto !important;
+        }
+        
+        .ym_forgot_password_content input {
+            border-radius: 0;
+            padding: 8px 5px;
+            border: 1px solid lightgrey;
+            margin: 0 0 0.5rem;
+            font-size: 15px;
+        }
+        
+        .ym_forgot_password_label {
+            font-family: benton-sans, sans-serif;
+            font-weight: 100;
+            font-size: 15px;
+        }
+        
+        #tarmikaLogo {
+            width: 160px;
+        }
+        
+        #forgotPasswordHeading {
+            margin: 0 0 2rem;
+            font-size: 24px;
+        } */
+    </style>
+
+</head> -->
+
+<!-- <body class="md-body ym_password_body" ng-app="monddesigner" ng-controller="mainController"> -->
+
+    <style>
+        @media(max-width: 768px) {
+            #validateOtpBoxFullDiv {
+                width: 100% !important;
+                margin-bottom: 3 !important;
+                margin-top: 0% !important;
+            }
+            #validateOtpHeading {
+                width: 100% !important;
+                font-size: 20px !important;
+            }
+            #validateOtpPasswordCardbody {
+                padding: 5px 6px !important;
+            }
+            #tarmikaLogo {
+                height: 38px !important;
+                margin-bottom: 2% !important;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+        
+        /* .ym_forgot_password_container {
+            background: linear-gradient(to right, rgba(169, 33, 121, 1) 0%, rgba(84, 46, 145, 1) 100%);
+            font-family: benton-sans, sans-serif;
+        } */
+        
+        .ym_forgot_password_content {
+            margin: 12vh auto !important;
+        }
+        
+        .ym_forgot_password_content input {
+            border-radius: 0;
+            padding: 8px 5px;
+            border: 1px solid lightgrey;
+            margin: 0 0 0.5rem;
+            font-size: 15px;
+        }
+        
+        .ym_forgot_password_label {
+            font-family: benton-sans, sans-serif;
+            font-weight: 100;
+            font-size: 15px;
+        }
+        
+        #tarmikaLogo {
+            width: 160px;
+        }
+        
+        #forgotPasswordHeading {
+            margin: 0 0 2rem;
+            font-size: 24px;
+        }
+    </style>
+<div class="ym_password_body">
+    <div class="row m-0 p-0 ym_forgot_password_container">
+
+        <div class="col-12  col-md-4 col-lg-4 m-0 p-0"></div>
+
+
+
+        <div class="col-12 col-md-4 col-lg-4 m-0 p-0 row d-flex justify-content-center ym_forgot_password_content">
+
+            <img src="assets/images/tarmika-logo-white.png" alt="Tarmika" class="md-center pb-0 mt-2"
+                id="tarmikaLogo">
+
+
+            <div class="col-12 m-0 p-0 d-flex justify-content-center">
+                <div class="card-deck mr-1 ml-1 mb-3" style="width:79%;" id="validateOtpBoxFullDiv">
+
+                    <div class="card">
+                        <div class="card-body text-left" style="padding: 20px 26px;" id="validateOtpPasswordCardbody">
+                            <h2 class="card-text" style="font-size: 28px; font-weight: 400; line-height: 1.2;"
+                                id="validateOtpHeading"> Verifying that it's you </h2>
+
+                            <p class="md-p md-line-height-1x text-justify m-0" style="font-size: 13px;">
+                                For your security, we need to authenticate your request. We've sent a One Time Password
+                                (OTP) to the email <span id="email">{{em}}</span> for help restoring access. Please enter it
+                                below.
+                            </p>
+
+                            <label class="w-100 md-cardlabel">
+                                <p class="text-left mb-0 mt-1" style="font-size: 13px;"><b
+                                        class="ym_forgot_password_label">Enter OTP </b> </p>
+
+                                <input required type="text" class="form-control md-input-height-sm"
+                                    #validateOtpNumber />
+                            </label>
+                            <div style="display: none; font-size: 13px;" class="text-danger" #validateEnterMsg>
+
+                                ! Please enter otp number.
+
+                            </div>
+                            <button type="button" name="button" id="button" class="ym_button"
+                                (click)="validateOtpSubmit()" style="width:100%">Continue</button>
+                            <label class="float-left mt-4 mb-0" style="font-size: 13px;">
+                                <a (click)="resendEmailSubmit('validateotp')" style="color:blue">Resend OTP</a>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+        <div class="col-4 m-0 p-0"></div>
+
+        <div class="row m-0 p-0 md-divider-inner ym_password_footer">
+            <p class="text-center md-size-mini">Copyright &copy; 2018-19 Tarmika All rights reserved</p>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- 
+
+    <script>
+        var params = (new URL(document.location)).searchParams;
+        var emailEncode = params.get("em");
+        var emailDecodeVal = Base64.decode(emailEncode);
+        document.getElementById("email").innerText = emailDecodeVal;
+    </script>
+
+</body>
+
+</html> -->

@@ -1,0 +1,7 @@
+<div class="row">
+    <input matInput class="col-md-8" #selectedYear [matDatepicker]="searchReconciliation_year" placeholder="Year" [formControl]="date">
+    <mat-datepicker-toggle matSuffix [for]="searchReconciliation_year">
+    </mat-datepicker-toggle>
+    <mat-datepicker #searchReconciliation_year startView="multi-year" (yearSelected)="chosenYearHandler($event,searchReconciliation_year)">
+    </mat-datepicker>
+</div>

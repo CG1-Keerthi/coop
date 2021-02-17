@@ -1,0 +1,81 @@
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <div class="ym_hero login-page">
+        <div class="ym_hero_overlay">
+            <div class="ym_header coop_header">
+
+            </div>
+            <div class="ym_title_bar create_business_class_banner coop_title_bar">
+                <div class="ym_title_bar_overlay">
+                    <div class="container">
+                        <img class="signInLogo" src="assets/images/coop-logo.png">
+                    </div>
+                </div>
+            </div>
+            <div class="ym_hero_content mt-5">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-5 offset-lg-3">
+                            <h2 class="loginPageText mb-0">Sign in</h2>
+                            <div class="ym_hero_content_form" style="height:auto">
+                                <div class="ym_form_group">
+                                    <label for="username">Username</label>
+                                    <input type="text" formControlName="username" placeholder="Username" class="form-control alteredForm-control" [ngClass]="{ 'is-invalid': submitted && accessFormFields.username.errors }">
+                                    <!-- <span><a href="#">I forgot my username</a></span> -->
+                                    <div *ngIf="submitted && accessFormFields.username.errors" class="invalid-feedback">
+                                        <div *ngIf="accessFormFields.username.errors.required">Username is required
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ym_form_group">
+                                    <label for="password">Password</label>
+                                    <input type="password" formControlName="password" placeholder="****" class="form-control alteredForm-control" [ngClass]="{ 'is-invalid': submitted && accessFormFields.password.errors }" style="border-radius: 0px !important;">
+                                    <div *ngIf="submitted && accessFormFields.password.errors" class="invalid-feedback">
+                                        <div *ngIf="accessFormFields.password.errors.required">Password is required
+                                        </div>
+                                    </div>
+                                    <span><a (click)="onClickOfForgotPassword()" class="clickableTag">I forgot my password</a></span>
+                                </div>
+                                <div class="ym_form_submit" style="text-align:center">
+                                    <input type="submit" class="ym_button signIn" value="Sign In">
+                                </div>
+
+                                <!-- <div class="ym_divider_line"></div> -->
+                                <!-- <div class="ym_hero_form_footer">
+                  <h3>Don't have an account?</h3>
+                  <div class="ym_hero_form_footer_button">
+                    <a href="mailto:support@tarmika.com?Subject=Sign%20Up" class="ym_button_outline">Sign Up for
+                      Demo</a>
+                  </div>
+                </div> -->
+                            </div>
+                            <!-- <div class="ym_hero_link">
+                <a href="mailto:support@tarmika.com?Subject=Technical%20Support" target="_top" style="cursor:pointer"><i
+                    class="far fa-envelope"></i>
+                  Technical Support</a>
+              </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <div class="ym_hero_footer">
+    <div class="ym_hero_footer_content">
+      <div class="container">
+        <div class="row">
+          <div class="col-xl-8 col-lg-9">
+            <h3>Find out how the TARMIKA Insurance Bridge can help your agency</h3>
+          </div>
+          <div class="col-xl-2 offset-xl-2 col-lg-3 offset-lg-0">
+            <a href="mailto:support@tarmika.com" target="_top" class="ym_button">Contact Us</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> -->
+</form>
+
+<!-- <app-forgotpassword-designer></app-forgotpassword-designer>
+<app-mond-createpassword-designer></app-mond-createpassword-designer>
+<app-mond-validateotp-designer></app-mond-validateotp-designer> -->

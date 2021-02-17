@@ -1,0 +1,40 @@
+<form [formGroup]="homeForm">
+    <div class="ym_header">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="ym_header_logo">
+                        <a href="https://www.cumis.com/" target="_blank"><img src="assets/images/coop-logo.png"></a>
+                    </div>
+                </div>
+                <div class="col-sm-9">
+                    <div class="ym_header_mobile"><i class="fa fa-bars"></i></div>
+                    <div class="ym_header_right">
+                        <ul class="ym_header_nav">
+                            <li><a routerLink="/home/financialReconciliation" skipLocationChange>Financial Reconciliation</a></li>
+                            <li><a routerLink="/home/productMaintenanceComponent" skipLocationChange>Product Maintenance</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <ng-container>
+        <button type="button" class="btn btn-primary" id="sessionTimeout_Btn" data-toggle="modal" data-target="#sessionTime_loading" style="display:none"></button>
+        <div class="modal ym_modal" tabindex="-1" role="dialog" id="sessionTime_loading" aria-labelledby="loadingLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content p-4">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="display:none">
+            <span aria-hidden="true" class="fa">&times;</span>
+          </button>
+                    <p id="sessionTimeOutMessage"></p>
+                    <div class="modal-footer p-0">
+                        <a style="cursor:pointer !important" (click)="reactivateSession()">Click here to activate your session</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+    <router-outlet></router-outlet>
+</form>
+<!-- <alert></alert> -->

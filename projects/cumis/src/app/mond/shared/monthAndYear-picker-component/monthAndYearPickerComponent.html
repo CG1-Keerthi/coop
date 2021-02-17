@@ -1,0 +1,7 @@
+<div class="row">
+    <input matInput class="col-md-8" #selectedMonthAndYear [matDatepicker]="monthAndYearPicker" placeholder="Month" [disabled]="disabledFl" [formControl]="date">
+    <mat-datepicker-toggle matSuffix [for]="monthAndYearPicker">
+    </mat-datepicker-toggle>
+    <mat-datepicker #monthAndYearPicker startView="multi-year" [disabled]="disabledFl" (yearSelected)="chosenYearHandler($event)" (monthSelected)="chosenMonthHandler($event, monthAndYearPicker)">
+    </mat-datepicker>
+</div>

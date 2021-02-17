@@ -1,0 +1,104 @@
+<div class="ym_content">
+    <div class="col-md-12 container">
+        <div class="row">
+            <mat-tab-group class="col-md-12" [(selectedIndex)]="selectedTab">
+                <mat-tab label="Product Search">
+                    <div class="row pt-2 m-0">
+                        <div class="col-md-2 p-2" style="background-color: #ebebf1;">
+                            <h3><i class="fa fa-bars pr-2"></i>Refine your Search</h3>
+                            <!-- <div class="ym_form_group">
+                                <label>Product Type</label> -->
+                            <!-- <div class="ym_form_select">
+                                    <select formControlName="reportClientName" class="p-1" (change)="onChangeOfReportClientName($event)">
+                                        <option selected value="">Select a client Name</option>
+                                        <option value="lais">LAIS</option>
+                                        <option value="lgm">LGM</option>
+                                    </select> -->
+                            <!-- </div> -->
+                            <div class="ym_form_group">
+                                <label>Product Type</label>
+                                <input placeholder="Product Type" [(ngModel)]="productType" (keyup)="getProductTypeDetails($event)" [matAutocomplete]="auto">
+                                <mat-autocomplete #auto="matAutocomplete">
+                                    <mat-option *ngFor="let option of productTypeListData" [value]="option.value">
+                                        {{option.id}}
+                                    </mat-option>
+                                </mat-autocomplete>
+                            </div>
+                            <div class="ym_form_group">
+                                <label>Product Business Model</label>
+                                <div class="ym_form_select">
+                                    <select [(ngModel)]="productBusinessModel">
+                                        <option selected value="">Select Business Model</option>
+                                        <option value="Merchant">Merchant</option>
+                                        <option value="Location">Location</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="ym_form_group">
+                                <label>Product Status</label>
+                                <div class="ym_form_select">
+                                    <select [(ngModel)]="productStatus"> 
+                                        <option selected value="">Select Product Status</option>
+                                        <option value="Active">Active</option>
+                                        <option value="Terminated">Terminated</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="ym_form_group">
+                                <button (click)="onClickOfReset()" class="ym_button" style="margin-right: 10px;"><i
+                                        class="fa fa-undo"></i> Reset</button>
+                                <button (click)="getProductMaintenanceList()" class="ym_button"><i
+                                        class="fa fa-search"></i>
+                                    Search</button>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="m-0 pt-2 pb-2 row" style="background-color: #ebebf1;">
+                                <div class="col-md-6">
+                                    <h2>Product Maintenance</h2>
+                                </div>
+                                <div class="col-md-6">
+                                    <button (click)="onClickOfAddProduct()" class="ym_button float-right">
+                                        <i class="fa fa-plus-square"></i> Add Product</button>
+                                </div>
+                            </div>
+                            <div class="m-0 p-2 row mt-3" style="background-color: #ebebf1;">
+                                <div class="col-md-6 pl-2 pt-2">
+                                    <h3>Product List</h3>
+                                </div>
+                            </div>
+                            <p-table [value]="productMaintenanceListData" selectionMode="single" (onRowSelect)="onProductListRowSelect($event)">
+                                <ng-template pTemplate="header">
+                                    <tr class="ptableHeader">
+                                        <th>Product Type</th>
+                                        <th>Product Name</th>
+                                        <th>Product Business Model</th>
+                                        <th>Product Status</th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-responseData>
+                                    <tr [pSelectableRow]="responseData">
+                                        <td>{{responseData.productType}}</td>
+                                        <td>{{responseData.productName}}</td>
+                                        <td>{{responseData.productBusinessModel}}</td>
+                                        <td>{{responseData.productStatus}}</td>
+                                        <!-- <td>{{responseData.reconciliationHeaderIdentifier}}</td> -->
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+                        </div>
+                    </div>
+                </mat-tab>
+
+                <mat-tab label="Product Details">
+                    <app-product-details-tab [productDetails]="planDetailsData"></app-product-details-tab>
+                </mat-tab>
+
+                <mat-tab label="Validation CheckList">
+
+                </mat-tab>
+            </mat-tab-group>
+        </div>
+    </div>
+</div>

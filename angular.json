@@ -1,0 +1,124 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "cumis": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "projects/cumis",
+      "sourceRoot": "projects/cumis/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/cumis",
+            "index": "projects/cumis/src/index.html",
+            "main": "projects/cumis/src/main.ts",
+            "polyfills": "projects/cumis/src/polyfills.ts",
+            "tsConfig": "projects/cumis/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "projects/cumis/src/favicon.ico",
+              "projects/cumis/src/assets"
+            ],
+            "styles": [
+              "projects/cumis/src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/cumis/src/environments/environment.ts",
+                  "with": "projects/cumis/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "cumis:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "cumis:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "cumis:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/cumis/src/test.ts",
+            "polyfills": "projects/cumis/src/polyfills.ts",
+            "tsConfig": "projects/cumis/tsconfig.spec.json",
+            "karmaConfig": "projects/cumis/karma.conf.js",
+            "assets": [
+              "projects/cumis/src/favicon.ico",
+              "projects/cumis/src/assets"
+            ],
+            "styles": [
+              "projects/cumis/src/styles.css"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/cumis/tsconfig.app.json",
+              "projects/cumis/tsconfig.spec.json",
+              "projects/cumis/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/cumis/e2e/protractor.conf.js",
+            "devServerTarget": "cumis:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "cumis:serve:production"
+            }
+          }
+        }
+      }
+    }},
+  "defaultProject": "cumis"
+}

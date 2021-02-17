@@ -1,0 +1,243 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "../src/assets/css/mond-component.css";
+@import "../src/assets/css/toast.css";
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import "~@ng-select/ng-select/themes/material.theme.css";
+@import "../../../node_modules/primeicons/primeicons.css";
+@import "../../../node_modules/primeng/resources/themes/nova-light/theme.css";
+@import "../../../node_modules/primeng/resources/primeng.min.css";
+
+/* @import '~font-awesome/css/font-awesome.css'; */
+
+.slick-prev:before,
+.slick-next:before {
+    font-family: "slick";
+    font-size: 29px !important;
+    color: #00456a !important;
+}
+
+.slick-prev {
+    left: -34px !important;
+}
+
+
+/* 
+.login-page.ym_hero {
+    
+} */
+
+
+/* Common Stylings */
+
+.tanna-insurance .ym_button.save_button,
+.reninsurance .ym_button.save_button {
+    color: white !important;
+}
+
+.reninsurance .ym_quote_block,
+.woodruff .ym_quote_block {
+    padding-bottom: 70%;
+}
+
+.reninsurance .ym_quote_block h4,
+.woodruff .ym_quote_block h4 {
+    font-size: 15px;
+}
+
+.reninsurance .ym_quote_block a,
+.woodruff .ym_quote_block a {
+    transition: all 0.2s;
+}
+
+._title_bar_overlay {
+    height: 100% !important;
+    background: linear-gradient(to right, rgb(10, 184, 193), rgb(10, 92, 193));
+}
+
+.reninsurance .create_business_class_banner h1 {
+    left: 50%;
+    top: 20% !important;
+    transform: translateX(-50%);
+}
+
+.reninsurance .ym_button.save_button {
+    color: white !important;
+}
+
+.item1 {
+    display: none;
+}
+
+.mat-expansion-panel-body {
+    padding: 5px 10px 16px !important;
+}
+
+.mat-tab-label {
+    font-weight: bold;
+    background-color: #c41230;
+    color: white;
+}
+
+.mat-tab-label-active {
+    opacity: 1 !important;
+}
+
+.mat-tab-group.mat-primary .mat-ink-bar,
+.mat-tab-nav-bar.mat-primary .mat-ink-bar {
+    background-color: #00456a;
+}
+
+.ym_button {
+    padding: 0.5rem 0.5rem;
+    background: #0071b3;
+}
+
+.ym_button.whiteBtn {
+    padding: 0.5rem 0.5rem;
+    background: #fff;
+    color: #00456a;
+}
+
+.ym_button.whiteBtn:hover:enabled {
+    background: #00456a;
+    color: #fff;
+}
+
+.ym_form_select select {
+    background: white;
+}
+
+.ym_hero_overlay {
+    background: #f2f2f2;
+}
+
+.ym_hero_content_form {
+    box-shadow: none;
+    padding: 2rem 2rem 2rem;
+}
+
+.ym_hero_content_logo img {
+    width: 270px;
+}
+
+.signIn {
+    background-color: #CF4910 !important;
+    width: 188px;
+}
+
+.ym_button.signIn:hover:enabled {
+    background-color: #fff !important;
+    border: 1px solid #CF4910 !important;
+    color: #CF4910;
+}
+
+.loginPageText {
+    background-color: #008acc;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    height: 70px;
+}
+
+.ym_title_bar_overlay {
+    background: #fff !important;
+    border: 1px solid #008acc !important;
+}
+
+.ym_title_bar_overlay>.container>img {
+    max-width: 270px;
+    max-height: 87px;
+}
+
+.coop_header {
+    background: #00456a !important;
+    height: 40px;
+}
+
+.coop_title_bar {
+    height: 140px;
+    background: #fff !important;
+}
+
+.signInLogo {
+    margin-top: 2.15rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    color: #fff !important;
+}
+
+.ym_button:hover:enabled {
+    background: #00456a;
+    border: 1px solid white !important;
+}
+
+.ym_header_nav li a {
+    color: #0071b3;
+}
+
+.ym_header_nav li a:hover {
+    color: #00456a;
+}
+
+.ym_header::after {
+    background: #008acc;
+}
+
+.ui-dropdown {
+    min-width: 0px;
+}
+
+.ui-dropdown-label-container {
+    max-width: 100%;
+}
+
+input[type="text"] {
+    width: 100%;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+
+.ym_checkmark {
+    border: 2px solid #00456a;
+}
+
+.ym_form_select::after {
+    color: #00456a;
+}
+
+.ym_button:disabled {
+    color: white;
+    background: rgb(114, 117, 119);
+}
+
+.ym_button.whiteBtn:disabled {
+    color: rgb(114, 117, 119);
+    background: white;
+}
+
+.ym_check .ym_checkmark:after {
+    background: #008acc;
+}
+
+.body .ui-widget {
+    background-color: red;
+}
+
+.p-table-caption {
+    font-family: "Open Sans", "Helvetica Neue", sans-serif;
+    color: black !important;
+    font-weight: bold;
+}
+
+.p-table-caption-container {
+    border: 1px solid #c8c8c8;
+    background-color: #f4f4f4;
+    border-bottom: 0px;
+}

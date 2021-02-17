@@ -1,0 +1,577 @@
+<div class="ym_content">
+    <div class="col-md-12 container">
+        <div class="row">
+            <mat-tab-group class="col-md-12" [(selectedIndex)]="selectedTab">
+                <mat-tab label="Reconciliation Search">
+                    <div class="row pt-2 m-0">
+                        <div class="col-md-2 p-2" style="background-color: #008acc;">
+                            <h3><i class="fa fa-bars"></i>Refine your Search</h3>
+                            <div class="ym_form_group">
+                                <label>Client Name</label>
+                                <div class="ym_form_select">
+                                    <select class="p-1" [(ngModel)]=reportClientName (change)="onChangeOfReportClientName($event)">
+                                        <option selected value="">Select a client Name</option>
+                                        <option value="lais">LAIS</option>
+                                        <option value="lgm">LGM</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="ym_form_group">
+                                <label>Period Month</label>
+                                <app-monthly-picker-component [monthPicked]="reportPeriodMonthSearch" (month)="onClickOfMonth($event)"></app-monthly-picker-component>
+                            </div>
+
+                            <div class="ym_form_group">
+                                <label>Period Year</label>
+                                <app-yearly-picker-component [yearPicked]="reportPeriodYearSearch" (year)="onClickOfYear($event)"></app-yearly-picker-component>
+                            </div>
+                            <div class="ym_form_group">
+                                <button (click)="resetReconciliation()" class="ym_button whiteBtn" style="margin-right: 10px;"><i class="fa fa-undo"></i> Reset</button>
+                                <button *ngIf="searchFl" (click)="getReconcilationRecords()" class="ym_button whiteBtn"><i
+                                        class="fa fa-search"></i>
+                                    Search</button>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="m-0 pt-2 pb-2 row" style="background-color: #008acc;">
+                                <div class="col-md-6">
+                                    <h2>Reconciliation</h2>
+                                </div>
+                                <div *ngIf="addReconFl" class="col-md-6">
+                                    <button (click)="onClickOfAddReconcilation()" class="ym_button whiteBtn float-right">
+                                        <i class="fa fa-plus-square"></i> Add Reconciliation</button>
+                                </div>
+                            </div>
+                            <!-- <h3>Reconciliation List</h3> -->
+                            <div class="m-0 p-1 row mt-3 p-table-caption-container">
+                                <div class="col-md-6 pl-2 pt-2">
+                                    <h3 class="p-table-caption">Reconciliation List</h3>
+                                </div>
+                            </div>
+                            <p-table [value]="reconciliationHeaderSummary" selectionMode="single" [(selection)]="selectedClient" dataKey="reconciliationHeaderIdentifier" (onRowSelect)="onRowSelectOfReconciliation($event)" (onRowUnselect)="onRowUnselectOfReconciliation($event)">
+                                <!-- <ng-template pTemplate="caption">Reconciliation List</ng-template> -->
+                                <ng-template pTemplate="header">
+                                    <tr class="ptableHeader">
+                                        <th>Client Name</th>
+                                        <th>Period Month</th>
+                                        <th>Period Year</th>
+                                        <th>Created By</th>
+                                        <th></th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-reconciliationHeaderSummary>
+                                    <tr [pSelectableRow]="reconciliationHeaderSummary">
+                                        <td>{{reconciliationHeaderSummary.reportClientName}}</td>
+                                        <td>{{reconciliationHeaderSummary.reportPeriodMonth}}</td>
+                                        <td>{{reconciliationHeaderSummary.reportPeriodYear}}</td>
+                                        <td>{{reconciliationHeaderSummary.reportCreatedBy}}</td>
+                                        <td>{{reconciliationHeaderSummary.reconciliationHeaderIdentifier}}</td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+                        </div>
+                    </div>
+                </mat-tab>
+
+                <mat-tab class="mx-3" label="Reconciliation Entry">
+                    <div class="mx-3">
+                        <div class="cm-0 pt-2 pb-2" style="background-color: #008acc;text-align: center;">
+                            <h2>Financial Reconciliation</h2>
+                        </div>
+                        <div class="m-0 pt-2 pb-2 row">
+                            <div class="row p-0 col-12">
+                                <div class="col-md-2 ym_form_group">
+                                    <label>Client</label>
+                                    <div class="ym_form_select">
+                                        <select class="p-1 pb-2" [(ngModel)]="reportClientNameDisp" (change)=checkIfReconciliationReportExists() [disabled]="isDisabledFl">
+                                            <option value=""></option>
+                                            <option value="LAIS">LAIS</option>
+                                            <option value="LGM">LGM</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-2 p-0 ym_form_group">
+                                    <label>Period</label>
+                                    <app-monthly-yearly-picker-component [disabledFl]="isDisabledFl" [month]="reportPeriodMonth" [year]="reportPeriodYear" (monthAndYear)="onClickOfMonthAndYear($event)">
+                                    </app-monthly-yearly-picker-component>
+                                </div>
+
+                                <div class="col-md-2 p-0 ym_form_group">
+                                    <div class="pt-4 mt-1 m-0 ym_checks">
+                                        <label class="ym_check">Tax Remitted by Client
+                                            <input type="checkbox" [(ngModel)]="reportTaxRemitByClientFlag"
+                                                (change)="onChangeOfTaxRemittedByClientCheckBox($event)" [disabled]="isDisabledFl">
+                                            <span class="ym_checkmark"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <!-- <div class="col-md-2 p-0 ym_form_group">
+                                    <label>Tax Remitted by Client</label>
+                                <div class="ym_checks">
+                                    <label class="ym_check">Yes
+                                      <input type="radio" [value]="true">
+                                      <span class="ym_checkmark"></span>
+                                    </label>
+                                    <label class="ym_check">No
+                                      <input type="radio" [value]="false">
+                                      <span class="ym_checkmark"></span>
+                                    </label>
+                                  </div>
+                                </div> -->
+                                <div class="col-md-6 mt-3 p-0">
+                                    <button *ngIf="refreshTotalFl" [disabled]="isDisabledFl" (click)="onClickOfSubmitReconcilation('RefreshReconciliationReportTotalValues')" class="ym_button">
+                                        <i class="fa fa-undo"></i> Refresh Totals</button>
+
+                                    <button *ngIf="calSysValFl" [disabled]="isDisabledFl" (click)="onClickOfSubmitReconcilation( 'FetchSystemCalculatedValues')" class="ym_button ml-1">
+                                        <i class="fa fa-search"></i> Calculate System Values</button>
+
+                                    <button *ngIf="generatReportFl" [disabled]="isDisabledFl" class="dropdown-toggle ym_button dropDownMenu-buton" class="ym_button ml-1" id="viewDropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fa fa-search "></i> Generate FR Discrepancy Report <i class="fa fa-angle-down"></i></button>
+                                    <div class="dropdown-menu" aria-labelledby="viewDropdownMenu">
+                                        <a (click)="createFinancialReconciliationReport('CreateFRDiscrepancyReport')" class="dropdown-item" role="button">FR Discrepancy Report</a>
+                                        <a (click)="createFinancialReconciliationReport('CreateFRReconciliationDetailReport')" class="dropdown-item" role="button">FR Discrepancy Report Details</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Grid 1 - Reconciliation Entry - Premium -->
+                        <!-- <h3> Premium</h3> -->
+                        <div class="m-0 p-1 row mt-3 p-table-caption-container">
+                            <div class="col-md-6 pl-2 pt-2">
+                                <h3 class="p-table-caption">Premium</h3>
+                            </div>
+                        </div>
+                        <p-table #dt [value]="premium" dataKey="premiumProvince" editMode="row">
+                            <!-- <ng-template pTemplate="caption">Premium</ng-template> -->
+                            <ng-template pTemplate="header">
+                                <tr class="ptableHeader">
+                                    <th colspan="1"></th>
+                                    <th colspan="1"></th>
+                                    <th colspan="2">Client Report</th>
+                                    <th colspan="2">System Values</th>
+                                    <th colspan="2">Difference</th>
+                                    <th colspan="1"></th>
+                                </tr>
+                                <tr class="ptableHeader">
+                                    <th></th>
+                                    <th>Province</th>
+                                    <th>Life</th>
+                                    <th>Other</th>
+                                    <th>Life</th>
+                                    <th>Other</th>
+                                    <th>Life</th>
+                                    <th>Other</th>
+                                    <th style="width:8em"></th>
+                                </tr>
+                            </ng-template>
+
+                            <ng-template pTemplate="body" let-premiumRowData let-editing="editing" let-rowInd="rowIndex">
+                                <tr [pEditableRow]="premiumRowData">
+                                    <td></td>
+                                    <td style="text-align:left">
+                                        <p-cellEditor>
+                                            <ng-template pTemplate="input">
+                                                <p-dropdown [options]="premiumProvinceList" (onChange)="onChangeOfPremiumProvince($event,rowInd)" [(ngModel)]="premiumRowData.premiumProvince" placeholder="Select" [style]="{ 'width': '100%'}">
+                                                </p-dropdown>
+                                            </ng-template>
+                                            <ng-template pTemplate="output">
+                                                {{getDropdownDisplayValue(premiumRowData.premiumProvince)}}
+                                            </ng-template>
+                                        </p-cellEditor>
+                                    </td>
+                                    <td style="text-align:right">
+                                        <p-cellEditor>
+                                            <ng-template pTemplate="input">
+                                                <input pInputText type="text" [(ngModel)]="premiumRowData.clientReportLifePremium">
+                                            </ng-template>
+                                            <ng-template pTemplate="output">
+                                                {{premiumRowData.clientReportLifePremium | currency: 'USD'}}
+                                            </ng-template>
+                                        </p-cellEditor>
+                                    </td>
+                                    <td style="text-align:right">
+                                        <p-cellEditor>
+                                            <ng-template pTemplate="input">
+                                                <input pInputText type="text" [(ngModel)]="premiumRowData.clientReportOtherPremium">
+                                            </ng-template>
+                                            <ng-template pTemplate="output">
+                                                {{premiumRowData.clientReportOtherPremium | currency: 'USD'}}
+                                            </ng-template>
+                                        </p-cellEditor>
+                                    </td>
+                                    <td style="text-align:right">{{premiumRowData.sysCalcLifePremium | currency: 'USD'}}
+                                    </td>
+                                    <td style="text-align:right">{{premiumRowData.sysCalcOtherPremium | currency: 'USD'}}
+                                    </td>
+                                    <td style="text-align:right">{{premiumRowData.differenceLifePremium | currency: 'USD'}}
+                                    </td>
+                                    <td style="text-align:right">{{premiumRowData.differenceOtherPremium | currency: 'USD'}}
+                                    </td>
+                                    <td style="text-align:center">
+                                        <button *ngIf="!editing" pButton type="button" pInitEditableRow class="btn-info" (click)="onPremiumRowEditInit(premiumRowData)">
+                                            <i class="fas fa-edit" aria-hidden="true"></i></button>
+                                        <button *ngIf="editing" pButton type="button" pSaveEditableRow class="btn-success" style="margin-right: .5em" (click)="onPremiumRowEditSave(premiumRowData)">
+                                            <i class="fa fa-check" aria-hidden="true"></i></button>
+                                        <button *ngIf="editing" pButton type="button" pCancelEditableRow class="btn-danger" (click)="onPremiumRowEditCancel(premiumRowData, rowInd)">
+                                            <i class="fa fa-times" aria-hidden="true"></i></button>
+                                    </td>
+                                </tr>
+                                <!-- <tr class="font-weight-bold" *ngIf="rowGroupPremiumGridMetadata[ 'Total'].index===r owInd">
+                                    <td><span class="p-ml-2">Total</span></td>
+                                    <td></td>
+                                    <td style="text-align:right">{{premiumRowData.total.clientRepLifeTotalPremium | currency: 'USD'}}</td>
+                                    <td style="text-align:right">{{premiumRowData.total.clientRepOtherTotalPremium | currency: 'USD'}}</td>
+                                    <td style="text-align:right">{{premiumRowData.total.sysCalcLifeTotalPremium | currency: 'USD'}}</td>
+                                    <td style="text-align:right">{{premiumRowData.total.sysCalcOtherTotalPremium | currency: 'USD'}}</td>
+                                    <td style="text-align:right">{{premiumRowData.total.differenceLifeTotalPremium | currency: 'USD'}}</td>
+                                    <td style="text-align:right">{{premiumRowData.total.differenceOtherTotalPremium | currency: 'USD'}}</td>
+                                    <td></td>
+                                </tr> -->
+                            </ng-template>
+                            <ng-template pTemplate="footer">
+                                <tr>
+                                    <td><span class="p-ml-2">Total</span></td>
+                                    <td></td>
+                                    <td style="text-align:right">{{premiumFooterClientRepLifeTotalPremium | currency: 'USD'}}
+                                    </td>
+                                    <td style="text-align:right">{{premiumFooterClientRepOtherTotalPremium | currency: 'USD'}}
+                                    </td>
+                                    <td style="text-align:right">{{premiumFooterSysCalcLifeTotalPremium | currency: 'USD'}}
+                                    </td>
+                                    <td style="text-align:right">{{premiumFooterSysCalcOtherTotalPremium | currency: 'USD'}}
+                                    </td>
+                                    <td style="text-align:right">{{premiumFooterDifferenceLifeTotalPremium | currency: 'USD'}}
+                                    </td>
+                                    <td style="text-align:right">{{premiumFooterDifferenceOtherTotalPremium | currency: 'USD'}}
+                                    </td>
+                                    <td></td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                        <button pButton type="button" class="ym_button" appPtableAddRow [table]="dt" [newRow]="onPremiumNewRow()">
+                            <i class="fa fa-plus-circle" aria-hidden="true"></i> Add Premium</button>
+
+                        <!-- Grid 2 - Reconciliation Entry - Taxes -->
+                        <!-- <h3 class="pt-2">Taxes</h3> -->
+                        <div class="m-0 p-1 row mt-3 p-table-caption-container">
+                            <div class="col-md-6 pl-2 pt-2">
+                                <h3 class="p-table-caption">Taxes</h3>
+                            </div>
+                        </div>
+                        <p-table #tx [value]="taxes" dataKey="taxesProvince" editMode="row">
+                            <!-- <ng-template pTemplate="caption">Taxes</ng-template> -->
+                            <ng-template pTemplate="header">
+                                <tr class="ptableHeader">
+                                    <th colspan="1"></th>
+                                    <th colspan="1"></th>
+                                    <th colspan="2">Client Report</th>
+                                    <th colspan="2">System Values</th>
+                                    <th colspan="2">Difference</th>
+                                    <th colspan="1"></th>
+                                </tr>
+                                <tr class="ptableHeader">
+                                    <th></th>
+                                    <th>Province</th>
+                                    <th>Tax Remit by Dealer</th>
+                                    <th>Tax not Remit by Dealer</th>
+                                    <th>Tax Remit by Dealer</th>
+                                    <th>Tax not Remit by Dealer</th>
+                                    <th>Tax Remit by Dealer</th>
+                                    <th>Tax not Remit by Dealer</th>
+                                    <th style="width:8em"></th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-taxesRowData let-editing="editing" let-taxRowIndex="rowIndex">
+                                <tr [pEditableRow]="taxesRowData">
+                                    <td></td>
+                                    <td style="text-align:left">
+                                        <p-cellEditor>
+                                            <ng-template pTemplate="input">
+                                                <p-dropdown [options]="taxesProvinceList" optionLabel="name" [(ngModel)]="taxesRowData.taxProvince" placeholder="Select" [style]="{ 'width': '100%'}">
+                                                </p-dropdown>
+                                            </ng-template>
+                                            <ng-template pTemplate="output">
+                                                {{getDropdownDisplayValue(taxesRowData.taxProvince)}}
+                                            </ng-template>
+                                        </p-cellEditor>
+                                    </td>
+                                    <td style="text-align:right">
+                                        <p-cellEditor>
+                                            <ng-template pTemplate="input">
+                                                <input pInputText type="text" [(ngModel)]="taxesRowData.clientReportDealerRemitTax">
+                                            </ng-template>
+                                            <ng-template pTemplate="output">
+                                                {{taxesRowData.clientReportDealerRemitTax | currency: 'USD'}}
+                                            </ng-template>
+                                        </p-cellEditor>
+                                    </td>
+                                    <td style="text-align:right">
+                                        <p-cellEditor>
+                                            <ng-template pTemplate="input">
+                                                <input pInputText type="text" [(ngModel)]="taxesRowData.clientReportDealerNotRemitTax">
+                                            </ng-template>
+                                            <ng-template pTemplate="output">
+                                                {{taxesRowData.clientReportDealerNotRemitTax | currency: 'USD'}}
+                                            </ng-template>
+                                        </p-cellEditor>
+                                    </td>
+                                    <td style="text-align:right">{{taxesRowData.sysCalcDealerRemitTax | currency: 'USD'}}
+                                    </td>
+                                    <td style="text-align:right">{{taxesRowData.sysCalcDealerNotRemitTax | currency: 'USD'}}
+                                    </td>
+                                    <td style="text-align:right">{{taxesRowData.differenceDealerRemitTax | currency: 'USD'}}
+                                    </td>
+                                    <td style="text-align:right">{{taxesRowData.differenceDealerNotRemitTax | currency: 'USD'}}
+                                    </td>
+                                    <td style="text-align:center">
+                                        <button *ngIf="!editing" pButton type="button" pInitEditableRow class="btn-info" (click)="onPremiumRowEditInit(taxesRowData)">
+                                            <i class="fas fa-edit" aria-hidden="true"></i></button>
+                                        <button *ngIf="editing" pButton type="button" pSaveEditableRow class="btn-success" style="margin-right: .5em" (click)="onPremiumRowEditSave(taxesRowData)">
+                                            <i class="fa fa-check" aria-hidden="true"></i></button>
+                                        <button *ngIf="editing" pButton type="button" pCancelEditableRow class="btn-danger" (click)="onPremiumRowEditCancel(taxesRowData, taxRowIndex)">
+                                            <i class="fa fa-times" aria-hidden="true"></i></button>
+                                    </td>
+                                </tr>
+                                <!-- <tr class="font-weight-bold" *ngIf="rowGroupTaxesGridMetadata[ 'Total'].index===t axRowIndex">
+                                    <td><span class="p-ml-2">Total</span></td>
+                                    <td></td>
+                                    <td style="text-align:right">{{taxesRowData.total.clientRepTotalDealerRemitTax | currency: 'USD'}}</td>
+                                    <td style="text-align:right">{{taxesRowData.total.clientRepTotalDealerNotRemitTax | currency: 'USD'}}</td>
+                                    <td style="text-align:right">{{taxesRowData.total.sysCalcTotalDealerRemitTax | currency: 'USD'}}</td>
+                                    <td style="text-align:right">{{taxesRowData.total.sysCalcTotalDealerNotRemitTax | currency: 'USD'}}</td>
+                                    <td style="text-align:right">{{taxesRowData.total.differenceTotalDealerRemitTax | currency: 'USD'}}</td>
+                                    <td style="text-align:right">{{taxesRowData.total.differenceTotalDealerNotRemitTax | currency: 'USD'}}</td>
+                                    <td></td>
+                                </tr> -->
+                            </ng-template>
+                            <ng-template pTemplate="footer">
+                                <tr>
+                                    <td><span class="p-ml-2">Total</span></td>
+                                    <td></td>
+                                    <td style="text-align:right">{{taxesFooterClientRepTotalDealerRemitTax | currency: 'USD'}}
+                                    </td>
+                                    <td style="text-align:right">{{taxesFooterClientRepTotalDealerNotRemitTax | currency: 'USD'}}</td>
+                                    <td style="text-align:right">{{taxesFooterSysCalcTotalDealerRemitTax | currency: 'USD'}}
+                                    </td>
+                                    <td style="text-align:right">{{taxesFooterSysCalcTotalDealerNotRemitTax | currency: 'USD'}}
+                                    </td>
+                                    <td style="text-align:right">{{taxesFooterDifferenceTotalDealerRemitTax | currency: 'USD'}}
+                                    </td>
+                                    <td style="text-align:right">{{taxesFooterDifferenceTotalDealerNotRemitTax | currency: 'USD'}}</td>
+                                    <td></td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                        <button pButton type="button" class="ym_button" appPtableAddRow [table]="tx" [newRow]="onTaxesNewRow()">
+                            <i class="fa fa-plus-circle" aria-hidden="true"></i> Add Taxes</button>
+
+                        <!-- Grid 3 - Reconciliation Entry - Commission -->
+                        <!-- <h3 class="pt-2">Commission</h3> -->
+                        <div class="m-0 p-1 row mt-3 p-table-caption-container">
+                            <div class="col-md-6 pl-2 pt-2">
+                                <h3 class="p-table-caption">Commission</h3>
+                            </div>
+                        </div>
+                        <p-table #cm [value]="commission" dataKey="commissionProvince" editMode="row">
+                            <!-- <ng-template pTemplate="caption">Commission</ng-template> -->
+                            <ng-template pTemplate="header">
+                                <tr class="ptableHeader">
+                                    <th colspan="1"></th>
+                                    <th colspan="1"></th>
+                                    <th colspan="2">Client Report</th>
+                                    <th colspan="2">System Values</th>
+                                    <th colspan="2">Difference</th>
+                                    <th colspan="1"></th>
+                                </tr>
+                                <tr class="ptableHeader">
+                                    <th></th>
+                                    <th>Province</th>
+                                    <th>Life</th>
+                                    <th>Other</th>
+                                    <th>Life</th>
+                                    <th>Other</th>
+                                    <th>Life</th>
+                                    <th>Other</th>
+                                    <th style="width:8em"></th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-commissionRowData let-editing="editing" let-commRowIndex="rowIndex">
+                                <tr [pEditableRow]="commissionRowData">
+                                    <td></td>
+                                    <td style="text-align:left">
+                                        <p-cellEditor>
+                                            <ng-template pTemplate="input">
+                                                <p-dropdown [options]="commissionProvinceList" optionLabel="name" [(ngModel)]="commissionRowData.commissionProvince" placeholder="Select" [style]="{ 'width': '100%'}"></p-dropdown>
+                                            </ng-template>
+                                            <ng-template pTemplate="output">
+                                                {{getDropdownDisplayValue(commissionRowData.commissionProvince)}}
+                                            </ng-template>
+                                        </p-cellEditor>
+                                    </td>
+                                    <td style="text-align:right">
+                                        <p-cellEditor>
+                                            <ng-template pTemplate="input">
+                                                <input pInputText type="text" [(ngModel)]="commissionRowData.clientReportLifeCompAmt">
+                                            </ng-template>
+                                            <ng-template pTemplate="output">
+                                                {{commissionRowData.clientReportLifeCompAmt | currency: 'USD'}}
+                                            </ng-template>
+                                        </p-cellEditor>
+                                    </td>
+                                    <td style="text-align:right">
+                                        <p-cellEditor>
+                                            <ng-template pTemplate="input">
+                                                <input pInputText type="text" [(ngModel)]="commissionRowData.clientReportOtherCompAmt">
+                                            </ng-template>
+                                            <ng-template pTemplate="output">
+                                                {{commissionRowData.clientReportOtherCompAmt | currency: 'USD'}}
+                                            </ng-template>
+                                        </p-cellEditor>
+                                    </td>
+                                    <td style="text-align:right">{{commissionRowData.sysCalcLifeCompensationAmount | currency: 'USD'}}</td>
+                                    <td style="text-align:right">{{commissionRowData.sysCalcOtherCompensationAmount | currency: 'USD'}}</td>
+                                    <td style="text-align:right">{{commissionRowData.differenceLifeCompAmt | currency: 'USD'}}
+                                    </td>
+                                    <td style="text-align:right">{{commissionRowData.differenceOtherCompAmt | currency: 'USD'}}
+                                    </td>
+                                    <td style="text-align:center">
+                                        <button *ngIf="!editing" pButton type="button" pInitEditableRow class="btn-info" (click)="onCommissionRowEditInit(commissionRowData)">
+                                            <i class="fas fa-edit" aria-hidden="true"></i></button>
+                                        <button *ngIf="editing" pButton type="button" pSaveEditableRow class="btn-success" style="margin-right: .5em" (click)="onCommissionRowEditSave(commissionRowData)">
+                                            <i class="fa fa-check" aria-hidden="true"></i></button>
+                                        <button *ngIf="editing" pButton type="button" pCancelEditableRow class="btn-danger" (click)="onCommissionRowEditCancel(commissionRowData, commRowIndex)">
+                                            <i class="fa fa-times" aria-hidden="true"></i></button>
+                                    </td>
+                                </tr>
+                                <!-- <tr class="font-weight-bold" *ngIf="rowGroupCommissionGridMetadata[ 'Total'].index===commRowIndex">
+                                    <td><span class="p-ml-2">Total</span></td>
+                                    <td></td>
+                                    <td style="text-align:right">{{commissionRowData.total.clientRepLifeTotalCompAmt | currency: 'USD'}}</td>
+                                    <td style="text-align:right">{{commissionRowData.total.clientRepOtherTotalCompAmt | currency: 'USD'}}</td>
+                                    <td style="text-align:right">{{commissionRowData.total.sysCalcLifeTotalCompAmt | currency: 'USD'}}</td>
+                                    <td style="text-align:right">{{commissionRowData.total.sysCalcOtherTotalCompAmt | currency: 'USD'}}</td>
+                                    <td style="text-align:right">{{commissionRowData.total.differenceLifeTotalCompAmt | currency: 'USD'}}</td>
+                                    <td style="text-align:right">{{commissionRowData.total.differenceOtherTotalCompAmt | currency: 'USD'}}</td>
+                                    <td></td>
+                                </tr> -->
+                            </ng-template>
+                            <ng-template pTemplate="footer">
+                                <tr>
+                                    <td><span class="p-ml-2">Total</span></td>
+                                    <td></td>
+                                    <td style="text-align:right">{{commissionFooterClientRepLifeTotalCompAmt | currency: 'USD'}}
+                                    </td>
+                                    <td style="text-align:right">{{commissionFooterClientRepOtherTotalCompAmt | currency: 'USD'}}</td>
+                                    <td style="text-align:right">{{commissionFooterSysCalcLifeTotalCompAmt | currency: 'USD'}}
+                                    </td>
+                                    <td style="text-align:right">{{commissionFooterSysCalcOtherTotalCompAmt | currency: 'USD'}}
+                                    </td>
+                                    <td style="text-align:right">{{commissionFooterDifferenceLifeTotalCompAmt | currency: 'USD'}}</td>
+                                    <td style="text-align:right">{{commissionFooterDifferenceOtherTotalCompAmt | currency: 'USD'}}</td>
+                                    <td></td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                        <button pButton type="button" class="ym_button" appPtableAddRow [table]="cm" [newRow]="onCommissionNewRow()" [disabled]="isDisabledFl">
+                            <i class="fa fa-plus-circle" aria-hidden="true"></i> Add Commission</button>
+                        <!-- Grid 4 - Reconciliation Entry - Summary -->
+                        <!-- <h3 class="pt-2">Summary</h3> -->
+                        <div class="m-0 p-1 row mt-3 p-table-caption-container">
+                            <div class="col-md-6 pl-2 pt-2">
+                                <h3 class="p-table-caption">Summary</h3>
+                            </div>
+                        </div>
+                        <p-table [value]="summary" editMode="row">
+                            <!-- <ng-template pTemplate="caption">Summary</ng-template> -->
+                            <ng-template pTemplate="header">
+                                <tr class="ptableHeader">
+                                    <th colspan="1"></th>
+                                    <th colspan="2">Client Report</th>
+                                    <th colspan="2">System Values</th>
+                                    <th colspan="2">Difference</th>
+                                </tr>
+                                <tr class="ptableHeader">
+                                    <th></th>
+                                    <th>Life</th>
+                                    <th>Other</th>
+                                    <th>Life</th>
+                                    <th>Other</th>
+                                    <th>Life</th>
+                                    <th>Other</th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-summary>
+                                <tr class="ptableHeader">
+                                    <td style="text-align:left">{{summary.feeName}}</td>
+                                    <td style="text-align:right">
+                                        <p-cellEditor>
+                                            <ng-template pTemplate="input">
+                                                <input pInputText type="text" [(ngModel)]="summary.clientRepLifeAmount">
+                                            </ng-template>
+                                            <ng-template pTemplate="output">
+                                                {{summary.clientRepLifeAmount | currency: 'USD'}}
+                                            </ng-template>
+                                        </p-cellEditor>
+                                    </td>
+                                    <td style="text-align:right">
+                                        <p-cellEditor>
+                                            <ng-template pTemplate="input">
+                                                <input pInputText type="text" [(ngModel)]="summary.clientRepOtherAmount">
+                                            </ng-template>
+                                            <ng-template pTemplate="output">
+                                                {{summary.clientRepOtherAmount | currency: 'USD'}}
+                                            </ng-template>
+                                        </p-cellEditor>
+                                    </td>
+                                    <td style="text-align:right">{{summary.sysCalcLifeAmount | currency: 'USD'}}</td>
+                                    <td style="text-align:right">{{summary.sysCalcOtherAmount | currency: 'USD'}}</td>
+                                    <td style="text-align:right">{{summary.differenceLifeAmount | currency: 'USD'}}</td>
+                                    <td style="text-align:right">{{summary.differenceOtherAmount | currency: 'USD'}}
+                                    </td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                    <div class="ym_form_group mt-3">
+                        <button *ngIf="submitFl" [disabled]="isDisabledFl" class="ym_button float-right" (click)="onClickOfSubmitReconcilation('SaveReconciliationReportDetail')"><i
+                                class="fa fa-save mr-1"></i>Submit</button>
+                        <button *ngIf="clearFl" [disabled]="isDisabledFl" class="ym_button float-right" (click)="onClickOfClear()" style="margin-right: 10px;"><i class="fa fa-times"></i>
+                            Clear</button>
+                    </div>
+                </mat-tab>
+
+                <mat-tab label="Reconciliation Summary">
+                    <!-- <h3 class="pt-2">Reconciliation Summary</h3> -->
+                    <div class="m-0 p-1 row mt-3 p-table-caption-container">
+                        <div class="col-md-6 pl-2 pt-2">
+                            <h3 class="p-table-caption">Reconciliation Summary</h3>
+                        </div>
+                    </div>
+                    <p-table [value]="reconciliationSummary">
+                        <!-- <ng-template pTemplate="caption">Reconciliation Summary</ng-template> -->
+                        <ng-template pTemplate="header">
+                            <tr class="ptableHeader">
+                                <th></th>
+                                <th>Client Report</th>
+                                <th>System Report</th>
+                                <th>Difference</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-reconciliationSummary>
+                            <tr class="ptableHeader">
+                                <td style="text-align:left">{{reconciliationSummary.summaryType}}</td>
+                                <td style="text-align:right">{{reconciliationSummary.clientReportAmount | currency: 'USD'}}
+                                </td>
+                                <td style="text-align:right">{{reconciliationSummary.systemReportAmount | currency: 'USD'}}
+                                </td>
+                                <td style="text-align:right">{{reconciliationSummary.differenceReportAmount | currency: 'USD'}}
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </mat-tab>
+            </mat-tab-group>
+        </div>
+    </div>
+</div>

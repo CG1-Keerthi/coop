@@ -9,14 +9,23 @@ import { DateAdapter, MatDateFormats, MatNativeDateModule, MAT_DATE_FORMATS, MAT
 import { FinancialReconciliationComponent } from '../mond/financialReconciliation/financialReconciliation';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatCardModule } from '@angular/material/card';
 import { SharedModule } from '../mond/shared/shared.module';
-import { TableModule} from 'primeng/table';
-import { DropdownModule} from 'primeng/dropdown'
+import { TableModule } from 'primeng/table';
+import { DropdownModule } from 'primeng/dropdown'
 import { AddRowDirective } from '../mond/directives/add-row.directive';
-import {MultiSelectModule} from 'primeng/multiselect';
+import { MultiSelectModule } from 'primeng/multiselect';
 import { ProductMaintenanceComponent } from '../mond/productMaintenance/productMaintenance';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { ProductDetailsComponent } from '../mond/productDetails/productDetails';
+import { ReportsComponent } from '../mond/reports/reports.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -24,7 +33,8 @@ import { ProductDetailsComponent } from '../mond/productDetails/productDetails';
     ProductMaintenanceComponent,
     FinancialReconciliationComponent,
     AddRowDirective,
-    ProductDetailsComponent
+    ProductDetailsComponent,
+    ReportsComponent
   ],
   imports: [
     CommonModule,
@@ -33,14 +43,23 @@ import { ProductDetailsComponent } from '../mond/productDetails/productDetails';
     HomeRouting,
     SharedModule,
     MatAutocompleteModule,
-    ReactiveFormsModule, 
+    ReactiveFormsModule,
     MatTabsModule,
     MatDatepickerModule,
     MatNativeDateModule,
     TableModule,
     DropdownModule,
-    MultiSelectModule
-  ], 
+    MultiSelectModule,
+    MatCardModule,
+    MatButtonModule,
+    MatButtonToggleModule,
+    MatDividerModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule
+
+  ],
   exports: [
   ]
 })

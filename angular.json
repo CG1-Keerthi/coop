@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "cumis"
+    }
+  },
+  "defaultProject": "cumis",
+  "cli": {
+    "analytics": false
+  }
 }

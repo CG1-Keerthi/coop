@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild, Injectable, HostListener } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, Injectable, HostListener, ElementRef } from '@angular/core';
 import { Base64 } from 'js-base64';
 import { filter, first, pairwise } from 'rxjs/operators';
 import { isEmpty, get, assign } from 'lodash';
@@ -32,10 +32,14 @@ export class HomeComponent implements OnInit, OnDestroy {
   autoReactivatingInterval: any;
   sessionCheckInterval: any;
   showBackButton: boolean = false;
+
+
+  @ViewChild('cancelBtn') cancelBtn: ElementRef;
   constructor(private formBuilder: FormBuilder, private mdLoginDS: MDLoginDS,
     private mdApplicationDetailDS: MDApplicationDetailsDS, private router: Router,
     private mdCommonGetterAndSetter: MDCommonGetterSetter, private mDMondService: MDMondServiceDS,
-    private toastService: ToastrService, private countDownTimer: MDCountdownTimer, private mdSessionDS: MDSessionDS,
+    private toastService: ToastrService, private countDownTimer: MDCountdownTimer, 
+    private mdSessionDS: MDSessionDS
     //  private appRoutingServices:AppRoutingServices
   ) {
     // this.router.events
@@ -294,11 +298,27 @@ export class HomeComponent implements OnInit, OnDestroy {
   getTabDetails() {
     //return this.tabsComponent.getTabDetails();
   }
+
   logOut() {
+    // debugger;
+    $("#logoutHomePage").click();
+    setTimeout(() => {
+      this.cancelBtn.nativeElement.focus();
+    }, 500);
+    return false;
+  }
+
+  onClickOfLogoutBtn() {
+    // debugger;
     this.mdLoginDS.logout().pipe(first()).subscribe(
       data => {
         this.router.navigate([''], { skipLocationChange: true });
+        this.mDMondService.showSuccessMessage("Logged Out successfully")
       });
+  }
+
+  onClickOfCancelBtn() {
+    return false;
   }
 
   getInstanceOfBinDataHeader(binData) {

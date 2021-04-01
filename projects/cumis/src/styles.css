@@ -241,3 +241,12 @@ input[type="text"] {
     background-color: #f4f4f4;
     border-bottom: 0px;
 }
+
+.modalHeaderClr{
+    /* color: #00539c!important; */
+    color: #008acc !important;
+}
+.md-Btn{
+    background-color: #008acc !important;
+}
+

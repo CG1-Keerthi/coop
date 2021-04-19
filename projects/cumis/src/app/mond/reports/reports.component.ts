@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MDCommonGetterSetter } from '../../_services/common';
 import { MDMondServiceDS } from '../../_services/ds/MDMondServiceDS';
 import { MDConnectedPartnersDS } from '../../_services/ds/MDConnectedPartnersDS'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-reports-designer',
@@ -31,7 +32,8 @@ export class ReportsComponent implements OnInit {
 
   constructor(private mdMondServiceDS: MDMondServiceDS,
     private mdCommonGetterAndSetter: MDCommonGetterSetter,
-    private mdConnectedPartnersDS: MDConnectedPartnersDS) { }
+    private mdConnectedPartnersDS: MDConnectedPartnersDS,
+    private router: Router) { }
 
 
   ngOnInit() {
@@ -131,5 +133,15 @@ export class ReportsComponent implements OnInit {
         console.log(error);
         this.mdMondServiceDS.MDError(error);
       })
+  }
+
+  onClickOfNetPremiumPlay(){
+    debugger;
+    this.router.navigateByUrl(('/home/netpremiumreportComponent'), { skipLocationChange: true });
+  }
+
+  onClickOfLogicalDeletePlay(){
+    debugger;
+    this.router.navigateByUrl(('/home/logicalDeleteReportComponent'), { skipLocationChange: true });
   }
 }

@@ -34,3 +34,9 @@ color: white;
     position: absolute;
     left: 89%;
 }
+
+.md-Btn-fst{
+  background-color: #008acc;
+  color: white;
+  /* left: 89%; */
+}

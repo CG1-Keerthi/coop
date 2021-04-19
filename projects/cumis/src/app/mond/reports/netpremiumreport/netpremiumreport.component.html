@@ -1,0 +1,54 @@
+<div class="ym_content">
+    <div class="col-md-12 col-lg-12 col-sm-12 mt-2 container">
+        <mat-accordion>
+            <mat-expansion-panel [expanded]="true"  >
+                <mat-expansion-panel-header style="background-color: #307ecc;">
+                    <mat-panel-title style="color: white;">
+                        Download Net Premium Report
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="row" style="padding: 0  16px;">
+  
+                    <div class="col-3">
+                        <mat-form-field class="w-100">
+                            <mat-label>From Date</mat-label>
+                            <input matInput [matDatepicker]="picker" #fromDate
+                            (dateInput)="OnNetPremiumFromDateChange($event.value)">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-3">
+                        
+                        <mat-form-field class="w-100">
+                            <mat-label>To Date</mat-label>
+                            <input matInput [matDatepicker]="picker2" #tillDate
+                            (dateInput)="OnNetPremiumTillDateChange($event.value)">
+                            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                            <mat-datepicker #picker2></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-3">
+                        <mat-form-field class="w-100">
+                            <mat-label>Client Name</mat-label>
+                            <!-- <input matInput>  -->
+                            <input type="text" placeholder="Pick one" aria-label="Number" matInput
+                                (keyup)="netPremiumKeyup($event)" [(ngModel)]="clientName"
+                                [matAutocomplete]="auto">
+                            <mat-autocomplete #auto="matAutocomplete">
+                                <mat-option *ngFor="let list of clientNameVal" [value]="list.companyName">
+                                    {{list.companyName}}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-3 mt-2">
+                        <button mat-button mat-raised-button class="md-Btn" (click)="onClickOfReset()"><mat-icon>refresh</mat-icon>Reset</button>
+                        <button mat-button mat-raised-button class="ml-2 md-Btn" (click)="onClickOfNetPremiumDownload()"><mat-icon>arrow_downward</mat-icon>Download</button>
+                    </div>
+                </div>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+</div>

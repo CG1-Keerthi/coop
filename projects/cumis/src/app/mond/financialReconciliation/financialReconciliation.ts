@@ -446,7 +446,7 @@ export class FinancialReconciliationComponent implements OnInit {
       return "";
     }
     let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-    months.indexOf(name) + 1;
+    return months.indexOf(name) + 1;
   }
 
   getMonthNameBasedOnNumber(number) {
@@ -742,7 +742,7 @@ export class FinancialReconciliationComponent implements OnInit {
       this.mdMondServiceDS.showErrorMessage("Reconciliation Header Identifier is not available");
       return;
     }
-debugger;
+    debugger;
     let currentDate = new Date();
     let currentMonth: any = currentDate.getMonth() + 1;
     if (currentMonth.toString().length < 2) {

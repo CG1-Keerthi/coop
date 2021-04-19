@@ -19,6 +19,7 @@ import { ProductMaintenanceComponent } from '../mond/productMaintenance/productM
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { ProductDetailsComponent } from '../mond/productDetails/productDetails';
 import { ReportsComponent } from '../mond/reports/reports.component';
+import { NetpremiumreportComponent } from '../mond/reports/netpremiumreport/netpremiumreport.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatDividerModule } from '@angular/material/divider';
@@ -26,6 +27,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { LogicalDeleteReportComponent } from '../mond/reports/logicaldeletereport/logicaldeletereport.component';
+
 
 @NgModule({
   declarations: [
@@ -34,7 +38,9 @@ import { MatIconModule } from '@angular/material/icon';
     FinancialReconciliationComponent,
     AddRowDirective,
     ProductDetailsComponent,
-    ReportsComponent
+    ReportsComponent,
+    NetpremiumreportComponent,
+    LogicalDeleteReportComponent
   ],
   imports: [
     CommonModule,
@@ -57,7 +63,9 @@ import { MatIconModule } from '@angular/material/icon';
     MatSelectModule,
     MatFormFieldModule,
     MatInputModule,
-    MatIconModule
+    MatIconModule,
+    MatExpansionModule
+    
 
   ],
   exports: [

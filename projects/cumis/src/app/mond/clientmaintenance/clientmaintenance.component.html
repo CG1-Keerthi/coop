@@ -1,0 +1,82 @@
+<div class="ym_content">
+    <div class="col-md-12 col-lg-12 col-sm-12 mt-2 container">
+        <div class="row">
+            <mat-tab-group class="col-md-12" [(selectedIndex)]="selectedTab">
+                <mat-tab label="Search Client">
+                    <div class="row pt-2 m-0">
+                        <div class="col-md-2 p-2" style="background-color: #ebebf1;">
+                            <h3><i class="fa fa-bars pr-2"></i>Refine your Search</h3>
+                            <div class="ym_form_group">
+                                <label>Client Number</label>
+                                <input type="text" placeholder="Client Number" [(ngModel)]="clientNumber">
+                            </div>
+                            <div class="ym_form_group">
+                                <label>Client Name</label>
+                                <input type="text" placeholder="Pick one" aria-label="Number" matInput
+                                    (keyup)="clientNameKeyup($event)" [(ngModel)]="clientName" [matAutocomplete]="auto">
+                                <mat-autocomplete #auto="matAutocomplete">
+                                    <mat-option *ngFor="let list of clientNameVal" [value]="list.companyName">
+                                        {{list.companyName}}
+                                    </mat-option>
+                                </mat-autocomplete>
+                            </div>
+
+                            <div class="ym_form_group">
+                                <label>Client Status</label>
+                                <div class="ym_form_select">
+                                    <select [(ngModel)]="clientStatusVal">
+                                        <option selected value="">Please select a value</option>
+                                        <option let *ngFor="let list of clientStatus" value="{{list.description}}">
+                                            {{list.description}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="ym_form_group">
+                                <button class="ym_button" style="margin-right: 10px;" (click)="onClickOfClientReset()"><i class="fa fa-undo"></i>
+                                    Reset</button>
+                                <button (click)="onClickOfClientMaintenanceSearch()" class="ym_button"><i class="fa fa-search"></i>
+                                    Search</button>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="m-0 pt-2 pb-2 row" style="background-color: #ebebf1;">
+                                <div class="col-md-6">
+                                    <h2>Client Maintenance</h2>
+                                </div>
+                                <div class="col-md-6">
+                                    <button class="ym_button float-right" (click)="onClickOfAddClient()">
+                                        <i class="fa fa-plus-square"></i> Add Client</button>
+                                </div>
+                            </div>
+                            <div class="m-0 p-2 row mt-3" style="background-color: #ebebf1;">
+                                <div class="col-md-6 pl-2 pt-2">
+                                    <h3>Client List</h3>
+                                </div>
+                            </div>
+                                <p-table [value]="clientMaintenanceListData" selectionMode="single" (onRowSelect)="onClientListRowSelect($event)">  
+                                <ng-template pTemplate="header">
+                                    <tr class="ptableHeader">
+                                        <th>Client Number</th>
+                                        <th>Client Name</th>
+                                        <th>Client Status</th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-responseData>
+                                    <tr [pSelectableRow]="responseData">
+                                        <td>{{responseData.clientNumber}}</td>
+                                        <td>{{responseData.clientName}}</td>
+                                        <td>{{responseData.clientStatus}}</td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+                        </div>
+                    </div>
+                </mat-tab>
+                <mat-tab label="Client Details">
+                    <app-clientdetail-designer  [clientDetails]="planDetailsData"></app-clientdetail-designer>
+                </mat-tab>
+                <mat-tab label="Validation CheckList"> </mat-tab>
+            </mat-tab-group>
+        </div>
+    </div>
+</div>

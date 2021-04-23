@@ -3,6 +3,7 @@ import { Observable, BehaviorSubject } from 'rxjs';
 import { MDBaseDS } from '../common/MDBaseDS';
 import { map } from 'rxjs/internal/operators/map';
 import { Base64 } from 'js-base64';
+import { any } from 'codelyzer/util/function';
 
 @Injectable({ providedIn: 'root' })
 export class MDMondServiceDS extends MDBaseDS {
@@ -16,7 +17,7 @@ export class MDMondServiceDS extends MDBaseDS {
 
 
     getFormDataFromMondService(projectName: String, serviceName: String, formVariables: String, csfrToken: String): Observable<any> {
-        let param = { projectName: projectName, serviceName: serviceName, version: "1.00", formVariables: formVariables, addSessionInfoFlag: true, csfrToken: csfrToken};
+        let param = { projectName: projectName, serviceName: serviceName, version: "1.00", formVariables: formVariables, addSessionInfoFlag: true, csfrToken: csfrToken };
         return this.invokeGET("/mondrestws/services/executeService/invokeMondProcessDesignerServiceGET", param);
     }
 
@@ -32,6 +33,38 @@ export class MDMondServiceDS extends MDBaseDS {
     getBusinessClassDetails(URL: string, owners: any, auth: string): Observable<any> {
         let param = { owners: owners };
         return this.invokeGETClassCodes(URL, param, auth);
+    }
+
+    invokeMondProcessDesignerService(projectName: any, serviceName: any, version: any, clientInfo_clientNumber: any, clientInfo_clientName: any, clientInfo_clientEffectiveDate: any, clientInfo_clientStatus: any,
+        clientInfo_clientTerminationDate: any, clientInfo_clientProvinceCode: any, clientInfo_clientLanguageCode: any, clientInfo_clientProfitSharingFlag: any, clientInfo_groupPolicyHolder: any,
+        clientInfo_clientPhone1: any, clientInfo_clientPhone2: any, clientInfo_clientFaxNumber: any, clientInfo_clientEmail: any, clientInfo_lastUpdateDate: any, clientInfo_currentRecordFlag: any,
+        clientInfo_clientStatusEndDate: any, clientInfo_clientIdentifier: any, mondFormDateFormat: any, inputProcessField1: any, inputServiceField1: any, outputProcessField1: any, outputServiceField1: any,
+        outputProcessField2: any, outputServiceField2: any, csfrToken: any): Observable<any> {
+        let dataToSend = 'projectName=' + projectName + '&serviceName=' + serviceName + '&version=' + version + '&clientInfo_clientNumber=' + clientInfo_clientNumber + '&clientInfo_clientName=' + clientInfo_clientName + '&clientInfo_clientEffectiveDate=' + clientInfo_clientEffectiveDate + '&clientInfo_clientStatus=' + clientInfo_clientStatus
+            + '&clientInfo_clientTerminationDate=' + clientInfo_clientTerminationDate + '&clientInfo_clientProvinceCode=' + clientInfo_clientProvinceCode + '&clientInfo_clientLanguageCode=' + clientInfo_clientLanguageCode + '&clientInfo_clientProfitSharingFlag=' + clientInfo_clientProfitSharingFlag + '&clientInfo_groupPolicyHolder=' + clientInfo_groupPolicyHolder
+            + '&clientInfo_clientPhone1=' + clientInfo_clientPhone1 + '&clientInfo_clientPhone2=' + clientInfo_clientPhone2 + '&clientInfo_clientFaxNumber=' + clientInfo_clientFaxNumber + '&clientInfo_clientEmail=' + clientInfo_clientEmail + '&clientInfo_lastUpdateDate=' + clientInfo_lastUpdateDate + '&clientInfo_currentRecordFlag=' + clientInfo_currentRecordFlag
+            + '&clientInfo_clientStatusEndDate=' + clientInfo_clientStatusEndDate + '&clientInfo_clientIdentifier=' + clientInfo_clientIdentifier + '&mondFormDateFormat=' + mondFormDateFormat + '&inputProcessField1=' + inputProcessField1 + '&inputServiceField1=' + inputServiceField1 + '&outputProcessField1=' + outputProcessField1 + '&outputServiceField1=' + outputServiceField1
+            + '&outputProcessField2=' + outputProcessField2 + '&outputServiceField2=' + outputServiceField2 + '&csfrToken=' + csfrToken;
+        return this.invokePOST("/mondrestws/services/executeService/invokeMondProcessDesignerService", dataToSend);
+    }
+
+    SaveClientAddressData(projectName: any, serviceName: any, version: any, clientAddressInfo_clientNumber: any, clientAddressInfo_clientIdentifier: any,
+        clientAddressInfo_addressType: any, clientAddressInfo_currentRecordFlag: any, clientAddressInfo_clientAddressIdentifier: any, mondFormDateFormat: any,
+        clientAddressInfo_addressEffectiveDate: any, clientAddressInfo_addressTerminationDate: any, clientAddressInfo_addressLine1: any, clientAddressInfo_addressLine2: any,
+        clientAddressInfo_city: any, clientAddressInfo_province: any, clientAddressInfo_postalCode: any, clientAddressInfo_country: any,
+        clientAddressInfo_lastUpdateDate: any, inputProcessField1: any, inputServiceField1: any, outputProcessField1: any, outputServiceField1: any, outputProcessField2: any,
+        outputServiceField2: any, csfrToken: any): Observable<any> {
+
+        let dataToSend = 'projectName=' + projectName + '&serviceName=' + serviceName + '&version=' +version + '&clientAddressInfo_clientNumber=' + clientAddressInfo_clientNumber + '&clientAddressInfo_clientIdentifier=' +clientAddressInfo_clientIdentifier
+        +'&clientAddressInfo_addressType=' + clientAddressInfo_addressType + '&clientAddressInfo_currentRecordFlag=' + clientAddressInfo_currentRecordFlag + '&clientAddressInfo_clientAddressIdentifier=' + clientAddressInfo_clientAddressIdentifier
+        +'&mondFormDateFormat=' + mondFormDateFormat + '&clientAddressInfo_addressEffectiveDate=' + clientAddressInfo_addressEffectiveDate + '&clientAddressInfo_addressTerminationDate=' +clientAddressInfo_addressTerminationDate 
+        + '&clientAddressInfo_addressLine1=' +clientAddressInfo_addressLine1
+        +'&clientAddressInfo_addressLine2=' + clientAddressInfo_addressLine2 + '&clientAddressInfo_city=' + clientAddressInfo_city + '&clientAddressInfo_province=' + clientAddressInfo_province + '&clientAddressInfo_postalCode=' +clientAddressInfo_postalCode
+        +'&clientAddressInfo_country=' +clientAddressInfo_country +'&clientAddressInfo_lastUpdateDate=' +clientAddressInfo_lastUpdateDate + '&inputProcessField1='+inputProcessField1
+        +'&inputServiceField1='+inputServiceField1 + '&outputProcessField1='+outputProcessField1 + '&outputServiceField1=' +outputServiceField1 + '&outputProcessField2='+outputProcessField2+'&outputServiceField2='+outputServiceField2 +'&csfrToken='+csfrToken
+
+
+        return this.invokePOST("/mondrestws/services/executeService/invokeMondProcessDesignerService", dataToSend);
     }
 
 

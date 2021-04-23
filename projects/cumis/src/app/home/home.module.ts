@@ -29,7 +29,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { LogicalDeleteReportComponent } from '../mond/reports/logicaldeletereport/logicaldeletereport.component';
-
+import { ClientMaintenanceComponent } from '../mond/clientmaintenance/clientmaintenance.component';
+import { ClientDetailComponent } from '../mond/clientmaintenance/clientdetail/clientdetail.component';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,9 @@ import { LogicalDeleteReportComponent } from '../mond/reports/logicaldeleterepor
     ProductDetailsComponent,
     ReportsComponent,
     NetpremiumreportComponent,
-    LogicalDeleteReportComponent
+    LogicalDeleteReportComponent,
+    ClientMaintenanceComponent,
+    ClientDetailComponent
   ],
   imports: [
     CommonModule,
@@ -64,8 +68,9 @@ import { LogicalDeleteReportComponent } from '../mond/reports/logicaldeleterepor
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
-    MatExpansionModule
-    
+    MatExpansionModule,
+    MatSlideToggleModule
+
 
   ],
   exports: [

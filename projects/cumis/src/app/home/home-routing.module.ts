@@ -6,6 +6,7 @@ import { ProductMaintenanceComponent } from '../mond/productMaintenance/productM
 import { ReportsComponent } from '../mond/reports/reports.component';
 import { NetpremiumreportComponent } from '../mond/reports/netpremiumreport/netpremiumreport.component';
 import { LogicalDeleteReportComponent } from '../mond/reports/logicaldeletereport/logicaldeletereport.component';
+import { ClientMaintenanceComponent } from '../mond/clientmaintenance/clientmaintenance.component';
 
 const homeRoutes: Routes = [
   {
@@ -15,7 +16,8 @@ const homeRoutes: Routes = [
       { path: 'productMaintenanceComponent', component: ProductMaintenanceComponent },
       { path: 'reportsComponent', component: ReportsComponent },
       { path: 'netpremiumreportComponent', component: NetpremiumreportComponent },
-      { path: 'logicalDeleteReportComponent', component: LogicalDeleteReportComponent }
+      { path: 'logicalDeleteReportComponent', component: LogicalDeleteReportComponent },
+      { path: 'clientmaintenance', component: ClientMaintenanceComponent }
 
     ]
   }

@@ -1,0 +1,249 @@
+<form [formGroup]="clientDetailsForm" class="mx-3 mt-2">
+    <div class="m-0 pt-2 pb-2 row my-3">
+        <div class="col-md-6">
+        </div>
+        <div class="col-md-6">
+            <button class="ym_button float-right ml-2" (click)="onClickOfClientUpdatePlan()"> Update Client</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="ym_form_group required col-4">
+            <label>Client Number</label>
+            <input placeholder="Client Number" formControlName="clientInfo_clientNumber" [readonly]="isFieldreadonly">
+        </div>
+        <div class="ym_form_group required col-4">
+            <label>Client Name</label>
+            <input placeholder="Client Name" formControlName="clientInfo_clientName" [readonly]="isFieldreadonly">
+        </div>
+        <div class="ym_form_group required col-4">
+            <div class="row">
+                <label>Client Effective Date</label>
+                <input class="col-md-9" matInput [matDatepicker]="picker" #fromDate
+                    formControlName="clientInfo_clientEffectiveDate" [readonly]="isFieldreadonly">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker class="col-md-3" #picker></mat-datepicker>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="ym_form_group col-4">
+            <label>Client Status</label>
+            <div class="ym_form_select">
+                <select formControlName="clientInfo_clientStatus" #clientStatusList>
+                    <option selected value="">Please select a value</option>
+                    <option let *ngFor="let list of clientStatus" value="{{list.description}}">
+                        {{list.description}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="ym_form_group col-4">
+            <div class="row">
+                <label>Client Termination Date</label>
+                <input class="col-md-9" matInput [matDatepicker]="picker2"
+                    formControlName="clientInfo_clientTerminationDate"   [readonly]="isFieldreadonly">
+                <mat-datepicker-toggle matSuffix [for]="picker2" [disabled]="isTerminationDateFieldreadonly"></mat-datepicker-toggle>
+                <mat-datepicker class="col-md-3" #picker2></mat-datepicker>
+            </div>
+        </div>
+        <div class="ym_form_group required col-4">
+            <label>Client Province</label>
+            <div class="ym_form_select">
+                <select formControlName="clientInfo_clientProvinceCode" #clientProvinceList>
+                    <option selected value="">Please select a value</option>
+                    <option let *ngFor="let list of clientProvinceCode" value="{{list.description}}">
+                        {{list.description}}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="ym_form_group required col-4">
+            <label>Client Language Code</label>
+            <div class="ym_form_select">
+                <select formControlName="clientInfo_clientLanguageCode" #clientLanguageList>
+                    <option selected value="">Please select a value</option>
+                    <option let *ngFor="let list of clientLanguage" value="{{list.description}}">
+                        {{list.description}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="ym_form_group col-4">
+            <label>Client Profit Sharing Flag</label>
+            <!-- <mat-slide-toggle [(ngModel)]="isChecked">Slide Toggle Checked: {{isChecked}}</mat-slide-toggle> -->
+            <mat-slide-toggle formControlName="clientInfo_clientProfitSharingFlag" [disabled]="isFieldreadonly"></mat-slide-toggle>
+        </div>
+        <div class="ym_form_group col-4">
+            <label>Group Policy Holder</label>
+            <mat-slide-toggle formControlName="clientInfo_groupPolicyHolder" [disabled]="isFieldreadonly"></mat-slide-toggle>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="ym_form_group col-4">
+            <label>Client Phone1</label>
+            <input placeholder="Client Phone1" formControlName="clientInfo_clientPhone1" [readonly]="isFieldreadonly">
+        </div>
+        <div class="ym_form_group col-4">
+            <label>Client Phone2</label>
+            <input placeholder="Client Phone2" formControlName="clientInfo_clientPhone2" [readonly]="isFieldreadonly">
+        </div>
+        <div class="ym_form_group col-4">
+            <label>Client Fax Number</label>
+            <input placeholder="Client Fax Number" formControlName="clientInfo_clientFaxNumber"
+                [readonly]="isFieldreadonly">
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="ym_form_group col-4">
+            <label>Client Email</label>
+            <input placeholder="Client Email" formControlName="clientInfo_clientEmail" [readonly]="isFieldreadonly">
+        </div>
+    </div>
+
+
+    <div class="ym_form_group">
+        <button class="ym_button float-right" (click)="onClickOfClientSubmit()" #clientSubmit><i
+                class="fa fa-save mr-1"></i>Submit</button>
+        <button class="ym_button float-right" style="margin-right: 10px;" (click)="onClickOfClientClear()"><i
+                class="fa fa-times"></i> Clear</button>
+    </div>
+</form>
+
+<mat-accordion class="col-sm-12">
+    <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header style="background-color: #307ecc;">
+            <mat-panel-title style="color: white;">
+                Client Address
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="m-0 pt-2 pb-2 row my-3">
+            <div class="col-md-6">
+            </div>
+            <div class="col-md-6">
+                <button class="ym_button float-right ml-2" (click)="onClickOfClientAddressUpdatePlan()"> Update Client
+                    Address</button>
+                <button class="ym_button float-right ml-2" (click)="onClickOfClientAddAddress()" [disabled]="isClientAddressDisable"><i
+                        class="fa fa-plus"></i>Add Address</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <div class="m-0 p-2 row mt-3" style="background-color: #ebebf1;">
+                    <div class="col-md-6 pl-2 pt-2">
+                        <h3>Address</h3>
+                    </div>
+                </div>
+                <p-table [value]="clientAddressList" selectionMode="single"
+                    (onRowSelect)="onClickOfClientAddressListRow($event)">
+                    <ng-template pTemplate="header">
+                        <tr class="ptableHeader">
+                            <th>Address Type</th>
+                            <th>Address Effective Date</th>
+                            <th>Province Code</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-responseData>
+                        <tr [pSelectableRow]="responseData">
+                            <td>{{responseData.clientAddressInfo_addressType}}</td>
+                            <td>{{responseData.clientAddressInfo_addressEffectiveDate.split('T')[0] }}</td>
+                            <td>{{responseData.clientAddressInfo_province}}</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+            <div class="col-6" [formGroup]="clientAddressForm">
+                <div class="row">
+                    <div class="ym_form_group required col-4">
+                        <label>Address Type </label>
+                        <div class="ym_form_select">
+                            <select formControlName="clientAddressInfo_addressType" #addressTypeList>
+                                <option selected value="">Please select a value</option>
+                                <option let *ngFor="let list of addressType" value="{{list.description}}">
+                                    {{list.description}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="ym_form_group required col-6">
+                        <div class="row">
+                            <label>Address Effective Date</label>
+                            <input class="col-md-9" matInput [matDatepicker]="picker3"
+                                formControlName="clientAddressInfo_addressEffectiveDate"
+                                [readonly]="isAddressFieldreadonly">
+                            <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                            <mat-datepicker class="col-md-3" #picker3></mat-datepicker>
+                        </div>
+                    </div>
+                    <div class="ym_form_group col-6">
+                        <div class="row">
+                            <label>Address Termination Date</label>
+                            <input class="col-md-9" matInput [matDatepicker]="picker4"
+                                formControlName="clientAddressInfo_addressTerminationDate"
+                                [readonly]="isAddressFieldreadonly" [readonly]="isAddressFieldreadonly">
+                            <mat-datepicker-toggle matSuffix [for]="picker4" [disabled]="isAddressterminationDateFieldreadonly"></mat-datepicker-toggle>
+                            <mat-datepicker class="col-md-3" #picker4></mat-datepicker>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="ym_form_group col-12">
+                        <label>Address Line 1</label>
+                        <input placeholder="Address Line 1" formControlName="clientAddressInfo_addressLine1"
+                            [readonly]="isAddressFieldreadonly">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="ym_form_group col-12">
+                        <label>Address Line 2</label>
+                        <input placeholder="Address Line 2" formControlName="clientAddressInfo_addressLine2"
+                            [readonly]="isAddressFieldreadonly">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="ym_form_group col-6">
+                        <label>City</label>
+                        <input placeholder="City" formControlName="clientAddressInfo_city"
+                            [readonly]="isAddressFieldreadonly">
+                    </div>
+                    <div class="ym_form_group  col-6">
+                        <label>Province Code</label>
+                        <div class="ym_form_select">
+                            <select formControlName="clientAddressInfo_province" #provinceCodeList>
+                                <option selected value="">Please select a value</option>
+                                <option let *ngFor="let list of clientProvinceCode" value="{{list.description}}">
+                                    {{list.description}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="ym_form_group col-6">
+                        <label>Postal Code</label>
+                        <input placeholder="Postal Code" formControlName="clientAddressInfo_postalCode"
+                            [readonly]="isAddressFieldreadonly">
+                    </div>
+                    <div class="ym_form_group  col-6">
+                        <label>Country</label>
+                        <div class="ym_form_select">
+                            <select formControlName="clientAddressInfo_country" #countryAddress>
+                                <option selected value="">Please select a value</option>
+                                <option let *ngFor="let list of countryList" value="{{list.description}}">
+                                    {{list.description}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="ym_form_group">
+                    <button class="ym_button float-right" (click)="onClickOfClientAddressSubmit()" #clientAddressSubmit
+                        ><i class="fa fa-save mr-1"></i>Submit</button>
+                </div>
+            </div>
+        </div>
+    </mat-expansion-panel>
+</mat-accordion>

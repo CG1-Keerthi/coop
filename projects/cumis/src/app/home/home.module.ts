@@ -32,6 +32,8 @@ import { LogicalDeleteReportComponent } from '../mond/reports/logicaldeleterepor
 import { ClientMaintenanceComponent } from '../mond/clientmaintenance/clientmaintenance.component';
 import { ClientDetailComponent } from '../mond/clientmaintenance/clientdetail/clientdetail.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { ClientDetailFormBuilderModule } from '../form-builder/clientMaintenance/clientDetails/client-detail-form.module';
+import { ClientAddressDetailFormBuilderModule } from '../form-builder/clientMaintenance/clientAddressdetails/client-address-detail-form.module';
 
 @NgModule({
   declarations: [
@@ -69,7 +71,9 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatInputModule,
     MatIconModule,
     MatExpansionModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    ClientDetailFormBuilderModule,
+    ClientAddressDetailFormBuilderModule
 
 
   ],

@@ -9,6 +9,7 @@ import { AuthModule } from './auth/auth.module';
 import { HomeModule } from './home/home.module';
 import { WINDOW_PROVIDERS } from './window.provider';
 
+
 @NgModule({
   declarations: [
     AppComponent
@@ -20,6 +21,7 @@ import { WINDOW_PROVIDERS } from './window.provider';
     HttpClientModule,
     HomeModule,
     AuthModule,
+ 
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right',
       preventDuplicates: true,

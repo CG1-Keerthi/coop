@@ -5,6 +5,8 @@ import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { MY_FORMATS } from '../../../_services/constants/MDDateFormate';
 import { MDCodeListHeaderDS, MDMondServiceDS } from '../../../_services/ds';
 import { MDCommonGetterSetter } from '../../../_services/common';
+import { ClientDetailFormBuilderService } from "../../../form-builder/clientMaintenance/clientDetails/client-detail-form-builder.service";
+import { ClientAddressDetailFormBuilderService } from "../../../form-builder/clientMaintenance/clientAddressdetails/client-address-detail-form-builder.service";
 
 
 
@@ -71,6 +73,10 @@ export class ClientDetailComponent implements OnInit {
     public clientAddressList: any;
     public clientDetailsValues: any;
     public isClientAddressDisable: boolean;
+    public fromDateVal: any;
+    public tillDateVal: any;
+    public addEffDateVal: any;
+    public addTerDateVal: any;
 
     @ViewChild('clientStatusList') clientStatusList: ElementRef;
     @ViewChild('clientProvinceList') clientProvinceList: ElementRef;
@@ -80,11 +86,17 @@ export class ClientDetailComponent implements OnInit {
     @ViewChild('provinceCodeList') provinceCodeList: ElementRef;
     @ViewChild('countryAddress') countryAddress: ElementRef;
     @ViewChild('clientAddressSubmit') clientAddressSubmit: ElementRef;
+    @ViewChild('fromDate') fromDate: ElementRef;
+    @ViewChild('tillDate') tillDate: ElementRef;
+    @ViewChild('addEffDate') addEffDate: ElementRef;
+    @ViewChild('addTerDate') addTerDate: ElementRef;
     constructor(private mdCodeListHeaderDS: MDCodeListHeaderDS,
         private mdMondServiceDS: MDMondServiceDS,
         private fb: FormBuilder,
         private mdCommonGetterAndSetter: MDCommonGetterSetter,
-        private renderer: Renderer2) { }
+        private renderer: Renderer2,
+        private clientDetailervice: ClientDetailFormBuilderService,
+        private clientAddressDetailService: ClientAddressDetailFormBuilderService) { }
 
 
     ngOnInit() {
@@ -95,35 +107,9 @@ export class ClientDetailComponent implements OnInit {
             }
         });
 
-        this.clientDetailsForm = this.fb.group({
-            "clientInfo_clientNumber": "",
-            "clientInfo_clientName": "",
-            "clientInfo_clientEffectiveDate": "",
-            "clientInfo_clientStatus": "",
-            "clientInfo_clientTerminationDate": "",
-            "clientInfo_clientProvinceCode": "",
-            "clientInfo_clientLanguageCode": "",
-            "clientInfo_clientProfitSharingFlag": "",
-            "clientInfo_groupPolicyHolder": "",
-            "clientInfo_clientPhone1": "",
-            "clientInfo_clientPhone2": "",
-            "clientInfo_clientFaxNumber": "",
-            "clientInfo_clientEmail": "",
-
-        })
-
-        this.clientAddressForm = this.fb.group({
-            "clientAddressInfo_addressType": "",
-            "clientAddressInfo_addressEffectiveDate": "",
-            "clientAddressInfo_addressTerminationDate": "",
-            "clientAddressInfo_addressLine1": "",
-            "clientAddressInfo_addressLine2": "",
-            "clientAddressInfo_city": "",
-            "clientAddressInfo_province": "",
-            "clientAddressInfo_postalCode": "",
-            "clientAddressInfo_country": ""
-        })
-
+        this.clientDetailsForm = this.clientDetailervice.form;
+        this.clientAddressForm = this.clientAddressDetailService.form;
+  
         this.mdCodeListHeaderDS.getListOfCodeLists('Coop-ClientStatus').subscribe(
             data => {
                 this.clientStatus = data;
@@ -179,41 +165,44 @@ export class ClientDetailComponent implements OnInit {
 
     onClickOfClientSubmit() {
         debugger;
-        if (this.clientDetailsForm.value.clientInfo_clientProfitSharingFlag == true) {
-            this.clientDetailsForm.value.clientInfo_clientProfitSharingFlag = "Y"
-        } else {
-            this.clientDetailsForm.value.clientInfo_clientProfitSharingFlag = "N"
+        this.clientDetailsForm.value
+        this.clientDetailsForm.value.clientInfo.clientEffectiveDate = this.fromDateVal;
+        if (this.tillDateVal != undefined) {
+            this.clientDetailsForm.value.clientInfo.clientTerminationDate = this.tillDateVal;
         }
 
-        if (this.clientDetailsForm.value.clientInfo_groupPolicyHolder == true) {
-            this.clientDetailsForm.value.clientInfo_groupPolicyHolder = "Y"
-        } else {
-            this.clientDetailsForm.value.clientInfo_groupPolicyHolder = "N"
+        if(this.clientDetailsForm.value.clientInfo.clientProfitSharingFlag == true){
+            this.clientDetailsForm.value.clientInfo.clientProfitSharingFlag = "Y"
+        }else{
+            this.clientDetailsForm.value.clientInfo.clientProfitSharingFlag = "N"
         }
-        var year = this.clientDetailsForm.value.clientInfo_clientEffectiveDate._i.year;
-        var month = this.clientDetailsForm.value.clientInfo_clientEffectiveDate._i.month;
-        var date = this.clientDetailsForm.value.clientInfo_clientEffectiveDate._i.date;
-        var clientEffectiveDate = year + "-" + month + "-" + date + "-" + "T00:00:00.000Z";
-        console.log('Form Submitted with value: ', this.clientDetailsForm.value);
-        this.mdMondServiceDS.invokeMondProcessDesignerService("Creditor Self Admin", "SaveClientData", "1.00", this.clientDetailsForm.value.clientInfo_clientNumber,
-            this.clientDetailsForm.value.clientInfo_clientName, clientEffectiveDate,
-            this.clientDetailsForm.value.clientInfo_clientStatus,
-            this.clientDetailsForm.value.clientInfo_clientTerminationDate, this.clientDetailsForm.value.clientInfo_clientProvinceCode,
-            this.clientDetailsForm.value.clientInfo_clientLanguageCode,
-            this.clientDetailsForm.value.clientInfo_clientProfitSharingFlag,
-            this.clientDetailsForm.value.clientInfo_groupPolicyHolder,
-            this.clientDetailsForm.value.clientInfo_clientPhone1, this.clientDetailsForm.value.clientInfo_clientPhone2, this.clientDetailsForm.value.clientInfo_clientFaxNumber,
-            this.clientDetailsForm.value.clientInfo_clientEmail, "",
-            "N", "", "", "", "clientInfo", "clientInfo", "status", "status", "message", "message", this.csfrToken).subscribe(
-                data => {
-                    console.log("onClickOfClientSubmit data", data);
 
-                }, error => {
-                    this.mdMondServiceDS.MDError(error);
-                });
+        if(this.clientDetailsForm.value.clientInfo.groupPolicyHolder == true){
+            this.clientDetailsForm.value.clientInfo.groupPolicyHolder = "YES"
+        }else{
+            this.clientDetailsForm.value.clientInfo.groupPolicyHolder = "NO"
+        }
+
+        console.log('Form Submitted with value: ', JSON.stringify(this.clientDetailsForm.value));
+        let formData = btoa(JSON.stringify(this.clientDetailsForm.value));
+        this.mdMondServiceDS.invokeMondService("Creditor Self Admin", "SaveClientData", "1.00", formData, this.csfrToken, true, true, true).subscribe(
+            data => {
+                console.log("onClickOfClientSubmit data", data);
+
+            }, error => {
+                this.mdMondServiceDS.MDError(error);
+            });
+
     }
 
+    clientEffectiveDateKeyup(event) {
+        debugger;
+        this.fromDateVal = this.fromDate.nativeElement.value + "T00:00:00.000Z";
+    }
 
+    onClickOfTerminationDate(event) {
+        this.tillDateVal = this.tillDate.nativeElement.value + "T00:00:00.000Z";
+    }
     onClickOfClientAddressListRow(event) {
         debugger;
         this.clientAddressForm.patchValue(event.data);
@@ -226,20 +215,31 @@ export class ClientDetailComponent implements OnInit {
 
     onClickOfClientAddressSubmit() {
         debugger;
-        var year = this.clientAddressForm.value.clientAddressInfo_addressEffectiveDate._i.year;
-        var month = this.clientAddressForm.value.clientAddressInfo_addressEffectiveDate._i.month;
-        var date = this.clientAddressForm.value.clientAddressInfo_addressEffectiveDate._i.date;
-        var clientAddressEffectiveDate = year + "-" + month + "-" + date + "-" + "T00:00:00.000Z";
-        this.mdMondServiceDS.SaveClientAddressData("Creditor Self Admin", "SaveClientAddressData", "1.00", this.clientDetailsForm.value.clientInfo_clientNumber,
-            this.clientDetailsValues.clientInfo_clientIdentifier, this.clientAddressForm.value.clientAddressInfo_addressType, "N", "", "", clientAddressEffectiveDate,
-            this.clientAddressForm.value.clientAddressInfo_addressTerminationDate, this.clientAddressForm.value.clientAddressInfo_addressLine1, this.clientAddressForm.value.clientAddressInfo_addressLine2,
-            this.clientAddressForm.value.clientAddressInfo_city, this.clientAddressForm.value.clientAddressInfo_province, this.clientAddressForm.value.clientAddressInfo_postalCode,
-            this.clientAddressForm.value.clientAddressInfo_country, "", "clientAddressInfo", "clientAddressInfo", "status", "status", "message", "message", this.csfrToken).subscribe(
-                data => {
-                    console.log("data", data)
-                }, error => {
-                    this.mdMondServiceDS.MDError(error);
-                })
+        this.clientAddressForm.value
+        this.clientAddressForm.value.clientAddressInfo.addressEffectiveDate = this.addEffDateVal;
+        if (this.addTerDateVal != undefined) {
+            this.clientAddressForm.value.clientAddressInfo.addressTerminationDate = this.addTerDateVal;
+        }
+        this.clientAddressForm.value.clientAddressInfo.clientIdentifier = this.clientDetailsValues.clientInfo_clientIdentifier;
+        this.clientAddressForm.value.clientAddressInfo.clientNumber = this.clientDetailsValues.clientInfo_clientNumber;
+    
+
+        let formData = btoa(JSON.stringify(this.clientAddressForm.value));
+        this.mdMondServiceDS.invokeMondService("Creditor Self Admin", "SaveClientAddressData", "1.00", formData, this.csfrToken, true, true, true).subscribe(
+            data => {
+                console.log("onClickOfClientSubmit data", data);
+
+            }, error => {
+                this.mdMondServiceDS.MDError(error);
+            });
+    }
+
+    onClickOfAddEffDate(event) {
+        this.addEffDateVal = this.addEffDate.nativeElement.value + "T00:00:00.000Z";
+    }
+
+    onClickOfAddTerminationDate(event) {
+        this.addTerDateVal = this.addTerDate.nativeElement.value + "T00:00:00.000Z";
     }
 
     onClickOfClientUpdatePlan() {

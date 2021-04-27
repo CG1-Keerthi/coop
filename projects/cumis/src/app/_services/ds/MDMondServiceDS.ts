@@ -61,4 +61,11 @@ export class MDMondServiceDS extends MDBaseDS {
     }
 
 
+    invokeMondServiceGET(projectName: any, serviceName: any, version: any,formData: any,csfrToken: any,addSessionInfoFlag: any,encodedDataFl: any,returnEncodedDataFl: any,includeOutputVarNameFl: any): Observable<any> {
+        let param = { projectName: projectName, serviceName: serviceName, version: version, formData: formData, csfrToken: csfrToken, addSessionInfoFlag: addSessionInfoFlag,
+            encodedDataFl:encodedDataFl,returnEncodedDataFl:returnEncodedDataFl,includeOutputVarNameFl:includeOutputVarNameFl };
+        return this.invokeGET("/mondrestws/services/executeService/invokeMondServiceGET", param);
+    }
+
+
 }

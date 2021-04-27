@@ -11,10 +11,16 @@
             <div class="ym_form_group required col-4">
                 <label>Client Number</label>
                 <input placeholder="Client Number" formControlName="clientNumber" [readonly]="isFieldreadonly">
+                <div  *ngIf="isSubmit && !clientDetailsForm.get('clientInfo.clientNumber').touched">
+                    <p class="text-danger">  Please fill out this field.</p>             
+                </div>
             </div>
             <div class="ym_form_group required col-4">
                 <label>Client Name</label>
                 <input placeholder="Client Name" formControlName="clientName" [readonly]="isFieldreadonly">
+                <div  *ngIf="isSubmit && !clientDetailsForm.get('clientInfo.clientName').touched">
+                    <p class="text-danger">  Please fill out this field.</p>             
+                </div>
             </div>
             <div class="ym_form_group required col-4">
                 <div class="row">
@@ -24,7 +30,11 @@
                         (dateInput)="clientEffectiveDateKeyup($event.value)">
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker class="col-md-3" #picker></mat-datepicker>
+                    <div  *ngIf="isSubmit && !clientDetailsForm.get('clientInfo.clientEffectiveDate').touched">
+                        <p class="text-danger">  Please fill out this field.</p>             
+                    </div>
                 </div>
+               
             </div>
         </div>
 
@@ -58,6 +68,9 @@
                             {{list.description}}</option>
                     </select>
                 </div>
+                <div  *ngIf="isSubmit && !clientDetailsForm.get('clientInfo.clientProvinceCode').touched">
+                    <p class="text-danger">  Please fill out this field.</p>             
+                </div>
             </div>
         </div>
 
@@ -70,6 +83,9 @@
                         <option let *ngFor="let list of clientLanguage" value="{{list.description}}">
                             {{list.description}}</option>
                     </select>
+                </div>
+                <div  *ngIf="isSubmit && !clientDetailsForm.get('clientInfo.clientLanguageCode').touched">
+                    <p class="text-danger">  Please fill out this field.</p>             
                 </div>
             </div>
             <div class="ym_form_group col-4">
@@ -171,6 +187,9 @@
                                         {{list.description}}</option>
                                 </select>
                             </div>
+                            <div  *ngIf="isSubmit && !clientAddressForm.get('clientAddressInfo.addressType').touched">
+                                <p class="text-danger">  Please fill out this field.</p>             
+                            </div>
                         </div>
                     </div>
                     <div class="row">
@@ -181,6 +200,9 @@
                                     formControlName="addressEffectiveDate" [readonly]="isAddressFieldreadonly" (dateInput)="onClickOfAddEffDate($event.value)" #addEffDate>
                                 <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
                                 <mat-datepicker class="col-md-3" #picker3></mat-datepicker>
+                                <div  *ngIf="isSubmit && !clientAddressForm.get('clientAddressInfo.addressEffectiveDate').touched">
+                                    <p class="text-danger">  Please fill out this field.</p>             
+                                </div>
                             </div>
                         </div>
                         <div class="ym_form_group col-6">

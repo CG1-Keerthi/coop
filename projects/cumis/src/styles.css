@@ -249,4 +249,20 @@ input[type="text"] {
 .md-Btn{
     background-color: #008acc !important;
 }
-
+.ui-table{
+    overflow-y: auto;
+    height: 232px;
+}
+.modal-backdrop
+{
+display:none;
+visibility:hidden; 
+position:relative
+}
+.modal{
+background:url("http://bin.smwcentral.net/u/11361/BlackTransparentBackground.png");
+z-index:1100; 
+}
+.modal-dialog{
+    margin-top: 120px;
+}

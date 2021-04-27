@@ -77,6 +77,7 @@ export class ClientDetailComponent implements OnInit {
     public tillDateVal: any;
     public addEffDateVal: any;
     public addTerDateVal: any;
+    public isSubmit: boolean = false;
 
     @ViewChild('clientStatusList') clientStatusList: ElementRef;
     @ViewChild('clientProvinceList') clientProvinceList: ElementRef;
@@ -109,7 +110,7 @@ export class ClientDetailComponent implements OnInit {
 
         this.clientDetailsForm = this.clientDetailervice.form;
         this.clientAddressForm = this.clientAddressDetailService.form;
-  
+
         this.mdCodeListHeaderDS.getListOfCodeLists('Coop-ClientStatus').subscribe(
             data => {
                 this.clientStatus = data;
@@ -165,21 +166,22 @@ export class ClientDetailComponent implements OnInit {
 
     onClickOfClientSubmit() {
         debugger;
+        this.isSubmit = true;
         this.clientDetailsForm.value
         this.clientDetailsForm.value.clientInfo.clientEffectiveDate = this.fromDateVal;
         if (this.tillDateVal != undefined) {
             this.clientDetailsForm.value.clientInfo.clientTerminationDate = this.tillDateVal;
         }
 
-        if(this.clientDetailsForm.value.clientInfo.clientProfitSharingFlag == true){
+        if (this.clientDetailsForm.value.clientInfo.clientProfitSharingFlag == true) {
             this.clientDetailsForm.value.clientInfo.clientProfitSharingFlag = "Y"
-        }else{
+        } else {
             this.clientDetailsForm.value.clientInfo.clientProfitSharingFlag = "N"
         }
 
-        if(this.clientDetailsForm.value.clientInfo.groupPolicyHolder == true){
+        if (this.clientDetailsForm.value.clientInfo.groupPolicyHolder == true) {
             this.clientDetailsForm.value.clientInfo.groupPolicyHolder = "YES"
-        }else{
+        } else {
             this.clientDetailsForm.value.clientInfo.groupPolicyHolder = "NO"
         }
 
@@ -188,9 +190,11 @@ export class ClientDetailComponent implements OnInit {
         this.mdMondServiceDS.invokeMondService("Creditor Self Admin", "SaveClientData", "1.00", formData, this.csfrToken, true, true, true).subscribe(
             data => {
                 console.log("onClickOfClientSubmit data", data);
+                this.mdMondServiceDS.showSuccessMessage("Client Record Inserted Successfully");
 
             }, error => {
                 this.mdMondServiceDS.MDError(error);
+
             });
 
     }
@@ -215,20 +219,19 @@ export class ClientDetailComponent implements OnInit {
 
     onClickOfClientAddressSubmit() {
         debugger;
+        this.isSubmit = true;
         this.clientAddressForm.value
         this.clientAddressForm.value.clientAddressInfo.addressEffectiveDate = this.addEffDateVal;
         if (this.addTerDateVal != undefined) {
             this.clientAddressForm.value.clientAddressInfo.addressTerminationDate = this.addTerDateVal;
         }
-        this.clientAddressForm.value.clientAddressInfo.clientIdentifier = this.clientDetailsValues.clientInfo_clientIdentifier;
-        this.clientAddressForm.value.clientAddressInfo.clientNumber = this.clientDetailsValues.clientInfo_clientNumber;
-    
-
+        this.clientAddressForm.value.clientAddressInfo.clientIdentifier = this.clientDetailsValues.clientInfo.clientIdentifier;
+        this.clientAddressForm.value.clientAddressInfo.clientNumber = this.clientDetailsValues.clientInfo.clientNumber;
         let formData = btoa(JSON.stringify(this.clientAddressForm.value));
         this.mdMondServiceDS.invokeMondService("Creditor Self Admin", "SaveClientAddressData", "1.00", formData, this.csfrToken, true, true, true).subscribe(
             data => {
                 console.log("onClickOfClientSubmit data", data);
-
+                this.mdMondServiceDS.showSuccessMessage("Client Address Record Inserted Successfully");
             }, error => {
                 this.mdMondServiceDS.MDError(error);
             });

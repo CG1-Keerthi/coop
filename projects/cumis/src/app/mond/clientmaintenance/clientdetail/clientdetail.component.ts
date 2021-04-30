@@ -7,7 +7,7 @@ import { MDCodeListHeaderDS, MDMondServiceDS } from '../../../_services/ds';
 import { MDCommonGetterSetter } from '../../../_services/common';
 import { ClientDetailFormBuilderService } from "../../../form-builder/clientMaintenance/clientDetails/client-detail-form-builder.service";
 import { ClientAddressDetailFormBuilderService } from "../../../form-builder/clientMaintenance/clientAddressdetails/client-address-detail-form-builder.service";
-
+declare var $: any;
 
 
 @Component({
@@ -28,6 +28,7 @@ export class ClientDetailComponent implements OnInit {
             this.isFieldreadonly = true;
             this.isTerminationDateFieldreadonly = true;
             this.isAddressterminationDateFieldreadonly = true;
+            this.isUpdateDateFieldReadonly = false;
             // this.isAddressFieldreadonly = false;
             this.renderer.setAttribute(this.clientStatusList.nativeElement, 'disabled', 'true');
             this.renderer.setAttribute(this.clientProvinceList.nativeElement, 'disabled', 'true');
@@ -38,9 +39,14 @@ export class ClientDetailComponent implements OnInit {
             // this.clientAddressList = [];
             this.clientAddressForm.reset();
             this.clientDetailsForm.patchValue(data);
-            this.clientAddressList = data.clientAddressInfo_clientAddressInfo;
+            this.clientAddressList = data.clientAddressInfo.clientAddressInfo;
             this.clientDetailsValues = data;
             this.isClientAddressDisable = false;
+            this.isDateUpdate = "Date";
+            this.clientDetailsForm.value.clientInfo.lastUpdateDate = this.clientDetailsForm.value.clientInfo.clientEffectiveDate;
+            this.clientDetailsForm.value.clientInfo.clientStatusEndDate = this.clientDetailsForm.value.clientInfo.clientTerminationDate;
+            this.clientDetailsForm.value.clientInfo.currentRecordFlag = "Y";
+            this.clientAddressForm.value.clientAddressInfo.currentRecordFlag = "Y";
 
         } else {
             this.clientDetailsForm.reset();
@@ -49,11 +55,14 @@ export class ClientDetailComponent implements OnInit {
             this.isFieldreadonly = false;
             this.isClientAddressDisable = true;
             this.isTerminationDateFieldreadonly = true;
+            this.isUpdateDateFieldReadonly = true;
             this.renderer.setAttribute(this.clientStatusList.nativeElement, 'disabled', 'true');
             this.renderer.setProperty(this.clientProvinceList.nativeElement, 'disabled', false);
             this.renderer.setProperty(this.clientLanguageList.nativeElement, 'disabled', false);
             this.renderer.setProperty(this.clientSubmit.nativeElement, 'disabled', false);
             this.renderer.setAttribute(this.clientAddressSubmit.nativeElement, 'disabled', 'true');
+            // this.clientDetailsForm.value.clientInfo.lastUpdateDate = "";
+
         }
 
     }
@@ -78,6 +87,13 @@ export class ClientDetailComponent implements OnInit {
     public addEffDateVal: any;
     public addTerDateVal: any;
     public isSubmit: boolean = false;
+    public isAddressSubmit: boolean = false;
+    // public clientIdentifier: string;
+    public recentAddress: any;
+    public isUpdateDateFieldReadonly: boolean;
+    public clientAddressIdentifier: string;
+    public isUpdate: string;
+    public isDateUpdate: string;
 
     @ViewChild('clientStatusList') clientStatusList: ElementRef;
     @ViewChild('clientProvinceList') clientProvinceList: ElementRef;
@@ -166,20 +182,44 @@ export class ClientDetailComponent implements OnInit {
 
     onClickOfClientSubmit() {
         debugger;
-        this.isSubmit = true;
-        this.clientDetailsForm.value
-        this.clientDetailsForm.value.clientInfo.clientEffectiveDate = this.fromDateVal;
+        if (this.clientDetailsForm.value.clientInfo.clientNumber == null && this.clientDetailsForm.value.clientInfo.clientName == null &&
+            this.clientDetailsForm.value.clientInfo.clientEffectiveDate == null && this.clientDetailsForm.value.clientInfo.clientProvinceCode == null &&
+            this.clientDetailsForm.value.clientInfo.clientLanguageCode == null) {
+            this.isSubmit = true;
+            this.mdMondServiceDS.showErrorMessage("Please fill out the field.");
+            return
+        }
+        if (this.isDateUpdate != "Date") {
+            this.clientDetailsForm.value.clientInfo.lastUpdateDate = "";
+            this.clientDetailsForm.value.clientInfo.clientStatusEndDate = "";
+        }
+        this.isDateUpdate = "";
+        if (this.isUpdate != 'update') {
+            this.clientDetailsForm.value.clientInfo.currentRecordFlag = "N";
+        }
+        this.isUpdate = "";
+        if (this.clientDetailsValues != undefined) {
+            this.clientDetailsForm.value.clientInfo.clientIdentifier = this.clientDetailsValues.clientInfo.clientIdentifier;
+            this.clientDetailsValues.clientInfo.clientIdentifier = undefined;
+        } else {
+            this.clientDetailsForm.value.clientInfo.clientIdentifier = this.clientDetailsValues;
+        }
+
+        if (this.fromDateVal != undefined) {
+            this.clientDetailsForm.value.clientInfo.clientEffectiveDate = this.fromDateVal;
+        }
+
         if (this.tillDateVal != undefined) {
             this.clientDetailsForm.value.clientInfo.clientTerminationDate = this.tillDateVal;
         }
 
-        if (this.clientDetailsForm.value.clientInfo.clientProfitSharingFlag == true) {
+        if (this.clientDetailsForm.value.clientInfo.clientProfitSharingFlag == true || this.clientDetailsForm.value.clientInfo.clientProfitSharingFlag == "Y") {
             this.clientDetailsForm.value.clientInfo.clientProfitSharingFlag = "Y"
         } else {
             this.clientDetailsForm.value.clientInfo.clientProfitSharingFlag = "N"
         }
 
-        if (this.clientDetailsForm.value.clientInfo.groupPolicyHolder == true) {
+        if (this.clientDetailsForm.value.clientInfo.groupPolicyHolder == true || this.clientDetailsForm.value.clientInfo.groupPolicyHolder == "Y") {
             this.clientDetailsForm.value.clientInfo.groupPolicyHolder = "YES"
         } else {
             this.clientDetailsForm.value.clientInfo.groupPolicyHolder = "NO"
@@ -187,14 +227,14 @@ export class ClientDetailComponent implements OnInit {
 
         console.log('Form Submitted with value: ', JSON.stringify(this.clientDetailsForm.value));
         let formData = btoa(JSON.stringify(this.clientDetailsForm.value));
-        this.mdMondServiceDS.invokeMondService("Creditor Self Admin", "SaveClientData", "1.00", formData, this.csfrToken, true, true, true).subscribe(
+        this.mdMondServiceDS.invokeMondService("Creditor Self Admin", "SaveClientData-V2", "1.00", formData, this.csfrToken, true, true, true).subscribe(
             data => {
                 console.log("onClickOfClientSubmit data", data);
                 this.mdMondServiceDS.showSuccessMessage("Client Record Inserted Successfully");
 
             }, error => {
-                this.mdMondServiceDS.MDError(error);
-
+                // debugger;
+                this.mdMondServiceDS.MDError(error);       
             });
 
     }
@@ -209,31 +249,81 @@ export class ClientDetailComponent implements OnInit {
     }
     onClickOfClientAddressListRow(event) {
         debugger;
-        this.clientAddressForm.patchValue(event.data);
+        let addressRowData = this.fb.group({
+            clientAddressInfo: event.data
+        });
+        this.clientAddressIdentifier = addressRowData.value.clientAddressInfo.clientAddressIdentifier;
+        this.clientAddressForm.patchValue(addressRowData.value);
+        // this.clientIdentifier = addressRowData.value.clientAddressInfo.clientIdentifier;
         this.isAddressFieldreadonly = true;
         this.renderer.setAttribute(this.addressTypeList.nativeElement, 'disabled', 'true');
         this.renderer.setAttribute(this.provinceCodeList.nativeElement, 'disabled', 'true');
         this.renderer.setAttribute(this.countryAddress.nativeElement, 'disabled', 'true');
-
     }
 
     onClickOfClientAddressSubmit() {
         debugger;
-        this.isSubmit = true;
-        this.clientAddressForm.value
-        this.clientAddressForm.value.clientAddressInfo.addressEffectiveDate = this.addEffDateVal;
+        if (this.clientAddressForm.value.clientAddressInfo.addressType != undefined) {
+            if (this.clientAddressForm.value.clientAddressInfo.addressType == null && this.clientAddressForm.value.clientAddressInfo.addressEffectiveDate == null) {
+                this.isAddressSubmit = true;
+                this.mdMondServiceDS.showErrorMessage("Please fill out the field.");
+                return;
+            }
+        }
+
+        if (this.isUpdate != 'updateAddress') {
+            this.clientAddressForm.value.clientAddressInfo.currentRecordFlag = "N";
+        }
+        this.isUpdate = "";
+
+        this.clientAddressForm.value.clientAddressInfo.clientAddressIdentifier = this.clientAddressIdentifier;
+        this.clientAddressIdentifier = "";
+        if (this.addEffDateVal != undefined) {
+            this.clientAddressForm.value.clientAddressInfo.addressEffectiveDate = this.addEffDateVal;
+        }
         if (this.addTerDateVal != undefined) {
             this.clientAddressForm.value.clientAddressInfo.addressTerminationDate = this.addTerDateVal;
         }
         this.clientAddressForm.value.clientAddressInfo.clientIdentifier = this.clientDetailsValues.clientInfo.clientIdentifier;
         this.clientAddressForm.value.clientAddressInfo.clientNumber = this.clientDetailsValues.clientInfo.clientNumber;
         let formData = btoa(JSON.stringify(this.clientAddressForm.value));
-        this.mdMondServiceDS.invokeMondService("Creditor Self Admin", "SaveClientAddressData", "1.00", formData, this.csfrToken, true, true, true).subscribe(
+        this.mdMondServiceDS.invokeMondService("Creditor Self Admin", "SaveClientAddressData-V2", "1.00", formData, this.csfrToken, true, true, true).subscribe(
             data => {
                 console.log("onClickOfClientSubmit data", data);
                 this.mdMondServiceDS.showSuccessMessage("Client Address Record Inserted Successfully");
+                let newAddressList = JSON.parse(atob(data)).clientAddressInfo[0];
+                this.clientAddressList.push(newAddressList);
+                this.clientAddressForm.reset();
+               
             }, error => {
                 this.mdMondServiceDS.MDError(error);
+                // let data = "eyJjbGllbnRBZGRyZXNzSW5mbyI6W3siY291bnRyeSI6IkNhbmFkYSIsImN1cnJlbnRSZWNvcmRGbGFnIjoiWSIsImNpdHkiOiJCYW5nYWxvcmUiLCJhZGRyZXNzVGVybWluYXRpb25EYXRlIjoiOTk5OS0xMi0zMVQwOTowODoyNi4wMDBaIiwiYWRkcmVzc1R5cGUiOiJCaWxsaW5nIiwibGFzdFVwZGF0ZURhdGUiOiIyMDIxLTA0LTI5VDA1OjI5OjA4LjAwMFoiLCJjbGllbnRJZGVudGlmaWVyIjozMCwicG9zdGFsQ29kZSI6IjExMTEiLCJhZGRyZXNzRWZmZWN0aXZlRGF0ZSI6IjIwMjEtMDQtMjlUMDA6MDA6MDAuMDAwWiIsImNsaWVudE51bWJlciI6IjI3IiwicHJvdmluY2UiOiJJTiIsImNsaWVudEFkZHJlc3NJZGVudGlmaWVyIjo0MSwiYWRkcmVzc0xpbmUxIjoiNDk1IFJpY2htb25kIFN0IiwiYWRkcmVzc0xpbmUyIjoiU3VpdGUgMzAwIn1dfQ==";
+                // console.log("onClickOfClientSubmit data", data);
+
+                // let newAddressList = JSON.parse(atob(data)).clientAddressInfo[0];
+
+                //     for(var i=0; i<this.clientAddressList.length; i++){
+                //         if(this.clientAddressList[i].clientAddressIdentifier == newAddressList.clientAddressIdentifier){
+                //             this.clientAddressList.splice(i,1);
+                //             this.clientAddressList.push(newAddressList);
+                //             this.mdMondServiceDS.showSuccessMessage("Client Address Record Updated Successfully");
+                //             return;
+                //         } 
+                //         if(this.clientAddressList[i].clientAddressIdentifier != newAddressList.clientAddressIdentifier){
+                //             this.clientAddressList.push(newAddressList);
+                //             this.mdMondServiceDS.showSuccessMessage("Client Address Record Inserted Successfully");
+                //             return;
+                //         }                      
+                //     }   
+                
+                // let data = "eyJjbGllbnRBZGRyZXNzSW5mbyI6W3siY291bnRyeSI6IkNhbmFkYSIsImN1cnJlbnRSZWNvcmRGbGFnIjoiWSIsImNpdHkiOiJSTlIiLCJhZGRyZXNzVGVybWluYXRpb25EYXRlIjoiOTk5OS0xMi0zMVQwOTowODoyNi4wMDBaIiwiYWRkcmVzc1R5cGUiOiJCaWxsaW5nIiwibGFzdFVwZGF0ZURhdGUiOiIyMDIxLTA0LTMwVDE1OjA4OjAyLjAwMFoiLCJjbGllbnRJZGVudGlmaWVyIjo1OSwicG9zdGFsQ29kZSI6IjExMTEiLCJhZGRyZXNzRWZmZWN0aXZlRGF0ZSI6IjIwMjEtMDQtMjhUMDA6MDA6MDAuMDAwWiIsImNsaWVudE51bWJlciI6IjQxIiwicHJvdmluY2UiOiJERSIsImNsaWVudEFkZHJlc3NJZGVudGlmaWVyIjo2OCwiYWRkcmVzc0xpbmUxIjoibGluZTEiLCJhZGRyZXNzTGluZTIiOiJMaW5lMiJ9LHsiY291bnRyeSI6IkNhbmFkYSIsImN1cnJlbnRSZWNvcmRGbGFnIjoiWSIsImNpdHkiOiJSTlIiLCJhZGRyZXNzVGVybWluYXRpb25EYXRlIjoiOTk5OS0xMi0zMVQwOTowODoyNi4wMDBaIiwiYWRkcmVzc1R5cGUiOiJCaWxsaW5nIiwibGFzdFVwZGF0ZURhdGUiOiIyMDIxLTA0LTMwVDE2OjAyOjA2LjAwMFoiLCJjbGllbnRJZGVudGlmaWVyIjo1OSwicG9zdGFsQ29kZSI6IjExIiwiYWRkcmVzc0VmZmVjdGl2ZURhdGUiOiIyMDIxLTA0LTAxVDAwOjAwOjAwLjAwMFoiLCJjbGllbnROdW1iZXIiOiI0MSIsInByb3ZpbmNlIjoiSUEiLCJjbGllbnRBZGRyZXNzSWRlbnRpZmllciI6ODQsImFkZHJlc3NMaW5lMSI6ImxpbmUxIiwiYWRkcmVzc0xpbmUyIjoibGluZTIifSx7ImN1cnJlbnRSZWNvcmRGbGFnIjoiWSIsInByb3ZpbmNlIjoiSEkiLCJhZGRyZXNzVGVybWluYXRpb25EYXRlIjoiOTk5OS0xMi0zMVQwOTowODoyNi4wMDBaIiwiYWRkcmVzc1R5cGUiOiJNYWlsaW5nIiwibGFzdFVwZGF0ZURhdGUiOiIyMDIxLTA0LTMwVDE1OjA3OjMxLjAwMFoiLCJjbGllbnRJZGVudGlmaWVyIjo1OSwiY2xpZW50QWRkcmVzc0lkZW50aWZpZXIiOjY3LCJhZGRyZXNzTGluZTEiOiJsaW5lMSIsImFkZHJlc3NFZmZlY3RpdmVEYXRlIjoiMjAyMS0wNC0wNFQwMDowMDowMC4wMDBaIiwiYWRkcmVzc0xpbmUyIjoibGluZTIiLCJjbGllbnROdW1iZXIiOiI0MSJ9XX0\u003d";             
+                // let newAddressList = JSON.parse(atob(data)).clientAddressInfo;
+                // for(var i=0; i<newAddressList.length; i++){
+                //     this.clientAddressList.push(newAddressList[i]);
+                // }
+                // this.mdMondServiceDS.showSuccessMessage("Client Address Record Inserted Successfully");         
+                // this.clientAddressForm.reset();
+             
             });
     }
 
@@ -247,6 +337,7 @@ export class ClientDetailComponent implements OnInit {
 
     onClickOfClientUpdatePlan() {
         debugger
+        this.isUpdate = "update";
         this.isFieldreadonly = false;
         this.isTerminationDateFieldreadonly = false;
         this.renderer.setProperty(this.clientStatusList.nativeElement, 'disabled', false);
@@ -257,10 +348,11 @@ export class ClientDetailComponent implements OnInit {
 
     onClickOfClientAddressUpdatePlan() {
         debugger;
-        if (this.clientAddressForm.value.clientAddressInfo_addressType == "" || this.clientAddressForm.value.clientAddressInfo_addressType == null) {
+        if (this.clientAddressForm.value.clientAddressInfo.addressType == "" || this.clientAddressForm.value.clientAddressInfo.addressType == null) {
             this.mdMondServiceDS.showErrorMessage("please select a row");
             return;
         }
+        this.isUpdate = 'updateAddress';
         this.isAddressFieldreadonly = false;
         this.isAddressterminationDateFieldreadonly = false;
         this.renderer.setProperty(this.addressTypeList.nativeElement, 'disabled', false);
@@ -278,6 +370,32 @@ export class ClientDetailComponent implements OnInit {
         this.renderer.setProperty(this.provinceCodeList.nativeElement, 'disabled', false);
         this.renderer.setProperty(this.countryAddress.nativeElement, 'disabled', false);
         this.renderer.setProperty(this.clientAddressSubmit.nativeElement, 'disabled', false);
+    }
+
+
+    onClickOfHistoricalAddress() {
+        debugger;
+
+        // if (this.clientAddressForm.value.clientAddressInfo.addressType == "" || this.clientAddressForm.value.clientAddressInfo.addressType == null) {
+        //     this.mdMondServiceDS.showErrorMessage("please select a row");
+        //     return;
+        // }
+        $("#historicalModelId").click();
+        let formVariables = JSON.stringify({ "clientId": this.clientDetailsValues.clientInfo.clientIdentifier });
+        this.mdMondServiceDS.getFormDataHistoricalAddress('Creditor Self Admin', 'BasedOnService', 'FetchClientAddressHistory', '1.00', formVariables, new Date().getTime()).subscribe(
+            res => {
+                var decodedData = atob(res.value);
+                var parseDecodeData = JSON.parse(decodedData);
+                this.recentAddress = parseDecodeData.clientAddressInfo_clientAddressInfo;
+            }, error => {
+                this.mdMondServiceDS.MDError(error);
+                // let data = "eyJjbGllbnRBZGRyZXNzSW5mb19jbGllbnRBZGRyZXNzSW5mbyI6W3siY2xpZW50QWRkcmVzc0luZm9fYWRkcmVzc1R5cGUiOiJCaWxsaW5nIiwiY2xpZW50QWRkcmVzc0luZm9fYWRkcmVzc1Rlcm1pbmF0aW9uRGF0ZSI6Ijk5OTktMTItMzFUMDk6MDg6MjYuMDAwWiIsImNsaWVudEFkZHJlc3NJbmZvX2NsaWVudEFkZHJlc3NJZGVudGlmaWVyIjo0MywiY2xpZW50QWRkcmVzc0luZm9fbGFzdFVwZGF0ZURhdGUiOiIyMDIxLTA0LTI5VDA1OjMyOjE1LjAwMFoiLCJjbGllbnRBZGRyZXNzSW5mb19wb3N0YWxDb2RlIjoiY29kZSIsImNsaWVudEFkZHJlc3NJbmZvX2FkZHJlc3NFZmZlY3RpdmVEYXRlIjoiMjAyMS0wNC0wMVQwMDowMDowMC4wMDBaIiwiY2xpZW50QWRkcmVzc0luZm9fcHJvdmluY2UiOiJLUyIsImNsaWVudEFkZHJlc3NJbmZvX2NsaWVudE51bWJlciI6IjEyMzQ1NiIsImNsaWVudEFkZHJlc3NJbmZvX2NsaWVudElkZW50aWZpZXIiOjEyLCJjbGllbnRBZGRyZXNzSW5mb19jaXR5IjoiY2l0eSIsImNsaWVudEFkZHJlc3NJbmZvX2NvdW50cnkiOiJDYW5hZGEiLCJjbGllbnRBZGRyZXNzSW5mb19jdXJyZW50UmVjb3JkRmxhZyI6IlkiLCJjbGllbnRBZGRyZXNzSW5mb19hZGRyZXNzTGluZTIiOiJsaW5lMiIsImNsaWVudEFkZHJlc3NJbmZvX2FkZHJlc3NMaW5lMSI6ImxpbmUxIn0seyJjbGllbnRBZGRyZXNzSW5mb19hZGRyZXNzVGVybWluYXRpb25EYXRlIjoiOTk5OS0xMi0zMVQwOTowODoyNi4wMDBaIiwiY2xpZW50QWRkcmVzc0luZm9fY2xpZW50QWRkcmVzc0lkZW50aWZpZXIiOjMwLCJjbGllbnRBZGRyZXNzSW5mb19sYXN0VXBkYXRlRGF0ZSI6IjIwMjEtMDQtMjdUMDU6MTQ6NDIuMDAwWiIsImNsaWVudEFkZHJlc3NJbmZvX3Bvc3RhbENvZGUiOiJjb2RlIiwiY2xpZW50QWRkcmVzc0luZm9fYWRkcmVzc1R5cGUiOiJNYWlsaW5nIiwiY2xpZW50QWRkcmVzc0luZm9fYWRkcmVzc0VmZmVjdGl2ZURhdGUiOiIyMDIxLTA0LTI3VDAwOjAwOjAwLjAwMFoiLCJjbGllbnRBZGRyZXNzSW5mb19wcm92aW5jZSI6IkFCIiwiY2xpZW50QWRkcmVzc0luZm9fY2xpZW50TnVtYmVyIjoiMTIzNDU2IiwiY2xpZW50QWRkcmVzc0luZm9fY2xpZW50SWRlbnRpZmllciI6MTIsImNsaWVudEFkZHJlc3NJbmZvX2NpdHkiOiJjaXR5IiwiY2xpZW50QWRkcmVzc0luZm9fY291bnRyeSI6IkNhbmFkYSIsImNsaWVudEFkZHJlc3NJbmZvX2N1cnJlbnRSZWNvcmRGbGFnIjoiWSIsImNsaWVudEFkZHJlc3NJbmZvX2FkZHJlc3NMaW5lMiI6ImxpbmUyIiwiY2xpZW50QWRkcmVzc0luZm9fYWRkcmVzc0xpbmUxIjoibGluZTEifV19";
+                //   let data = {"key":"key","value":"eyJjbGllbnRBZGRyZXNzSW5mb19jbGllbnRBZGRyZXNzSW5mbyI6W3siY2xpZW50QWRkcmVzc0luZm9fYWRkcmVzc1Rlcm1pbmF0aW9uRGF0ZSI6Ijk5OTktMTItMzFUMDk6MDg6MjYuMDAwWiIsImNsaWVudEFkZHJlc3NJbmZvX2NsaWVudEFkZHJlc3NJZGVudGlmaWVyIjo0MiwiY2xpZW50QWRkcmVzc0luZm9fbGFzdFVwZGF0ZURhdGUiOiIyMDIxLTA0LTI5VDA1OjI5OjA4LjAwMFoiLCJjbGllbnRBZGRyZXNzSW5mb19wb3N0YWxDb2RlIjoiMTExMSIsImNsaWVudEFkZHJlc3NJbmZvX2FkZHJlc3NUeXBlIjoiQmlsbGluZyIsImNsaWVudEFkZHJlc3NJbmZvX2FkZHJlc3NFZmZlY3RpdmVEYXRlIjoiMjAyMS0wNC0yOVQwMDowMDowMC4wMDBaIiwiY2xpZW50QWRkcmVzc0luZm9fcHJvdmluY2UiOiJJTiIsImNsaWVudEFkZHJlc3NJbmZvX2NsaWVudE51bWJlciI6IjI3IiwiY2xpZW50QWRkcmVzc0luZm9fY2xpZW50SWRlbnRpZmllciI6MzAsImNsaWVudEFkZHJlc3NJbmZvX2NpdHkiOiJCYW5nYWxvcmUiLCJjbGllbnRBZGRyZXNzSW5mb19jb3VudHJ5IjoiQ2FuYWRhIiwiY2xpZW50QWRkcmVzc0luZm9fY3VycmVudFJlY29yZEZsYWciOiJZIiwiY2xpZW50QWRkcmVzc0luZm9fYWRkcmVzc0xpbmUyIjoiU3VpdGUgMzAwIiwiY2xpZW50QWRkcmVzc0luZm9fYWRkcmVzc0xpbmUxIjoiNDk1IFJpY2htb25kIFN0In0seyJjbGllbnRBZGRyZXNzSW5mb19hZGRyZXNzVGVybWluYXRpb25EYXRlIjoiOTk5OS0xMi0zMVQwOTowODoyNi4wMDBaIiwiY2xpZW50QWRkcmVzc0luZm9fY2xpZW50QWRkcmVzc0lkZW50aWZpZXIiOjQ1LCJjbGllbnRBZGRyZXNzSW5mb19sYXN0VXBkYXRlRGF0ZSI6IjIwMjEtMDQtMjlUMDY6MDc6MDYuMDAwWiIsImNsaWVudEFkZHJlc3NJbmZvX3Bvc3RhbENvZGUiOiJjb2RlIiwiY2xpZW50QWRkcmVzc0luZm9fYWRkcmVzc1R5cGUiOiJNYWlsaW5nIiwiY2xpZW50QWRkcmVzc0luZm9fYWRkcmVzc0VmZmVjdGl2ZURhdGUiOiIyMDIxLTA0LTI4VDAwOjAwOjAwLjAwMFoiLCJjbGllbnRBZGRyZXNzSW5mb19wcm92aW5jZSI6IkhJIiwiY2xpZW50QWRkcmVzc0luZm9fY2xpZW50TnVtYmVyIjoiMjciLCJjbGllbnRBZGRyZXNzSW5mb19jbGllbnRJZGVudGlmaWVyIjozMCwiY2xpZW50QWRkcmVzc0luZm9fY2l0eSI6ImNpdHkiLCJjbGllbnRBZGRyZXNzSW5mb19jb3VudHJ5IjoiQ2FuYWRhIiwiY2xpZW50QWRkcmVzc0luZm9fY3VycmVudFJlY29yZEZsYWciOiJZIiwiY2xpZW50QWRkcmVzc0luZm9fYWRkcmVzc0xpbmUyIjoibGluZTIiLCJjbGllbnRBZGRyZXNzSW5mb19hZGRyZXNzTGluZTEiOiJsaW5lMSJ9LHsiY2xpZW50QWRkcmVzc0luZm9fYWRkcmVzc1Rlcm1pbmF0aW9uRGF0ZSI6Ijk5OTktMTItMzFUMDk6MDg6MjYuMDAwWiIsImNsaWVudEFkZHJlc3NJbmZvX2NsaWVudEFkZHJlc3NJZGVudGlmaWVyIjo0NCwiY2xpZW50QWRkcmVzc0luZm9fbGFzdFVwZGF0ZURhdGUiOiIyMDIxLTA0LTI5VDA2OjAzOjE3LjAwMFoiLCJjbGllbnRBZGRyZXNzSW5mb19wb3N0YWxDb2RlIjoiY29kZSIsImNsaWVudEFkZHJlc3NJbmZvX2FkZHJlc3NUeXBlIjoiTWFpbGluZyIsImNsaWVudEFkZHJlc3NJbmZvX2FkZHJlc3NFZmZlY3RpdmVEYXRlIjoiMjAyMS0wNC0wMVQwMDowMDowMC4wMDBaIiwiY2xpZW50QWRkcmVzc0luZm9fcHJvdmluY2UiOiJDQSIsImNsaWVudEFkZHJlc3NJbmZvX2NsaWVudE51bWJlciI6IjI3IiwiY2xpZW50QWRkcmVzc0luZm9fY2xpZW50SWRlbnRpZmllciI6MzAsImNsaWVudEFkZHJlc3NJbmZvX2NpdHkiOiJjaXR5IiwiY2xpZW50QWRkcmVzc0luZm9fY291bnRyeSI6IkNhbmFkYSIsImNsaWVudEFkZHJlc3NJbmZvX2N1cnJlbnRSZWNvcmRGbGFnIjoiWSIsImNsaWVudEFkZHJlc3NJbmZvX2FkZHJlc3NMaW5lMiI6ImxpbmUyIiwiY2xpZW50QWRkcmVzc0luZm9fYWRkcmVzc0xpbmUxIjoibGluZTEifV19"};
+
+                //     var decodedData = atob(data.value);
+                //     var parseDecodeData = JSON.parse(decodedData);
+                //     this.recentAddress = parseDecodeData.clientAddressInfo_clientAddressInfo;
+            });
     }
 
 }

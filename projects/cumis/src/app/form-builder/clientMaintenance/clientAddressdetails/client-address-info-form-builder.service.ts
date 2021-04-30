@@ -34,7 +34,9 @@ export class ClientAddressInfoFormBuilderService {
                 postalCode: [''],
                 country: [''],
                 clientIdentifier:[''],
-                clientNumber:['']
+                clientNumber:[''],
+                clientAddressIdentifier:[''],
+                currentRecordFlag: ['']
         });
     }
 }

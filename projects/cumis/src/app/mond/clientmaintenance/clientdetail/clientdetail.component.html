@@ -3,7 +3,9 @@
         <div class="col-md-6">
         </div>
         <div class="col-md-6">
-            <button class="ym_button float-right ml-2" (click)="onClickOfClientUpdatePlan()"> Update Client</button>
+            <button class="float-right ml-2 btn btn-primary" [disabled]="isUpdateDateFieldReadonly"
+                (click)="onClickOfClientUpdatePlan()"> Update
+                Client</button>
         </div>
     </div>
     <div formGroupName="clientInfo">
@@ -11,15 +13,17 @@
             <div class="ym_form_group required col-4">
                 <label>Client Number</label>
                 <input placeholder="Client Number" formControlName="clientNumber" [readonly]="isFieldreadonly">
-                <div  *ngIf="isSubmit && !clientDetailsForm.get('clientInfo.clientNumber').touched">
-                    <p class="text-danger">  Please fill out this field.</p>             
+                <div
+                    *ngIf="isSubmit && !clientDetailsForm.get('clientInfo.clientNumber').touched  && clientDetailsForm.get('clientInfo.clientNumber').invalid">
+                    <p class="text-danger"> Please fill out this field.</p>
                 </div>
             </div>
             <div class="ym_form_group required col-4">
                 <label>Client Name</label>
                 <input placeholder="Client Name" formControlName="clientName" [readonly]="isFieldreadonly">
-                <div  *ngIf="isSubmit && !clientDetailsForm.get('clientInfo.clientName').touched">
-                    <p class="text-danger">  Please fill out this field.</p>             
+                <div
+                    *ngIf="isSubmit && !clientDetailsForm.get('clientInfo.clientName').touched && clientDetailsForm.get('clientInfo.clientName').invalid">
+                    <p class="text-danger"> Please fill out this field.</p>
                 </div>
             </div>
             <div class="ym_form_group required col-4">
@@ -30,11 +34,12 @@
                         (dateInput)="clientEffectiveDateKeyup($event.value)">
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker class="col-md-3" #picker></mat-datepicker>
-                    <div  *ngIf="isSubmit && !clientDetailsForm.get('clientInfo.clientEffectiveDate').touched">
-                        <p class="text-danger">  Please fill out this field.</p>             
+                    <div
+                        *ngIf="isSubmit && !clientDetailsForm.get('clientInfo.clientEffectiveDate').touched && clientDetailsForm.get('clientInfo.clientEffectiveDate').invalid">
+                        <p class="text-danger"> Please fill out this field.</p>
                     </div>
                 </div>
-               
+
             </div>
         </div>
 
@@ -68,8 +73,9 @@
                             {{list.description}}</option>
                     </select>
                 </div>
-                <div  *ngIf="isSubmit && !clientDetailsForm.get('clientInfo.clientProvinceCode').touched">
-                    <p class="text-danger">  Please fill out this field.</p>             
+                <div
+                    *ngIf="isSubmit && !clientDetailsForm.get('clientInfo.clientProvinceCode').touched && clientDetailsForm.get('clientInfo.clientProvinceCode').invalid">
+                    <p class="text-danger"> Please fill out this field.</p>
                 </div>
             </div>
         </div>
@@ -84,8 +90,9 @@
                             {{list.description}}</option>
                     </select>
                 </div>
-                <div  *ngIf="isSubmit && !clientDetailsForm.get('clientInfo.clientLanguageCode').touched">
-                    <p class="text-danger">  Please fill out this field.</p>             
+                <div
+                    *ngIf="isSubmit && !clientDetailsForm.get('clientInfo.clientLanguageCode').touched && clientDetailsForm.get('clientInfo.clientLanguageCode').invalid">
+                    <p class="text-danger"> Please fill out this field.</p>
                 </div>
             </div>
             <div class="ym_form_group col-4">
@@ -126,9 +133,9 @@
     </div>
 
     <div class="ym_form_group">
-        <button class="ym_button float-right" (click)="onClickOfClientSubmit()" #clientSubmit><i
+        <button class="float-right btn btn-primary" (click)="onClickOfClientSubmit()" #clientSubmit><i
                 class="fa fa-save mr-1"></i>Submit</button>
-        <button class="ym_button float-right" style="margin-right: 10px;" (click)="onClickOfClientClear()"><i
+        <button class="float-right btn btn-primary" style="margin-right: 10px;" (click)="onClickOfClientClear()"><i
                 class="fa fa-times"></i> Clear</button>
     </div>
 </form>
@@ -144,10 +151,22 @@
             <div class="col-md-6">
             </div>
             <div class="col-md-6">
-                <button class="ym_button float-right ml-2" (click)="onClickOfClientAddressUpdatePlan()"> Update Client
-                    Address</button>
-                <button class="ym_button float-right ml-2" (click)="onClickOfClientAddAddress()"
+                <div class="dropdown float-right ml-2">
+                    <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
+                        [disabled]="isClientAddressDisable">
+                        More Action
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" (click)="onClickOfClientAddressUpdatePlan()">Update Client Address</a>
+                        <a class="dropdown-item" (click)="onClickOfHistoricalAddress()">View Historical Address</a>
+                    </div>
+                </div>
+                <!-- <button class="ym_button float-right ml-2" (click)="onClickOfClientAddressUpdatePlan()"> Update Client
+                    Address</button> -->
+                <button type="button" class="float-right ml-2 btn btn-primary" (click)="onClickOfClientAddAddress()"
                     [disabled]="isClientAddressDisable"><i class="fa fa-plus"></i>Add Address</button>
+
+
             </div>
         </div>
         <div class="row">
@@ -168,9 +187,9 @@
                     </ng-template>
                     <ng-template pTemplate="body" let-responseData>
                         <tr [pSelectableRow]="responseData">
-                            <td>{{responseData.clientAddressInfo_addressType}}</td>
-                            <td>{{responseData.clientAddressInfo_addressEffectiveDate.split('T')[0] }}</td>
-                            <td>{{responseData.clientAddressInfo_province}}</td>
+                            <td>{{responseData.addressType}}</td>
+                            <td>{{responseData.addressEffectiveDate.split('T')[0] }}</td>
+                            <td>{{responseData.province}}</td>
                         </tr>
                     </ng-template>
                 </p-table>
@@ -187,8 +206,9 @@
                                         {{list.description}}</option>
                                 </select>
                             </div>
-                            <div  *ngIf="isSubmit && !clientAddressForm.get('clientAddressInfo.addressType').touched">
-                                <p class="text-danger">  Please fill out this field.</p>             
+                            <div
+                                *ngIf="isAddressSubmit && !clientAddressForm.get('clientAddressInfo.addressType').touched && clientAddressForm.get('clientAddressInfo.addressType').invalid">
+                                <p class="text-danger"> Please fill out this field.</p>
                             </div>
                         </div>
                     </div>
@@ -197,11 +217,13 @@
                             <div class="row">
                                 <label>Address Effective Date</label>
                                 <input class="col-md-9" matInput [matDatepicker]="picker3"
-                                    formControlName="addressEffectiveDate" [readonly]="isAddressFieldreadonly" (dateInput)="onClickOfAddEffDate($event.value)" #addEffDate>
+                                    formControlName="addressEffectiveDate" [readonly]="isAddressFieldreadonly"
+                                    (dateInput)="onClickOfAddEffDate($event.value)" #addEffDate>
                                 <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
                                 <mat-datepicker class="col-md-3" #picker3></mat-datepicker>
-                                <div  *ngIf="isSubmit && !clientAddressForm.get('clientAddressInfo.addressEffectiveDate').touched">
-                                    <p class="text-danger">  Please fill out this field.</p>             
+                                <div
+                                    *ngIf="isAddressSubmit && !clientAddressForm.get('clientAddressInfo.addressEffectiveDate').touched && clientAddressForm.get('clientAddressInfo.addressEffectiveDate').invalid">
+                                    <p class="text-danger"> Please fill out this field.</p>
                                 </div>
                             </div>
                         </div>
@@ -210,7 +232,8 @@
                                 <label>Address Termination Date</label>
                                 <input class="col-md-9" matInput [matDatepicker]="picker4"
                                     formControlName="addressTerminationDate" [readonly]="isAddressFieldreadonly"
-                                    [readonly]="isAddressFieldreadonly" (dateInput)="onClickOfAddTerminationDate($event.value)" #addTerDate>
+                                    [readonly]="isAddressFieldreadonly"
+                                    (dateInput)="onClickOfAddTerminationDate($event.value)" #addTerDate>
                                 <mat-datepicker-toggle matSuffix [for]="picker4"
                                     [disabled]="isAddressterminationDateFieldreadonly"></mat-datepicker-toggle>
                                 <mat-datepicker class="col-md-3" #picker4></mat-datepicker>
@@ -278,13 +301,61 @@
                                 [readonly]="isAddressFieldreadonly">
                         </div>
                     </div>
-                    <div class="ym_form_group">
-                        <button class="ym_button float-right" (click)="onClickOfClientAddressSubmit()"
-                            #clientAddressSubmit><i class="fa fa-save mr-1"></i>Submit</button>
-                    </div>
+                    <button class="float-right btn btn-primary" (click)="onClickOfClientAddressSubmit()"
+                        #clientAddressSubmit><i class="fa fa-save mr-1"></i>Submit</button>
                 </div>
-
             </div>
         </div>
     </mat-expansion-panel>
 </mat-accordion>
+
+
+
+<button type="button" class="btn btn-primary" id="historicalModelId" data-toggle="modal" data-target="#historicalModal"
+    style="display: none;">
+    Historical Modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="historicalModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <b class="md-address">Historical Address</b>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p-table [value]="recentAddress">
+                    <ng-template pTemplate="header">
+                        <tr class="ptableHeader">
+                            <th>Address Type</th>
+                            <th>Effective Date</th>
+                            <th>Termination Date</th>
+                            <th>Address</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-responseData>
+                        <tr [pSelectableRow]="responseData">
+                            <td>{{responseData.clientAddressInfo_addressType}}</td>
+                            <td>{{responseData.clientAddressInfo_addressEffectiveDate.split('T')[0]}}</td>
+                            <td>{{responseData.clientAddressInfo_addressTerminationDate.split('T')[0]}}</td>
+                            <td>{{responseData.clientAddressInfo_addressLine1}}
+                                {{responseData.clientAddressInfo_addressLine2}}
+                                {{responseData.clientAddressInfo_city}}
+                                {{responseData.clientAddressInfo_province}}
+                                {{responseData.clientAddressInfo_postalCode}}
+                                {{responseData.clientAddressInfo_country}}</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal"><i
+                        class="fa fa-times ml-2"></i>Close</button>
+            </div>
+        </div>
+    </div>
+</div>

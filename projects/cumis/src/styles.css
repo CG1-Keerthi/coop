@@ -266,3 +266,11 @@ z-index:1100;
 .modal-dialog{
     margin-top: 120px;
 }
+.btn-primary{
+    background: #0071b3 !important;
+    border-radius: 0px !important;
+}
+.md-address{
+    color: #0071b3 !important;
+    font-size: x-large;
+}

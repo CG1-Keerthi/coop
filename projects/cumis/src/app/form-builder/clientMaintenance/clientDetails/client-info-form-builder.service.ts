@@ -36,7 +36,11 @@ export class ClientInfoFormBuilderService {
                 clientPhone1: [''],
                 clientPhone2: [''],
                 clientFaxNumber: [''],
-                clientEmail: ['']
+                clientEmail: [''],
+                clientIdentifier:[''],
+                lastUpdateDate:[''],
+                currentRecordFlag:[''],
+                clientStatusEndDate:['']
             // })
         });
     }

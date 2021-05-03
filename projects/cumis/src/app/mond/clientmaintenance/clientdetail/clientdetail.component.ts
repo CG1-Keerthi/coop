@@ -57,6 +57,7 @@ export class ClientDetailComponent implements OnInit {
             this.isTerminationDateFieldreadonly = true;
             this.isUpdateDateFieldReadonly = true;
             this.isDateUpdate = "";
+            this.isUpdateClientRecord = "";
             this.clientDetailsValues.clientInfo.clientIdentifier = undefined;
             this.renderer.setAttribute(this.clientStatusList.nativeElement, 'disabled', 'true');
             this.renderer.setProperty(this.clientProvinceList.nativeElement, 'disabled', false);
@@ -96,6 +97,7 @@ export class ClientDetailComponent implements OnInit {
     public clientAddressIdentifier: string;
     public isUpdate: string;
     public isDateUpdate: string;
+    public isUpdateClientRecord: string;
 
     @ViewChild('clientStatusList') clientStatusList: ElementRef;
     @ViewChild('clientProvinceList') clientProvinceList: ElementRef;
@@ -195,7 +197,7 @@ export class ClientDetailComponent implements OnInit {
             this.clientDetailsForm.value.clientInfo.lastUpdateDate = "";
             this.clientDetailsForm.value.clientInfo.clientStatusEndDate = "";
         }
-        
+
         this.isDateUpdate = "";
         if (this.isUpdate != 'update') {
             this.clientDetailsForm.value.clientInfo.currentRecordFlag = "N";
@@ -237,7 +239,15 @@ export class ClientDetailComponent implements OnInit {
 
             }, error => {
                 // debugger;
-                this.mdMondServiceDS.MDError(error);       
+                this.mdMondServiceDS.MDError(error);
+                // if (this.isUpdateClientRecord != "updateClientRecord") {
+                //     this.mdMondServiceDS.showSuccessMessage("Client Record Inserted Successfully");
+                //     this.isUpdateClientRecord = "";
+                //     return;
+                // }else{
+                //     this.mdMondServiceDS.showSuccessMessage("Client Record Updated Successfully");
+                //     return;
+                // }
             });
 
     }
@@ -293,13 +303,13 @@ export class ClientDetailComponent implements OnInit {
                 // console.log("onClickOfClientSubmit data", data);
                 let newAddressList = JSON.parse(atob(data)).clientAddressInfo;
                 this.clientAddressList = [];
-                for(var i=0; i<newAddressList.length; i++){                   
+                for (var i = 0; i < newAddressList.length; i++) {
                     this.clientAddressList.push(newAddressList[i]);
                 }
-                this.mdMondServiceDS.showSuccessMessage("Record Inserted Successfully");         
+                this.mdMondServiceDS.showSuccessMessage("Record Inserted Successfully");
                 this.clientAddressForm.reset();
             }, error => {
-                this.mdMondServiceDS.MDError(error);               
+                this.mdMondServiceDS.MDError(error);
                 // let data = "eyJjbGllbnRBZGRyZXNzSW5mbyI6W3siY291bnRyeSI6IkNhbmFkYSIsImN1cnJlbnRSZWNvcmRGbGFnIjoiWSIsImNpdHkiOiJSTlIiLCJhZGRyZXNzVGVybWluYXRpb25EYXRlIjoiOTk5OS0xMi0zMVQwOTowODoyNi4wMDBaIiwiYWRkcmVzc1R5cGUiOiJCaWxsaW5nIiwibGFzdFVwZGF0ZURhdGUiOiIyMDIxLTA0LTMwVDE1OjA4OjAyLjAwMFoiLCJjbGllbnRJZGVudGlmaWVyIjo1OSwicG9zdGFsQ29kZSI6IjExMTEiLCJhZGRyZXNzRWZmZWN0aXZlRGF0ZSI6IjIwMjEtMDQtMjhUMDA6MDA6MDAuMDAwWiIsImNsaWVudE51bWJlciI6IjQxIiwicHJvdmluY2UiOiJERSIsImNsaWVudEFkZHJlc3NJZGVudGlmaWVyIjo2OCwiYWRkcmVzc0xpbmUxIjoibGluZTEiLCJhZGRyZXNzTGluZTIiOiJMaW5lMiJ9LHsiY291bnRyeSI6IkNhbmFkYSIsImN1cnJlbnRSZWNvcmRGbGFnIjoiWSIsImNpdHkiOiJSTlIiLCJhZGRyZXNzVGVybWluYXRpb25EYXRlIjoiOTk5OS0xMi0zMVQwOTowODoyNi4wMDBaIiwiYWRkcmVzc1R5cGUiOiJCaWxsaW5nIiwibGFzdFVwZGF0ZURhdGUiOiIyMDIxLTA0LTMwVDE2OjAyOjA2LjAwMFoiLCJjbGllbnRJZGVudGlmaWVyIjo1OSwicG9zdGFsQ29kZSI6IjExIiwiYWRkcmVzc0VmZmVjdGl2ZURhdGUiOiIyMDIxLTA0LTAxVDAwOjAwOjAwLjAwMFoiLCJjbGllbnROdW1iZXIiOiI0MSIsInByb3ZpbmNlIjoiSUEiLCJjbGllbnRBZGRyZXNzSWRlbnRpZmllciI6ODQsImFkZHJlc3NMaW5lMSI6ImxpbmUxIiwiYWRkcmVzc0xpbmUyIjoibGluZTIifSx7ImN1cnJlbnRSZWNvcmRGbGFnIjoiWSIsInByb3ZpbmNlIjoiSEkiLCJhZGRyZXNzVGVybWluYXRpb25EYXRlIjoiOTk5OS0xMi0zMVQwOTowODoyNi4wMDBaIiwiYWRkcmVzc1R5cGUiOiJNYWlsaW5nIiwibGFzdFVwZGF0ZURhdGUiOiIyMDIxLTA0LTMwVDE1OjA3OjMxLjAwMFoiLCJjbGllbnRJZGVudGlmaWVyIjo1OSwiY2xpZW50QWRkcmVzc0lkZW50aWZpZXIiOjY3LCJhZGRyZXNzTGluZTEiOiJsaW5lMSIsImFkZHJlc3NFZmZlY3RpdmVEYXRlIjoiMjAyMS0wNC0wNFQwMDowMDowMC4wMDBaIiwiYWRkcmVzc0xpbmUyIjoibGluZTIiLCJjbGllbnROdW1iZXIiOiI0MSJ9XX0\u003d";             
                 // let newAddressList = JSON.parse(atob(data)).clientAddressInfo;
                 // this.clientAddressList = [];
@@ -308,7 +318,7 @@ export class ClientDetailComponent implements OnInit {
                 // }
                 // this.mdMondServiceDS.showSuccessMessage("Record Inserted Successfully");         
                 // this.clientAddressForm.reset();
-             
+
             });
     }
 
@@ -323,6 +333,7 @@ export class ClientDetailComponent implements OnInit {
     onClickOfClientUpdatePlan() {
         debugger
         this.isUpdate = "update";
+        this.isUpdateClientRecord = "updateClientRecord";
         this.isFieldreadonly = false;
         this.isTerminationDateFieldreadonly = false;
         this.renderer.setProperty(this.clientStatusList.nativeElement, 'disabled', false);

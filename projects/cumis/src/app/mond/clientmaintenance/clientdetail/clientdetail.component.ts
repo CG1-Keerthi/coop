@@ -56,6 +56,8 @@ export class ClientDetailComponent implements OnInit {
             this.isClientAddressDisable = true;
             this.isTerminationDateFieldreadonly = true;
             this.isUpdateDateFieldReadonly = true;
+            this.isDateUpdate = "";
+            this.clientDetailsValues.clientInfo.clientIdentifier = undefined;
             this.renderer.setAttribute(this.clientStatusList.nativeElement, 'disabled', 'true');
             this.renderer.setProperty(this.clientProvinceList.nativeElement, 'disabled', false);
             this.renderer.setProperty(this.clientLanguageList.nativeElement, 'disabled', false);
@@ -193,6 +195,7 @@ export class ClientDetailComponent implements OnInit {
             this.clientDetailsForm.value.clientInfo.lastUpdateDate = "";
             this.clientDetailsForm.value.clientInfo.clientStatusEndDate = "";
         }
+        
         this.isDateUpdate = "";
         if (this.isUpdate != 'update') {
             this.clientDetailsForm.value.clientInfo.currentRecordFlag = "N";
@@ -229,7 +232,7 @@ export class ClientDetailComponent implements OnInit {
         let formData = btoa(JSON.stringify(this.clientDetailsForm.value));
         this.mdMondServiceDS.invokeMondService("Creditor Self Admin", "SaveClientData-V2", "1.00", formData, this.csfrToken, true, true, true).subscribe(
             data => {
-                console.log("onClickOfClientSubmit data", data);
+                // console.log("onClickOfClientSubmit data", data);
                 this.mdMondServiceDS.showSuccessMessage("Client Record Inserted Successfully");
 
             }, error => {
@@ -270,12 +273,10 @@ export class ClientDetailComponent implements OnInit {
                 return;
             }
         }
-
         if (this.isUpdate != 'updateAddress') {
             this.clientAddressForm.value.clientAddressInfo.currentRecordFlag = "N";
         }
         this.isUpdate = "";
-
         this.clientAddressForm.value.clientAddressInfo.clientAddressIdentifier = this.clientAddressIdentifier;
         this.clientAddressIdentifier = "";
         if (this.addEffDateVal != undefined) {
@@ -289,39 +290,23 @@ export class ClientDetailComponent implements OnInit {
         let formData = btoa(JSON.stringify(this.clientAddressForm.value));
         this.mdMondServiceDS.invokeMondService("Creditor Self Admin", "SaveClientAddressData-V2", "1.00", formData, this.csfrToken, true, true, true).subscribe(
             data => {
-                console.log("onClickOfClientSubmit data", data);
-                this.mdMondServiceDS.showSuccessMessage("Client Address Record Inserted Successfully");
-                let newAddressList = JSON.parse(atob(data)).clientAddressInfo[0];
-                this.clientAddressList.push(newAddressList);
-                this.clientAddressForm.reset();
-               
-            }, error => {
-                this.mdMondServiceDS.MDError(error);
-                // let data = "eyJjbGllbnRBZGRyZXNzSW5mbyI6W3siY291bnRyeSI6IkNhbmFkYSIsImN1cnJlbnRSZWNvcmRGbGFnIjoiWSIsImNpdHkiOiJCYW5nYWxvcmUiLCJhZGRyZXNzVGVybWluYXRpb25EYXRlIjoiOTk5OS0xMi0zMVQwOTowODoyNi4wMDBaIiwiYWRkcmVzc1R5cGUiOiJCaWxsaW5nIiwibGFzdFVwZGF0ZURhdGUiOiIyMDIxLTA0LTI5VDA1OjI5OjA4LjAwMFoiLCJjbGllbnRJZGVudGlmaWVyIjozMCwicG9zdGFsQ29kZSI6IjExMTEiLCJhZGRyZXNzRWZmZWN0aXZlRGF0ZSI6IjIwMjEtMDQtMjlUMDA6MDA6MDAuMDAwWiIsImNsaWVudE51bWJlciI6IjI3IiwicHJvdmluY2UiOiJJTiIsImNsaWVudEFkZHJlc3NJZGVudGlmaWVyIjo0MSwiYWRkcmVzc0xpbmUxIjoiNDk1IFJpY2htb25kIFN0IiwiYWRkcmVzc0xpbmUyIjoiU3VpdGUgMzAwIn1dfQ==";
                 // console.log("onClickOfClientSubmit data", data);
-
-                // let newAddressList = JSON.parse(atob(data)).clientAddressInfo[0];
-
-                //     for(var i=0; i<this.clientAddressList.length; i++){
-                //         if(this.clientAddressList[i].clientAddressIdentifier == newAddressList.clientAddressIdentifier){
-                //             this.clientAddressList.splice(i,1);
-                //             this.clientAddressList.push(newAddressList);
-                //             this.mdMondServiceDS.showSuccessMessage("Client Address Record Updated Successfully");
-                //             return;
-                //         } 
-                //         if(this.clientAddressList[i].clientAddressIdentifier != newAddressList.clientAddressIdentifier){
-                //             this.clientAddressList.push(newAddressList);
-                //             this.mdMondServiceDS.showSuccessMessage("Client Address Record Inserted Successfully");
-                //             return;
-                //         }                      
-                //     }   
-                
+                let newAddressList = JSON.parse(atob(data)).clientAddressInfo;
+                this.clientAddressList = [];
+                for(var i=0; i<newAddressList.length; i++){                   
+                    this.clientAddressList.push(newAddressList[i]);
+                }
+                this.mdMondServiceDS.showSuccessMessage("Record Inserted Successfully");         
+                this.clientAddressForm.reset();
+            }, error => {
+                this.mdMondServiceDS.MDError(error);               
                 // let data = "eyJjbGllbnRBZGRyZXNzSW5mbyI6W3siY291bnRyeSI6IkNhbmFkYSIsImN1cnJlbnRSZWNvcmRGbGFnIjoiWSIsImNpdHkiOiJSTlIiLCJhZGRyZXNzVGVybWluYXRpb25EYXRlIjoiOTk5OS0xMi0zMVQwOTowODoyNi4wMDBaIiwiYWRkcmVzc1R5cGUiOiJCaWxsaW5nIiwibGFzdFVwZGF0ZURhdGUiOiIyMDIxLTA0LTMwVDE1OjA4OjAyLjAwMFoiLCJjbGllbnRJZGVudGlmaWVyIjo1OSwicG9zdGFsQ29kZSI6IjExMTEiLCJhZGRyZXNzRWZmZWN0aXZlRGF0ZSI6IjIwMjEtMDQtMjhUMDA6MDA6MDAuMDAwWiIsImNsaWVudE51bWJlciI6IjQxIiwicHJvdmluY2UiOiJERSIsImNsaWVudEFkZHJlc3NJZGVudGlmaWVyIjo2OCwiYWRkcmVzc0xpbmUxIjoibGluZTEiLCJhZGRyZXNzTGluZTIiOiJMaW5lMiJ9LHsiY291bnRyeSI6IkNhbmFkYSIsImN1cnJlbnRSZWNvcmRGbGFnIjoiWSIsImNpdHkiOiJSTlIiLCJhZGRyZXNzVGVybWluYXRpb25EYXRlIjoiOTk5OS0xMi0zMVQwOTowODoyNi4wMDBaIiwiYWRkcmVzc1R5cGUiOiJCaWxsaW5nIiwibGFzdFVwZGF0ZURhdGUiOiIyMDIxLTA0LTMwVDE2OjAyOjA2LjAwMFoiLCJjbGllbnRJZGVudGlmaWVyIjo1OSwicG9zdGFsQ29kZSI6IjExIiwiYWRkcmVzc0VmZmVjdGl2ZURhdGUiOiIyMDIxLTA0LTAxVDAwOjAwOjAwLjAwMFoiLCJjbGllbnROdW1iZXIiOiI0MSIsInByb3ZpbmNlIjoiSUEiLCJjbGllbnRBZGRyZXNzSWRlbnRpZmllciI6ODQsImFkZHJlc3NMaW5lMSI6ImxpbmUxIiwiYWRkcmVzc0xpbmUyIjoibGluZTIifSx7ImN1cnJlbnRSZWNvcmRGbGFnIjoiWSIsInByb3ZpbmNlIjoiSEkiLCJhZGRyZXNzVGVybWluYXRpb25EYXRlIjoiOTk5OS0xMi0zMVQwOTowODoyNi4wMDBaIiwiYWRkcmVzc1R5cGUiOiJNYWlsaW5nIiwibGFzdFVwZGF0ZURhdGUiOiIyMDIxLTA0LTMwVDE1OjA3OjMxLjAwMFoiLCJjbGllbnRJZGVudGlmaWVyIjo1OSwiY2xpZW50QWRkcmVzc0lkZW50aWZpZXIiOjY3LCJhZGRyZXNzTGluZTEiOiJsaW5lMSIsImFkZHJlc3NFZmZlY3RpdmVEYXRlIjoiMjAyMS0wNC0wNFQwMDowMDowMC4wMDBaIiwiYWRkcmVzc0xpbmUyIjoibGluZTIiLCJjbGllbnROdW1iZXIiOiI0MSJ9XX0\u003d";             
                 // let newAddressList = JSON.parse(atob(data)).clientAddressInfo;
-                // for(var i=0; i<newAddressList.length; i++){
+                // this.clientAddressList = [];
+                // for(var i=0; i<newAddressList.length; i++){                   
                 //     this.clientAddressList.push(newAddressList[i]);
                 // }
-                // this.mdMondServiceDS.showSuccessMessage("Client Address Record Inserted Successfully");         
+                // this.mdMondServiceDS.showSuccessMessage("Record Inserted Successfully");         
                 // this.clientAddressForm.reset();
              
             });

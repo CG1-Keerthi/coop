@@ -34,6 +34,9 @@ import { ClientDetailComponent } from '../mond/clientmaintenance/clientdetail/cl
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { ClientDetailFormBuilderModule } from '../form-builder/clientMaintenance/clientDetails/client-detail-form.module';
 import { ClientAddressDetailFormBuilderModule } from '../form-builder/clientMaintenance/clientAddressdetails/client-address-detail-form.module';
+import { RateStructureConfigurationComponent } from '../mond/rateStructureConfiguration/rateStructureConfiguration.component';
+import { RatingDetailsComponent } from '../mond/rateStructureConfiguration/ratingDetails/ratingDetails.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -46,7 +49,9 @@ import { ClientAddressDetailFormBuilderModule } from '../form-builder/clientMain
     NetpremiumreportComponent,
     LogicalDeleteReportComponent,
     ClientMaintenanceComponent,
-    ClientDetailComponent
+    ClientDetailComponent,
+    RateStructureConfigurationComponent,
+    RatingDetailsComponent
   ],
   imports: [
     CommonModule,
@@ -73,7 +78,8 @@ import { ClientAddressDetailFormBuilderModule } from '../form-builder/clientMain
     MatExpansionModule,
     MatSlideToggleModule,
     ClientDetailFormBuilderModule,
-    ClientAddressDetailFormBuilderModule
+    ClientAddressDetailFormBuilderModule,
+    MatProgressSpinnerModule
 
 
   ],

@@ -16,7 +16,12 @@ export class MDMondServiceDS extends MDBaseDS {
     }
 
     getFormDataFromMondService(projectName: String, serviceName: String, formVariables: String, csfrToken: String): Observable<any> {
-        let param = { projectName: projectName, serviceName: serviceName, version: "1.00", formVariables: formVariables, addSessionInfoFlag: true, csfrToken: csfrToken };
+       let param;
+        if(csfrToken == null){
+        param = { projectName: projectName, serviceName: serviceName, version: "1.00", formVariables: formVariables };
+       }else{
+        param = { projectName: projectName, serviceName: serviceName, version: "1.00", formVariables: formVariables, addSessionInfoFlag: true, csfrToken: csfrToken };
+       }           
         return this.invokeGET("/mondrestws/services/executeService/invokeMondProcessDesignerServiceGET", param);
     }
 
@@ -34,9 +39,9 @@ export class MDMondServiceDS extends MDBaseDS {
         return this.invokeGETClassCodes(URL, param, auth);
     }
 
-    invokeMondService(projectName: any, serviceName: any, version: any,formData: any,csfrToken: any,addSessionInfoFlag: any,encodedDataFl: any,returnEncodedDataFl: any): Observable<any> {
+    invokeMondService(projectName: any, serviceName: any, version: any,formData: any,csfrToken: any,addSessionInfoFlag: any,encodedDataFl: any,returnEncodedDataFl: any, includeOutputVarNameFl: any): Observable<any> {
         let dataToSend = 'projectName=' + projectName + '&serviceName=' + serviceName + '&version=' + version + '&formData=' + formData + 
-        '&csfrToken=' + csfrToken + '&addSessionInfoFlag=' + addSessionInfoFlag + '&encodedDataFl=' + encodedDataFl + '&returnEncodedDataFl=' + returnEncodedDataFl;
+        '&csfrToken=' + csfrToken + '&addSessionInfoFlag=' + addSessionInfoFlag + '&encodedDataFl=' + encodedDataFl + '&returnEncodedDataFl=' + returnEncodedDataFl + '&includeOutputVarNameFl=' + includeOutputVarNameFl;
         return this.invokePOST("/mondrestws/services/executeService/invokeMondService", dataToSend);
     }
 

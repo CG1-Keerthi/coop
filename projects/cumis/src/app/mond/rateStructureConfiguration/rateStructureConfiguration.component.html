@@ -1,0 +1,65 @@
+<div class="ym_content">
+    <div class="col-md-12 col-lg-12 col-sm-12 mt-2 container">
+        <div class="row">
+            <mat-tab-group class="col-md-12" [(selectedIndex)]="selectedTab">
+                <mat-tab label="Search Rate">
+                    <div class="row pt-2 m-0">
+                        <div class="col-md-2 p-2" style="background-color: #ebebf1;">
+                            <h3><i class="fa fa-bars pr-2"></i>Refine your Search</h3>
+                            <div class="ym_form_group">
+                                <label>Rate Name</label>
+                                <input type="text" placeholder="Rate Name" [(ngModel)]="rateName">
+                            </div>
+                            <div class="ym_form_group">
+                                <label>Rate Type</label>
+                                <div class="ym_form_select">
+                                    <select [(ngModel)]="rateType">
+                                        <option selected value="">Please select a value</option>
+                                        <option value="High">High</option>
+                                        <option value="Low">Low</option>
+                                    </select>
+                                </div>
+                            </div>                          
+                            <div class="ym_form_group">
+                                <button class="ym_button" style="margin-right: 10px;" (click)=onClickOfRatereset()><i class="fa fa-undo"></i>
+                                    Reset</button>
+                                <button  class="ym_button" (click)="onClickOfRatesearch()"><i class="fa fa-search"></i>
+                                    Search</button>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="m-0 pt-2 pb-2 row" style="background-color: #ebebf1;">
+                                <div class="col-md-6">
+                                    <h2>Rate Structure List</h2>
+                                </div>
+                                <div class="col-md-6">
+                                    <button class="ym_button float-right" (click)="onClickOfAddRate()">
+                                        <i class="fa fa-plus-square"></i> Add Rate</button>
+                                </div>
+                            </div>
+                            <mat-spinner class="md-spinner" *ngIf="isSpinnerShow"></mat-spinner>
+                                <p-table [value]="rateList" selectionMode="single" (onRowSelect)="onRateListRowSelect($event)">  
+                                <ng-template pTemplate="header">
+                                    <tr class="ptableHeader">
+                                        <th>Rate Name</th>
+                                        <th>Rate Type</th>
+                            
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-responseData>
+                                    <tr [pSelectableRow]="responseData">
+                                        <td>{{responseData.rateName}}</td>
+                                        <td>{{responseData.rateType}}</td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+                        </div>
+                    </div>
+                </mat-tab>
+                <mat-tab label="Rating Details">
+                    <app-ratingDetails-designer></app-ratingDetails-designer>
+                </mat-tab>
+            </mat-tab-group>
+        </div>
+    </div>
+</div>

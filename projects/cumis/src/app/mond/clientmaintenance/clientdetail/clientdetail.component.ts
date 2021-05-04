@@ -57,7 +57,6 @@ export class ClientDetailComponent implements OnInit {
             this.isTerminationDateFieldreadonly = true;
             this.isUpdateDateFieldReadonly = true;
             this.isDateUpdate = "";
-            this.isUpdateClientRecord = "";
             this.clientDetailsValues.clientInfo.clientIdentifier = undefined;
             this.renderer.setAttribute(this.clientStatusList.nativeElement, 'disabled', 'true');
             this.renderer.setProperty(this.clientProvinceList.nativeElement, 'disabled', false);
@@ -97,7 +96,7 @@ export class ClientDetailComponent implements OnInit {
     public clientAddressIdentifier: string;
     public isUpdate: string;
     public isDateUpdate: string;
-    public isUpdateClientRecord: string;
+  
 
     @ViewChild('clientStatusList') clientStatusList: ElementRef;
     @ViewChild('clientProvinceList') clientProvinceList: ElementRef;
@@ -180,12 +179,10 @@ export class ClientDetailComponent implements OnInit {
 
 
     onClickOfClientClear() {
-        debugger;
         this.clientDetailsForm.reset();
     }
 
     onClickOfClientSubmit() {
-        debugger;
         if (this.clientDetailsForm.value.clientInfo.clientNumber == null && this.clientDetailsForm.value.clientInfo.clientName == null &&
             this.clientDetailsForm.value.clientInfo.clientEffectiveDate == null && this.clientDetailsForm.value.clientInfo.clientProvinceCode == null &&
             this.clientDetailsForm.value.clientInfo.clientLanguageCode == null) {
@@ -235,25 +232,15 @@ export class ClientDetailComponent implements OnInit {
         this.mdMondServiceDS.invokeMondService("Creditor Self Admin", "SaveClientData-V2", "1.00", formData, this.csfrToken, true, true, true,true).subscribe(
             data => {
                 // console.log("onClickOfClientSubmit data", data);
-                this.mdMondServiceDS.showSuccessMessage("Client Record Inserted Successfully");
+                this.mdMondServiceDS.showSuccessMessage(JSON.parse(atob(data)).message);
 
-            }, error => {
-                // debugger;
-                this.mdMondServiceDS.MDError(error);
-                // if (this.isUpdateClientRecord != "updateClientRecord") {
-                //     this.mdMondServiceDS.showSuccessMessage("Client Record Inserted Successfully");
-                //     this.isUpdateClientRecord = "";
-                //     return;
-                // }else{
-                //     this.mdMondServiceDS.showSuccessMessage("Client Record Updated Successfully");
-                //     return;
-                // }
+            }, error => {                
+                this.mdMondServiceDS.MDError(error);           
             });
 
     }
 
     clientEffectiveDateKeyup(event) {
-        debugger;
         this.fromDateVal = this.fromDate.nativeElement.value + "T00:00:00.000Z";
     }
 
@@ -261,7 +248,6 @@ export class ClientDetailComponent implements OnInit {
         this.tillDateVal = this.tillDate.nativeElement.value + "T00:00:00.000Z";
     }
     onClickOfClientAddressListRow(event) {
-        debugger;
         let addressRowData = this.fb.group({
             clientAddressInfo: event.data
         });
@@ -275,7 +261,6 @@ export class ClientDetailComponent implements OnInit {
     }
 
     onClickOfClientAddressSubmit() {
-        debugger;
         if (this.clientAddressForm.value.clientAddressInfo.addressType != undefined) {
             if (this.clientAddressForm.value.clientAddressInfo.addressType == null && this.clientAddressForm.value.clientAddressInfo.addressEffectiveDate == null) {
                 this.isAddressSubmit = true;
@@ -301,24 +286,17 @@ export class ClientDetailComponent implements OnInit {
         this.mdMondServiceDS.invokeMondService("Creditor Self Admin", "SaveClientAddressData-V2", "1.00", formData, this.csfrToken, true, true, true, true).subscribe(
             data => {
                 // console.log("onClickOfClientSubmit data", data);
-                let newAddressList = JSON.parse(atob(data)).clientAddressInfo;
+                let newAddressList = JSON.parse(atob(data)).clientAddressInfo.clientAddressInfo
                 this.clientAddressList = [];
-                for (var i = 0; i < newAddressList.length; i++) {
+                for(var i=0; i<newAddressList.length; i++){                   
                     this.clientAddressList.push(newAddressList[i]);
                 }
-                this.mdMondServiceDS.showSuccessMessage("Record Inserted Successfully");
+                this.mdMondServiceDS.showSuccessMessage(JSON.parse(atob(data)).message);         
                 this.clientAddressForm.reset();
+                
             }, error => {
-                this.mdMondServiceDS.MDError(error);
-                // let data = "eyJjbGllbnRBZGRyZXNzSW5mbyI6W3siY291bnRyeSI6IkNhbmFkYSIsImN1cnJlbnRSZWNvcmRGbGFnIjoiWSIsImNpdHkiOiJSTlIiLCJhZGRyZXNzVGVybWluYXRpb25EYXRlIjoiOTk5OS0xMi0zMVQwOTowODoyNi4wMDBaIiwiYWRkcmVzc1R5cGUiOiJCaWxsaW5nIiwibGFzdFVwZGF0ZURhdGUiOiIyMDIxLTA0LTMwVDE1OjA4OjAyLjAwMFoiLCJjbGllbnRJZGVudGlmaWVyIjo1OSwicG9zdGFsQ29kZSI6IjExMTEiLCJhZGRyZXNzRWZmZWN0aXZlRGF0ZSI6IjIwMjEtMDQtMjhUMDA6MDA6MDAuMDAwWiIsImNsaWVudE51bWJlciI6IjQxIiwicHJvdmluY2UiOiJERSIsImNsaWVudEFkZHJlc3NJZGVudGlmaWVyIjo2OCwiYWRkcmVzc0xpbmUxIjoibGluZTEiLCJhZGRyZXNzTGluZTIiOiJMaW5lMiJ9LHsiY291bnRyeSI6IkNhbmFkYSIsImN1cnJlbnRSZWNvcmRGbGFnIjoiWSIsImNpdHkiOiJSTlIiLCJhZGRyZXNzVGVybWluYXRpb25EYXRlIjoiOTk5OS0xMi0zMVQwOTowODoyNi4wMDBaIiwiYWRkcmVzc1R5cGUiOiJCaWxsaW5nIiwibGFzdFVwZGF0ZURhdGUiOiIyMDIxLTA0LTMwVDE2OjAyOjA2LjAwMFoiLCJjbGllbnRJZGVudGlmaWVyIjo1OSwicG9zdGFsQ29kZSI6IjExIiwiYWRkcmVzc0VmZmVjdGl2ZURhdGUiOiIyMDIxLTA0LTAxVDAwOjAwOjAwLjAwMFoiLCJjbGllbnROdW1iZXIiOiI0MSIsInByb3ZpbmNlIjoiSUEiLCJjbGllbnRBZGRyZXNzSWRlbnRpZmllciI6ODQsImFkZHJlc3NMaW5lMSI6ImxpbmUxIiwiYWRkcmVzc0xpbmUyIjoibGluZTIifSx7ImN1cnJlbnRSZWNvcmRGbGFnIjoiWSIsInByb3ZpbmNlIjoiSEkiLCJhZGRyZXNzVGVybWluYXRpb25EYXRlIjoiOTk5OS0xMi0zMVQwOTowODoyNi4wMDBaIiwiYWRkcmVzc1R5cGUiOiJNYWlsaW5nIiwibGFzdFVwZGF0ZURhdGUiOiIyMDIxLTA0LTMwVDE1OjA3OjMxLjAwMFoiLCJjbGllbnRJZGVudGlmaWVyIjo1OSwiY2xpZW50QWRkcmVzc0lkZW50aWZpZXIiOjY3LCJhZGRyZXNzTGluZTEiOiJsaW5lMSIsImFkZHJlc3NFZmZlY3RpdmVEYXRlIjoiMjAyMS0wNC0wNFQwMDowMDowMC4wMDBaIiwiYWRkcmVzc0xpbmUyIjoibGluZTIiLCJjbGllbnROdW1iZXIiOiI0MSJ9XX0\u003d";             
-                // let newAddressList = JSON.parse(atob(data)).clientAddressInfo;
-                // this.clientAddressList = [];
-                // for(var i=0; i<newAddressList.length; i++){                   
-                //     this.clientAddressList.push(newAddressList[i]);
-                // }
-                // this.mdMondServiceDS.showSuccessMessage("Record Inserted Successfully");         
-                // this.clientAddressForm.reset();
-
+                this.mdMondServiceDS.MDError(error);         
+            //    let data = "eyJjbGllbnRBZGRyZXNzSW5mbyI6eyJjbGllbnRBZGRyZXNzSW5mbyI6W3siY291bnRyeSI6IkNhbmFkYSIsImN1cnJlbnRSZWNvcmRGbGFnIjoiWSIsImNpdHkiOiJSTlIiLCJhZGRyZXNzVGVybWluYXRpb25EYXRlIjoiOTk5OS0xMi0zMVQwOTowODoyNi4wMDBaIiwiYWRkcmVzc1R5cGUiOiJNYWlsaW5nIiwibGFzdFVwZGF0ZURhdGUiOiIyMDIxLTA1LTA0VDA0OjQxOjQxLjAwMFoiLCJjbGllbnRJZGVudGlmaWVyIjo2OCwicG9zdGFsQ29kZSI6IjEyMzQiLCJhZGRyZXNzRWZmZWN0aXZlRGF0ZSI6IjIwMjEtMDUtMDNUMDA6MDA6MDAuMDAwWiIsImNsaWVudE51bWJlciI6IjQ4IiwicHJvdmluY2UiOiJJRCIsImNsaWVudEFkZHJlc3NJZGVudGlmaWVyIjoxMjAsImFkZHJlc3NMaW5lMSI6IkxpbmUxIiwiYWRkcmVzc0xpbmUyIjoiTGluZTIifSx7ImNvdW50cnkiOiJDYW5hZGEiLCJjdXJyZW50UmVjb3JkRmxhZyI6IlkiLCJjaXR5IjoiY2l0eSIsImFkZHJlc3NUZXJtaW5hdGlvbkRhdGUiOiI5OTk5LTEyLTMxVDA5OjA4OjI2LjAwMFoiLCJhZGRyZXNzVHlwZSI6Ik1haWxpbmciLCJsYXN0VXBkYXRlRGF0ZSI6IjIwMjEtMDUtMDRUMDU6MTA6NDEuMDAwWiIsImNsaWVudElkZW50aWZpZXIiOjY4LCJwb3N0YWxDb2RlIjoiMTExMSIsImFkZHJlc3NFZmZlY3RpdmVEYXRlIjoiMjAyMS0wNC0wMVQwMDowMDowMC4wMDBaIiwiY2xpZW50TnVtYmVyIjoiNDgiLCJwcm92aW5jZSI6IkhJIiwiY2xpZW50QWRkcmVzc0lkZW50aWZpZXIiOjEyMSwiYWRkcmVzc0xpbmUxIjoibGluZTEiLCJhZGRyZXNzTGluZTIiOiJsaW5lMiJ9XX0sIm1lc3NhZ2UiOiJSZWNvcmQgSW5zZXJ0ZWQgU3VjY2Vzc2Z1bGx5Iiwic3RhdHVzIjoiU3VjY2VzcyJ9"
             });
     }
 
@@ -331,9 +309,7 @@ export class ClientDetailComponent implements OnInit {
     }
 
     onClickOfClientUpdatePlan() {
-        debugger
         this.isUpdate = "update";
-        this.isUpdateClientRecord = "updateClientRecord";
         this.isFieldreadonly = false;
         this.isTerminationDateFieldreadonly = false;
         this.renderer.setProperty(this.clientStatusList.nativeElement, 'disabled', false);
@@ -343,7 +319,6 @@ export class ClientDetailComponent implements OnInit {
     }
 
     onClickOfClientAddressUpdatePlan() {
-        debugger;
         if (this.clientAddressForm.value.clientAddressInfo.addressType == "" || this.clientAddressForm.value.clientAddressInfo.addressType == null) {
             this.mdMondServiceDS.showErrorMessage("please select a row");
             return;
@@ -358,7 +333,6 @@ export class ClientDetailComponent implements OnInit {
     }
 
     onClickOfClientAddAddress() {
-        debugger
         this.clientAddressForm.reset();
         this.isAddressFieldreadonly = false;
         this.isAddressterminationDateFieldreadonly = true;
@@ -369,13 +343,7 @@ export class ClientDetailComponent implements OnInit {
     }
 
 
-    onClickOfHistoricalAddress() {
-        debugger;
-
-        // if (this.clientAddressForm.value.clientAddressInfo.addressType == "" || this.clientAddressForm.value.clientAddressInfo.addressType == null) {
-        //     this.mdMondServiceDS.showErrorMessage("please select a row");
-        //     return;
-        // }
+    onClickOfHistoricalAddress() { 
         $("#historicalModelId").click();
         let formVariables = JSON.stringify({ "clientId": this.clientDetailsValues.clientInfo.clientIdentifier });
         this.mdMondServiceDS.getFormDataHistoricalAddress('Creditor Self Admin', 'BasedOnService', 'FetchClientAddressHistory', '1.00', formVariables, new Date().getTime()).subscribe(

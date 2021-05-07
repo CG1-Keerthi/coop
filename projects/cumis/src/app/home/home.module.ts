@@ -37,6 +37,7 @@ import { ClientAddressDetailFormBuilderModule } from '../form-builder/clientMain
 import { RateStructureConfigurationComponent } from '../mond/rateStructureConfiguration/rateStructureConfiguration.component';
 import { RatingDetailsComponent } from '../mond/rateStructureConfiguration/ratingDetails/ratingDetails.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { RateDetailFormBuilderModule } from '../form-builder/rateDetails/rate-detail-form.module';
 
 @NgModule({
   declarations: [
@@ -79,7 +80,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatSlideToggleModule,
     ClientDetailFormBuilderModule,
     ClientAddressDetailFormBuilderModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    RateDetailFormBuilderModule
 
 
   ],

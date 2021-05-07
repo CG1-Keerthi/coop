@@ -1,7 +1,150 @@
-<div class="ym_content">
-    <div class="col-md-12 col-lg-12 col-sm-12 mt-2 container">
-        <div class="row">
-            rating Details works!
+<form [formGroup]="rateDetailsForm" class="mx-3 mt-2">
+    <div class="m-0 pt-2 pb-2 row my-3">
+        <div class="col-md-6">
+        </div>
+        <div class="col-md-6">
+            <button class="float-right ml-2 btn btn-primary" [disabled]="isUpdateBtn" (click)="onClickOfRateUpdate()">
+                Update Rate</button>
         </div>
     </div>
-</div>
+    <div formGroupName="PlanRatingStructureHeader">
+        <div class="row">
+            <div class="ym_form_group required col-4">
+                <label>Rate Name</label>
+                <input placeholder="Rate Name" formControlName="rateName" [readonly]="isFieldreadonly">
+            </div>
+            <div class="ym_form_group required col-4">
+                <label>Joint Life Multiplier</label>
+                <div class="ym_input_info">
+                    <div class="row">
+                        <a (click)="subSpinnerLimits()" class="ym_button_outline mr-2 ml-2 p-2"><i
+                                class="material-icons">
+                                remove_circle
+                            </i></a>
+                        <input placeholder="Data Breach Coverage Limit" style="width: 50%;" value="0.925" maxValue="1"
+                            id="jointLifeMultiplier" formControlName="jointLifeMultiplier" [readonly]="isFieldreadonly">
+                        <a (click)="addSpinnerLimits()" class="ym_button_outline mr-2 ml-2 p-2"><i
+                                class="material-icons">
+                                add_circle
+                            </i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <label>Rate Type</label>
+                <div class="ym_form_select required">
+                    <select formControlName="rateType">
+                        <option selected value="">Please select a value</option>
+                        <option value="High">High</option>
+                        <option value="Low">Low</option>
+                    </select>
+                </div>
+            </div>
+            <div class="ym_form_group required col-4">
+                <label>Tolerance Level</label>
+                <div class="ym_input_info">
+                    <div class="row">
+                        <a (click)="subToleranceSpinnerLimits()" class="ym_button_outline mr-2 ml-2 p-2"><i
+                                class="material-icons">
+                                remove_circle
+                            </i></a>
+                        <input placeholder="Data Breach Coverage Limit" style="width: 50%;" value="0.02" maxValue="1"
+                            id="toleranceLevel" formControlName="toleranceLevel" [readonly]="isFieldreadonly">
+                        <a (click)="addToleranceSpinnerLimits()" class="ym_button_outline mr-2 ml-2 p-2"><i
+                                class="material-icons">
+                                add_circle
+                            </i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" formArrayName="PlanRatingStructureDetails">
+            <table class="style">
+                <thead>
+                    <tr>
+                        <th colspan="2">Loan Amount ($)</th>
+                        <th colspan="1"></th>
+                        <th colspan="1"></th>
+                        <th colspan="1"></th>
+                        <th colspan="2">Term (in Months)</th>
+                        <th colspan="2">Age (in Years)</th>
+                        <th colspan="1"></th>
+                        <th colspan="1"></th>
+                        <th colspan="1"></th>
+                    </tr>
+                    <tr>
+
+                        <th>Start Amount</th>
+                        <th>End Amount</th>
+                        <th>Multi-Life</th>
+                        <th>Multi-Life Term</th>
+                        <th>Benefits</th>
+                        <th>Term Start</th>
+                        <th>Term End</th>
+                        <th style="width:8em">Age Start</th>
+                        <th>Age End</th>
+                        <th>Elimination Period</th>
+                        <th>Premium ($)</th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+
+                <tbody *ngIf="isGridShow">
+                    <tr [formGroupName]="i"
+                        *ngFor="let list of rateDetailsForm.get('PlanRatingStructureHeader.PlanRatingStructureDetails')['controls']; let i = index;">
+                        <td><input class="md-input" type="text" formControlName="loanAmountStartValue"
+                                [readonly]="isFieldreadonly"></td>
+                        <td><input class="md-input" type="text" formControlName="loanAmountEndValue"
+                                [readonly]="isFieldreadonly"></td>
+                        <td>
+                            <select class="md-select" formControlName="multiLife">
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select class="md-select" formControlName="multiLifeTerm">
+                                <option value="N/A">N/A</option>
+                                <option value="Same">Same</option>
+                                <option value="Different">Different</option>
+                            </select>
+
+                        </td>
+                        <td><input class="md-input" type="text" formControlName="coverageCodeInPlanRatingStructure"
+                                [readonly]="isFieldreadonly"></td>
+                        <td><input class="md-input" type="text" formControlName="termStartValue"
+                                [readonly]="isFieldreadonly"></td>
+                        <td><input class="md-input" type="text" formControlName="termEndValue"
+                                [readonly]="isFieldreadonly"></td>
+                        <td><input class="md-input" type="text" formControlName="ageStartValue"
+                                [readonly]="isFieldreadonly"></td>
+                        <td><input class="md-input" type="text" formControlName="ageEndValue"
+                                [readonly]="isFieldreadonly"></td>
+                        <td><input class="md-input" type="text" formControlName="eliminationPeriodInPlanRatingStructure"
+                                [readonly]="isFieldreadonly"></td>
+                        <td><input class="md-input" type="text" formControlName="premiumAmountInPlanRatingStructure"
+                                [readonly]="isFieldreadonly"></td>
+                        <td> <button (click)="deleteRow(i)"><i class="fa fa-trash" style="color: red;"></i></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <br>
+            <div class="ym_form_group row">
+                <button class="float-left btn btn-primary" (click)="addTable()"> <i class="fa fa-plus-square"></i> Add
+                    Row</button>
+            </div>
+        </div>
+
+
+        <div class="ym_form_group row">
+            <button class="float-right btn btn-primary" (click)="onClickOfRateSubmit()" [disabled]="isSubmitBtn"><i
+                    class="fa fa-save mr-1"></i>Submit</button>
+            <!-- <button class="float-right btn btn-primary" style="margin-right: 10px;"><i class="fa fa-times"></i>
+                Clear</button> -->
+        </div>
+    </div>
+</form>

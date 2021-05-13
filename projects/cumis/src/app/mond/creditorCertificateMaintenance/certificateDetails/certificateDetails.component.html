@@ -1,0 +1,512 @@
+<!-- <div>certificate Detail works!</div> -->
+<!-- <div> -->
+<div class="ym_content">
+    <div class="col-md-12 col-lg-12 col-sm-12 mt-2 container">
+        <div>
+            <mat-accordion>
+                <mat-expansion-panel [expanded]="true">
+                    <mat-expansion-panel-header style="background-color: #307ecc;">
+                        <mat-panel-title style="color: white;">
+                            Header
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <div class="row">
+                        <div class="ym_form_group  col-3">
+                            <label>File Identifier</label>
+                            <input placeholder="File Identifier" value="{{creditorDataJson?.fileInfo?.fileIdentifier}}"
+                                [readonly]="isFieldreadonly">
+                        </div>
+                        <div class="ym_form_group  col-3">
+                            <label>Client Name</label>
+                            <input placeholder="Client Name" value="{{creditorDataJson?.fileInfo?.partnerName}}"
+                                [readonly]="isFieldreadonly">
+                        </div>
+                        <div class="ym_form_group  col-3">
+                            <label>Client Identifier</label>
+                            <input placeholder="Client Identifier"
+                                value="{{creditorDataJson?.fileInfo?.partnerIdentifier}}" [readonly]="isFieldreadonly">
+                        </div>
+                        <div class="ym_form_group  col-3">
+                            <label>Transaction Type</label>
+                            <input placeholder="Transaction Type"
+                                value="{{creditorDataJson?.fileInfo?.transactionType}}" [readonly]="isFieldreadonly">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="ym_form_group  col-3">
+                            <label>Product Type</label>
+                            <input placeholder="Product Type" value="{{creditorDataJson?.fileInfo?.productType}}"
+                                [readonly]="isFieldreadonly">
+                        </div>
+                        <div class="ym_form_group  col-3">
+                            <label>Number Of Records</label>
+                            <input placeholder="Number Of Records"
+                                value="{{creditorDataJson?.fileInfo?.numberOfRecords}}" [readonly]="isFieldreadonly">
+                        </div>
+                        <div class="ym_form_group  col-3">
+                            <label>Processed With Error</label>
+                            <input placeholder="Processed With Error"
+                                value="{{creditorDataJson?.fileInfo?.processedWithErrorFlag}}"
+                                [readonly]="isFieldreadonly">
+                        </div>
+                        <div class="ym_form_group  col-3">
+                            <label>Processed With Warnings</label>
+                            <input placeholder="Processed With Warnings"
+                                value="{{creditorDataJson?.fileInfo?.processedWithWarningFlag}}"
+                                [readonly]="isFieldreadonly">
+                        </div>
+                    </div>
+                    <div class="row" style="margin-left: -10px;">
+                        <div class="ym_form_group  col-3">
+                            <div class="row">
+                                <label>File Created Date</label>
+                                <input class="col-md-9" matInput [matDatepicker]="picker"
+                                    [(ngModel)]="creditorDataJson.fileInfo.fileCreatedDate"
+                                    [ngModelOptions]="{standalone: true}" [readonly]="isFieldreadonly">
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker class="col-md-3" #picker></mat-datepicker>
+                            </div>
+                        </div>
+                        <div class="ym_form_group  col-3">
+                            <div class="row">
+                                <label>File Load Date</label>
+                                <input class="col-md-9" matInput [matDatepicker]="picker2"
+                                    [(ngModel)]="creditorDataJson.fileInfo.fileLoadDate"
+                                    [ngModelOptions]="{standalone: true}" [readonly]="isFieldreadonly">
+                                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                                <mat-datepicker class="col-md-3" #picker2></mat-datepicker>
+                            </div>
+                        </div>
+                        <div class="col-3"></div>
+                        <div class="col-3"></div>
+                    </div>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </div>
+
+        <!-- certificate Details -->
+        <div>
+            <mat-accordion>
+                <mat-expansion-panel [expanded]="true">
+                    <mat-expansion-panel-header style="background-color: #307ecc;">
+                        <mat-panel-title style="color: white;">
+                            Certificate Details
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <div class="row">
+                        <div class="ym_form_group  col-4">
+                            <label>Certificate Number</label>
+                            <input placeholder="Certificate Number"
+                                value="{{creditorDataJson?.certificate?.certificateNumber}}"
+                                [readonly]="isFieldreadonly">
+                        </div>
+                        <div class="ym_form_group  col-4">
+                            <label>Unique Certificate Identifier</label>
+                            <input placeholder="Unique Certificate Identifier"
+                                value="{{creditorDataJson?.certificate?.uniqueCertificateIdentifier}}"
+                                [readonly]="isFieldreadonly">
+                        </div>
+                        <div class="ym_form_group  col-4">
+                            <label>Unique Certificate Identifier2</label>
+                            <input placeholder="Unique Certificate Identifier2"
+                                value="{{creditorDataJson?.certificate?.uniqueCertificateIdentifier2}}"
+                                [readonly]="isFieldreadonly">
+                        </div>
+                    </div>
+                    <div class="row" style="margin-left: -10px;">
+                        <div class="ym_form_group  col-4">
+                            <div class="row">
+                                <label>Certificate Effective Date</label>
+                                <input class="col-md-9" matInput [matDatepicker]="picker3"
+                                    [(ngModel)]="creditorDataJson.certificate.certificateEffectiveDate"
+                                    [readonly]="isFieldreadonly">
+                                <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                                <mat-datepicker class="col-md-3" #picker3></mat-datepicker>
+                            </div>
+                        </div>
+                        <div class="ym_form_group  col-4">
+                            <div class="row">
+                                <label>Certificate Termination Date</label>
+                                <input class="col-md-9" matInput [matDatepicker]="picker4"
+                                    [(ngModel)]="creditorDataJson.certificate.certificateTermDate"
+                                    [readonly]="isFieldreadonly">
+                                <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
+                                <mat-datepicker class="col-md-3" #picker4></mat-datepicker>
+                            </div>
+                        </div>
+                        <div class="ym_form_group  col-4">
+                            <label>Internal Location Number</label>
+                            <input placeholder="Internal Location Number"
+                                value="{{creditorDataJson?.certificate?.internalLocationNumber}}"
+                                [readonly]="isFieldreadonly">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="ym_form_group  col-4">
+                            <label>Certificate Status</label>
+                            <input placeholder="Certificate Status"
+                                value="{{creditorDataJson?.certificate?.certificateStatus}}"
+                                [readonly]="isFieldreadonly">
+                        </div>
+                        <div class="ym_form_group  col-4">
+                            <label>Certificate Sub Status</label>
+                            <input placeholder="Certificate Sub Status"
+                                value="{{creditorDataJson?.certificate?.certificateSubStatus}}"
+                                [readonly]="isFieldreadonly">
+                        </div>
+                        <div class="ym_form_group  col-4">
+                            <label>Certificate Termination Reason</label>
+                            <input placeholder="Certificate Termination Reason"
+                                value="{{creditorDataJson?.certificate?.certificateStatusReason}}"
+                                [readonly]="isFieldreadonly">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="ym_form_group  col-4">
+                            <label>Certificate Product Type</label>
+                            <input placeholder="Certificate Product Type"
+                                value="{{creditorDataJson?.certificate?.certificateProductType}}"
+                                [readonly]="isFieldreadonly">
+                        </div>
+                        <div class="ym_form_group  col-4">
+                            <label>Plan Name</label>
+                            <input placeholder="Plan Name" value="{{creditorDataJson?.certificate?.planName}}"
+                                [readonly]="isFieldreadonly">
+                        </div>
+                        <div class="ym_form_group  col-4">
+                            <label>Plan Number</label>
+                            <input placeholder="Plan Number" value="{{creditorDataJson?.certificate?.planNumber}}"
+                                [readonly]="isFieldreadonly">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="ym_form_group  col-8">
+                            <label>Plan Description</label>
+                            <textarea class="md-text-area-width" rows="3" placeholder="Plan Description"
+                                [(ngModel)]="creditorDataJson.certificate.planDescription"
+                                [readonly]="isFieldreadonly"></textarea>
+                        </div>
+
+                        <div class="ym_form_group  col-4">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="ym_form_group  col-4">
+                            <label>Logical Delete Flag</label>
+                            <input placeholder="Logical Delete Flag"
+                                value="{{creditorDataJson?.certificate?.certificateLogicalDeleteFlag}}"
+                                [readonly]="isFieldreadonly">
+                        </div>
+                        <div class="ym_form_group  col-8">
+                            <label>Logical Delete Notes</label>
+                            <textarea class="md-text-area-width" rows="3" placeholder="Logical Delete Notes"
+                                [(ngModel)]="creditorDataJson.certificate.logicalDeleteNotes"
+                                [readonly]="isFieldreadonly"></textarea>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="ym_form_group  col-4">
+                            <label>Processed With Error Flag</label>
+                            <input placeholder="Processed With Error Flag"
+                                value={{creditorDataJson?.certificate?.certificateProcessedWithErrorFlag}}
+                                [readonly]="isFieldreadonly">
+                        </div>
+                        <div class="ym_form_group  col-8">
+                            <label>Processed With Error Note</label>
+                            <textarea class="md-text-area-width" rows="3" placeholder="Processed With Error Note"
+                                [(ngModel)]="creditorDataJson.certificate.processedWithErrorReason"
+                                [readonly]="isFieldreadonly"></textarea>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="ym_form_group  col-4">
+                            <label>Processed With Warning Flag</label>
+                            <input placeholder="Processed With Warning Flag"
+                                value="{{creditorDataJson?.certificate?.certificateProcessedWithWarningFlag}}"
+                                [readonly]="isFieldreadonly">
+                        </div>
+                        <div class="ym_form_group  col-8">
+                            <label>Processed With Warning Note</label>
+                            <textarea class="md-text-area-width" rows="3" placeholder="Processed With Warning Note"
+                                [(ngModel)]="creditorDataJson.certificate.certificateProcessedWithWarningNote"
+                                [readonly]="isFieldreadonly"></textarea>
+                        </div>
+                    </div>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </div>
+        <!-- Applicant Details -->
+        <div>
+            <div class="row">
+                <div class="col-4">
+                    <div class="m-0 p-2 row mt-3" style="background-color: #ebebf1;">
+                        <div class="col-md-12 pl-2 pt-2">
+                            <h3>Applicants On Certificate</h3>
+                        </div>
+                    </div>
+                    <div id="ptableId">
+                        <p-table [value]="creditorDataJson.certificate.applicant" selectionMode="single"
+                            (onRowSelect)="onClickOfApplicantCertficateRow($event)">
+                            <ng-template pTemplate="header">
+                                <tr class="ptableHeader">
+                                    <th>Applicant Type</th>
+                                    <th>First Name</th>
+                                    <th>Last name</th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-responseData>
+                                <tr [pSelectableRow]="responseData">
+                                    <td>{{responseData.applicantSequenceNumber}}</td>
+                                    <td>{{responseData.applicantFirstName}}</td>
+                                    <td>{{responseData.applicantLastName}}</td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                </div>
+                <div class="col-8 mt-2">
+                    <mat-card class="w-100 mt-2 md-boder">
+                        <mat-card-header>
+                            <mat-card-title class="md-clr md-font">Applicant Details</mat-card-title>
+                        </mat-card-header>
+                        <mat-divider></mat-divider>
+                        <mat-card-content class="mt-1">
+                            <div class="row">
+                                <div class="ym_form_group  col-6">
+                                    <label>Insured Flag</label>
+                                    <input placeholder="Insured Flag" value={{applicantDetails?.insuredFlag}}
+                                        [readonly]="isFieldreadonly">
+                                </div>
+                                <div class="ym_form_group  col-6">
+                                    <label>First Name</label>
+                                    <input placeholder="First Name" value="{{applicantDetails?.applicantFirstName}}"
+                                        [readonly]="isFieldreadonly">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="ym_form_group  col-6">
+                                    <label>Middle Name</label>
+                                    <input placeholder="Middle Name" value="{{applicantDetails?.applicantMiddleName}}"
+                                        [readonly]="isFieldreadonly">
+                                </div>
+                                <div class="ym_form_group  col-6">
+                                    <label>Last Name</label>
+                                    <input placeholder="Last Name" value="{{applicantDetails?.applicantLastName}}"
+                                        [readonly]="isFieldreadonly">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="ym_form_group  col-6">
+                                    <div class="row ml-1">
+                                        <label>Date Of Birth</label>
+                                        <input class="col-md-9" matInput [matDatepicker]="picker5"
+                                            value="{{applicantDetails?.applicantDateOfBirth}}"
+                                            [readonly]="isFieldreadonly">
+                                        <mat-datepicker-toggle matSuffix [for]="picker5"></mat-datepicker-toggle>
+                                        <mat-datepicker class="col-md-3" #picker5></mat-datepicker>
+                                    </div>
+                                </div>
+                                <div class="ym_form_group  col-6">
+                                    <label>Gender</label>
+                                    <input placeholder="Gender" value={{applicantDetails?.gender}}
+                                        [readonly]="isFieldreadonly">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="ym_form_group  col-6">
+                                    <label>Phone1</label>
+                                    <input placeholder="Phone1" value="{{applicantDetails?.applicantPhone1}}"
+                                        [readonly]="isFieldreadonly">
+                                </div>
+                                <div class="ym_form_group  col-6">
+                                    <label>Phone2</label>
+                                    <input placeholder="Phone2" value="{{applicantDetails?.applicantPhone2}}"
+                                        [readonly]="isFieldreadonly">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="ym_form_group  col-6">
+                                    <label>Email</label>
+                                    <input placeholder="Email" value="{{applicantDetails?.applicantEmail}}"
+                                        [readonly]="isFieldreadonly">
+                                </div>
+                                <div class="ym_form_group  col-6">
+                                    <label>Province</label>
+                                    <input placeholder="Province" value="{{applicantDetails?.applicantProvince}}"
+                                        [readonly]="isFieldreadonly">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="ym_form_group  col-6">
+                                    <label>Is Smoker</label>
+                                    <input placeholder="Is Smoker" value="{{applicantDetails?.isSmoker}}"
+                                        [readonly]="isFieldreadonly">
+                                </div>
+                                <div class="ym_form_group  col-6">
+                                    <label>Correspondence Language</label>
+                                    <input placeholder="Correspondence Language"
+                                        value="{{applicantDetails?.correspondenceLanguage}}"
+                                        [readonly]="isFieldreadonly">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="ym_form_group  col-6">
+                                    <label>Correspondence Type</label>
+                                    <input placeholder="Correspondence Type"
+                                        value="{{applicantDetails?.correpondenceType}}" [readonly]="isFieldreadonly">
+                                </div>
+                                <div class="ym_form_group  col-6">
+                                    <label>Communication Consent Flag</label>
+                                    <input placeholder="Communication Consent Flag"
+                                        value="{{applicantDetails?.communicationConsentFlag}}"
+                                        [readonly]="isFieldreadonly">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="ym_form_group  col-6">
+                                    <label>Processed With Error Flag</label>
+                                    <input placeholder="Processed With Error Flag"
+                                        value="{{applicantDetails?.applicantProcessedWithErrorFlag}}"
+                                        [readonly]="isFieldreadonly">
+                                </div>
+                                <div class="ym_form_group  col-6">
+                                    <label>Processed With Warning Flag</label>
+                                    <input placeholder="Processed With Warning Flag"
+                                        value="{{applicantDetails?.applicantProcessedWithWarningFlag}}"
+                                        [readonly]="isFieldreadonly">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="ym_form_group  col-6">
+                                    <label>Logical Delete Flag</label>
+                                    <input placeholder="Logical Delete Flag"
+                                        value="{{applicantDetails?.applicantLogicalDeleteFlag}}"
+                                        [readonly]="isFieldreadonly">
+                                </div>
+                                <div class="ym_form_group  col-6">
+                                    <label>Tax Exempt Flag</label>
+                                    <input placeholder="Tax Exempt Flag" value="{{applicantDetails?.taxExemptFlag}}"
+                                        [readonly]="isFieldreadonly">
+                                </div>
+                            </div>
+
+                        </mat-card-content>
+
+
+                    </mat-card>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Applicant Address & Applicant Coverage -->
+        <div>
+            <div class="row">
+                <div class="col-4">
+                    <div class="m-0 p-2 row mt-3" style="background-color: #ebebf1;">
+                        <div class="col-md-12 pl-2 pt-2">
+                            <h3>Applicant Address</h3>
+                        </div>
+                    </div>
+                    <div id="ptableId">
+                        <p-table [value]="applicantAddress" selectionMode="single">
+                            <ng-template pTemplate="header">
+                                <tr class="ptableHeader">
+                                    <th>Address Type</th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-addressResponseData>
+                                <tr [pSelectableRow]="addressResponseData">
+                                    <td>{{addressResponseData?.addressType}}</td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                </div>
+                <div class="col-8">
+                    <div class="m-0 p-2 row mt-3" style="background-color: #ebebf1;">
+                        <div class="col-md-12 pl-2 pt-2">
+                            <h3>Applicant Coverage</h3>
+                        </div>
+                    </div>
+                    <div id="ptableId">
+                        <p-table [value]="applicantCoverage" selectionMode="single">
+                            <ng-template pTemplate="header">
+                                <tr class="ptableHeader">
+                                    <th>Coverage Amount</th>
+                                    <th>Coverage Term</th>
+                                    <th>Coverage Effective Date</th>
+                                    <th>Coverage Code</th>
+                                    <th>Coverage Status</th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-coverageResponseData>
+                                <tr [pSelectableRow]="coverageResponseData">
+                                    <td>{{coverageResponseData?.coverageAmount}}</td>
+                                    <td>{{coverageResponseData?.coverageTerm}}</td>
+                                    <td>{{coverageResponseData?.coverageEffectiveDate.split('T')[0]}}</td>
+                                    <td>{{coverageResponseData?.coverageCode}}</td>
+                                    <td>{{coverageResponseData?.applicantCoverageStatus}}</td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Premium List -->
+        <div>
+            <div class="row">
+                <div class="col-12 m-0 p-2 row mt-3" style="background-color: #ebebf1;">
+                    <div class="col-md-12 pl-2 pt-2">
+                        <h3>Premium List</h3>
+                    </div>
+                </div>
+                <div id="ptableId">
+                    <p-table [value]="premiumHistoryList.premiumListSP_premium" selectionMode="single">
+                        <ng-template pTemplate="header">
+                            <tr class="ptableHeader">
+                                <th>Billing Period</th>
+                                <th>Transaction Type</th>
+                                <th>Applicant</th>
+                                <th>Disability Premium</th>
+                                <th style="width: 12rem;">Disability Premium Tax</th>
+                                <th>Total Premium</th>
+                                <th>Total Tax</th>
+                                <th style="width: 13rem;">Total Premium With Tax</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-premiumResponseData>
+                            <tr [pSelectableRow]="premiumResponseData">
+                                <td>{{premiumResponseData.transactionDate.split('T')[0]}}</td>
+                                <td>{{premiumResponseData.baseTransactionType}}</td>
+                                <td>{{premiumResponseData.applicantName}}</td>
+                                <td>{{premiumResponseData.disabilityPremium}}</td>
+                                <td>{{premiumResponseData.disabilityPremiumTax}}</td>
+                                <td>{{premiumResponseData.totalPremium}}</td>
+                                <td>{{premiumResponseData.totalTax}}</td>
+                                <td>{{premiumResponseData.totalPremiumWithTax}}</td>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="footer">
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td><span class="p-ml-2">Total</span></td>
+                                <td>{{disabilityPremiumTotal}}</td>
+                                <td>{{disabilityPremiumTaxTotal}}</td>
+                                <td>{{premiumTotal}}</td>
+                                <td>{{taxTotal}}</td>
+                                <td>{{premiumWithTaxTotal}}</td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- </div> -->

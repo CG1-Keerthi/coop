@@ -25,9 +25,9 @@ export class RatingDetailsComponent implements OnInit {
             this.isUpdateBtn = false;
             this.isFieldreadonly = true;
             this.addRow = "";
-            this.rateGridData = data.PlanRatingStructureHeader.PlanRatingStructureDetails;
+            this.rateGridData = data.planRatingStructureHeader.PlanRatingStructureDetails;
             for (let i = 0; i < this.rateGridData.length; i++) {
-                let rateFormArray = (<FormArray>this.rateDetailsForm.get('PlanRatingStructureHeader.PlanRatingStructureDetails'));
+                let rateFormArray = (<FormArray>this.rateDetailsForm.get('planRatingStructureHeader.PlanRatingStructureDetails'));
                 for (let j = 0; j < rateFormArray.length; j++) {
                     if (rateFormArray.length < this.rateGridData.length) {
                         rateFormArray.push(
@@ -57,7 +57,7 @@ export class RatingDetailsComponent implements OnInit {
             this.isUpdateBtn = true;
             this.isFieldreadonly = false;
             this.rateDetailsForm = this.fb.group({
-                PlanRatingStructureHeader: this.fb.group({
+                planRatingStructureHeader: this.fb.group({
                     rateName: [''],
                     rateType: [''],
                     jointLifeMultiplier: ['0.925'],
@@ -148,7 +148,7 @@ export class RatingDetailsComponent implements OnInit {
 
     addTable() {
         debugger;
-        this.rateFormArray = (<FormArray>this.rateDetailsForm.get('PlanRatingStructureHeader.PlanRatingStructureDetails'));
+        this.rateFormArray = (<FormArray>this.rateDetailsForm.get('planRatingStructureHeader.PlanRatingStructureDetails'));
         if (this.addRow == "addRow") {
             this.isGridShow = true;
             this.addRow = "";
@@ -183,7 +183,7 @@ export class RatingDetailsComponent implements OnInit {
 
     deleteRow(index) {
         debugger
-        (<FormArray>this.rateDetailsForm.get('PlanRatingStructureHeader.PlanRatingStructureDetails')).removeAt(index);
+        (<FormArray>this.rateDetailsForm.get('planRatingStructureHeader.PlanRatingStructureDetails')).removeAt(index);
     }
 
     onClickOfRateUpdate() {

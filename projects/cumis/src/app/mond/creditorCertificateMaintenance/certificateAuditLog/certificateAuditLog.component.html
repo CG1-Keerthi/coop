@@ -1,0 +1,87 @@
+<!-- <div>certificateAuditLog works!</div> -->
+<div class="ym_content">
+    <div class="col-md-12 col-lg-12 col-sm-12 mt-2 container">
+        <div>
+            <mat-accordion>
+                <mat-expansion-panel [expanded]="true">
+                    <mat-expansion-panel-header style="background-color: #307ecc;">
+                        <mat-panel-title style="color: white;">
+                            Certificate Transaction History
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <div class="row">
+                        <div class="ym_form_group  col-6">
+                            <label>Client Certificate Number
+                            </label>
+                            <input placeholder="Client Certificate Number" value="{{parsedAuditLogList[0]?.uniqueCertificateNumber}}"  [readonly]="isFieldreadonly">
+                        </div>
+                    </div>
+
+                    <div id="ptableId">
+                            <p-table [value]="parsedAuditLogList" selectionMode="single">
+                                <ng-template pTemplate="header">
+                                    <tr class="ptableHeader">
+                                        <th>File Load Date and Time</th>
+                                        <th>Transaction Type</th>
+                                        <th>File Name</th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-transactionHistoryResponseData>
+                                    <tr [pSelectableRow]="transactionHistoryResponseData">
+                                        <td>{{transactionHistoryResponseData?.fileLoadDateTime}}</td>
+                                        <td>{{transactionHistoryResponseData?.transactionType}}</td>
+                                        <td>{{transactionHistoryResponseData?.fileName}}</td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>                 
+                    </div>
+
+                </mat-expansion-panel>
+            </mat-accordion>
+        </div>
+
+        <!-- Certificate Audit History -->
+        <div class="mt-2" id="ptableId">
+            <mat-accordion>
+                <mat-expansion-panel [expanded]="true">
+                    <mat-expansion-panel-header style="background-color: #307ecc;">
+                        <mat-panel-title style="color: white;">
+                            Certificate Audit History
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <div>
+                     
+                            <p-table [value]="certificateAuditHistory" selectionMode="single">
+                                <ng-template pTemplate="header">
+                                    <tr class="ptableHeader">
+                                        
+                                        <th>Transaction Type</th>
+                                        <th>Transaction Date</th>
+                                        <th>Application/Co-Applicant</th>
+                                        <th>Coverage</th>
+                                        <th>Field Name</th>
+                                        <th>Old Value</th>
+                                        <th>New Value</th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-auditHistoryResponseData>
+                                    <tr [pSelectableRow]="auditHistoryResponseData">
+                                        <td>{{auditHistoryResponseData?.transactionType}}</td>
+                                        <td>{{auditHistoryResponseData?.transactionDate}}</td>
+                                        <td>{{auditHistoryResponseData?.applicantName}}</td>
+                                        <td>{{auditHistoryResponseData?.coverageCode}}</td>
+                                        <td>{{auditHistoryResponseData?.updatedUIFieldName}}</td>
+                                        <td>{{auditHistoryResponseData?.oldValue}}</td>
+                                        <td>{{auditHistoryResponseData?.newValue}}</td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>                 
+                   
+                    </div>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </div>
+
+
+    </div>
+</div>

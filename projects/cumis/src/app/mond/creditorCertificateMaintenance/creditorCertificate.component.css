@@ -1,0 +1,11 @@
+.md-hd{
+    background: #0071b3 !important;
+}
+.ptableHeader> th {
+  color: white !important;
+  background-color: #00456a !important;
+}
+#creditorCertficateId{
+  overflow-y: auto !important;
+  height: 30rem  !important;
+}

@@ -249,10 +249,10 @@ input[type="text"] {
 .md-Btn{
     background-color: #008acc !important;
 }
-.ui-table{
+/* .ui-table{
     overflow-y: auto;
     height: 232px;
-}
+} */
 .modal-backdrop
 {
 display:none;
@@ -274,3 +274,7 @@ z-index:1100;
     color: #0071b3 !important;
     font-size: x-large;
 }
+.mat-tab-body-content{
+    overflow-x: hidden !important;
+}
+

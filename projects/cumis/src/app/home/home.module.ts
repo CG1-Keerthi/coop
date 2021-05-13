@@ -38,6 +38,11 @@ import { RateStructureConfigurationComponent } from '../mond/rateStructureConfig
 import { RatingDetailsComponent } from '../mond/rateStructureConfiguration/ratingDetails/ratingDetails.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { RateDetailFormBuilderModule } from '../form-builder/rateDetails/rate-detail-form.module';
+import { creditorCertificateComponent } from '../mond/creditorCertificateMaintenance/creditorCertificate.component';
+import { CreditorCertificateFormBuilderModule } from '../form-builder/creditorCertificateMaintenance/creditor-certificate-form.module';
+import { certificateDetailsComponent } from '../mond/creditorCertificateMaintenance/certificateDetails/certificateDetails.component';
+import { additionalDetailsComponent } from '../mond/creditorCertificateMaintenance/additionalDetails/additionalDetails.component';
+import { CertificateAuditLogComponent } from '../mond/creditorCertificateMaintenance/certificateAuditLog/certificateauditLog.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +57,11 @@ import { RateDetailFormBuilderModule } from '../form-builder/rateDetails/rate-de
     ClientMaintenanceComponent,
     ClientDetailComponent,
     RateStructureConfigurationComponent,
-    RatingDetailsComponent
+    RatingDetailsComponent,
+    creditorCertificateComponent,
+    certificateDetailsComponent,
+    additionalDetailsComponent,
+    CertificateAuditLogComponent
   ],
   imports: [
     CommonModule,
@@ -81,7 +90,8 @@ import { RateDetailFormBuilderModule } from '../form-builder/rateDetails/rate-de
     ClientDetailFormBuilderModule,
     ClientAddressDetailFormBuilderModule,
     MatProgressSpinnerModule,
-    RateDetailFormBuilderModule
+    RateDetailFormBuilderModule,
+    CreditorCertificateFormBuilderModule
 
 
   ],

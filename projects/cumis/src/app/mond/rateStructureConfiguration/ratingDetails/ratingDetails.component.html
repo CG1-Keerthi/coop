@@ -7,7 +7,7 @@
                 Update Rate</button>
         </div>
     </div>
-    <div formGroupName="PlanRatingStructureHeader">
+    <div formGroupName="planRatingStructureHeader">
         <div class="row">
             <div class="ym_form_group required col-4">
                 <label>Rate Name</label>
@@ -94,7 +94,7 @@
 
                 <tbody *ngIf="isGridShow">
                     <tr [formGroupName]="i"
-                        *ngFor="let list of rateDetailsForm.get('PlanRatingStructureHeader.PlanRatingStructureDetails')['controls']; let i = index;">
+                        *ngFor="let list of rateDetailsForm.get('planRatingStructureHeader.PlanRatingStructureDetails')['controls']; let i = index;">
                         <td><input class="md-input" type="text" formControlName="loanAmountStartValue"
                                 [readonly]="isFieldreadonly"></td>
                         <td><input class="md-input" type="text" formControlName="loanAmountEndValue"

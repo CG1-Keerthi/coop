@@ -71,7 +71,7 @@ export class RateStructureConfigurationComponent implements OnInit {
             data => {
                 // this.rateDetailsData = JSON.parse(atob(data))
                 let restructureJSON = {
-                    PlanRatingStructureHeader: JSON.parse(JSON.parse(atob(data)).planRateStructureJSON)
+                    planRatingStructureHeader: JSON.parse(JSON.parse(atob(data)).planRateStructureJSON)
                 }
                 this.rateDetailsData = restructureJSON;
             },

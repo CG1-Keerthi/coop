@@ -28,7 +28,7 @@ export class RateDetailFormBuilderService {
 
     getRateDetailForm() {
         this.rateDetailForm = this.fb.group({
-            PlanRatingStructureHeader: this.rateInfoForm.getRateInfoForm()
+            planRatingStructureHeader: this.rateInfoForm.getRateInfoForm()
             // PlanRatingStructureDetails:this.rateInfoForm.getRateInfoForm()
         });
     }

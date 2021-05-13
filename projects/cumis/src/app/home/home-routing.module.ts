@@ -8,6 +8,7 @@ import { NetpremiumreportComponent } from '../mond/reports/netpremiumreport/netp
 import { LogicalDeleteReportComponent } from '../mond/reports/logicaldeletereport/logicaldeletereport.component';
 import { ClientMaintenanceComponent } from '../mond/clientmaintenance/clientmaintenance.component';
 import { RateStructureConfigurationComponent } from '../mond/rateStructureConfiguration/rateStructureConfiguration.component';
+import { creditorCertificateComponent } from '../mond/creditorCertificateMaintenance/creditorCertificate.component';
 
 const homeRoutes: Routes = [
   {
@@ -19,7 +20,10 @@ const homeRoutes: Routes = [
       { path: 'netpremiumreportComponent', component: NetpremiumreportComponent },
       { path: 'logicalDeleteReportComponent', component: LogicalDeleteReportComponent },
       { path: 'clientmaintenance', component: ClientMaintenanceComponent },
-      { path: 'rateStructureConfiguration', component: RateStructureConfigurationComponent }
+      { path: 'rateStructureConfiguration', component: RateStructureConfigurationComponent },
+      { path: 'creditorCertificate', component: creditorCertificateComponent }
+
+      
     ]
   }
 ];

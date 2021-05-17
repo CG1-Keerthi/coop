@@ -24,28 +24,29 @@ export class RateInfoFormBuilderService {
 
     getRateInfoForm() {
         return this.fb.group({
-
-                rateName: ['', Validators.required],
-                rateType: ['', Validators.required],
-                jointLifeMultiplier: ['0.925', Validators.required],
-                toleranceLevel: ['0.02', Validators.required],
-                PlanRatingStructureDetails: this.fb.array([
-                    this.fb.group({
-                        loanAmountStartValue: [''],
-                        loanAmountEndValue: [''],
-                        multiLife: [''],
-                        multiLifeTerm: [''],
-                        coverageCodeInPlanRatingStructure: [''],
-                        termStartValue: [''],
-                        termEndValue: [''],
-                        ageStartValue: [''],
-                        ageEndValue: [''],
-                        eliminationPeriodInPlanRatingStructure: [''],
-                        premiumAmountInPlanRatingStructure: [''],
-                        rateStructureDetailsId: [''],
-                        rateStructureHeaderId: ['']
-                    })
-                ])
+            
+            rateName: ['', Validators.required],
+            rateType: ['', Validators.required],
+            jointLifeMultiplier: ['0.925', Validators.required],
+            toleranceLevel: ['0.02', Validators.required],
+            rateStructureHeaderId: [''],
+            PlanRatingStructureDetails: this.fb.array([
+                this.fb.group({
+                    loanAmountStartValue: [''],
+                    loanAmountEndValue: [''],
+                    multiLife: [''],
+                    multiLifeTerm: [''],
+                    coverageCodeInPlanRatingStructure: [''],
+                    termStartValue: [''],
+                    termEndValue: [''],
+                    ageStartValue: [''],
+                    ageEndValue: [''],
+                    eliminationPeriodInPlanRatingStructure: [''],
+                    premiumAmountInPlanRatingStructure: [''],
+                    rateStructureDetailsId: [''],
+                    rateStructureHeaderId: ['']
+                })
+            ])
 
         });
 

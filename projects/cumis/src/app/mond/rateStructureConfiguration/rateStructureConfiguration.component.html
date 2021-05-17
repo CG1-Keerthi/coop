@@ -38,21 +38,24 @@
                                 </div>
                             </div>
                             <mat-spinner class="md-spinner" *ngIf="isSpinnerShow"></mat-spinner>
+                            <div class="ptableId">
                                 <p-table [value]="rateList" selectionMode="single" (onRowSelect)="onRateListRowSelect($event)">  
-                                <ng-template pTemplate="header">
-                                    <tr class="ptableHeader">
-                                        <th>Rate Name</th>
-                                        <th>Rate Type</th>
-                            
-                                    </tr>
-                                </ng-template>
-                                <ng-template pTemplate="body" let-responseData>
-                                    <tr [pSelectableRow]="responseData">
-                                        <td>{{responseData.rateName}}</td>
-                                        <td>{{responseData.rateType}}</td>
-                                    </tr>
-                                </ng-template>
-                            </p-table>
+                                    <ng-template pTemplate="header">
+                                        <tr class="ptableHeader">
+                                            <th>Rate Name</th>
+                                            <th>Rate Type</th>
+                                
+                                        </tr>
+                                    </ng-template>
+                                    <ng-template pTemplate="body" let-responseData>
+                                        <tr [pSelectableRow]="responseData">
+                                            <td>{{responseData.rateName}}</td>
+                                            <td>{{responseData.rateType}}</td>
+                                        </tr>
+                                    </ng-template>
+                                </p-table>
+                            </div>
+                           
                         </div>
                     </div>
                 </mat-tab>

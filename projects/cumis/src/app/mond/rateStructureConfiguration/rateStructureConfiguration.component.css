@@ -1,3 +1,8 @@
 .md-spinner{
     margin-left: 30rem;
 }
+
+.ptableId{
+    overflow-y: auto;
+    height: 300px;
+  }

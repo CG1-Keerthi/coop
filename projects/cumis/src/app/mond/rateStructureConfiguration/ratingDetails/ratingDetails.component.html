@@ -12,6 +12,9 @@
             <div class="ym_form_group required col-4">
                 <label>Rate Name</label>
                 <input placeholder="Rate Name" formControlName="rateName" [readonly]="isFieldreadonly">
+                <div *ngIf="isSubmit && !rateDetailsForm.get('planRatingStructureHeader.rateName').touched">
+                    <p class="text-danger">Please Enter Rate Name</p>
+                </div>
             </div>
             <div class="ym_form_group required col-4">
                 <label>Joint Life Multiplier</label>
@@ -40,6 +43,9 @@
                         <option value="High">High</option>
                         <option value="Low">Low</option>
                     </select>
+                </div>
+                <div *ngIf="isSubmit && !rateDetailsForm.get('planRatingStructureHeader.rateType').touched">
+                    <p class="text-danger">Please Select Rate Type</p>
                 </div>
             </div>
             <div class="ym_form_group required col-4">
@@ -96,9 +102,9 @@
                     <tr [formGroupName]="i"
                         *ngFor="let list of rateDetailsForm.get('planRatingStructureHeader.PlanRatingStructureDetails')['controls']; let i = index;">
                         <td><input class="md-input" type="text" formControlName="loanAmountStartValue"
-                                [readonly]="isFieldreadonly"></td>
+                                [readonly]="isFieldreadonly" (keyup)="onKeyUpOfStartAmount($event)"></td>
                         <td><input class="md-input" type="text" formControlName="loanAmountEndValue"
-                                [readonly]="isFieldreadonly"></td>
+                                [readonly]="isFieldreadonly" (keyup)="onKeyUpOfEndAmount($event)"></td>
                         <td>
                             <select class="md-select" formControlName="multiLife">
                                 <option value="Yes">Yes</option>
@@ -116,13 +122,13 @@
                         <td><input class="md-input" type="text" formControlName="coverageCodeInPlanRatingStructure"
                                 [readonly]="isFieldreadonly"></td>
                         <td><input class="md-input" type="text" formControlName="termStartValue"
-                                [readonly]="isFieldreadonly"></td>
+                                [readonly]="isFieldreadonly" (keyup)="onKeyUpOfTermStart($event)"></td>
                         <td><input class="md-input" type="text" formControlName="termEndValue"
-                                [readonly]="isFieldreadonly"></td>
+                                [readonly]="isFieldreadonly" (keyup)="onKeyUpOfTermEnd($event)"></td>
                         <td><input class="md-input" type="text" formControlName="ageStartValue"
-                                [readonly]="isFieldreadonly"></td>
+                                [readonly]="isFieldreadonly" (keyup)="onKeyUpOfAgeStart($event)"></td>
                         <td><input class="md-input" type="text" formControlName="ageEndValue"
-                                [readonly]="isFieldreadonly"></td>
+                                [readonly]="isFieldreadonly" (keyup)="onKeyUpOfAgeEnd($event)"></td>
                         <td><input class="md-input" type="text" formControlName="eliminationPeriodInPlanRatingStructure"
                                 [readonly]="isFieldreadonly"></td>
                         <td><input class="md-input" type="text" formControlName="premiumAmountInPlanRatingStructure"

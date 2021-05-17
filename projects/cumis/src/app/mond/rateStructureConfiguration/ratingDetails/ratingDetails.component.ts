@@ -49,6 +49,12 @@ export class RatingDetailsComponent implements OnInit {
                                     rateStructureHeaderId: ['']
                                 })
                             )
+                        } else if(rateFormArray.length > this.rateGridData.length){
+                            if(rateFormArray.value[j].loanAmountStartValue == null){                                 
+                                (<FormArray>this.rateDetailsForm.get('planRatingStructureHeader.PlanRatingStructureDetails')).removeAt(j);   
+                               }else{
+                                (<FormArray>this.rateDetailsForm.get('planRatingStructureHeader.PlanRatingStructureDetails')).removeAt(j); 
+                               }     
                         }
                     }
                 }

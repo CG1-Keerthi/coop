@@ -43,6 +43,8 @@ import { CreditorCertificateFormBuilderModule } from '../form-builder/creditorCe
 import { certificateDetailsComponent } from '../mond/creditorCertificateMaintenance/certificateDetails/certificateDetails.component';
 import { additionalDetailsComponent } from '../mond/creditorCertificateMaintenance/additionalDetails/additionalDetails.component';
 import { CertificateAuditLogComponent } from '../mond/creditorCertificateMaintenance/certificateAuditLog/certificateauditLog.component';
+import { OnlyNumberDirective } from '../mond/directives/only-number.directive';
+import { AlphabetOnlyDirective } from '../mond/directives/alphabet-only.directive';
 
 @NgModule({
   declarations: [
@@ -61,7 +63,9 @@ import { CertificateAuditLogComponent } from '../mond/creditorCertificateMainten
     creditorCertificateComponent,
     certificateDetailsComponent,
     additionalDetailsComponent,
-    CertificateAuditLogComponent
+    CertificateAuditLogComponent,
+    OnlyNumberDirective,
+    AlphabetOnlyDirective
   ],
   imports: [
     CommonModule,

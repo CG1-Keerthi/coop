@@ -102,9 +102,9 @@
                     <tr [formGroupName]="i"
                         *ngFor="let list of rateDetailsForm.get('planRatingStructureHeader.PlanRatingStructureDetails')['controls']; let i = index;">
                         <td><input class="md-input" type="text" formControlName="loanAmountStartValue"
-                                [readonly]="isFieldreadonly" (keyup)="onKeyUpOfStartAmount($event)"></td>
+                                [readonly]="isFieldreadonly" (keyup)="onKeyUpOfStartAmount($event)" onlyNumber></td>
                         <td><input class="md-input" type="text" formControlName="loanAmountEndValue"
-                                [readonly]="isFieldreadonly" (keyup)="onKeyUpOfEndAmount($event)"></td>
+                                [readonly]="isFieldreadonly" (keyup)="onKeyUpOfEndAmount($event)" onlyNumber></td>
                         <td>
                             <select class="md-select" formControlName="multiLife">
                                 <option value="Yes">Yes</option>
@@ -120,19 +120,19 @@
 
                         </td>
                         <td><input class="md-input" type="text" formControlName="coverageCodeInPlanRatingStructure"
-                                [readonly]="isFieldreadonly"></td>
+                                [readonly]="isFieldreadonly" appAlphabetOnly></td>
                         <td><input class="md-input" type="text" formControlName="termStartValue"
-                                [readonly]="isFieldreadonly" (keyup)="onKeyUpOfTermStart($event)"></td>
+                                [readonly]="isFieldreadonly" (keyup)="onKeyUpOfTermStart($event)" onlyNumber></td>
                         <td><input class="md-input" type="text" formControlName="termEndValue"
-                                [readonly]="isFieldreadonly" (keyup)="onKeyUpOfTermEnd($event)"></td>
+                                [readonly]="isFieldreadonly" (keyup)="onKeyUpOfTermEnd($event)" onlyNumber></td>
                         <td><input class="md-input" type="text" formControlName="ageStartValue"
-                                [readonly]="isFieldreadonly" (keyup)="onKeyUpOfAgeStart($event)"></td>
+                                [readonly]="isFieldreadonly" (keyup)="onKeyUpOfAgeStart($event)" onlyNumber></td>
                         <td><input class="md-input" type="text" formControlName="ageEndValue"
-                                [readonly]="isFieldreadonly" (keyup)="onKeyUpOfAgeEnd($event)"></td>
+                                [readonly]="isFieldreadonly" (keyup)="onKeyUpOfAgeEnd($event)" onlyNumber></td>
                         <td><input class="md-input" type="text" formControlName="eliminationPeriodInPlanRatingStructure"
-                                [readonly]="isFieldreadonly"></td>
+                                [readonly]="isFieldreadonly" onlyNumber></td>
                         <td><input class="md-input" type="text" formControlName="premiumAmountInPlanRatingStructure"
-                                [readonly]="isFieldreadonly"></td>
+                                [readonly]="isFieldreadonly" onlyNumber></td>
                         <td> <button (click)="deleteRow(i)"><i class="fa fa-trash" style="color: red;"></i></button>
                         </td>
                     </tr>

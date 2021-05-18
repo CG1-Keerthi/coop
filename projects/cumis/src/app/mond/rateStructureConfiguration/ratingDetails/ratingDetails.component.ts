@@ -7,8 +7,6 @@ import { MDCommonGetterSetter } from '../../../_services/common';
 
 declare var $: any;
 
-
-
 @Component({
     selector: 'app-ratingDetails-designer',
     templateUrl: './ratingDetails.component.html',
@@ -30,17 +28,19 @@ export class RatingDetailsComponent implements OnInit {
                 this.addRow = "";
                 for (let i = 0; i < this.rateGridData.length; i++) {
                     this.rateFormArray = (<FormArray>this.rateDetailsForm.get('planRatingStructureHeader.PlanRatingStructureDetails'));
-                    this.createRow();
+                    if (this.rateFormArray.length == 0) {
+                        this.createRow();
+                    }
                     for (let j = 0; j < this.rateFormArray.length; j++) {
-                       
+                        // if formcontrol have length greater than or less than from rategrid array
                         if (this.rateFormArray.length < this.rateGridData.length) {
-                            this.createRow();                          
-                        } else if(this.rateFormArray.length > this.rateGridData.length){
-                            if(this.rateFormArray.value[j].loanAmountStartValue == null){                                 
-                                (<FormArray>this.rateDetailsForm.get('planRatingStructureHeader.PlanRatingStructureDetails')).removeAt(j);   
-                               }else{
-                                (<FormArray>this.rateDetailsForm.get('planRatingStructureHeader.PlanRatingStructureDetails')).removeAt(j); 
-                               }     
+                            this.createRow();
+                        } else if (this.rateFormArray.length > this.rateGridData.length) {
+                            if (this.rateFormArray.value[j].loanAmountStartValue == null) {
+                                (<FormArray>this.rateDetailsForm.get('planRatingStructureHeader.PlanRatingStructureDetails')).removeAt(j);
+                            } else {
+                                (<FormArray>this.rateDetailsForm.get('planRatingStructureHeader.PlanRatingStructureDetails')).removeAt(j);
+                            }
                         }
                     }
                 }
@@ -188,7 +188,6 @@ export class RatingDetailsComponent implements OnInit {
     }
 
     deleteRow(index) {
-        debugger
         (<FormArray>this.rateDetailsForm.get('planRatingStructureHeader.PlanRatingStructureDetails')).removeAt(index);
     }
 
@@ -197,14 +196,13 @@ export class RatingDetailsComponent implements OnInit {
         this.isFieldreadonly = false;
     }
     onClickOfRateSubmit() {
-        debugger;
         if (this.rateDetailsForm.value.planRatingStructureHeader.rateName == "" && this.rateDetailsForm.value.planRatingStructureHeader.rateType == "") {
             this.isSubmit = true;
             this.mdMondServiceDS.showErrorMessage("Please fill out the field.");
             return;
         }
 
-        if((this.endAmount < this.startAmount) || (this.termEnd < this.termStart) || (this.ageEnd < this.ageStart)){
+        if ((this.endAmount < this.startAmount) || (this.termEnd < this.termStart) || (this.ageEnd < this.ageStart)) {
             this.mdMondServiceDS.showErrorMessage("Please fill out the field properly in the rate detail grid.");
             return;
         }
@@ -219,17 +217,10 @@ export class RatingDetailsComponent implements OnInit {
             data => {
                 // console.log("onClickOfRateSubmit data", data);
                 this.mdMondServiceDS.showSuccessMessage(JSON.parse(atob(data)).message);
-
             }, error => {
-                debugger;
                 this.mdMondServiceDS.MDError(error);
-                // let data = "eyJtZXNzYWdlIjoiUmVjb3JkIEluc2VydGVkIFN1Y2Nlc3NmdWxseSIsInBsYW5SYXRpbmdTdHJ1Y3R1cmVIZWFkZXIiOnsicmF0ZVR5cGUiOiJIaWdoIiwicmF0ZU5hbWUiOiJUZXN0MiIsImpvaW50TGlmZU11bHRpcGxpZXIiOjAuOTI1LCJ0b2xlcmFuY2VMZXZlbCI6MC4wMiwiUGxhblJhdGluZ1N0cnVjdHVyZURldGFpbHMiOlt7ImFnZVN0YXJ0VmFsdWUiOjE2LCJlbGltaW5hdGlvblBlcmlvZEluUGxhblJhdGluZ1N0cnVjdHVyZSI6IjE4IiwiY292ZXJhZ2VDb2RlSW5QbGFuUmF0aW5nU3RydWN0dXJlIjoiMTMiLCJhZ2VFbmRWYWx1ZSI6MTcsInByZW1pdW1BbW91bnRJblBsYW5SYXRpbmdTdHJ1Y3R1cmUiOjE5LCJ0ZXJtU3RhcnRWYWx1ZSI6MTQsIm11bHRpTGlmZVRlcm0iOiJTYW1lIiwibG9hbkFtb3VudEVuZFZhbHVlIjoxMiwibG9hbkFtb3VudFN0YXJ0VmFsdWUiOjExLCJtdWx0aUxpZmUiOiJZZXMiLCJ0ZXJtRW5kVmFsdWUiOjE1fV19LCJzdGF0dXMiOiJTdWNjZXNzIn0\u003d";
-                // this.mdMondServiceDS.showSuccessMessage(JSON.parse(atob(data)).message);
-
             });
     }
-
-  
     onKeyUpOfStartAmount(event) {
         this.startAmount = event.target.value;
     }
@@ -241,11 +232,11 @@ export class RatingDetailsComponent implements OnInit {
         }
     }
 
-    onKeyUpOfTermStart(event){
+    onKeyUpOfTermStart(event) {
         this.termStart = event.target.value;
     }
 
-    onKeyUpOfTermEnd(event){
+    onKeyUpOfTermEnd(event) {
         this.termEnd = event.target.value;
         if (this.termEnd < this.termStart) {
             this.mdMondServiceDS.showErrorMessage("Term End should be greater than Term Start");
@@ -253,11 +244,11 @@ export class RatingDetailsComponent implements OnInit {
         }
     }
 
-    onKeyUpOfAgeStart(event){
+    onKeyUpOfAgeStart(event) {
         this.ageStart = event.target.value;
     }
 
-    onKeyUpOfAgeEnd(event){
+    onKeyUpOfAgeEnd(event) {
         this.ageEnd = event.target.value;
         if (this.ageEnd < this.ageStart) {
             this.mdMondServiceDS.showErrorMessage("Age End should be greater than Age Start");

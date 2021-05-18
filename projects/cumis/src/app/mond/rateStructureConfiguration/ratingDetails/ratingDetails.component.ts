@@ -29,28 +29,14 @@ export class RatingDetailsComponent implements OnInit {
                 this.isGridShow = true;
                 this.addRow = "";
                 for (let i = 0; i < this.rateGridData.length; i++) {
-                    let rateFormArray = (<FormArray>this.rateDetailsForm.get('planRatingStructureHeader.PlanRatingStructureDetails'));
-                    for (let j = 0; j < rateFormArray.length; j++) {
-                        if (rateFormArray.length < this.rateGridData.length) {
-                            rateFormArray.push(
-                                this.fb.group({
-                                    loanAmountStartValue: [''],
-                                    loanAmountEndValue: [''],
-                                    multiLife: [''],
-                                    multiLifeTerm: [''],
-                                    coverageCodeInPlanRatingStructure: [''],
-                                    termStartValue: [''],
-                                    termEndValue: [''],
-                                    ageStartValue: [''],
-                                    ageEndValue: [''],
-                                    eliminationPeriodInPlanRatingStructure: [''],
-                                    premiumAmountInPlanRatingStructure: [''],
-                                    rateStructureDetailsId: [''],
-                                    rateStructureHeaderId: ['']
-                                })
-                            )
-                        } else if(rateFormArray.length > this.rateGridData.length){
-                            if(rateFormArray.value[j].loanAmountStartValue == null){                                 
+                    this.rateFormArray = (<FormArray>this.rateDetailsForm.get('planRatingStructureHeader.PlanRatingStructureDetails'));
+                    this.createRow();
+                    for (let j = 0; j < this.rateFormArray.length; j++) {
+                       
+                        if (this.rateFormArray.length < this.rateGridData.length) {
+                            this.createRow();                          
+                        } else if(this.rateFormArray.length > this.rateGridData.length){
+                            if(this.rateFormArray.value[j].loanAmountStartValue == null){                                 
                                 (<FormArray>this.rateDetailsForm.get('planRatingStructureHeader.PlanRatingStructureDetails')).removeAt(j);   
                                }else{
                                 (<FormArray>this.rateDetailsForm.get('planRatingStructureHeader.PlanRatingStructureDetails')).removeAt(j); 

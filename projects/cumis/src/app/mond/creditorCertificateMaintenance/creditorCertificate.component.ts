@@ -32,7 +32,10 @@ export class creditorCertificateComponent implements OnInit {
   certificateDetails: any;
   auditHistoryDetails: any;
   premiumHistory: any;
+  public param: {};
   public isShowCertificateDetail: boolean = false;
+  public isSpinnerShow: boolean = false;
+
 
 
   @ViewChild('logicalDeleteFlag') logicalDeleteFlag: ElementRef;
@@ -76,7 +79,7 @@ export class creditorCertificateComponent implements OnInit {
   }
 
   getCreditorList() {
-    this.rowsfound = this.creditorListCount + ' rows found' + '( ' + this.numberOfRecordsToFetch + ' rows fetched )';
+    this.isSpinnerShow = true;
     let formVariable = {
       fileIdentifier: this.fileIdentifier,
       clientName: this.clientName,
@@ -117,6 +120,8 @@ export class creditorCertificateComponent implements OnInit {
         }
 
         this.creditorCertificateList = creditorGridData;
+        this.rowsfound = this.creditorListCount + ' rows found' + '( ' + this.creditorCertificateList.length + ' rows fetched )';
+        this.isSpinnerShow = false;
       }, error => {
         debugger;
         this.mdMondServiceDS.MDError(error);
@@ -143,16 +148,20 @@ export class creditorCertificateComponent implements OnInit {
         }
 
         this.creditorCertificateList = creditorGridData;
-
+        this.rowsfound = this.creditorListCount + ' rows found' + '( ' + this.creditorCertificateList.length + ' rows fetched )';
+        this.isSpinnerShow = false;
       });
+
   }
 
   onClickOfCreditorRow(event) {
     debugger;
     this.isShowCertificateDetail = false;
-    // this.certificateDetails = {};
-    // console.log('this.certificateDetails-before', this.certificateDetails);
-    
+    this.param = {
+      certificateIdentifier: event.data.certificateIdentifier,
+      logicalDeleteFlag: event.data.logicalDeleteFlag
+    }
+
     this.selectedTab = 1;
     let certificateFormvariables = {
       fileHeaderId: event.data.fileHeaderIdentifier,
@@ -161,7 +170,6 @@ export class creditorCertificateComponent implements OnInit {
     this.mdMondServiceDS.getFormDataFromMondService('Creditor Self Admin', 'FetchCertificateDetails', JSON.stringify(certificateFormvariables), null).subscribe(
       data => {
         this.certificateDetails = JSON.parse(atob(data.value));
-        // console.log('this.certificateDetails-after', this.certificateDetails);
         this.fetchPremiumHistory(event);
         this.fetchTransactionAuditHistory(event);
       }, error => {
@@ -172,21 +180,15 @@ export class creditorCertificateComponent implements OnInit {
         this.fetchTransactionAuditHistory(event);
       })
 
-
-
   }
 
   fetchPremiumHistory(event) {
-    // this.premiumHistory = "{}";
-    // console.log('this.premiumHistory-before', this.premiumHistory);
-    
     let premiumHistoryFormvariables = {
       certificateId: event.data.certificateIdentifier
     }
     this.mdMondServiceDS.getFormDataFromMondService('Creditor Self Admin', 'FetchPremiumHistory-SP', JSON.stringify(premiumHistoryFormvariables), null).subscribe(
       data => {
         this.premiumHistory = atob(data.value)
-        // console.log('this.premiumHistory-after', this.premiumHistory);
       }, error => {
         this.mdMondServiceDS.MDError(error);
         let data = { "key": "key", "value": "eyJwcmVtaXVtTGlzdFNQX3ByZW1pdW0iOlt7InRvdGFsVGF4IjoxNjIuMjUsImJhc2VUcmFuc2FjdGlvblR5cGUiOiJSZWluc3RhdGUiLCJ0b3RhbFByZW1pdW1XaXRoVGF4IjoxOTYzLjk2LCJkaXNhYmlsaXR5UHJlbWl1bVRheCI6MTYyLjI1LCJ0b3RhbFByZW1pdW0iOjE4MDEuNzEsImFwcGxpY2FudE5hbWUiOiJDaHd3d3RpYW4gRGVzYmllbnMiLCJ0cmFuc2FjdGlvbkRhdGUiOiIyMDIxLTA5LTI2VDAwOjAwOjAwLjAwMFoiLCJkaXNhYmlsaXR5UHJlbWl1bSI6MTgwMS43MX0seyJ0b3RhbFRheCI6MTYyLjI1LCJiYXNlVHJhbnNhY3Rpb25UeXBlIjoiTmV3IEJ1c2luZXNzIiwidG90YWxQcmVtaXVtV2l0aFRheCI6MTk2NC45OCwiZGlzYWJpbGl0eVByZW1pdW1UYXgiOjE2Mi4yNSwidG90YWxQcmVtaXVtIjoxODAyLjczLCJhcHBsaWNhbnROYW1lIjoiQ2h3d3d0aWFuIERlc2JpZW5zIiwidHJhbnNhY3Rpb25EYXRlIjoiMjAyMC0wNC0yMVQwMDowMDowMC4wMDBaIiwiZGlzYWJpbGl0eVByZW1pdW0iOjE4MDIuNzN9LHsidG90YWxUYXgiOi0xNTMuODksImJhc2VUcmFuc2FjdGlvblR5cGUiOiJDYW5jZWxsYXRpb24iLCJ0b3RhbFByZW1pdW1XaXRoVGF4IjotMTkwNC4zNSwiZGlzYWJpbGl0eVByZW1pdW1UYXgiOi0xNTMuODksInRvdGFsUHJlbWl1bSI6LTE3NTAuNDYsImFwcGxpY2FudE5hbWUiOiJDaHd3d3RpYW4gRGVzYmllbnMiLCJ0cmFuc2FjdGlvbkRhdGUiOiIyMDE5LTA3LTI1VDAwOjAwOjAwLjAwMFoiLCJkaXNhYmlsaXR5UHJlbWl1bSI6LTE3NTAuNDZ9XX0\u003d" };
@@ -196,9 +198,6 @@ export class creditorCertificateComponent implements OnInit {
   }
   fetchTransactionAuditHistory(event) {
     debugger;
-    // this.auditHistoryDetails = {};
-    // console.log('this.auditHistoryDetails-before', this.auditHistoryDetails);
-    
     let auditHistoryFormvariables = {
       fileHeaderId: event.data.fileHeaderIdentifier,
       certificateNumber: event.data.certificateNumber
@@ -206,7 +205,6 @@ export class creditorCertificateComponent implements OnInit {
     this.mdMondServiceDS.getFormDataFromMondService('Creditor Self Admin', 'FetchTransactionAuditHistory', JSON.stringify(auditHistoryFormvariables), null).subscribe(
       data => {
         this.auditHistoryDetails = JSON.parse(atob(data.value));
-        // console.log('this.auditHistoryDetails-after', this.auditHistoryDetails);
         this.isShowCertificateDetail = true;
       }, error => {
         this.mdMondServiceDS.MDError(error);
@@ -218,22 +216,80 @@ export class creditorCertificateComponent implements OnInit {
 
   @HostListener('scroll', ['$event'])
   onScroll(event) {
-    debugger;
+    // debugger;
     console.log('scrolled', event.target.scrollTop);
     let tracker = event.target;
     let limit = tracker.scrollHeight - tracker.clientHeight;
     console.log(Math.round(event.target.scrollTop), limit);
-    if (Math.round(event.target.scrollTop) === limit) {
-      //  alert('end reached');
+    if (Math.round(event.target.scrollTop) === limit) {     
       console.log('end reached');
-      debugger;
-      // this.rowLIst.emit(this.populateGridData);
+      this.onScrollDown(this.creditorCertificateList);
     } else if (Math.round(event.target.scrollTop) === limit - 1) {
       console.log("Math.round(event.target.scrollTop)-1", Math.round(event.target.scrollTop) - 1);
       console.log('end reached');
-      debugger;
-      // this.rowLIst.emit(this.populateGridData);
+      this.onScrollDown(this.creditorCertificateList);
     }
+  }
+
+  onScrollDown(oldGridList) {
+    debugger;
+    this.isSpinnerShow = true;
+    this.isShowCertificateDetail = false;
+    let formVariable = {
+      fileIdentifier: this.fileIdentifier,
+      clientName: this.clientName,
+      certificateNumber: this.certificateNumber,
+      certificateEffectiveDateMax: this.CEDGreaterThan,
+      certificateEffectiveDateMin: this.CEDLessThan,
+      internalLocationNumber: this.clientLocationNumber,
+      applicantFirstName: this.firstName,
+      applicantLastName: this.lastName,
+      clientCertificateNumber: this.clientCertificateNo,
+      additionalSearchValue: this.additionalSearchValue,
+      additionalSearchField: this.additionalSearchField,
+      "": this.creditorListCount,
+      startRow: this.creditorCertificateList.length,
+      numberOfRecordsToFetch: this.numberOfRecordsToFetch
+    }
+    this.mdMondServiceDS.getFormDataFromMondService('Creditor Self Admin', 'FetchCertificateList', JSON.stringify(formVariable), null).subscribe(
+      data => {
+        this.creditorCertificateList = [];
+
+        for (var j = 0; j < oldGridList.length; j++) {
+          this.creditorCertificateList.push(oldGridList[j]);
+          console.log("after push oldGridList,this.creditorCertificateList", this.creditorCertificateList);
+          var list = this.creditorCertificateList;
+        }
+        let creditorGridData = JSON.parse(atob(data.value)).certificateList_certificateSummary;
+        for (var i = 0; i < creditorGridData.length; i++) {
+          creditorGridData[i]['No'] = oldGridList.length + i;
+          if (creditorGridData[i].logicalDeleteFlag == 'N') {
+            creditorGridData[i].logicalDeleteFlag = false;
+          } else {
+            creditorGridData[i].logicalDeleteFlag = true;
+          }
+
+          if (creditorGridData[i].processedWithErrors == 'N') {
+            creditorGridData[i].processedWithErrors = false;
+          } else {
+            creditorGridData[i].processedWithErrors = true;
+          }
+          if (creditorGridData[i].processedWithWarningFlag == 'N') {
+            creditorGridData[i].processedWithWarningFlag = false;
+          } else {
+            creditorGridData[i].processedWithWarningFlag = true;
+          }
+        }
+
+        for (var k = 0; k < creditorGridData.length; k++) {
+          this.creditorCertificateList.push(creditorGridData[k]);
+        }
+        this.rowsfound = this.creditorListCount + ' rows found' + '( ' + this.creditorCertificateList.length + ' rows fetched )';
+        this.isSpinnerShow = false;
+      }, error => {
+        this.mdMondServiceDS.MDError(error);
+        // let data = { "key": "key", "value": "eyJjZXJ0aWZpY2F0ZUxpc3RfY2VydGlmaWNhdGVTdW1tYXJ5IjpbeyJjZXJ0aWZpY2F0ZUlkZW50aWZpZXIiOjc3NzEzLCJjZXJ0aWZpY2F0ZVN1YlN0YXR1cyI6IlJlLUluc3RhdGVkIiwicHJvY2Vzc2VkV2l0aEVycm9ycyI6Ik4iLCJjZXJ0aWZpY2F0ZVN0YXR1cyI6IkFjdGl2ZSIsInBhcnRuZXJOYW1lIjoiTEdNIiwicHJvY2Vzc2VkV2l0aFdhcm5pbmdGbGFnIjoiTiIsImFwcGxpY2FudE5hbWUiOiJDaHd3d3RpYW4gRGVzYmllbnMiLCJjZXJ0aWZpY2F0ZUVmZmVjdGl2ZURhdGUiOiIyMDE3LTEyLTMxVDAwOjAwOjAwLjAwMFoiLCJ1bmlxdWVDZXJ0aWZpY2F0ZUlkZW50aWZpZXIiOiI5MDAyNTk5IiwiY2VydGlmaWNhdGVOdW1iZXIiOiJDSTAwMDAwMDAwMDc2Mzk3IiwiZmlsZUhlYWRlcklkZW50aWZpZXIiOjkxNDcsImxvZ2ljYWxEZWxldGVGbGFnIjoiTiIsInByb2R1Y3RUeXBlIjoiU1AifSx7ImNlcnRpZmljYXRlSWRlbnRpZmllciI6Nzc3MTQsImNlcnRpZmljYXRlU3ViU3RhdHVzIjoiUmUtSW5zdGF0ZWQiLCJwcm9jZXNzZWRXaXRoRXJyb3JzIjoiTiIsImNlcnRpZmljYXRlU3RhdHVzIjoiQWN0aXZlIiwicGFydG5lck5hbWUiOiJMR00iLCJwcm9jZXNzZWRXaXRoV2FybmluZ0ZsYWciOiJOIiwiY29hcHBsaWNhbnROYW1lIjoiQnJ3REVSSUMgTEFRVUlOIiwiYXBwbGljYW50TmFtZSI6IkZSd0RFUklDIFBBUVVJTiIsImNlcnRpZmljYXRlRWZmZWN0aXZlRGF0ZSI6IjIwMTctMTItMzFUMDA6MDA6MDAuMDAwWiIsInVuaXF1ZUNlcnRpZmljYXRlSWRlbnRpZmllciI6IjkwMDI2OTkiLCJjZXJ0aWZpY2F0ZU51bWJlciI6IkNJMDAwMDAwMDAwNzYzOTgiLCJmaWxlSGVhZGVySWRlbnRpZmllciI6OTE0NywibG9naWNhbERlbGV0ZUZsYWciOiJZIiwicHJvZHVjdFR5cGUiOiJTUCJ9LHsiY2VydGlmaWNhdGVJZGVudGlmaWVyIjo3NzcxNCwiY2VydGlmaWNhdGVTdWJTdGF0dXMiOiJSZS1JbnN0YXRlZCIsInByb2Nlc3NlZFdpdGhFcnJvcnMiOiJOIiwiY2VydGlmaWNhdGVTdGF0dXMiOiJBY3RpdmUiLCJwYXJ0bmVyTmFtZSI6IkxHTSIsInByb2Nlc3NlZFdpdGhXYXJuaW5nRmxhZyI6Ik4iLCJjb2FwcGxpY2FudE5hbWUiOiJCcndERVJJQyBMQVFVSU4iLCJhcHBsaWNhbnROYW1lIjoiRlJ3REVSSUMgUEFRVUlOIiwiY2VydGlmaWNhdGVFZmZlY3RpdmVEYXRlIjoiMjAxNy0xMi0zMVQwMDowMDowMC4wMDBaIiwidW5pcXVlQ2VydGlmaWNhdGVJZGVudGlmaWVyIjoiOTAwMjY5OSIsImNlcnRpZmljYXRlTnVtYmVyIjoiQ0kwMDAwMDAwMDA3NjM5OCIsImZpbGVIZWFkZXJJZGVudGlmaWVyIjo5MTQ3LCJsb2dpY2FsRGVsZXRlRmxhZyI6IlkiLCJwcm9kdWN0VHlwZSI6IlNQIn0seyJjZXJ0aWZpY2F0ZUlkZW50aWZpZXIiOjc3NzE0LCJjZXJ0aWZpY2F0ZVN1YlN0YXR1cyI6IlJlLUluc3RhdGVkIiwicHJvY2Vzc2VkV2l0aEVycm9ycyI6Ik4iLCJjZXJ0aWZpY2F0ZVN0YXR1cyI6IkFjdGl2ZSIsInBhcnRuZXJOYW1lIjoiTEdNIiwicHJvY2Vzc2VkV2l0aFdhcm5pbmdGbGFnIjoiTiIsImNvYXBwbGljYW50TmFtZSI6IkJyd0RFUklDIExBUVVJTiIsImFwcGxpY2FudE5hbWUiOiJGUndERVJJQyBQQVFVSU4iLCJjZXJ0aWZpY2F0ZUVmZmVjdGl2ZURhdGUiOiIyMDE3LTEyLTMxVDAwOjAwOjAwLjAwMFoiLCJ1bmlxdWVDZXJ0aWZpY2F0ZUlkZW50aWZpZXIiOiI5MDAyNjk5IiwiY2VydGlmaWNhdGVOdW1iZXIiOiJDSTAwMDAwMDAwMDc2Mzk4IiwiZmlsZUhlYWRlcklkZW50aWZpZXIiOjkxNDcsImxvZ2ljYWxEZWxldGVGbGFnIjoiWSIsInByb2R1Y3RUeXBlIjoiU1AifSx7ImNlcnRpZmljYXRlSWRlbnRpZmllciI6Nzc3MTQsImNlcnRpZmljYXRlU3ViU3RhdHVzIjoiUmUtSW5zdGF0ZWQiLCJwcm9jZXNzZWRXaXRoRXJyb3JzIjoiTiIsImNlcnRpZmljYXRlU3RhdHVzIjoiQWN0aXZlIiwicGFydG5lck5hbWUiOiJMR00iLCJwcm9jZXNzZWRXaXRoV2FybmluZ0ZsYWciOiJOIiwiY29hcHBsaWNhbnROYW1lIjoiQnJ3REVSSUMgTEFRVUlOIiwiYXBwbGljYW50TmFtZSI6IkZSd0RFUklDIFBBUVVJTiIsImNlcnRpZmljYXRlRWZmZWN0aXZlRGF0ZSI6IjIwMTctMTItMzFUMDA6MDA6MDAuMDAwWiIsInVuaXF1ZUNlcnRpZmljYXRlSWRlbnRpZmllciI6IjkwMDI2OTkiLCJjZXJ0aWZpY2F0ZU51bWJlciI6IkNJMDAwMDAwMDAwNzYzOTgiLCJmaWxlSGVhZGVySWRlbnRpZmllciI6OTE0NywibG9naWNhbERlbGV0ZUZsYWciOiJZIiwicHJvZHVjdFR5cGUiOiJTUCJ9LHsiY2VydGlmaWNhdGVJZGVudGlmaWVyIjo3NzcxNCwiY2VydGlmaWNhdGVTdWJTdGF0dXMiOiJSZS1JbnN0YXRlZCIsInByb2Nlc3NlZFdpdGhFcnJvcnMiOiJOIiwiY2VydGlmaWNhdGVTdGF0dXMiOiJBY3RpdmUiLCJwYXJ0bmVyTmFtZSI6IkxHTSIsInByb2Nlc3NlZFdpdGhXYXJuaW5nRmxhZyI6Ik4iLCJjb2FwcGxpY2FudE5hbWUiOiJCcndERVJJQyBMQVFVSU4iLCJhcHBsaWNhbnROYW1lIjoiRlJ3REVSSUMgUEFRVUlOIiwiY2VydGlmaWNhdGVFZmZlY3RpdmVEYXRlIjoiMjAxNy0xMi0zMVQwMDowMDowMC4wMDBaIiwidW5pcXVlQ2VydGlmaWNhdGVJZGVudGlmaWVyIjoiOTAwMjY5OSIsImNlcnRpZmljYXRlTnVtYmVyIjoiQ0kwMDAwMDAwMDA3NjM5OCIsImZpbGVIZWFkZXJJZGVudGlmaWVyIjo5MTQ3LCJsb2dpY2FsRGVsZXRlRmxhZyI6IlkiLCJwcm9kdWN0VHlwZSI6IlNQIn0seyJjZXJ0aWZpY2F0ZUlkZW50aWZpZXIiOjc3NzE0LCJjZXJ0aWZpY2F0ZVN1YlN0YXR1cyI6IlJlLUluc3RhdGVkIiwicHJvY2Vzc2VkV2l0aEVycm9ycyI6Ik4iLCJjZXJ0aWZpY2F0ZVN0YXR1cyI6IkFjdGl2ZSIsInBhcnRuZXJOYW1lIjoiTEdNIiwicHJvY2Vzc2VkV2l0aFdhcm5pbmdGbGFnIjoiTiIsImNvYXBwbGljYW50TmFtZSI6IkJyd0RFUklDIExBUVVJTiIsImFwcGxpY2FudE5hbWUiOiJGUndERVJJQyBQQVFVSU4iLCJjZXJ0aWZpY2F0ZUVmZmVjdGl2ZURhdGUiOiIyMDE3LTEyLTMxVDAwOjAwOjAwLjAwMFoiLCJ1bmlxdWVDZXJ0aWZpY2F0ZUlkZW50aWZpZXIiOiI5MDAyNjk5IiwiY2VydGlmaWNhdGVOdW1iZXIiOiJDSTAwMDAwMDAwMDc2Mzk4IiwiZmlsZUhlYWRlcklkZW50aWZpZXIiOjkxNDcsImxvZ2ljYWxEZWxldGVGbGFnIjoiWSIsInByb2R1Y3RUeXBlIjoiU1AifSx7ImNlcnRpZmljYXRlSWRlbnRpZmllciI6Nzc3MTQsImNlcnRpZmljYXRlU3ViU3RhdHVzIjoiUmUtSW5zdGF0ZWQiLCJwcm9jZXNzZWRXaXRoRXJyb3JzIjoiTiIsImNlcnRpZmljYXRlU3RhdHVzIjoiQWN0aXZlIiwicGFydG5lck5hbWUiOiJMR00iLCJwcm9jZXNzZWRXaXRoV2FybmluZ0ZsYWciOiJOIiwiY29hcHBsaWNhbnROYW1lIjoiQnJ3REVSSUMgTEFRVUlOIiwiYXBwbGljYW50TmFtZSI6IkZSd0RFUklDIFBBUVVJTiIsImNlcnRpZmljYXRlRWZmZWN0aXZlRGF0ZSI6IjIwMTctMTItMzFUMDA6MDA6MDAuMDAwWiIsInVuaXF1ZUNlcnRpZmljYXRlSWRlbnRpZmllciI6IjkwMDI2OTkiLCJjZXJ0aWZpY2F0ZU51bWJlciI6IkNJMDAwMDAwMDAwNzYzOTgiLCJmaWxlSGVhZGVySWRlbnRpZmllciI6OTE0NywibG9naWNhbERlbGV0ZUZsYWciOiJZIiwicHJvZHVjdFR5cGUiOiJTUCJ9LHsiY2VydGlmaWNhdGVJZGVudGlmaWVyIjo3NzcxNCwiY2VydGlmaWNhdGVTdWJTdGF0dXMiOiJSZS1JbnN0YXRlZCIsInByb2Nlc3NlZFdpdGhFcnJvcnMiOiJOIiwiY2VydGlmaWNhdGVTdGF0dXMiOiJBY3RpdmUiLCJwYXJ0bmVyTmFtZSI6IkxHTSIsInByb2Nlc3NlZFdpdGhXYXJuaW5nRmxhZyI6Ik4iLCJjb2FwcGxpY2FudE5hbWUiOiJCcndERVJJQyBMQVFVSU4iLCJhcHBsaWNhbnROYW1lIjoiRlJ3REVSSUMgUEFRVUlOIiwiY2VydGlmaWNhdGVFZmZlY3RpdmVEYXRlIjoiMjAxNy0xMi0zMVQwMDowMDowMC4wMDBaIiwidW5pcXVlQ2VydGlmaWNhdGVJZGVudGlmaWVyIjoiOTAwMjY5OSIsImNlcnRpZmljYXRlTnVtYmVyIjoiQ0kwMDAwMDAwMDA3NjM5OCIsImZpbGVIZWFkZXJJZGVudGlmaWVyIjo5MTQ3LCJsb2dpY2FsRGVsZXRlRmxhZyI6IlkiLCJwcm9kdWN0VHlwZSI6IlNQIn1dfQ==" };   
+      });
   }
 
 }

@@ -132,6 +132,7 @@
                             </div>
 
                         </div>
+                        <mat-spinner class="md-spinner" *ngIf="isSpinnerShow" style="margin-left: 41rem;"></mat-spinner>
                         <div id="creditorCertficateId" (scroll)="onScroll($event)">
                             <p-table  [value]="creditorCertificateList" selectionMode="single" (onRowSelect)="onClickOfCreditorRow($event)">
                                 <ng-template pTemplate="header">
@@ -180,7 +181,7 @@
                     <app-certificateDetails-designer *ngIf="isShowCertificateDetail" [certificateDetailsData]="certificateDetails" [premiumHistoryData]="premiumHistory"></app-certificateDetails-designer>
                 </mat-tab>
                 <mat-tab label="Additional Details">
-                    <app-additionalDetails-designer *ngIf="isShowCertificateDetail" [additionalDetailsData]="certificateDetails"></app-additionalDetails-designer>
+                    <app-additionalDetails-designer *ngIf="isShowCertificateDetail" [additionalDetailsData]="certificateDetails" [param]="param"></app-additionalDetails-designer>
                 </mat-tab>
                 <mat-tab label="Certificate Audit Log">
                     <app-certificateAuditLog-designer *ngIf="isShowCertificateDetail" [auditLogData]="certificateDetails" [auditHistoryData]="auditHistoryDetails"></app-certificateAuditLog-designer>

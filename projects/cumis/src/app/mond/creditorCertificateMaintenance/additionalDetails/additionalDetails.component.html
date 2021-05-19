@@ -12,42 +12,54 @@
                     <div class="row">
                         <div class="ym_form_group  col-4">
                             <label>Loan Account Number</label>
-                            <input placeholder="Loan Account Number" value="{{parsedAdditionalDetailsList?.loan?.LoanAccountNumber}}" [readonly]="isFieldreadonly">
+                            <input placeholder="Loan Account Number"
+                                value="{{parsedAdditionalDetailsList?.loan?.LoanAccountNumber}}"
+                                [readonly]="isFieldreadonly">
                         </div>
                         <div class="ym_form_group  col-4">
                             <label>Loan Type Category</label>
-                            <input placeholder="Loan Type Category" value="{{parsedAdditionalDetailsList?.loan?.LoanTypeCategory}}" [readonly]="isFieldreadonly">
+                            <input placeholder="Loan Type Category"
+                                value="{{parsedAdditionalDetailsList?.loan?.LoanTypeCategory}}"
+                                [readonly]="isFieldreadonly">
                         </div>
                         <div class="ym_form_group  col-4">
                             <label>Loan Type</label>
-                            <input placeholder="Loan Type" value="{{parsedAdditionalDetailsList?.loan?.LoanType}}" [readonly]="isFieldreadonly">
+                            <input placeholder="Loan Type" value="{{parsedAdditionalDetailsList?.loan?.LoanType}}"
+                                [readonly]="isFieldreadonly">
                         </div>
 
                     </div>
                     <div class="row">
                         <div class="ym_form_group  col-4">
                             <label>Loan Sub Type</label>
-                            <input placeholder="Loan Sub Type" value="{{parsedAdditionalDetailsList?.loan?.LoanSubType}}" [readonly]="isFieldreadonly">
+                            <input placeholder="Loan Sub Type"
+                                value="{{parsedAdditionalDetailsList?.loan?.LoanSubType}}" [readonly]="isFieldreadonly">
                         </div>
                         <div class="ym_form_group  col-4">
                             <label>Loan Amount</label>
-                            <input placeholder="Loan Amount" value="{{parsedAdditionalDetailsList?.loan?.LoanAmount}}" [readonly]="isFieldreadonly">
+                            <input placeholder="Loan Amount" value="{{parsedAdditionalDetailsList?.loan?.LoanAmount}}"
+                                [readonly]="isFieldreadonly">
                         </div>
                         <div class="ym_form_group  col-4">
                             <label>Loan Amount Without Insurance</label>
-                            <input placeholder="Loan Amount Without Insurance" value="{{parsedAdditionalDetailsList?.loan?.LoanAmtWithoutInsuranceLoc}}" [readonly]="isFieldreadonly">
+                            <input placeholder="Loan Amount Without Insurance"
+                                value="{{parsedAdditionalDetailsList?.loan?.LoanAmtWithoutInsuranceLoc}}"
+                                [readonly]="isFieldreadonly">
                         </div>
 
                     </div>
                     <div class="row">
                         <div class="ym_form_group  col-4">
                             <label>Loan Term (Months)</label>
-                            <input placeholder="Loan Term (Months)" value="{{parsedAdditionalDetailsList?.loan?.LoanTerm}}" [readonly]="isFieldreadonly">
+                            <input placeholder="Loan Term (Months)"
+                                value="{{parsedAdditionalDetailsList?.loan?.LoanTerm}}" [readonly]="isFieldreadonly">
                         </div>
                         <div class="ym_form_group  col-4">
                             <div class="row">
                                 <label>Loan Effective Date</label>
-                                <input class="col-md-9" matInput [matDatepicker]="picker1" value="{{parsedAdditionalDetailsList?.loan?.LoanEffectiveDate}}" [readonly]="isFieldreadonly">
+                                <input class="col-md-9" matInput [matDatepicker]="picker1"
+                                    value="{{parsedAdditionalDetailsList?.loan?.LoanEffectiveDate}}"
+                                    [readonly]="isFieldreadonly">
                                 <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                                 <mat-datepicker class="col-md-3" #picker1></mat-datepicker>
                             </div>
@@ -55,36 +67,50 @@
                         </div>
                         <div class="ym_form_group  col-4">
                             <label>Annualized Interest Rate</label>
-                            <input placeholder="Annualized Interest Rate" value="{{parsedAdditionalDetailsList?.loan?.AnnualizedInterestRate}}" [readonly]="isFieldreadonly">
+                            <input placeholder="Annualized Interest Rate"
+                                value="{{parsedAdditionalDetailsList?.loan?.AnnualizedInterestRate}}"
+                                [readonly]="isFieldreadonly">
                         </div>
                     </div>
                     <div class="row">
                         <div class="ym_form_group  col-4">
                             <label>Loan Amortization (Months)</label>
-                            <input placeholder="Loan Amortization (Months)" value="{{parsedAdditionalDetailsList?.loan?.LoanAmortization}}" [readonly]="isFieldreadonly">
+                            <input placeholder="Loan Amortization (Months)"
+                                value="{{parsedAdditionalDetailsList?.loan?.LoanAmortization}}"
+                                [readonly]="isFieldreadonly">
                         </div>
                         <div class="ym_form_group  col-4">
                             <label>Loan Interest Compounding Frequency</label>
-                            <input placeholder="Loan Interest Compounding Frequency" value="{{parsedAdditionalDetailsList?.loan?.LoanInterestCompoundingFrequency}}" [readonly]="isFieldreadonly">
+                            <input placeholder="Loan Interest Compounding Frequency"
+                                value="{{parsedAdditionalDetailsList?.loan?.LoanInterestCompoundingFrequency}}"
+                                [readonly]="isFieldreadonly">
                         </div>
                         <div class="ym_form_group  col-4">
                             <label>Loan Payment Frequency</label>
-                            <input placeholder="Loan Payment Frequency" value="{{parsedAdditionalDetailsList?.loan?.LoanPaymentFrequency}}" [readonly]="isFieldreadonly">
+                            <input placeholder="Loan Payment Frequency"
+                                value="{{parsedAdditionalDetailsList?.loan?.LoanPaymentFrequency}}"
+                                [readonly]="isFieldreadonly">
                         </div>
                     </div>
                     <div class="row">
                         <div class="ym_form_group  col-4">
                             <label>Periodic Payment Amount</label>
-                            <input placeholder="Periodic Payment Amount" value="{{parsedAdditionalDetailsList?.loan?.PeriodicPaymentAmount}}" [readonly]="isFieldreadonly">
+                            <input placeholder="Periodic Payment Amount"
+                                value="{{parsedAdditionalDetailsList?.loan?.PeriodicPaymentAmount}}"
+                                [readonly]="isFieldreadonly">
                         </div>
                         <div class="ym_form_group  col-4">
                             <label>Periodic Payment Amount With Insurance</label>
-                            <input placeholder="Periodic Payment Amount With Insurance" value="{{parsedAdditionalDetailsList?.loan?.PeriodicPaymentAmountWithIns}}" [readonly]="isFieldreadonly">
+                            <input placeholder="Periodic Payment Amount With Insurance"
+                                value="{{parsedAdditionalDetailsList?.loan?.PeriodicPaymentAmountWithIns}}"
+                                [readonly]="isFieldreadonly">
                         </div>
                         <div class="ym_form_group  col-4">
                             <div class="row">
                                 <label>Loan Original Load Date</label>
-                                <input class="col-md-9" matInput [matDatepicker]="picker2" value="{{parsedAdditionalDetailsList?.loan?.LoanOriginalLoadDate}}" [readonly]="isFieldreadonly">
+                                <input class="col-md-9" matInput [matDatepicker]="picker2"
+                                    value="{{parsedAdditionalDetailsList?.loan?.LoanOriginalLoadDate}}"
+                                    [readonly]="isFieldreadonly">
                                 <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                                 <mat-datepicker class="col-md-3" #picker2></mat-datepicker>
                             </div>
@@ -94,16 +120,22 @@
                     <div class="row">
                         <div class="ym_form_group  col-4">
                             <label>Loan Processed With Error Flag</label>
-                            <input placeholder="Loan Processed With Error Flag" value="{{parsedAdditionalDetailsList?.loan?.LoanProcessedWithErrorFlag}}" [readonly]="isFieldreadonly">
+                            <input placeholder="Loan Processed With Error Flag"
+                                value="{{parsedAdditionalDetailsList?.loan?.LoanProcessedWithErrorFlag}}"
+                                [readonly]="isFieldreadonly">
                         </div>
                         <div class="ym_form_group  col-4">
                             <label>Loan Logical Delete Flag</label>
-                            <input placeholder="Loan Logical Delete Flag" value="{{parsedAdditionalDetailsList?.loan?.LoanLogicalDeleteFlag}}" [readonly]="isFieldreadonly">
+                            <input placeholder="Loan Logical Delete Flag"
+                                value="{{parsedAdditionalDetailsList?.loan?.LoanLogicalDeleteFlag}}"
+                                [readonly]="isFieldreadonly">
                         </div>
                         <div class="ym_form_group  col-4">
                             <div class="row">
                                 <label>Loan Last Updated Date</label>
-                                <input class="col-md-9" matInput [matDatepicker]="picker3" value="{{parsedAdditionalDetailsList?.loan?.LoanLastUpdatedDate}}" [readonly]="isFieldreadonly">
+                                <input class="col-md-9" matInput [matDatepicker]="picker3"
+                                    value="{{parsedAdditionalDetailsList?.loan?.LoanLastUpdatedDate}}"
+                                    [readonly]="isFieldreadonly">
                                 <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
                                 <mat-datepicker class="col-md-3" #picker3></mat-datepicker>
                             </div>
@@ -113,31 +145,42 @@
                     <div class="row">
                         <div class="ym_form_group  col-4">
                             <label>Loan Outstanding Balance</label>
-                            <input placeholder="Loan Outstanding Balance" value="{{parsedAdditionalDetailsList?.loan?.LoanOutstandingBalance}}" [readonly]="isFieldreadonly">
+                            <input placeholder="Loan Outstanding Balance"
+                                value="{{parsedAdditionalDetailsList?.loan?.LoanOutstandingBalance}}"
+                                [readonly]="isFieldreadonly">
                         </div>
                         <div class="ym_form_group  col-4">
                             <label>Loan Balloon Amount
                             </label>
-                            <input placeholder="Loan Balloon Amount" value="{{parsedAdditionalDetailsList?.loan?.LoanResidualValueAmount}}" [readonly]="isFieldreadonly">
+                            <input placeholder="Loan Balloon Amount"
+                                value="{{parsedAdditionalDetailsList?.loan?.LoanResidualValueAmount}}"
+                                [readonly]="isFieldreadonly">
                         </div>
                         <div class="ym_form_group  col-4">
                             <label>Loan Residual Insured Flag</label>
-                            <input placeholder="Loan Residual Insured Flag" value="{{parsedAdditionalDetailsList?.loan?.LoanResidualInsuredFlag}}" [readonly]="isFieldreadonly">
+                            <input placeholder="Loan Residual Insured Flag"
+                                value="{{parsedAdditionalDetailsList?.loan?.LoanResidualInsuredFlag}}"
+                                [readonly]="isFieldreadonly">
                         </div>
                     </div>
                     <div class="row">
                         <div class="ym_form_group  col-4">
                             <label>Loan Deal Type</label>
-                            <input placeholder="Loan Deal Type" value="{{parsedAdditionalDetailsList?.loan?.DealType}}" [readonly]="isFieldreadonly">
+                            <input placeholder="Loan Deal Type" value="{{parsedAdditionalDetailsList?.loan?.DealType}}"
+                                [readonly]="isFieldreadonly">
                         </div>
                         <div class="ym_form_group  col-4">
                             <label>Amount of Insured loan or lease</label>
-                            <input placeholder="Amount of Insured loan or lease" value="{{parsedAdditionalDetailsList?.loan?.InsuredLoanLeaseAmount}}" [readonly]="isFieldreadonly">
+                            <input placeholder="Amount of Insured loan or lease"
+                                value="{{parsedAdditionalDetailsList?.loan?.InsuredLoanLeaseAmount}}"
+                                [readonly]="isFieldreadonly">
                         </div>
                         <div class="ym_form_group  col-4">
                             <div class="row">
                                 <label>Loan Residual Due Date</label>
-                                <input class="col-md-9" matInput [matDatepicker]="picker4" value="{{parsedAdditionalDetailsList?.loan?.LoanResidualDueDate}}" [readonly]="isFieldreadonly">
+                                <input class="col-md-9" matInput [matDatepicker]="picker4"
+                                    value="{{parsedAdditionalDetailsList?.loan?.LoanResidualDueDate}}"
+                                    [readonly]="isFieldreadonly">
                                 <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
                                 <mat-datepicker class="col-md-3" #picker4></mat-datepicker>
                             </div>
@@ -147,7 +190,9 @@
                     <div class="row">
                         <div class="ym_form_group  col-4">
                             <label>Loan Processed With Warning Flag</label>
-                            <input placeholder="Loan Processed With Warning Flag" value="{{parsedAdditionalDetailsList?.loan?.loanProcessedWithWarningFlag}}" [readonly]="isFieldreadonly">
+                            <input placeholder="Loan Processed With Warning Flag"
+                                value="{{parsedAdditionalDetailsList?.loan?.loanProcessedWithWarningFlag}}"
+                                [readonly]="isFieldreadonly">
                         </div>
                     </div>
                 </mat-expansion-panel>
@@ -166,84 +211,118 @@
                     <div class="row">
                         <div class="ym_form_group  col-6">
                             <label>Creditor Business Name</label>
-                            <input placeholder="Creditor Business Name" value="{{parsedAdditionalDetailsList?.creditor?.creditorBusinessName}}" [readonly]="isFieldreadonly">
+                            <input placeholder="Creditor Business Name"
+                                value="{{parsedAdditionalDetailsList?.creditor?.creditorBusinessName}}"
+                                [readonly]="isFieldreadonly">
                         </div>
                         <div class="ym_form_group  col-6">
                             <label>Creditor Business Name2</label>
-                            <input placeholder="Creditor Business Name2" value="{{parsedAdditionalDetailsList?.creditor?.creditorBusinessName2}}" [readonly]="isFieldreadonly">
+                            <input placeholder="Creditor Business Name2"
+                                value="{{parsedAdditionalDetailsList?.creditor?.creditorBusinessName2}}"
+                                [readonly]="isFieldreadonly">
                         </div>
                     </div>
                     <div class="row">
                         <div class="ym_form_group  col-6">
                             <label>Creditor Address Line 1</label>
-                            <input placeholder="Creditor Address Line 1" value="{{parsedAdditionalDetailsList?.creditor?.creditorAddressLine1}}" [readonly]="isFieldreadonly">
+                            <input placeholder="Creditor Address Line 1"
+                                value="{{parsedAdditionalDetailsList?.creditor?.creditorAddressLine1}}"
+                                [readonly]="isFieldreadonly">
                         </div>
                         <div class="ym_form_group  col-6">
                             <label>Creditor Address Line 2</label>
-                            <input placeholder="Creditor Address Line 2" value="{{parsedAdditionalDetailsList?.creditor?.creditorAddressLine2}}" [readonly]="isFieldreadonly">
+                            <input placeholder="Creditor Address Line 2"
+                                value="{{parsedAdditionalDetailsList?.creditor?.creditorAddressLine2}}"
+                                [readonly]="isFieldreadonly">
                         </div>
                     </div>
                     <div class="row">
                         <div class="ym_form_group  col-4">
                             <label>Creditor City</label>
-                            <input placeholder="Creditor City" value="{{parsedAdditionalDetailsList?.creditor?.creditorCity}}" [readonly]="isFieldreadonly">
+                            <input placeholder="Creditor City"
+                                value="{{parsedAdditionalDetailsList?.creditor?.creditorCity}}"
+                                [readonly]="isFieldreadonly">
                         </div>
                         <div class="ym_form_group  col-4">
                             <label>Creditor Province</label>
-                            <input placeholder="Creditor Province" value="{{parsedAdditionalDetailsList?.creditor?.creditorProvince}}" [readonly]="isFieldreadonly">
+                            <input placeholder="Creditor Province"
+                                value="{{parsedAdditionalDetailsList?.creditor?.creditorProvince}}"
+                                [readonly]="isFieldreadonly">
                         </div>
                         <div class="ym_form_group  col-4">
                             <label>Creditor Postal Code</label>
-                            <input placeholder="Creditor Postal Code" value="{{parsedAdditionalDetailsList?.creditor?.creditorPostalCode}}" [readonly]="isFieldreadonly">
+                            <input placeholder="Creditor Postal Code"
+                                value="{{parsedAdditionalDetailsList?.creditor?.creditorPostalCode}}"
+                                [readonly]="isFieldreadonly">
                         </div>
                     </div>
                     <div class="row">
                         <div class="ym_form_group  col-4">
                             <label>Creditor Phone 1</label>
-                            <input placeholder="Creditor Phone 1" value="{{parsedAdditionalDetailsList?.creditor?.creditorPhone1}}" [readonly]="isFieldreadonly">
+                            <input placeholder="Creditor Phone 1"
+                                value="{{parsedAdditionalDetailsList?.creditor?.creditorPhone1}}"
+                                [readonly]="isFieldreadonly">
                         </div>
                         <div class="ym_form_group  col-4">
                             <label>Creditor Phone 2</label>
-                            <input placeholder="Creditor Phone 2" value="{{parsedAdditionalDetailsList?.creditor?.creditorPhone2}}" [readonly]="isFieldreadonly">
+                            <input placeholder="Creditor Phone 2"
+                                value="{{parsedAdditionalDetailsList?.creditor?.creditorPhone2}}"
+                                [readonly]="isFieldreadonly">
                         </div>
                         <div class="ym_form_group  col-4">
                             <label>Creditor Email</label>
-                            <input placeholder="Creditor Email" value="{{parsedAdditionalDetailsList?.creditor?.creditorEmail}}" [readonly]="isFieldreadonly">
+                            <input placeholder="Creditor Email"
+                                value="{{parsedAdditionalDetailsList?.creditor?.creditorEmail}}"
+                                [readonly]="isFieldreadonly">
                         </div>
                     </div>
                     <div class="row">
                         <div class="ym_form_group  col-4">
                             <label>Creditor Website</label>
-                            <input placeholder="Creditor Website" value="{{parsedAdditionalDetailsList?.creditor?.creditorWebsite}}" [readonly]="isFieldreadonly">
+                            <input placeholder="Creditor Website"
+                                value="{{parsedAdditionalDetailsList?.creditor?.creditorWebsite}}"
+                                [readonly]="isFieldreadonly">
                         </div>
                         <div class="ym_form_group  col-4">
                             <label>Creditor Social Media1</label>
-                            <input placeholder="Creditor Social Media1" value="{{parsedAdditionalDetailsList?.creditor?.creditorSocialMedia1}}" [readonly]="isFieldreadonly">
+                            <input placeholder="Creditor Social Media1"
+                                value="{{parsedAdditionalDetailsList?.creditor?.creditorSocialMedia1}}"
+                                [readonly]="isFieldreadonly">
                         </div>
                         <div class="ym_form_group  col-4">
                             <label>Creditor Social Media2</label>
-                            <input placeholder="Creditor Social Media2" value="{{parsedAdditionalDetailsList?.creditor?.creditorSocialMedia2}}" [readonly]="isFieldreadonly">
+                            <input placeholder="Creditor Social Media2"
+                                value="{{parsedAdditionalDetailsList?.creditor?.creditorSocialMedia2}}"
+                                [readonly]="isFieldreadonly">
                         </div>
                     </div>
                     <div class="row">
                         <div class="ym_form_group  col-4">
                             <label>Creditor Loan Broker</label>
-                            <input placeholder="Creditor Loan Broker" value="{{parsedAdditionalDetailsList?.creditor?.creditorLoanBroker}}" [readonly]="isFieldreadonly">
+                            <input placeholder="Creditor Loan Broker"
+                                value="{{parsedAdditionalDetailsList?.creditor?.creditorLoanBroker}}"
+                                [readonly]="isFieldreadonly">
                         </div>
                         <div class="ym_form_group  col-4">
                             <label>Creditor Country</label>
-                            <input placeholder="Creditor Country" value="{{parsedAdditionalDetailsList?.creditor?.creditorCountry}}" [readonly]="isFieldreadonly">
+                            <input placeholder="Creditor Country"
+                                value="{{parsedAdditionalDetailsList?.creditor?.creditorCountry}}"
+                                [readonly]="isFieldreadonly">
                         </div>
                         <div class="ym_form_group  col-4">
                             <label>Creditor Language Code</label>
-                            <input placeholder="Creditor Language Code" value="{{parsedAdditionalDetailsList?.creditor?.creditorLanguageCode}}" [readonly]="isFieldreadonly">
+                            <input placeholder="Creditor Language Code"
+                                value="{{parsedAdditionalDetailsList?.creditor?.creditorLanguageCode}}"
+                                [readonly]="isFieldreadonly">
                         </div>
                     </div>
                     <div class="row">
                         <div class="ym_form_group  col-4 ml-2">
                             <div class="row">
                                 <label>Creditor Last Updated Date</label>
-                                <input class="col-md-9" matInput [matDatepicker]="picker5" value="{{parsedAdditionalDetailsList?.creditor?.creditorLastUpdatedDate}}" [readonly]="isFieldreadonly">
+                                <input class="col-md-9" matInput [matDatepicker]="picker5"
+                                    value="{{parsedAdditionalDetailsList?.creditor?.creditorLastUpdatedDate}}"
+                                    [readonly]="isFieldreadonly">
                                 <mat-datepicker-toggle matSuffix [for]="picker5"></mat-datepicker-toggle>
                                 <mat-datepicker class="col-md-3" #picker5></mat-datepicker>
                             </div>
@@ -265,94 +344,130 @@
                     <div class="row">
                         <div class="ym_form_group  col-6">
                             <label>Group Policy Holder Business Name</label>
-                            <input placeholder="Group Policy Holder Business Name" value="{{parsedAdditionalDetailsList?.groupPolicyHolder?.groupPolicyHolderBusinessName}}" [readonly]="isFieldreadonly">
+                            <input placeholder="Group Policy Holder Business Name"
+                                value="{{parsedAdditionalDetailsList?.groupPolicyHolder?.groupPolicyHolderBusinessName}}"
+                                [readonly]="isFieldreadonly">
                         </div>
                         <div class="ym_form_group  col-6">
                             <label>Group Policy Holder Business Name 2</label>
-                            <input placeholder="Group Policy Holder Business Name 2" value="{{parsedAdditionalDetailsList?.groupPolicyHolder?.groupPolicyHolderBusinessName2}}" [readonly]="isFieldreadonly">
+                            <input placeholder="Group Policy Holder Business Name 2"
+                                value="{{parsedAdditionalDetailsList?.groupPolicyHolder?.groupPolicyHolderBusinessName2}}"
+                                [readonly]="isFieldreadonly">
                         </div>
                     </div>
                     <div class="row">
                         <div class="ym_form_group  col-6">
                             <label>Group Policy Holder Address Line 1</label>
-                            <input placeholder="Group Policy Holder Address Line 1" value="{{parsedAdditionalDetailsList?.groupPolicyHolder?.groupPolicyHolderAddressLine1}}" [readonly]="isFieldreadonly">
+                            <input placeholder="Group Policy Holder Address Line 1"
+                                value="{{parsedAdditionalDetailsList?.groupPolicyHolder?.groupPolicyHolderAddressLine1}}"
+                                [readonly]="isFieldreadonly">
                         </div>
                         <div class="ym_form_group  col-6">
                             <label>Group Policy Holder Address Line 2</label>
-                            <input placeholder="Group Policy Holder Address Line 2" value="{{parsedAdditionalDetailsList?.groupPolicyHolder?.groupPolicyHolderAddressLine2}}" [readonly]="isFieldreadonly">
+                            <input placeholder="Group Policy Holder Address Line 2"
+                                value="{{parsedAdditionalDetailsList?.groupPolicyHolder?.groupPolicyHolderAddressLine2}}"
+                                [readonly]="isFieldreadonly">
                         </div>
                     </div>
                     <div class="row">
                         <div class="ym_form_group  col-4">
                             <label>Group Policy Holder City
                             </label>
-                            <input placeholder="Group Policy Holder City" value="{{parsedAdditionalDetailsList?.groupPolicyHolder?.groupPolicyHolderCity}}" [readonly]="isFieldreadonly">
+                            <input placeholder="Group Policy Holder City"
+                                value="{{parsedAdditionalDetailsList?.groupPolicyHolder?.groupPolicyHolderCity}}"
+                                [readonly]="isFieldreadonly">
                         </div>
                         <div class="ym_form_group  col-4">
                             <label>Group Policy Holder Province</label>
-                            <input placeholder="Group Policy Holder Province" value="{{parsedAdditionalDetailsList?.groupPolicyHolder?.groupPolicyHolderProvince}}" [readonly]="isFieldreadonly">
+                            <input placeholder="Group Policy Holder Province"
+                                value="{{parsedAdditionalDetailsList?.groupPolicyHolder?.groupPolicyHolderProvince}}"
+                                [readonly]="isFieldreadonly">
                         </div>
                         <div class="ym_form_group  col-4">
                             <label>Group Policy Holder Postal Code</label>
-                            <input placeholder="Group Policy Holder Postal Code" value="{{parsedAdditionalDetailsList?.groupPolicyHolder?.groupPolicyHolderPostalCode}}" [readonly]="isFieldreadonly">
+                            <input placeholder="Group Policy Holder Postal Code"
+                                value="{{parsedAdditionalDetailsList?.groupPolicyHolder?.groupPolicyHolderPostalCode}}"
+                                [readonly]="isFieldreadonly">
                         </div>
                     </div>
                     <div class="row">
                         <div class="ym_form_group  col-4">
                             <label>Group Policy Holder Phone 1
                             </label>
-                            <input placeholder="Group Policy Holder Phone 1" value="{{parsedAdditionalDetailsList?.groupPolicyHolder?.groupPolicyHolderPhone1}}" [readonly]="isFieldreadonly">
+                            <input placeholder="Group Policy Holder Phone 1"
+                                value="{{parsedAdditionalDetailsList?.groupPolicyHolder?.groupPolicyHolderPhone1}}"
+                                [readonly]="isFieldreadonly">
                         </div>
                         <div class="ym_form_group  col-4">
                             <label>Group Policy Holder Phone 2
                             </label>
-                            <input placeholder="Group Policy Holder Phone 2" value="{{parsedAdditionalDetailsList?.groupPolicyHolder?.groupPolicyHolderPhone2}}" [readonly]="isFieldreadonly">
+                            <input placeholder="Group Policy Holder Phone 2"
+                                value="{{parsedAdditionalDetailsList?.groupPolicyHolder?.groupPolicyHolderPhone2}}"
+                                [readonly]="isFieldreadonly">
                         </div>
                         <div class="ym_form_group  col-4">
                             <label>Group Policy Holder Email</label>
-                            <input placeholder="Group Policy Holder Email" value="{{parsedAdditionalDetailsList?.groupPolicyHolder?.groupPolicyHolderEmail}}" [readonly]="isFieldreadonly">
+                            <input placeholder="Group Policy Holder Email"
+                                value="{{parsedAdditionalDetailsList?.groupPolicyHolder?.groupPolicyHolderEmail}}"
+                                [readonly]="isFieldreadonly">
                         </div>
                     </div>
                     <div class="row">
                         <div class="ym_form_group  col-4">
                             <label>Group Policy Holder Website</label>
-                            <input placeholder="Group Policy Holder Website" value="{{parsedAdditionalDetailsList?.groupPolicyHolder?.groupPolicyHolderWebsite}}" [readonly]="isFieldreadonly"> 
+                            <input placeholder="Group Policy Holder Website"
+                                value="{{parsedAdditionalDetailsList?.groupPolicyHolder?.groupPolicyHolderWebsite}}"
+                                [readonly]="isFieldreadonly">
                         </div>
                         <div class="ym_form_group  col-4">
                             <label>Group Policy Holder Social Media 1</label>
-                            <input placeholder="Group Policy Holder Social Media 1" value="{{parsedAdditionalDetailsList?.groupPolicyHolder?.groupPolicyHolderSocialMedia1}}" [readonly]="isFieldreadonly">
+                            <input placeholder="Group Policy Holder Social Media 1"
+                                value="{{parsedAdditionalDetailsList?.groupPolicyHolder?.groupPolicyHolderSocialMedia1}}"
+                                [readonly]="isFieldreadonly">
                         </div>
                         <div class="ym_form_group  col-4">
                             <label>Group Policy Holder Social Media 2</label>
-                            <input placeholder="Group Policy Holder Social Media 2" value="{{parsedAdditionalDetailsList?.groupPolicyHolder?.groupPolicyHolderSocialMedia2}}" [readonly]="isFieldreadonly">
+                            <input placeholder="Group Policy Holder Social Media 2"
+                                value="{{parsedAdditionalDetailsList?.groupPolicyHolder?.groupPolicyHolderSocialMedia2}}"
+                                [readonly]="isFieldreadonly">
                         </div>
                     </div>
                     <div class="row">
                         <div class="ym_form_group  col-4">
                             <label>Group Policy Holder Loan Broker</label>
-                            <input placeholder="Group Policy Holder Loan Broker" value="{{parsedAdditionalDetailsList?.groupPolicyHolder?.groupPolicyHolderLoanBroker}}" [readonly]="isFieldreadonly">
+                            <input placeholder="Group Policy Holder Loan Broker"
+                                value="{{parsedAdditionalDetailsList?.groupPolicyHolder?.groupPolicyHolderLoanBroker}}"
+                                [readonly]="isFieldreadonly">
                         </div>
                         <div class="ym_form_group  col-4">
                             <label>Group Policy Holder Country</label>
-                            <input placeholder="Group Policy Holder Country" value="{{parsedAdditionalDetailsList?.groupPolicyHolder?.groupPolicyHolderCountry}}" [readonly]="isFieldreadonly">
+                            <input placeholder="Group Policy Holder Country"
+                                value="{{parsedAdditionalDetailsList?.groupPolicyHolder?.groupPolicyHolderCountry}}"
+                                [readonly]="isFieldreadonly">
                         </div>
                         <div class="ym_form_group  col-4">
                             <label>Group Policy Holder Language Code</label>
-                            <input placeholder="Group Policy Holder Language Code" value="{{parsedAdditionalDetailsList?.groupPolicyHolder?.groupPolicyHolderLanguageCode}}" [readonly]="isFieldreadonly">
+                            <input placeholder="Group Policy Holder Language Code"
+                                value="{{parsedAdditionalDetailsList?.groupPolicyHolder?.groupPolicyHolderLanguageCode}}"
+                                [readonly]="isFieldreadonly">
                         </div>
                     </div>
                     <div class="row">
                         <div class="ym_form_group  col-4 ml-2">
                             <div class="row">
                                 <label>Group Policy Holder Last Updated Date</label>
-                                <input class="col-md-9" matInput [matDatepicker]="picker6" value="{{parsedAdditionalDetailsList?.groupPolicyHolder?.groupPolicyHolderLastUpdatedDate}}" [readonly]="isFieldreadonly">
+                                <input class="col-md-9" matInput [matDatepicker]="picker6"
+                                    value="{{parsedAdditionalDetailsList?.groupPolicyHolder?.groupPolicyHolderLastUpdatedDate}}"
+                                    [readonly]="isFieldreadonly">
                                 <mat-datepicker-toggle matSuffix [for]="picker6"></mat-datepicker-toggle>
                                 <mat-datepicker class="col-md-3" #picker6></mat-datepicker>
                             </div>
                         </div>
                         <div class="ym_form_group  col-4">
                             <label>Dealer Remits Tax</label>
-                            <input placeholder="Dealer Remits Tax" value="{{parsedAdditionalDetailsList?.groupPolicyHolder?.groupPolicyHolderDealerRemitsTax}}" [readonly]="isFieldreadonly">
+                            <input placeholder="Dealer Remits Tax"
+                                value="{{parsedAdditionalDetailsList?.groupPolicyHolder?.groupPolicyHolderDealerRemitsTax}}"
+                                [readonly]="isFieldreadonly">
                         </div>
                     </div>
                 </mat-expansion-panel>
@@ -371,87 +486,121 @@
                     <div class="row">
                         <div class="ym_form_group  col-6">
                             <label>Merchant Business Name</label>
-                            <input placeholder="Merchant Business Name" value="{{parsedAdditionalDetailsList?.merchant?.merchantBusinessName}}" [readonly]="isFieldreadonly">
+                            <input placeholder="Merchant Business Name"
+                                value="{{parsedAdditionalDetailsList?.merchant?.merchantBusinessName}}"
+                                [readonly]="isFieldreadonly">
                         </div>
                         <div class="ym_form_group  col-6">
                             <label>Merchant Business Name 2</label>
-                            <input placeholder="Merchant Business Name 2" value="{{parsedAdditionalDetailsList?.merchant?.merchantBusinessName2}}" [readonly]="isFieldreadonly">
+                            <input placeholder="Merchant Business Name 2"
+                                value="{{parsedAdditionalDetailsList?.merchant?.merchantBusinessName2}}"
+                                [readonly]="isFieldreadonly">
                         </div>
                     </div>
                     <div class="row">
                         <div class="ym_form_group  col-6">
                             <label>Merchant Address Line 1</label>
-                            <input placeholder="Merchant Address Line 1" value="{{parsedAdditionalDetailsList?.merchant?.merchantAddressLine1}}" [readonly]="isFieldreadonly">
+                            <input placeholder="Merchant Address Line 1"
+                                value="{{parsedAdditionalDetailsList?.merchant?.merchantAddressLine1}}"
+                                [readonly]="isFieldreadonly">
                         </div>
                         <div class="ym_form_group  col-6">
                             <label>Merchant Address Line 2</label>
-                            <input placeholder="Merchant Address Line 2" value="{{parsedAdditionalDetailsList?.merchant?.merchantAddressLine2}}" [readonly]="isFieldreadonly">
+                            <input placeholder="Merchant Address Line 2"
+                                value="{{parsedAdditionalDetailsList?.merchant?.merchantAddressLine2}}"
+                                [readonly]="isFieldreadonly">
                         </div>
                     </div>
                     <div class="row">
                         <div class="ym_form_group  col-4">
                             <label>Merchant City
                             </label>
-                            <input placeholder="Merchant City" value="{{parsedAdditionalDetailsList?.merchant?.merchantCity}}" [readonly]="isFieldreadonly">
+                            <input placeholder="Merchant City"
+                                value="{{parsedAdditionalDetailsList?.merchant?.merchantCity}}"
+                                [readonly]="isFieldreadonly">
                         </div>
                         <div class="ym_form_group  col-4">
                             <label>Merchant Province</label>
-                            <input placeholder="Group Policy Holder Province" value="{{parsedAdditionalDetailsList?.merchant?.merchantProvince}}" [readonly]="isFieldreadonly">
+                            <input placeholder="Group Policy Holder Province"
+                                value="{{parsedAdditionalDetailsList?.merchant?.merchantProvince}}"
+                                [readonly]="isFieldreadonly">
                         </div>
                         <div class="ym_form_group  col-4">
                             <label>Merchant Postal Code</label>
-                            <input placeholder="Group Policy Holder Postal Code" value="{{parsedAdditionalDetailsList?.merchant?.merchantPostalCode}}" [readonly]="isFieldreadonly">
+                            <input placeholder="Group Policy Holder Postal Code"
+                                value="{{parsedAdditionalDetailsList?.merchant?.merchantPostalCode}}"
+                                [readonly]="isFieldreadonly">
                         </div>
                     </div>
                     <div class="row">
                         <div class="ym_form_group  col-4">
                             <label>Merchant Phone 1
                             </label>
-                            <input placeholder="Merchant Phone 1" value="{{parsedAdditionalDetailsList?.merchant?.merchantPhone1}}" [readonly]="isFieldreadonly">
+                            <input placeholder="Merchant Phone 1"
+                                value="{{parsedAdditionalDetailsList?.merchant?.merchantPhone1}}"
+                                [readonly]="isFieldreadonly">
                         </div>
                         <div class="ym_form_group  col-4">
                             <label>Merchant Phone 2
                             </label>
-                            <input placeholder="Merchant Phone 2" value="{{parsedAdditionalDetailsList?.merchant?.merchantPhone2}}" [readonly]="isFieldreadonly">
+                            <input placeholder="Merchant Phone 2"
+                                value="{{parsedAdditionalDetailsList?.merchant?.merchantPhone2}}"
+                                [readonly]="isFieldreadonly">
                         </div>
                         <div class="ym_form_group  col-4">
                             <label>Merchant Email</label>
-                            <input placeholder="Merchant Email" value="{{parsedAdditionalDetailsList?.merchant?.merchantEmail}}" [readonly]="isFieldreadonly">
+                            <input placeholder="Merchant Email"
+                                value="{{parsedAdditionalDetailsList?.merchant?.merchantEmail}}"
+                                [readonly]="isFieldreadonly">
                         </div>
                     </div>
                     <div class="row">
                         <div class="ym_form_group  col-4">
                             <label>Merchant Website</label>
-                            <input placeholder="Merchant Website" value="{{parsedAdditionalDetailsList?.merchant?.merchantWebsite}}" [readonly]="isFieldreadonly">
+                            <input placeholder="Merchant Website"
+                                value="{{parsedAdditionalDetailsList?.merchant?.merchantWebsite}}"
+                                [readonly]="isFieldreadonly">
                         </div>
                         <div class="ym_form_group  col-4">
                             <label>Merchant Social Media 1</label>
-                            <input placeholder="Merchant Social Media 1" value="{{parsedAdditionalDetailsList?.merchant?.merchantSocialMedia1}}" [readonly]="isFieldreadonly">
+                            <input placeholder="Merchant Social Media 1"
+                                value="{{parsedAdditionalDetailsList?.merchant?.merchantSocialMedia1}}"
+                                [readonly]="isFieldreadonly">
                         </div>
                         <div class="ym_form_group  col-4">
                             <label>Merchant Social Media 2</label>
-                            <input placeholder="Merchant Social Media 2" value="{{parsedAdditionalDetailsList?.merchant?.merchantSocialMedia2}}" [readonly]="isFieldreadonly">
+                            <input placeholder="Merchant Social Media 2"
+                                value="{{parsedAdditionalDetailsList?.merchant?.merchantSocialMedia2}}"
+                                [readonly]="isFieldreadonly">
                         </div>
                     </div>
                     <div class="row">
                         <div class="ym_form_group  col-4">
                             <label>Merchant Loan Broker</label>
-                            <input placeholder="Group Policy Holder Loan Broker" value="{{parsedAdditionalDetailsList?.merchant?.merchantLoanBroker}}" [readonly]="isFieldreadonly">
+                            <input placeholder="Group Policy Holder Loan Broker"
+                                value="{{parsedAdditionalDetailsList?.merchant?.merchantLoanBroker}}"
+                                [readonly]="isFieldreadonly">
                         </div>
                         <div class="ym_form_group  col-4">
                             <label>Merchant Country</label>
-                            <input placeholder="Group Policy Holder Country" value="{{parsedAdditionalDetailsList?.merchant?.merchantCountry}}" [readonly]="isFieldreadonly">
+                            <input placeholder="Group Policy Holder Country"
+                                value="{{parsedAdditionalDetailsList?.merchant?.merchantCountry}}"
+                                [readonly]="isFieldreadonly">
                         </div>
                         <div class="ym_form_group  col-4">
                             <label>Merchant Language Code</label>
-                            <input placeholder="Group Policy Holder Language Code" value="{{parsedAdditionalDetailsList?.merchant?.merchantLanguageCode}}" [readonly]="isFieldreadonly">
+                            <input placeholder="Group Policy Holder Language Code"
+                                value="{{parsedAdditionalDetailsList?.merchant?.merchantLanguageCode}}"
+                                [readonly]="isFieldreadonly">
                         </div>
                     </div>
                     <div class="row">
                         <div class="ym_form_group  col-4 ml-2">
                             <div class="row">
                                 <label>Merchant Last Updated Date</label>
-                                <input class="col-md-9" matInput [matDatepicker]="picker7" value="{{parsedAdditionalDetailsList?.merchant?.merchantLastUpdatedDate}}" [readonly]="isFieldreadonly">
+                                <input class="col-md-9" matInput [matDatepicker]="picker7"
+                                    value="{{parsedAdditionalDetailsList?.merchant?.merchantLastUpdatedDate}}"
+                                    [readonly]="isFieldreadonly">
                                 <mat-datepicker-toggle matSuffix [for]="picker7"></mat-datepicker-toggle>
                                 <mat-datepicker class="col-md-3" #picker7></mat-datepicker>
                             </div>
@@ -460,14 +609,44 @@
                 </mat-expansion-panel>
             </mat-accordion>
         </div>
-<div>
-    <div class="ym_form_group row">
-        <button class="float-right btn btn-primary" ><i
-                class="fa fa-search mr-1"></i>Search</button>
-        <button class="float-right btn btn-primary" style="margin-right: 10px;"><i
-                class="fa fa-times"></i> Clear</button>
+        <div>
+            <div class="ym_form_group row">
+                <button *ngIf="isDeleteBtn" class="float-right btn btn-primary" data-toggle="modal" data-target="#historicalModal"><i
+                        class="fa fa-trash mr-1"></i>Delete Certificate</button>
+                <button *ngIf="isReverseBtn" class="float-right btn btn-primary" style="margin-right: 10px;" data-toggle="modal" data-target="#historicalModal"><i
+                class="fa fa-times mr-1"></i>Reverse Logical Delete</button>
+            </div>
+        </div>
+
     </div>
 </div>
 
+<!-- Modal -->
+<div class="modal fade" id="historicalModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <b class="md-address">{{modelheader}}</b>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="ym_form_group  col-8">
+                        <label>{{modelTitle}}</label>
+                        <textarea class="md-text-area-width" rows="3" style="width: 48rem;" #note></textarea>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="deleteCertificate()"><i
+                        class="fa fa-save mr-1"></i>Save</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal"><i
+                        class="fa fa-times mr-1"></i>Close</button>
+            </div>
+        </div>
     </div>
 </div>

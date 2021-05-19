@@ -1,7 +1,7 @@
 <!-- <div>certificate Detail works!</div> -->
 <!-- <div> -->
 <div class="ym_content">
-    <div class="col-md-12 col-lg-12 col-sm-12 mt-2 container">
+    <div class="col-md-12 col-lg-12 col-sm-12 md-top container">
         <div>
             <mat-accordion>
                 <mat-expansion-panel [expanded]="true">
@@ -61,8 +61,8 @@
                             <div class="row">
                                 <label>File Created Date</label>
                                 <input class="col-md-9" matInput [matDatepicker]="picker"
-                                    [(ngModel)]="creditorDataJson.fileInfo.fileCreatedDate"
-                                    [ngModelOptions]="{standalone: true}" [readonly]="isFieldreadonly">
+                                    value="{{creditorDataJson?.fileInfo?.fileCreatedDate}}"
+                                    [readonly]="isFieldreadonly">
                                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                                 <mat-datepicker class="col-md-3" #picker></mat-datepicker>
                             </div>
@@ -71,8 +71,7 @@
                             <div class="row">
                                 <label>File Load Date</label>
                                 <input class="col-md-9" matInput [matDatepicker]="picker2"
-                                    [(ngModel)]="creditorDataJson.fileInfo.fileLoadDate"
-                                    [ngModelOptions]="{standalone: true}" [readonly]="isFieldreadonly">
+                                    value="{{creditorDataJson?.fileInfo?.fileLoadDate}}" [readonly]="isFieldreadonly">
                                 <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                                 <mat-datepicker class="col-md-3" #picker2></mat-datepicker>
                             </div>
@@ -85,7 +84,7 @@
         </div>
 
         <!-- certificate Details -->
-        <div>
+        <div class="mt-2">
             <mat-accordion>
                 <mat-expansion-panel [expanded]="true">
                     <mat-expansion-panel-header style="background-color: #307ecc;">
@@ -118,7 +117,7 @@
                             <div class="row">
                                 <label>Certificate Effective Date</label>
                                 <input class="col-md-9" matInput [matDatepicker]="picker3"
-                                    [(ngModel)]="creditorDataJson.certificate.certificateEffectiveDate"
+                                    value="{{creditorDataJson?.certificate?.certificateEffectiveDate}}"
                                     [readonly]="isFieldreadonly">
                                 <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
                                 <mat-datepicker class="col-md-3" #picker3></mat-datepicker>
@@ -128,7 +127,7 @@
                             <div class="row">
                                 <label>Certificate Termination Date</label>
                                 <input class="col-md-9" matInput [matDatepicker]="picker4"
-                                    [(ngModel)]="creditorDataJson.certificate.certificateTermDate"
+                                    value="{{creditorDataJson?.certificate?.certificateTermDate}}"
                                     [readonly]="isFieldreadonly">
                                 <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
                                 <mat-datepicker class="col-md-3" #picker4></mat-datepicker>
@@ -183,7 +182,7 @@
                         <div class="ym_form_group  col-8">
                             <label>Plan Description</label>
                             <textarea class="md-text-area-width" rows="3" placeholder="Plan Description"
-                                [(ngModel)]="creditorDataJson.certificate.planDescription"
+                                value="{{creditorDataJson?.certificate?.planDescription}}"
                                 [readonly]="isFieldreadonly"></textarea>
                         </div>
 
@@ -200,7 +199,7 @@
                         <div class="ym_form_group  col-8">
                             <label>Logical Delete Notes</label>
                             <textarea class="md-text-area-width" rows="3" placeholder="Logical Delete Notes"
-                                [(ngModel)]="creditorDataJson.certificate.logicalDeleteNotes"
+                                value="{{creditorDataJson?.certificate?.logicalDeleteNotes}}"
                                 [readonly]="isFieldreadonly"></textarea>
                         </div>
                     </div>
@@ -214,7 +213,7 @@
                         <div class="ym_form_group  col-8">
                             <label>Processed With Error Note</label>
                             <textarea class="md-text-area-width" rows="3" placeholder="Processed With Error Note"
-                                [(ngModel)]="creditorDataJson.certificate.processedWithErrorReason"
+                                value="{{creditorDataJson?.certificate?.processedWithErrorReason}}"
                                 [readonly]="isFieldreadonly"></textarea>
                         </div>
                     </div>
@@ -228,7 +227,7 @@
                         <div class="ym_form_group  col-8">
                             <label>Processed With Warning Note</label>
                             <textarea class="md-text-area-width" rows="3" placeholder="Processed With Warning Note"
-                                [(ngModel)]="creditorDataJson.certificate.certificateProcessedWithWarningNote"
+                                value="{{creditorDataJson?.certificate?.certificateProcessedWithWarningNote}}"
                                 [readonly]="isFieldreadonly"></textarea>
                         </div>
                     </div>
@@ -245,7 +244,7 @@
                         </div>
                     </div>
                     <div id="ptableId">
-                        <p-table [value]="creditorDataJson.certificate.applicant" selectionMode="single"
+                        <p-table [value]="creditorDataJson?.certificate?.applicant" selectionMode="single"
                             (onRowSelect)="onClickOfApplicantCertficateRow($event)">
                             <ng-template pTemplate="header">
                                 <tr class="ptableHeader">
@@ -262,6 +261,11 @@
                                 </tr>
                             </ng-template>
                         </p-table>
+                    </div>
+                    <div class="row">
+                       <b>Note<span style="color: red;">*</span>:</b>                    
+                        Select the applicant row in the table above to view the applicant
+                        details.
                     </div>
                 </div>
                 <div class="col-8 mt-2">
@@ -464,7 +468,7 @@
                     </div>
                 </div>
                 <div id="ptableId">
-                    <p-table [value]="premiumHistoryList.premiumListSP_premium" selectionMode="single">
+                    <p-table [value]="premiumHistoryList?.premiumListSP_premium" selectionMode="single">
                         <ng-template pTemplate="header">
                             <tr class="ptableHeader">
                                 <th>Billing Period</th>

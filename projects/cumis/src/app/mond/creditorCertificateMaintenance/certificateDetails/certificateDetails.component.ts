@@ -10,8 +10,7 @@ import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 })
 
 export class certificateDetailsComponent implements OnInit {
-
-  gridLoadData: any;
+ gridLoadData: any;
   @Input() certificateDetailsData;
   @Input() premiumHistoryData
 
@@ -32,33 +31,39 @@ export class certificateDetailsComponent implements OnInit {
 
 
   ngOnInit() {
-    debugger;
-    console.log("this.certificateDetailsData", this.certificateDetailsData);
-
+    // console.log("this.certificateDetailsData", this.certificateDetailsData);
     this.certificateData = this.certificateDetailsData;
     this.creditorDataJson = {};
-    this.creditorDataJson = JSON.parse(this.certificateData.creditorDataJson);
-    this.premiumHistoryList = [];
-    this.premiumHistoryList = JSON.parse(this.premiumHistoryData);
-
-    var totalPremium = this.premiumHistoryList.premiumListSP_premium;
-    let disabilityPremiumArray = [];
-    let disabilityPremiumTaxArray = [];
-    let totalPremiumArray = [];
-    let totalTaxArray = [];
-    let totalPremiumWithTaxArrray = [];
-    for (let i = 0; i < totalPremium.length; i++) {
-      disabilityPremiumArray.push(totalPremium[i].disabilityPremium);
-      disabilityPremiumTaxArray.push(totalPremium[i].disabilityPremiumTax);
-      totalPremiumArray.push(totalPremium[i].totalPremium);
-      totalTaxArray.push(totalPremium[i].totalTax);
-      totalPremiumWithTaxArrray.push(totalPremium[i].totalPremiumWithTax);
+    if(this.certificateData != ""){
+      this.creditorDataJson = JSON.parse(this.certificateData.creditorDataJson);
     }
-    this.getDisabilityTotal(disabilityPremiumArray);
-    this.getDisabilityPremiumTaxTotal(disabilityPremiumTaxArray);
-    this.getTotalPremiumArray(totalPremiumArray);
-    this.getTotalTaxArray(totalTaxArray);
-    this.getTotalPremiumWithTaxArrray(totalPremiumWithTaxArrray);
+   
+    this.premiumHistoryList = [];
+    if(this.premiumHistoryData != ""){
+      this.premiumHistoryList = JSON.parse(this.premiumHistoryData);
+    }
+  
+    var totalPremium = this.premiumHistoryList.premiumListSP_premium;
+    if(totalPremium != undefined){
+      let disabilityPremiumArray = [];
+      let disabilityPremiumTaxArray = [];
+      let totalPremiumArray = [];
+      let totalTaxArray = [];
+      let totalPremiumWithTaxArrray = [];
+      for (let i = 0; i < totalPremium.length; i++) {
+        disabilityPremiumArray.push(totalPremium[i].disabilityPremium);
+        disabilityPremiumTaxArray.push(totalPremium[i].disabilityPremiumTax);
+        totalPremiumArray.push(totalPremium[i].totalPremium);
+        totalTaxArray.push(totalPremium[i].totalTax);
+        totalPremiumWithTaxArrray.push(totalPremium[i].totalPremiumWithTax);
+      }
+      this.getDisabilityTotal(disabilityPremiumArray);
+      this.getDisabilityPremiumTaxTotal(disabilityPremiumTaxArray);
+      this.getTotalPremiumArray(totalPremiumArray);
+      this.getTotalTaxArray(totalTaxArray);
+      this.getTotalPremiumWithTaxArrray(totalPremiumWithTaxArrray);
+    }
+
   }
 
   getDisabilityTotal(data) {

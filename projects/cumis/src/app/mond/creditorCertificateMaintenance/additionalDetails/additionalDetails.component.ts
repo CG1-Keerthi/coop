@@ -10,7 +10,6 @@ declare var $: any;
 })
 
 export class additionalDetailsComponent implements OnInit {
-
   @Input() additionalDetailsData;
   @Input() set param(data) {
     this.params = data;
@@ -98,20 +97,20 @@ export class additionalDetailsComponent implements OnInit {
         outputServiceField3: "newPolicyStatus"
       }
     }
-    
+
     this.mdMondServiceDS.invokeMondService("Creditor Self Admin", serviceName, "1.00", btoa(JSON.stringify(formData)), this.csfrToken, true, true, true, true).subscribe(
       data => {
         this.mdMondServiceDS.showSuccessMessage(JSON.parse(atob(data)).message);
         if (serviceName == 'DeleteCertificate') {
           this.isDeleteBtn = false;
           this.isReverseBtn = true;
-        }else{
+        } else {
           this.isDeleteBtn = true;
           this.isReverseBtn = false;
         }
       },
       error => {
-        this.mdMondServiceDS.MDError(error);     
+        this.mdMondServiceDS.MDError(error);
         // let data = "eyJtZXNzYWdlIjoiQ2VydGlmaWNhdGUgRGVsZXRpb24gUmV2ZXJzZWQgU3VjY2Vzc2Z1bGx5Iiwic3RhdHVzIjoiU3VjY2VzcyJ9"
       });
   }

@@ -46,6 +46,11 @@ import { CertificateAuditLogComponent } from '../mond/creditorCertificateMainten
 import { OnlyNumberDirective } from '../mond/directives/only-number.directive';
 import { AlphabetOnlyDirective } from '../mond/directives/alphabet-only.directive';
 
+// for datae picker formate
+// import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import { MomentDateAdapter } from '@angular/material-moment-adapter';
+import { MY_FORMATS } from '../_services/constants/MDDateFormate';
+
 @NgModule({
   declarations: [
     HomeComponent,
@@ -98,6 +103,10 @@ import { AlphabetOnlyDirective } from '../mond/directives/alphabet-only.directiv
     CreditorCertificateFormBuilderModule
 
 
+  ],
+  providers: [
+    { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
+    { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS },
   ],
   exports: [
   ]

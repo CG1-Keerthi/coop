@@ -34,25 +34,20 @@ export class CertificateAuditLogComponent implements OnInit {
         let applicantCreditorAuditHistory = this.parsedAuditHistoryData.applicantCreditorAuditHistory;
         let applicantGrpPlcyHolderAuditHistory = this.parsedAuditHistoryData.applicantGrpPlcyHolderAuditHistory;
 
-        Array.prototype.push.apply(applicantCoverageAuditHistory, applicantLoanAuditHistory);
+        Array.prototype.push.apply(applicantLoanAuditHistory, applicantCoverageAuditHistory);
         Array.prototype.push.apply(applicantAddressAuditHistory, applicantAuditHistory);
         Array.prototype.push.apply(applicantCreditorAuditHistory, applicantGrpPlcyHolderAuditHistory);
-        console.log('applicantCoverageAuditHistory', applicantCoverageAuditHistory);
-        console.log('applicantAddressAuditHistory', applicantAddressAuditHistory);
-        console.log('applicantCreditorAuditHistory', applicantCreditorAuditHistory);
+        // console.log('applicantCoverageAuditHistory', applicantCoverageAuditHistory);
+        // console.log('applicantAddressAuditHistory', applicantAddressAuditHistory);
+        // console.log('applicantCreditorAuditHistory', applicantCreditorAuditHistory);
 
-        Array.prototype.push.apply(applicantCoverageAuditHistory, applicantAddressAuditHistory);
-        console.log('applicantCoverageAuditHistory2', applicantCoverageAuditHistory);
-        Array.prototype.push.apply(applicantCoverageAuditHistory, applicantCreditorAuditHistory);
-        console.log('applicantCoverageAuditHistory3', applicantCoverageAuditHistory);
+        Array.prototype.push.apply(applicantLoanAuditHistory, applicantAddressAuditHistory);
+        // console.log('applicantCoverageAuditHistory2', applicantCoverageAuditHistory);
+        Array.prototype.push.apply(applicantLoanAuditHistory,applicantCreditorAuditHistory);
+        // console.log('applicantCoverageAuditHistory3', applicantCreditorAuditHistory);
         this.certificateAuditHistory = [];
-        this.certificateAuditHistory = applicantCoverageAuditHistory;
-
-
-    }
-
-
-
+        this.certificateAuditHistory = applicantLoanAuditHistory;
+   }
 
 }
 

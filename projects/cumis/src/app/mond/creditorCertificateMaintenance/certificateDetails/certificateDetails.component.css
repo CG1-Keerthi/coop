@@ -17,3 +17,6 @@ mat-expansion-panel-header{
     overflow-y: auto;
     height: 232px;
   }
+  .md-top{
+    margin-top: -3rem;
+  }

@@ -1,0 +1,629 @@
+<div>
+    <div class="ym_form_group md-group row">
+        <button class="float-right btn btn-primary"><i class="fa fa-download mr-1"></i>Download Error Report </button>
+        <button class="float-right btn btn-primary" style="margin-right: 10px;"><i class="fa fa-download"></i>Download
+            Premium DISC Warning Report</button>
+    </div>
+
+    <div>
+        <mat-accordion>
+            <mat-expansion-panel [expanded]="true">
+                <mat-expansion-panel-header style="background-color: #307ecc;">
+                    <mat-panel-title style="color: white;">
+                        Balancing Information
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div>
+                    <div class="m-0 p-2 row mt-3" style="background-color: #ebebf1;">
+                        <div class="col-md-12 pl-2 pt-2">
+                            <h3>Balancing Information</h3>
+                        </div>
+                    </div>
+                    <div id="ptableId">
+                        <p-table [value]="LGMTwoData?.creditorFileProcessingInfo_balancingInfo">
+                            <ng-template pTemplate="header">
+                                <tr class="ptableHeader">
+                                    <th>Transaction Type</th>
+                                    <th>Total Number Of Records</th>
+                                    <th>Total Number Of Duplicate Records</th>
+                                    <th>Number Of Records Posted</th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-LGMTwoBalInfoResponseData>
+                                <tr [pSelectableRow]="LGMTwoBalInfoResponseData">
+                                    <td>{{LGMTwoBalInfoResponseData?.transactionType}}</td>
+                                    <td>{{LGMTwoBalInfoResponseData?.totalNumberOfRecords}}</td>
+                                    <td>{{LGMTwoBalInfoResponseData?.totalNumberOfDuplicateRecords}}</td>
+                                    <td>{{LGMTwoBalInfoResponseData?.numberOfRecordsPosted}}</td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                </div>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+
+    <!-- LGM2 file header strated -->
+    <div>
+        <mat-accordion>
+            <mat-expansion-panel [expanded]="true">
+                <mat-expansion-panel-header style="background-color: #307ecc;">
+                    <mat-panel-title style="color: white;">
+                        File Header
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="row">
+                    <div class="ym_form_group ml-3">
+                        <label>Header Errors</label>
+                        <textarea class="md-text-area-width" rows="3" placeholder="Header Errors"  value="{{LGMTwoData?.creditorFileProcessingInfo_fileProcessingErrors}}"></textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="ym_form_group col-4">
+                        <label>Transaction Month</label>
+                        <input placeholder="Transaction Month" value="{{LGMTwoData?.creditorFile_policyUnexpiredFileLGM2_header_transactionMonth}}">
+                    </div>
+                    <div class="ym_form_group col-4">
+                        <label>Period Start Date</label>
+                        <input placeholder="Period Start Date" value="{{LGMTwoData?.creditorFile_policyUnexpiredFileLGM2_header_periodStartDate}}">
+                    </div>
+                    <div class="ym_form_group col-4">
+                        <label>Period End Date
+                        </label>
+                        <input placeholder="Period End Date" value="{{LGMTwoData?.creditorFile_policyUnexpiredFileLGM2_header_periodEndDate}}">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="ym_form_group col-4">
+                        <label>File Creation Date</label>
+                        <input placeholder="File Creation Date" value="{{LGMTwoData?.creditorFile_policyUnexpiredFileLGM2_header_fileCreationDate}}">
+                    </div>
+                    <div class="ym_form_group col-4">
+                        <label>Insurance Policy Number</label>
+                        <input placeholder="Insurance Policy Number" value="{{LGMTwoData?.creditorFile_policyUnexpiredFileLGM2_header_creditorGroupInsurancePolicyNumber}}">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="ym_form_group col-4">
+                        <label>Total Number Of Records</label>
+                        <input placeholder="Total Number Of Records" value="{{LGMTwoData?.creditorFile_policyUnexpiredFileLGM2_header_totalNumberOfRecords}}">
+                    </div>
+                    <div class="ym_form_group col-4">
+                        <label>Total Number Of Certificates</label>
+                        <input placeholder="Total Number Of Certificates" value="{{LGMTwoData?.creditorFile_policyUnexpiredFileLGM2_header_totalNumberOfCertificates}}">
+                    </div>
+                </div>
+
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+
+    <!-- LGM2 File Header Ended -->
+
+    <!-- LGM2 Certificate starts -->
+    <div>
+        <mat-accordion>
+            <mat-expansion-panel [expanded]="true">
+                <mat-expansion-panel-header style="background-color: #307ecc;">
+                    <mat-panel-title style="color: white;">
+                        Certificate
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="row">
+                    <div class="col-3">
+                        <div>
+                            <div class="m-0 p-2 row mt-3" style="background-color: #ebebf1;">
+                                <div class="col-md-12 pl-2 pt-2">
+                                    <h3>Certificate</h3>
+                                </div>
+                            </div>
+                            <div id="ptableId">
+                                <p-table [value]="LGMTwoData?.creditorFile_policyUnexpiredFileLGM2_certificate">
+                                    <ng-template pTemplate="header">
+                                        <tr class="ptableHeader">
+                                            <th>Transaction Type</th>
+                                            <th>Policy Number</th>
+                                        </tr>
+                                    </ng-template>
+                                    <ng-template pTemplate="body" let-certificateResponseData>
+                                        <tr [pSelectableRow]="certificateResponseData">
+                                            <td>{{certificateResponseData?.transactionType}}</td>
+                                            <td>{{certificateResponseData?.policyNumber}}</td>
+                                        </tr>
+                                    </ng-template>
+                                </p-table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-9">
+                        <div class="ym_form_group">
+                            <label>Record Errors</label>
+                            <textarea class="md-text-area-width" rows="3" placeholder="Header Errors" value={{LGMTwoData?.creditorFile_policyUnexpiredFileLGM2_header_recordErrors}}></textarea>
+                        </div>
+                        <div>
+                            <mat-card class="w-100 mt-2 md-boder">
+                                <mat-card-header>
+                                    <mat-card-title class="md-clr"><b>Certificate Details</b></mat-card-title>
+                                </mat-card-header>
+                                <mat-divider></mat-divider>
+                                <mat-card-content class="mt-3">
+                                    <div class="row">
+                                        <div class="ym_form_group col-4">
+                                            <label>Transaction Code</label>
+                                            <input placeholder="Total Number Of Records" value="{{LGMTwoData?.transactionType}}">
+                                        </div>
+                                        <div class="ym_form_group col-4">
+                                            <label>Certificate / Policy / POS Number</label>
+                                            <input placeholder="Certificate / Policy / POS Number" value="{{LGMTwoData?.policyNumber}}">
+                                        </div>
+                                        <div class="ym_form_group col-4">
+                                            <label>Plan Code</label>
+                                            <input placeholder="Plan Code" value="{{LGMTwoData?.planCode}}">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="ym_form_group col-4">
+                                            <label>Transaction Activity Date</label>
+                                            <input placeholder="Transaction Activity Date"  value="{{LGMTwoData?.transactionActivityDate}}">
+                                        </div>
+                                    </div>
+                                    <!-- <mat-divider></mat-divider> -->
+                                    <hr>
+                                    <div class="row mt-2">
+                                        <div class="ym_form_group col-4">
+                                            <label>Applicant First Name </label>
+                                            <input placeholder="Applicant First Name" value="{{LGMTwoData?.applicantFirstName}}">
+                                        </div>
+                                        <div class="ym_form_group col-4">
+                                            <label>Applicant Last Name</label>
+                                            <input placeholder="Applicant Last Name" value="{{LGMTwoData?.applicantLastName}}">
+                                        </div>
+                                        <div class="ym_form_group col-4">
+                                            <label>Applicant Birth Date</label>
+                                            <input placeholder="Applicant Birth Date" value="{{LGMTwoData?.applicantDateOfBirth}}">
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="ym_form_group col-4">
+                                            <label>Applicant Gender</label>
+                                            <input placeholder="Applicant Gender" value="{{LGMTwoData?.applicantGender}}">
+                                        </div>
+                                        <div class="ym_form_group col-4">
+                                            <label>Applicant Smoker</label>
+                                            <input placeholder="Applicant Smoker" value="{{LGMTwoData?.isApplicantSmoker}}">
+                                        </div>
+                                        <div class="ym_form_group col-4">
+                                            <label>Applicant Mailing Address</label>
+                                            <input placeholder="Applicant Mailing Address" value="{{LGMTwoData?.applicantMailingAddress}}">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="ym_form_group col-4">
+                                            <label>Applicant City</label>
+                                            <input placeholder="Applicant City" value="{{LGMTwoData?.applicantCity}}">
+                                        </div>
+                                        <div class="ym_form_group col-4">
+                                            <label>Applicant Province</label>
+                                            <input placeholder="Applicant Province" value="{{LGMTwoData?.applicantProvince}}">
+                                        </div>
+                                        <div class="ym_form_group col-4">
+                                            <label>Applicant Postal Code</label>
+                                            <input placeholder="Applicant Postal Code" value="{{LGMTwoData?.applicantPostalCode}}">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="ym_form_group col-4">
+                                            <label>Applicant Country</label>
+                                            <input placeholder="Applicant Country" value="{{LGMTwoData?.applicantCountry}}">
+                                        </div>
+                                        <div class="ym_form_group col-4">
+                                            <label>Applicant Telephone Number</label>
+                                            <input placeholder="Applicant Telephone Number" value="{{LGMTwoData?.applicantTelephoneNumber}}">
+                                        </div>
+                                        <div class="ym_form_group col-4">
+                                            <label>Applicant Email</label>
+                                            <input placeholder="Applicant Email" value="{{LGMTwoData?.applicantEmail}}">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="ym_form_group col-4">
+                                            <label>Tax Exempt (Y/N)</label>
+                                            <input placeholder="Tax Exempt (Y/N)" value="{{LGMTwoData?.taxExemptFlag}}">
+                                        </div>
+                                        <div class="ym_form_group col-4">
+                                            <label>Retro / Non-Retro</label>
+                                            <input placeholder="Retro / Non-Retro"  value="{{LGMTwoData?.retroOrNonRetroFlag}}">
+                                        </div>
+                                        <div class="ym_form_group col-4">
+                                            <label>Applicant Coverage Expiry Date</label>
+                                            <input placeholder="Applicant Coverage Expiry Date" value="{{LGMTwoData?.applicantCoverageExpiryDate}}">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="ym_form_group col-4">
+                                            <label>Applicant Coverage Status</label>
+                                            <input placeholder="Applicant Coverage Status" value="{{LGMTwoData?.applicantCoverageStatus}}">
+                                        </div>
+
+                                        <div class="ym_form_group col-4">
+                                            <label>Applicant Insurance Term in months (By Coverage)</label>
+                                            <input placeholder="Applicant Insurance Term in months (By Coverage)" value="{{LGMTwoData?.applicantInsuranceTerm}}">
+                                        </div>
+                                        <div class="ym_form_group col-4">
+                                            <label>Applicant Coverage Premium Amount</label>
+                                            <input placeholder="Applicant Coverage Premium Amount" value="{{LGMTwoData?.applicantCoveragePremiumAmount}}">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="ym_form_group col-4">
+                                            <label>Applicant Critical Illness Eligibility Flag</label>
+                                            <input placeholder="Applicant Critical Illness Eligibility Flag" value="{{LGMTwoData?.applicantCriticalIllnessEligibilityFlag}}">
+                                        </div>
+                                        <div class="ym_form_group col-4">
+                                            <label>Applicant Job Loss Eligibility Flag</label>
+                                            <input placeholder="Applicant Job Loss Eligibility Flag" value="{{LGMTwoData?.applicantJobLossEligibilityFlag}}">
+                                        </div>
+                                    </div>
+                                    <!-- <mat-divider></mat-divider> -->
+                                    <hr>
+
+                                    <!-- new code -->
+                                    <div class="row mt-2">
+                                        <div class="ym_form_group col-4">
+                                            <label>Co-Applicant First Name</label>
+                                            <input placeholder="Co-Applicant First Name" value="{{LGMTwoData?.coApplicantFirstName}}">
+                                        </div>
+                                        <div class="ym_form_group col-4">
+                                            <label>Co-Applicant Last Name</label>
+                                            <input placeholder="Co-Applicant Last Name" value="{{LGMTwoData?.coApplicantLastName}}">
+                                        </div>
+                                        <div class="ym_form_group col-4">
+                                            <label>Co-Applicant Birth Date</label>
+                                            <input placeholder="Co-Applicant Birth Date" value="{{LGMTwoData?.coApplicantDateOfBirth}}">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="ym_form_group col-4">
+                                            <label>Co-Applicant Gender</label>
+                                            <input placeholder="Co-Applicant Gender" value="{{LGMTwoData?.coApplicantGender}}">
+                                        </div>
+                                        <div class="ym_form_group col-4">
+                                            <label>Co-Applicant Smoker</label>
+                                            <input placeholder="Co-Applicant Smoker" value="{{LGMTwoData?.isCoApplicantSmoker}}">
+                                        </div>
+                                        <div class="ym_form_group col-4">
+                                            <label>Single / Joint</label>
+                                            <input placeholder="Single / Joint" value="{{LGMTwoData?.singleOrJointFlag}}">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="ym_form_group col-4">
+                                            <label>Co-Applicant Mailing Address</label>
+                                            <input placeholder="Co-Applicant Mailing Address" value="{{LGMTwoData?.coApplicantMailingAddress}}">
+                                        </div>
+                                        <div class="ym_form_group col-4">
+                                            <label>Co-Applicant City</label>
+                                            <input placeholder="Co-Applicant City" value="{{LGMTwoData?.coApplicantCity}}">
+                                        </div>
+                                        <div class="ym_form_group col-4">
+                                            <label>Co-Applicant Province</label>
+                                            <input placeholder="Co-Applicant Province" value="{{LGMTwoData?.coApplicantProvince}}">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="ym_form_group col-4">
+                                            <label>Co-Applicant Postal Code</label>
+                                            <input placeholder="Co-Applicant Postal Code" value="{{LGMTwoData?.coApplicantPostalCode}}">
+                                        </div>
+                                        <div class="ym_form_group col-4">
+                                            <label>Co-Applicant Country</label>
+                                            <input placeholder="Co-Applicant Country" value="{{LGMTwoData?.coApplicantCountry}}">
+                                        </div>
+                                        <div class="ym_form_group col-4">
+                                            <label>Co-Applicant Telephone Number</label>
+                                            <input placeholder="Co-Applicant Telephone Number" value="{{LGMTwoData?.coApplicantTelephoneNumber}}">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="ym_form_group col-4">
+                                            <label>Co-Applicant Email</label>
+                                            <input placeholder="Co-Applicant Email" value="{{LGMTwoData?.coApplicantEmail}}">
+                                        </div>
+                                        <div class="ym_form_group col-4">
+                                            <label>Co-Applicant Coverage Expiry Date</label>
+                                            <input placeholder="Co-Applicant Coverage Expiry Date" value="{{LGMTwoData?.coApplicantCoverageExpiryDate}}">
+                                        </div>
+                                        <div class="ym_form_group col-4">
+                                            <label>Co-Applicant Coverage Status</label>
+                                            <input placeholder="Co-Applicant Coverage Status" value="{{LGMTwoData?.coApplicantCoverageStatus}}">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="ym_form_group col-4">
+                                            <label>Co-Applicant Insurance Term in months (By Coverage)</label>
+                                            <input placeholder="Co-Applicant Insurance Term in months" value="{{LGMTwoData?.coApplicantInsuranceTerm}}">
+                                        </div>
+                                        <div class="ym_form_group col-4">
+                                            <label>Co-Applicant Coverage Premium Amount</label>
+                                            <input placeholder="Co-Applicant Coverage Premium Amount" value="{{LGMTwoData?.coApplicantCoveragePremiumAmount}}">
+                                        </div>
+                                        <div class="ym_form_group col-4">
+                                            <label>Co-Applicant Critical Illness Eligibility Flag</label>
+                                            <input placeholder="Co-Applicant Critical Illness Eligibility Flag" value="{{LGMTwoData?.coApplicantCriticalIllnessEligibilityFlag}}">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="ym_form_group col-4">
+                                            <label>Co-Applicant Job Loss Eligibility Flag</label>
+                                            <input placeholder="Co-Applicant Job Loss Eligibility Flag" value="{{LGMTwoData?.coApplicantJobLossEligibilityFlag}}">
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="ym_form_group col-4">
+                                            <label>Coverage Type</label>
+                                            <input placeholder="Coverage Type" value="{{LGMTwoData?.coverageType}}">
+                                        </div>
+                                        <div class="ym_form_group col-4">
+                                            <label>Coverage Effective Date</label>
+                                            <input placeholder="Coverage Effective Date" value="{{LGMTwoData?.coverageEffectiveDate}}">
+                                        </div>
+                                        <div class="ym_form_group col-4">
+                                            <label>Coverage Termination Date</label>
+                                            <input placeholder="Coverage Termination Date" value="{{LGMTwoData?.coverageTerminationDate}}">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="ym_form_group col-4">
+                                            <label>Coverage Refund Amount</label>
+                                            <input placeholder="Coverage Refund Amount" value="{{LGMTwoData?.coveragePremiumRefundAmount}}">
+                                        </div>
+                                        <div class="ym_form_group col-4">
+                                            <label>Coverage Refund Tax</label>
+                                            <input placeholder="Coverage Refund Tax" value="{{LGMTwoData?.coveragePremiumRefundTax}}">
+                                        </div>
+                                        <div class="ym_form_group col-4">
+                                            <label>Coverage Termination Reason</label>
+                                            <input placeholder="Coverage Termination Reason" value="{{LGMTwoData?.coverageTerminationReason}}">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="ym_form_group col-4">
+                                            <label>Insured Monthly Benefit</label>
+                                            <input placeholder="Insured Monthly Benefit" value="{{LGMTwoData?.insuredMonthlyBenefit}}">
+                                        </div>
+                                        <div class="ym_form_group col-4">
+                                            <label>Premium Split</label>
+                                            <input placeholder="Premium Split" value="{{LGMTwoData?.premiumSplit}}">
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="ym_form_group col-4">
+                                            <label>Creditor Name</label>
+                                            <input placeholder="Creditor Name" value="{{LGMTwoData?.creditorName}}">
+                                        </div>
+                                        <div class="ym_form_group col-4">
+                                            <label>Creditor Address</label>
+                                            <input placeholder="Creditor Address" value="{{LGMTwoData?.creditorAddress}}">
+                                        </div>
+                                        <div class="ym_form_group col-4">
+                                            <label>Creditor City</label>
+                                            <input placeholder="Creditor City" value="{{LGMTwoData?.creditorCity}}">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="ym_form_group col-4">
+                                            <label>Creditor Province</label>
+                                            <input placeholder="Creditor Province" value="{{LGMTwoData?.creditorProvince}}">
+                                        </div>
+                                        <div class="ym_form_group col-4">
+                                            <label>Creditor Postal Code</label>
+                                            <input placeholder="Creditor Postal Code" value="{{LGMTwoData?.creditorPostalCode}}">
+                                        </div>
+                                        <div class="ym_form_group col-4">
+                                            <label>Creditor Country</label>
+                                            <input placeholder="Creditor Country" value="{{LGMTwoData?.creditorCountry}}">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="ym_form_group col-4">
+                                            <label>Creditor Telephone</label>
+                                            <input placeholder="Creditor Telephone" value="{{LGMTwoData?.creditorTelephone}}">
+                                        </div>
+                                        <div class="ym_form_group col-4">
+                                            <label>Creditor Email</label>
+                                            <input placeholder="Creditor Email" value="{{LGMTwoData?.creditorEmailAddress}}">
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="ym_form_group col-4">
+                                            <label>Group Policy Holder</label>
+                                            <input placeholder="Group Policy Holder" value="{{LGMTwoData?.groupPolicyHolder}}">
+                                        </div>
+                                        <div class="ym_form_group col-4">
+                                            <label>Group Policy Holder Address</label>
+                                            <input placeholder="Group Policy Holder Address" value="{{LGMTwoData?.groupPolicyHolderAddress}}">
+                                        </div>
+                                        <div class="ym_form_group col-4">
+                                            <label>Group Policy Holder City</label>
+                                            <input placeholder="Group Policy Holder City" value="{{LGMTwoData?.groupPolicyHolderCity}}">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="ym_form_group col-4">
+                                            <label>Group Policy Holder Province</label>
+                                            <input placeholder="Group Policy Holder Province" value="{{LGMTwoData?.groupPolicyHolderProvince}}">
+                                        </div>
+                                        <div class="ym_form_group col-4">
+                                            <label>Group Policy Holder Postal Code</label>
+                                            <input placeholder="Group Policy Holder Postal Code" value="{{LGMTwoData?.groupPolicyHolderPostalCode}}">
+                                        </div>
+                                        <div class="ym_form_group col-4">
+                                            <label>Group Policy Holder Country</label>
+                                            <input placeholder="Group Policy Holder Country" value="{{LGMTwoData?.groupPolicyHolderCountry}}">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="ym_form_group col-4">
+                                            <label>Group Policy Holder Telephone</label>
+                                            <input placeholder="Group Policy Holder Telephone" value="{{LGMTwoData?.groupPolicyHolderTelephone}}">
+                                        </div>
+                                        <div class="ym_form_group col-4">
+                                            <label>Group Policy Holder Email</label>
+                                            <input placeholder="Group Policy Holder Email" value="{{LGMTwoData?.groupPolicyHolderEmailAddress}}">
+                                        </div>
+                                        <div class="ym_form_group col-4">
+                                            <label>Dealer Remits Tax</label>
+                                            <input placeholder="Dealer Remits Tax" value="{{LGMTwoData?.groupPolicyHolderDealerRemitsTax}}">
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="ym_form_group col-4">
+                                            <label>Merchant Name</label>
+                                            <input placeholder="Merchant Name" value="{{LGMTwoData?.merchantName}}">
+                                        </div>
+                                        <div class="ym_form_group col-4">
+                                            <label>Merchant Address</label>
+                                            <input placeholder="Merchant Address" value="{{LGMTwoData?.merchantAddress}}">
+                                        </div>
+                                        <div class="ym_form_group col-4">
+                                            <label>Merchant City</label>
+                                            <input placeholder="Merchant City" value="{{LGMTwoData?.merchantCity}}">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="ym_form_group col-4">
+                                            <label>Merchant Province</label>
+                                            <input placeholder="Merchant Province" value="{{LGMTwoData?.merchantProvince}}">
+                                        </div>
+                                        <div class="ym_form_group col-4">
+                                            <label>Merchant Postal Code
+                                            </label>
+                                            <input placeholder="Merchant Postal Code" value="{{LGMTwoData?.merchantPostalCode}}">
+                                        </div>
+                                        <div class="ym_form_group col-4">
+                                            <label>Merchant Country</label>
+                                            <input placeholder="Merchant Country" value="{{LGMTwoData?.merchantCountry}}">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="ym_form_group col-4">
+                                            <label>Merchant Telephone</label>
+                                            <input placeholder="Merchant Telephone" value="{{LGMTwoData?.merchantTelephoneNumber}}">
+                                        </div>
+                                        <div class="ym_form_group col-4">
+                                            <label>Merchant Email</label>
+                                            <input placeholder="Merchant Email" value="{{LGMTwoData?.merchantEmail}}">
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="ym_form_group col-4">
+                                            <label>Total Single Premium</label>
+                                            <input placeholder="Total Single Premium" value="{{LGMTwoData?.totalPremiumAmount}}">
+                                        </div>
+                                        <div class="ym_form_group col-4">
+                                            <label>Sales Tax</label>
+                                            <input placeholder="Sales Tax" value="{{LGMTwoData?.salesTax}}">
+                                        </div>
+                                        <div class="ym_form_group col-4">
+                                            <label>Total Refund Amount</label>
+                                            <input placeholder="Total Refund Amount" value="{{LGMTwoData?.coveragePremiumRefundTotalAmount}}">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="ym_form_group col-4">
+                                            <label>Refund Method</label>
+                                            <input placeholder="Refund Method" value="{{LGMTwoData?.refundMethod}}">
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="ym_form_group col-4">
+                                            <label>Loan Account Number</label>
+                                            <input placeholder="Loan Account Number" value="{{LGMTwoData?.loanAccountNumber}}">
+                                        </div>
+                                        <div class="ym_form_group col-4">
+                                            <label>Loan Term</label>
+                                            <input placeholder="Loan Term" value="{{LGMTwoData?.loanTerm}}">
+                                        </div>
+                                        <div class="ym_form_group col-4">
+                                            <label>Loan Amount without Insurance</label>
+                                            <input placeholder="Loan Amount without Insurance" value="{{LGMTwoData?.loanAmountWithoutInsurance}}">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="ym_form_group col-4">
+                                            <label>Interest Rate</label>
+                                            <input placeholder="Interest Rate" value="{{LGMTwoData?.interestRate}}">
+                                        </div>
+                                        <div class="ym_form_group col-4">
+                                            <label>Loan Payment Frequency</label>
+                                            <input placeholder="Loan Payment Frequency" value="{{LGMTwoData?.loanPaymentFrequency}}">
+                                        </div>
+                                        <div class="ym_form_group col-4">
+                                            <label>Deal Type</label>
+                                            <input placeholder="Deal Type" value="{{LGMTwoData?.dealType}}">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="ym_form_group col-4">
+                                            <label>Loan Payment with Insurance</label>
+                                            <input placeholder="Loan Payment with Insurance" value="{{LGMTwoData?.loanPaymentWithInsurance}}">
+                                        </div>
+                                        <div class="ym_form_group col-4">
+                                            <label>Loan Payment Without Insurance</label>
+                                            <input placeholder="Loan Payment Without Insurance" value="{{LGMTwoData?.loanPaymentWithoutInsurance}}">
+                                        </div>
+                                        <div class="ym_form_group col-4">
+                                            <label>Balloon (Residual) Payment Amount</label>
+                                            <input placeholder="Balloon (Residual) Payment Amount" value="{{LGMTwoData?.residualPaymentAmount}}">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="ym_form_group col-4">
+                                            <label>Residual Insured</label>
+                                            <input placeholder="Residual Insured" value="{{LGMTwoData?.residualInsured}}">
+                                        </div>
+                                        <div class="ym_form_group col-4">
+                                            <label>Residual Due Date</label>
+                                            <input placeholder="Residual Due Date" value="{{LGMTwoData?.residualDueDate}}">
+                                        </div>
+                                        <div class="ym_form_group col-4">
+                                            <label>Loan Amount with Insurance</label>
+                                            <input placeholder="Loan Amount with Insurance" value="{{LGMTwoData?.loanAmountWithInsurance}}">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="ym_form_group col-4">
+                                            <label>Amount of Insured Loan or Lease</label>
+                                            <input placeholder="Amount of Insured Loan or Lease" value="{{LGMTwoData?.loanAmountInsured}}">
+                                        </div>                                       
+                                        <div class="ym_form_group col-4">
+                                            <label>Processed With Errors</label>
+                                            <!-- value="{{LGMTwoData?.creditorFile_policyUnexpiredFileLGM2_header_processedWithErrors}}" -->
+                                           <mat-slide-toggle (click)="onClickOfPWE($event)" ></mat-slide-toggle>
+                                        </div>                                    
+                                    </div>
+                                    <div class="row" *ngIf="isShowField">
+                                        <div class="col-4"></div>
+                                        <div class="ym_form_group col-8">
+                                            <label>Processed With Error Reason</label>
+                                            <textarea class="md-text-area-width" rows="3" placeholder="Processed With Error Reason" value="{{LGMTwoData?.creditorFile_policyUnexpiredFileLGM2_header_processedWithErrorReason}}"></textarea>
+                                        </div>
+                                    </div>
+                                </mat-card-content>
+                            </mat-card>
+                        </div>
+                    </div>
+                </div>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+    <!-- LGM2 Certificate End -->
+</div>

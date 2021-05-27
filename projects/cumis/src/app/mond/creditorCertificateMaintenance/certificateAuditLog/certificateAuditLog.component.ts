@@ -19,7 +19,6 @@ export class CertificateAuditLogComponent implements OnInit {
     constructor() { }
 
     ngOnInit() {
-        debugger;
         this.auditLogList = this.auditLogData;
         this.parsedAuditLogList = [];
         this.parsedAuditLogList = JSON.parse(this.auditLogList.certificateData).certificateHistory;
@@ -37,14 +36,8 @@ export class CertificateAuditLogComponent implements OnInit {
         Array.prototype.push.apply(applicantLoanAuditHistory, applicantCoverageAuditHistory);
         Array.prototype.push.apply(applicantAddressAuditHistory, applicantAuditHistory);
         Array.prototype.push.apply(applicantCreditorAuditHistory, applicantGrpPlcyHolderAuditHistory);
-        // console.log('applicantCoverageAuditHistory', applicantCoverageAuditHistory);
-        // console.log('applicantAddressAuditHistory', applicantAddressAuditHistory);
-        // console.log('applicantCreditorAuditHistory', applicantCreditorAuditHistory);
-
         Array.prototype.push.apply(applicantLoanAuditHistory, applicantAddressAuditHistory);
-        // console.log('applicantCoverageAuditHistory2', applicantCoverageAuditHistory);
         Array.prototype.push.apply(applicantLoanAuditHistory,applicantCreditorAuditHistory);
-        // console.log('applicantCoverageAuditHistory3', applicantCreditorAuditHistory);
         this.certificateAuditHistory = [];
         this.certificateAuditHistory = applicantLoanAuditHistory;
    }

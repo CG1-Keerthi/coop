@@ -1,0 +1,113 @@
+<div class="ym_content">
+    <div class="col-md-12 col-lg-12 col-sm-12 mt-2 container">
+        <div class="row">
+            <mat-tab-group class="col-md-12">
+                <mat-tab label="Overview">
+                    <div class="m-0 pt-2 pb-2 row my-3 justify-content-center md-hd">
+                        <h2>Creditor Data Processing Overview</h2>
+                    </div>
+                    <div class="row">
+                        <div class="ym_form_group  col-6">
+                            <label>Process Instance Number</label>
+                            <input placeholder="Process Instance Number"
+                                value="{{processingOverviewData?.creditorFileProcessingInfo_processInstanceNumber}}">
+                        </div>
+                        <div class="ym_form_group  col-6">
+                            <label>Client Name</label>
+                            <input placeholder="Client Name"
+                                value="{{processingOverviewData?.creditorFileProcessingInfo_partnerName}}">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="ym_form_group  col-6">
+                            <label>File Name</label>
+                            <input placeholder="File Name"
+                                value="{{processingOverviewData?.creditorFileProcessingInfo_fileName}}">
+                        </div>
+                        <div class="ym_form_group  col-6">
+                            <div class="row">
+                                <label>File Submission Date</label>
+                                <input class="col-md-9" matInput [matDatepicker]="picker"
+                                    value="{{processingOverviewData?.creditorFileProcessingInfo_fileSubmissionDate}}">
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker class="col-md-3" #picker></mat-datepicker>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="ym_form_group  col-6">
+                            <div class="row ml-1">
+                                <label>File Processing Date</label>
+                                <input class="col-md-9" matInput [matDatepicker]="picker2"
+                                    value="{{processingOverviewData?.creditorFileProcessingInfo_fileProcessingDate}}">
+                                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                                <mat-datepicker class="col-md-3" #picker2></mat-datepicker>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="ym_form_group  col-6">
+                            <label>Parent File Identifier</label>
+                            <input placeholder="Parent File Identifier"
+                                value="{{processingOverviewData?.creditorFileProcessingInfo_fileIdentifier}}">
+                        </div>
+                        <div class="ym_form_group  col-6">
+                            <label>Parent File Processing Status</label>
+                            <input placeholder="Parent File Processing Status"
+                                value="{{processingOverviewData?.creditorFileProcessingInfo_fileProcessingStatus}}">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="ym_form_group  col-6">
+                            <label>File Identifier</label>
+                            <input placeholder="File Identifier"
+                                value="{{processingOverviewData?.creditorSplitFileProcessingInfo_fileIdentifier}}">
+                        </div>
+                        <div class="ym_form_group  col-6">
+                            <label>File Processing Status</label>
+                            <input placeholder="File Processing Status"
+                                value="{{processingOverviewData?.creditorSplitFileProcessingInfo_fileProcessingStatus}}">
+                        </div>
+                    </div>
+                    <div>
+                        <mat-card class="w-100 mt-2 md-boder">
+                            <mat-card-header>
+                                <mat-card-title class="md-clr"><b><i class="fa fa-comment blue"></i>File Processing
+                                        Remarks</b></mat-card-title>
+                            </mat-card-header>
+                            <mat-divider></mat-divider>
+                            <mat-card-content class="mt-3">
+                                <div class="ym_form_group row md-flex">
+                                    <div class="col-11">
+                                        <input placeholder="Type your message here ..."
+                                            value="{{processingOverviewData?.creditorFileProcessingInfo_fileProcessingRemarks}}" />
+                                    </div>
+                                    <div class="col-1 md-btn">
+                                        <button class="btn  btn-info no-radius" type="button">
+                                            <i class="fa fa-share-alt"></i> Save
+                                        </button>
+                                    </div>
+                                </div>
+                            </mat-card-content>
+                        </mat-card>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="ym_form_group  col-6">
+                            <label>File Reviewed By</label>
+                            <input placeholder="File Reviewed By"
+                                value="{{processingOverviewData?.creditorFileProcessingInfo_fileReviewedBy}}">
+                        </div>
+                    </div>
+                </mat-tab>
+                <mat-tab label="Form Review">
+                    <app-lgmTwo-designer *ngIf="isShowLGMTWO" [processingOverviewData]="processingOverviewData">
+                    </app-lgmTwo-designer>
+                    <app-creLogix-designer *ngIf="isShowCreLogix" [creLogixData]="processingOverviewData"></app-creLogix-designer>
+                    <app-lais-designer *ngIf="isShowLAIS" [laisData]="processingOverviewData"></app-lais-designer>
+                    <app-lgm-designer *ngIf="isShowLGM" [lgmData]="processingOverviewData"></app-lgm-designer>
+                </mat-tab>
+            </mat-tab-group>
+        </div>
+    </div>
+</div>

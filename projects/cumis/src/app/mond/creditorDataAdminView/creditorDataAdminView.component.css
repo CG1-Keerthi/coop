@@ -1,0 +1,23 @@
+mat-expansion-panel-header{
+height: 39px !important;
+}
+
+.ptableHeader> th {
+color: white !important;
+background-color: #00456a !important;
+  }
+
+.mat-expansion-panel-body{
+background: blue !important;
+}
+
+#processSummaryId{
+overflow-x: auto;
+width: 1063px;
+overflow-y: auto!important;
+height: 30rem!important;
+}
+
+ul{
+  left: -49px !important;
+}

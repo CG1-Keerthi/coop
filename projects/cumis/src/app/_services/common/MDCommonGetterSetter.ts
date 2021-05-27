@@ -39,19 +39,22 @@ export class MDCommonGetterSetter {
     previousURLArrayData = this.previousURLArray.asObservable();
     private groupRequestIdentifier = new BehaviorSubject('default message');
     groupRequestIdentifiereData = this.groupRequestIdentifier.asObservable();
-
+    private processSummaryRowData = new BehaviorSubject({})
+    processSummaryRowDataList = this.processSummaryRowData.asObservable();
+    private splitFileRowData = new BehaviorSubject({})
+    splitFileRowList = this.splitFileRowData.asObservable();
     constructor(private router: Router) {
         this.router.events.subscribe(data => {
             if (data['routerEvent'] && data['routerEvent']['url']) {
                 if (data['routerEvent']['url'] != "/home" && data['routerEvent']['url'] != "/") {
                     const urlTree = this.router.parseUrl(data['routerEvent']['url']);
                     // console.log("urlTree", urlTree);
-                    if(urlTree.root.children['primary']){
-                    const urlWithoutParams = urlTree.root.children['primary'].segments.map(it => it.path).join('/');
-                    // console.log("urlWithoutParams", urlWithoutParams);
-                    let urlArray = this.previousURLArray.getValue();
-                    urlArray.push(urlWithoutParams)
-                    this.previousURLArray.next(urlArray);
+                    if (urlTree.root.children['primary']) {
+                        const urlWithoutParams = urlTree.root.children['primary'].segments.map(it => it.path).join('/');
+                        // console.log("urlWithoutParams", urlWithoutParams);
+                        let urlArray = this.previousURLArray.getValue();
+                        urlArray.push(urlWithoutParams)
+                        this.previousURLArray.next(urlArray);
                     }
                 }
             }
@@ -223,6 +226,22 @@ export class MDCommonGetterSetter {
 
     getGroupRequestIdentifier() {
         return this.groupRequestIdentifier;
+    }
+
+    setProcessSummaryRowData(rowData) {
+        this.processSummaryRowData.next(rowData);
+    }
+
+    getProcessSummaryRowData() {
+        return this.processSummaryRowData;
+    }
+
+    setSplitFileRowData(splitRowData) {
+        this.splitFileRowData.next(splitRowData);
+    }
+
+    getSplitFileRowData() {
+        return this.splitFileRowData
     }
 
 

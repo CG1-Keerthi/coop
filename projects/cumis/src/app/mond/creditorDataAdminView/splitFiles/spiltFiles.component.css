@@ -1,0 +1,7 @@
+mat-expansion-panel-header{
+    height: 39px !important;
+}
+.ptableHeader> th {
+    color: white !important;
+    background-color: #00456a !important;
+      }

@@ -1,0 +1,44 @@
+mat-expansion-panel-header{
+    height: 39px !important;
+}
+.md-group{
+    margin: 1rem 0rem 1rem 0rem !important;
+    display: inline-block !important;
+}
+.md-icon{
+    color: white;
+    font-size: 2rem;
+    margin-top: 1rem;
+    margin-left: 14px;
+}
+.md-imgConfig{
+    height: 4rem;
+    width: 4rem;    
+}
+.mat-card-subtitle{
+    display: revert;
+}
+.md-border{
+    border: 2px solid #008acc;
+}
+.md-text-area-width{
+    width: 100%;
+}
+.md-imgConfigBlue{
+    background-color: #6fb3e0;
+}
+.md-imgConfigOrange{
+    background-color:#e8b110;
+}
+.md-imgConfigRed{
+    background-color:#d53f40;
+}
+.md-imgConfigGreen{
+    background-color:#9abc32;
+}
+.md-clr{
+    color:#008acc;
+}
+.md-boder{
+    border: 2px solid #008acc;
+}

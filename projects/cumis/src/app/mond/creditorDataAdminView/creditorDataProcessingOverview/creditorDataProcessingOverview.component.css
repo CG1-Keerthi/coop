@@ -1,0 +1,23 @@
+.md-hd,.btn-info{
+    background: #0071b3 !important;
+}
+.md-btn{
+    margin-left: -31px;
+    margin-top: 1px;
+}
+.md-flex{
+    display: flex !important;
+}
+.md-boder{
+    border: 2px solid #008acc;
+}
+.md-clr{
+    color: #0071b3 !important;
+}
+hr{
+    border-top: 2px solid #0071b3 !important;
+}
+
+
+
+

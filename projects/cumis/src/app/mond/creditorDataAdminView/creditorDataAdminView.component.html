@@ -1,0 +1,208 @@
+<div class="ym_content">
+    <div class="col-md-12 col-lg-12 col-sm-12 mt-2 container">
+        <div class="row">
+            <div class="col-md-9">
+                <mat-tab-group class="col-md-12" [(selectedIndex)]="selectedTab">
+                    <mat-tab label="Process Overview">
+                        <div class="row pt-2 m-0">
+                            <div class="col-md-3 p-2" style="background-color: #ebebf1;">
+                                <h3><i class="fa fa-bars pr-2"></i>Refine your Search</h3>
+                                <div class="ym_form_group">
+                                    <label>Client</label>
+                                    <input type="text" placeholder="Client" [(ngModel)]="clientName">
+                                </div>
+                                <div class="ym_form_group">
+                                    <label>File Status</label>
+                                    <div class="ym_form_select">
+                                        <select [(ngModel)]="fileStatus">
+                                            <option value="">All Status</option>
+                                            <option value="File Received">File Received</option>
+                                            <option value="File Processed Completely">File Processed Completely
+                                            </option>
+                                            <option value="File Processed Partially">File Processed Partially
+                                            </option>
+                                            <option value="File Processed with Errors">File Processed with Errors
+                                            </option>
+                                            <option value="File Load Failure">File Load Failure</option>
+                                            <option value="File Waiting For Internal Review">File Waiting For
+                                                Internal Review</option>
+                                            <option value="File Waiting For Review By Partner">File Waiting For
+                                                Review By Partner</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="ym_form_group">
+                                    <button class="ym_button" style="margin-right: 10px;"><i class="fa fa-undo"></i>
+                                        Reset</button>
+                                    <button class="ym_button" (click)="onClickOfProcessOverviewSearch()"><i
+                                            class="fa fa-search"></i>
+                                        Search</button>
+                                </div>
+                            </div>
+                            <div class="row mt-4" style="margin-left: -1px;">
+                                <mat-accordion>
+                                    <mat-expansion-panel [expanded]="true">
+                                        <mat-expansion-panel-header style="background-color: #307ecc;">
+                                            <mat-panel-title style="color: white;">
+                                                Process Summary
+                                            </mat-panel-title>
+                                        </mat-expansion-panel-header>
+                                        <div class="row m-1" id="processSummaryId">
+                                            <p-table [value]="processSummaryList" >
+                                                <ng-template pTemplate="header">
+                                                    <tr class="ptableHeader">
+                                                        <th style="width: 30rem;">File Name</th>
+                                                        <th style="width: 4rem;">Client</th>
+                                                        <th style="width: 9rem;">File Submission Date</th>
+                                                        <th style="width: 11rem;">File Processing Status</th>
+                                                        <th style="width: 13rem;">Process Instance Number</th>
+                                                        <th style="width: 10rem;">View</th>
+                                                    </tr>
+                                                </ng-template>                                             
+                                                <ng-template pTemplate="body" let-processSummaryListData>
+                                                    <tr [pSelectableRow]="processSummaryListData">
+                                                        <td style="color: royalblue;"
+                                                            (click)="onClickOfFileName(processSummaryListData)">
+                                                            {{processSummaryListData?.fileIdentifier}}<br>{{processSummaryListData?.fileName}}
+                                                        </td>
+                                                        <td>{{processSummaryListData?.partnerName}}</td>
+                                                        <td>{{processSummaryListData?.fileSubmissionDate.split('T')[0]}}
+                                                        </td>
+                                                        <td>{{processSummaryListData?.fileProcessingStatus}}</td>
+                                                        <td>{{processSummaryListData?.processInstanceNumber}}</td>
+                                                        <td><button type="button" class="btn btn-primary" (click)="onClickOfViewSplitFiles(processSummaryListData)">View Split
+                                                                Files</button></td>
+                                                    </tr>
+                                                </ng-template>
+                                            </p-table>
+                                        </div>
+                                    </mat-expansion-panel>
+                                </mat-accordion>
+                            </div>
+                        </div>
+                    </mat-tab>
+                    <mat-tab label="Split Files">
+                        <app-splitFiles-designer *ngIf="isShowSplitView" [splitData]="splitDataList"></app-splitFiles-designer>
+                    </mat-tab>
+                </mat-tab-group>
+            </div>
+            <div class="col-3 col-md-3">
+                <div class="widget-body" style="background-color: #FAFAFA; border-radius: 8px; margin-top: 3px;">
+                    <br>
+                    <h4 style="color:#0066FF !important; padding-left: 6px; margin-top: 10px;margin-bottom: 10px">
+                        Instructions</h4>
+                    <ul class="bulletList">
+                        <li class="bulletList">
+                            <div class="instructionListDiv">
+                                You can view the status of files submitted by Partners. Enter partially the name of the
+                                Partner and / or select the file status and click <b>Search</b>.
+                            </div>
+                        </li>
+                        <li class="bulletList mt-3">
+                            <div class="instructionListDiv">
+                                The search results will be displayed in the grid in the descending order of file
+                                submission date.
+                            </div>
+                        </li>
+                    </ul>
+                    <p style="margin-bottom: 10px">&nbsp;</p>
+                </div>
+                <div class="widget-body" style="background-color: #FAFAFA; border-radius: 8px;">
+                    <br>
+                    <h4 style="color:#0066FF !important; padding-left: 6px;margin-top: 10px;margin-bottom: 10px">Quick
+                        Links</h4>
+                    <ul class="bulletList">
+
+                        <li class="bulletList">
+                            <div class="instructionListDiv">
+                                <a href="mailto:support@mondcloud.com">Contact support</a>
+                                <p> </p>
+                            </div>
+                        </li>
+                    </ul>
+                    <p style="margin-bottom: 10px">&nbsp;</p>
+                </div>
+                <div>
+                    <mat-card class="w-100 mt-2 md-boder">
+                        <mat-card-header>
+                            <mat-card-title class="md-clr md-font">
+                                <div class="row col-xs-12">
+                                    <div class="col-8 col-xs-8" style="margin-left: -9px;">
+                                        <span style="margin-left: -24px; color: #0071b3 !important ;">
+                                            <mat-icon>signal_cellular_alt</mat-icon>
+                                            <p style="margin-top: -27px;
+                                         font-size: 15px;">For future enhancement</p>
+                                        </span>
+                                    </div>
+                                    <div class="col-4 col-xs-4">
+                                        <div class="dropdown">
+                                            <button style="width: 7rem;" class="btn btn-primary dropdown-toggle"
+                                                type="button" data-toggle="dropdown">This Week
+                                                <span class="caret"></span></button>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="#">This Week</a></li>
+                                                <li><a href="#">Last Week</a></li>
+                                                <li><a href="#">This Month</a></li>
+                                                <li><a href="#">Last Month</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </mat-card-title>
+                        </mat-card-header>
+                        <mat-divider></mat-divider>
+                        <mat-card-content class="mt-3">
+                            <table style="position: relative;
+                          left: 12rem;">
+                                <tr style="cursor: default;">
+                                    <td class="legendColorBox" style="cursor: default;">
+                                        <div style="padding: 1px; cursor: default;">
+                                            <div
+                                                style="width: 4px; height: 0px; border: 5px solid rgb(104, 188, 49); overflow: hidden; cursor: default;">
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="legendLabel" style="cursor: default;">File received</td>
+                                </tr>
+                                <tr style="height: 35px; cursor: default;">
+                                    <td class="legendColorBox" style="cursor: default;">
+                                        <div style="padding: 1px; cursor: default;">
+                                            <div
+                                                style="width: 4px; height: 0px; border: 5px solid rgb(32, 145, 207); overflow: hidden; cursor: default;">
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="legendLabel" style="cursor: default;">File processed <br
+                                            style="cursor: default;"> completely</td>
+                                </tr>
+                                <tr style="height: 35px; cursor: default;">
+                                    <td class="legendColorBox" style="cursor: default;">
+                                        <div style="padding: 1px; cursor: default;">
+                                            <div
+                                                style="width: 4px; height: 0px; border: 5px solid rgb(175, 78, 150); overflow: hidden; cursor: default;">
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="legendLabel" style="cursor: default;">File waiting <br
+                                            style="cursor: default;"> internal review</td>
+                                </tr>
+                                <tr style="cursor: default;">
+                                    <td class="legendColorBox" style="cursor: default;">
+                                        <div style="padding: 1px; cursor: default;">
+                                            <div
+                                                style="width: 4px; height: 0px; border: 5px solid rgb(218, 84, 48); overflow: hidden; cursor: default;">
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="legendLabel" style="cursor: default;">File waiting for <br
+                                            style="cursor: default;"> review by partner
+                                    </td>
+                                </tr>
+                            </table>
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

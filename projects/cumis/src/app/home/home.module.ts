@@ -46,10 +46,16 @@ import { CertificateAuditLogComponent } from '../mond/creditorCertificateMainten
 import { OnlyNumberDirective } from '../mond/directives/only-number.directive';
 import { AlphabetOnlyDirective } from '../mond/directives/alphabet-only.directive';
 
-// for datae picker formate
-// import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+// for date picker formate
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { MY_FORMATS } from '../_services/constants/MDDateFormate';
+import { CreditorDataAdminViewComponent } from '../mond/creditorDataAdminView/creditorDataAdminView.component';
+import { SplitFilesComponent } from '../mond/creditorDataAdminView/splitFiles/splitFiles.component';
+import { CreditorDataProcessingOverviewComponent } from '../mond/creditorDataAdminView/creditorDataProcessingOverview/creditorDataProcessingOverview.component';
+import { lgmTwoComponent } from '../mond/creditorDataAdminView/creditorDataProcessingOverview/lgmTwo/lgmTwo.component';
+import { CreLogixComponent } from '../mond/creditorDataAdminView/creditorDataProcessingOverview/creLogix/creLogix.component';
+import { LAISComponent } from '../mond/creditorDataAdminView/creditorDataProcessingOverview/LAIS/lais.component';
+import { LGMComponent } from '../mond/creditorDataAdminView/creditorDataProcessingOverview/LGM/lgm.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +76,14 @@ import { MY_FORMATS } from '../_services/constants/MDDateFormate';
     additionalDetailsComponent,
     CertificateAuditLogComponent,
     OnlyNumberDirective,
-    AlphabetOnlyDirective
+    AlphabetOnlyDirective,
+    CreditorDataAdminViewComponent,
+    SplitFilesComponent,
+    CreditorDataProcessingOverviewComponent,
+    lgmTwoComponent,
+    CreLogixComponent,
+    LAISComponent,
+    LGMComponent
   ],
   imports: [
     CommonModule,

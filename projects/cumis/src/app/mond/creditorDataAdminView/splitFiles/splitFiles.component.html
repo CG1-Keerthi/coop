@@ -1,0 +1,48 @@
+<div class="row pt-2 m-0">
+    <div class="col-md-3 p-2" style="background-color: #ebebf1;">
+        <h3><i class="fa fa-bars pr-2"></i>Refine your Search</h3>
+        <div class="ym_form_group">
+            <label>File Identifier</label>
+            <input type="text" placeholder="File Identifier" [(ngModel)]="fileIdentifier">
+        </div>
+        <div class="ym_form_group">
+            <label>Certificate Number</label>
+            <input type="text" placeholder="Certificate Number" [(ngModel)]="certificateNumber">
+        </div>
+        <div class="ym_form_group">
+            <button class="ym_button" style="margin-right: 10px;"><i class="fa fa-undo"></i>
+                Reset</button>
+            <button class="ym_button" (click)="onClickOfSplitFilesSearch()"><i class="fa fa-search"></i>
+                Search</button>
+        </div>
+    </div>
+    <div class="row mt-4" style="margin-left: -1px;">
+        <mat-accordion>
+            <mat-expansion-panel [expanded]="true">
+                <mat-expansion-panel-header style="background-color: #307ecc;">
+                    <mat-panel-title style="color: white;">
+                     Split Files
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="row m-1 mr-3" id="processSummaryId">
+                    <p-table [value]="splitFilesList">
+                        <ng-template pTemplate="header">
+                            <tr class="ptableHeader">
+                                <th style="width: 15rem;">File Identifier - Certificate Number</th>
+                                <th style="width: 6rem;">File Processing Status</th>
+                                <th style="width: 9rem;">Process Instance Number</th>                              
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-splitFilesListData>
+                            <tr [pSelectableRow]="splitFilesListData">
+                                <td style="color: royalblue;" (click)="onClickOfFileIdentifier(splitFilesListData)">{{splitFilesListData?.fileIdentifier}}</td>
+                                <td>{{splitFilesListData?.fileProcessingStatus}}</td>                              
+                                <td>{{splitFilesListData?.processInstanceNumber}}</td>                           
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+</div>

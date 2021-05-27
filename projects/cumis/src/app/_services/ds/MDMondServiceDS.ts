@@ -71,8 +71,14 @@ export class MDMondServiceDS extends MDBaseDS {
         return this.invokeGET("/mondrestws/services/executeService/invokeMondServiceGET", param);
     }
 
-    getFormDataHistoricalAddress(projectName: any,debugLevel: any,serviceName:any,version: any,formVariables: any,foobar: any): Observable<any>{
+    getFormDataDebugLevel(projectName: any,debugLevel: any,serviceName:any,version: any,formVariables: any,foobar: any): Observable<any>{
         let param = {projectName: projectName,debugLevel:debugLevel,serviceName:serviceName,version:version,formVariables: formVariables,foobar:foobar};       
         return this.invokeGET("/mondrestws/services/executeService/invokeMondProcessDesignerServiceGET", param);
     }
+
+    getBinDataModelBasedOnFKTypeDescriptionVersion(foreignKeyType: any,description: any,version:any): Observable<any>{
+        let param = {foreignKeyType: foreignKeyType,description:description,version:version};       
+        return this.invokeGET("/mondrestws/services/binData/getBinDataModelBasedOnFKTypeDescriptionVersion", param);
+    }
+
 }

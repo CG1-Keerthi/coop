@@ -346,7 +346,7 @@ export class ClientDetailComponent implements OnInit {
     onClickOfHistoricalAddress() { 
         $("#historicalModelId").click();
         let formVariables = JSON.stringify({ "clientId": this.clientDetailsValues.clientInfo.clientIdentifier });
-        this.mdMondServiceDS.getFormDataHistoricalAddress('Creditor Self Admin', 'BasedOnService', 'FetchClientAddressHistory', '1.00', formVariables, new Date().getTime()).subscribe(
+        this.mdMondServiceDS.getFormDataDebugLevel('Creditor Self Admin', 'BasedOnService', 'FetchClientAddressHistory', '1.00', formVariables, new Date().getTime()).subscribe(
             res => {
                 var decodedData = atob(res.value);
                 var parseDecodeData = JSON.parse(decodedData);

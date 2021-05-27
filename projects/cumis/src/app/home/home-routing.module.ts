@@ -9,6 +9,8 @@ import { LogicalDeleteReportComponent } from '../mond/reports/logicaldeleterepor
 import { ClientMaintenanceComponent } from '../mond/clientmaintenance/clientmaintenance.component';
 import { RateStructureConfigurationComponent } from '../mond/rateStructureConfiguration/rateStructureConfiguration.component';
 import { creditorCertificateComponent } from '../mond/creditorCertificateMaintenance/creditorCertificate.component';
+import { CreditorDataAdminViewComponent } from '../mond/creditorDataAdminView/creditorDataAdminView.component';
+import { CreditorDataProcessingOverviewComponent } from '../mond/creditorDataAdminView/creditorDataProcessingOverview/creditorDataProcessingOverview.component';
 
 const homeRoutes: Routes = [
   {
@@ -21,9 +23,11 @@ const homeRoutes: Routes = [
       { path: 'logicalDeleteReportComponent', component: LogicalDeleteReportComponent },
       { path: 'clientmaintenance', component: ClientMaintenanceComponent },
       { path: 'rateStructureConfiguration', component: RateStructureConfigurationComponent },
-      { path: 'creditorCertificate', component: creditorCertificateComponent }
+      { path: 'creditorCertificate', component: creditorCertificateComponent },
+      { path: 'creditorDataAdminView', component: CreditorDataAdminViewComponent },
+      { path: 'creditorDataProcessingOverview', component: CreditorDataProcessingOverviewComponent }
 
-      
+
     ]
   }
 ];

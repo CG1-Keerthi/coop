@@ -1,0 +1,596 @@
+<div>
+    <div class="ym_form_group md-group row">
+        <button class="float-right btn btn-primary" (click)="onClickOfLGMDownloaderrorReport()"><i class="fa fa-download mr-1"></i>Download Error Report </button>
+    </div>
+
+    <!-- LAIS  Balancing Info -->
+    <div>
+        <mat-accordion>
+            <mat-expansion-panel [expanded]="true">
+                <mat-expansion-panel-header style="background-color: #307ecc;">
+                    <mat-panel-title style="color: white;">
+                        Balancing Information
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="row">
+                    <div class="col-3">
+                        <mat-card class="m-0 p-0 md-border">
+                            <mat-card-header class="p-2">
+                                <div mat-card-avatar class="md-imgConfig md-imgConfigBlue">
+                                    <i class="fa fa-files-o md-icon"></i>
+                                </div>
+                                <mat-card-title class="mt-1">
+                                    {{lgmDataList?.creditorFileProcessingInfo_totalNumberOfRecords}}</mat-card-title>
+                                <mat-card-subtitle>Total No. Of Records</mat-card-subtitle>
+                            </mat-card-header>
+                        </mat-card>
+                    </div>
+                    <div class="col-3">
+                        <mat-card class="m-0 p-0 md-border">
+                            <mat-card-header class="p-2">
+                                <div mat-card-avatar class="md-imgConfig md-imgConfigOrange">
+                                    <i class="fa fa-files-o md-icon"></i>
+                                </div>
+                                <mat-card-title class="mt-1">
+                                    {{lgmDataList?.creditorFileProcessingInfo_totalNumberOfDuplicateRecords}}
+                                </mat-card-title>
+                                <mat-card-subtitle>No. Of Duplicate Records</mat-card-subtitle>
+                            </mat-card-header>
+                        </mat-card>
+                    </div>
+                    <div class="col-3">
+                        <mat-card class="m-0 p-0 md-border">
+                            <mat-card-header class="p-2">
+                                <div mat-card-avatar class="md-imgConfig md-imgConfigRed">
+                                    <i class="fa fa-files-o md-icon"></i>
+                                </div>
+                                <mat-card-title class="mt-1">
+                                    {{lgmDataList?.creditorFileProcessingInfo_numberOfRecordsInError}}</mat-card-title>
+                                <mat-card-subtitle>No. Of Records In Error</mat-card-subtitle>
+                            </mat-card-header>
+                        </mat-card>
+                    </div>
+                    <div class="col-3">
+                        <mat-card class="m-0 p-0 md-border">
+                            <mat-card-header class="p-2">
+                                <div mat-card-avatar class="md-imgConfig md-imgConfigGreen">
+                                    <i class="fa fa-files-o md-icon"></i>
+                                </div>
+                                <mat-card-title class="mt-1">
+                                    {{lgmDataList?.creditorFileProcessingInfo_numberOfRecordsPosted}}</mat-card-title>
+                                <mat-card-subtitle>No. Of Records Posted</mat-card-subtitle>
+                            </mat-card-header>
+                        </mat-card>
+                    </div>
+                </div>
+
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+    <!-- Balancing info ended -->
+
+    <!-- LGM File Header start -->
+    <div>
+        <mat-accordion>
+            <mat-expansion-panel [expanded]="true">
+                <mat-expansion-panel-header style="background-color: #307ecc;">
+                    <mat-panel-title style="color: white;">
+                        File Header
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="row">
+                    <div class="ym_form_group ml-3">
+                        <label>Header Errors</label>
+                        <textarea class="md-text-area-width" rows="5" placeholder="Header Errors" value="{{lgmDataList?.creditorFile_policyFileLGM_header_headerErrors}}
+                        {{lgmDataList?.creditorFile_policyReinstetementFileLGM_header_creditUnionName}}
+                        {{lgmDataList?.creditorFile_policyCancellationFileLGM_header_headerErrors}}"></textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="ym_form_group col-4">
+                        <label>Client Name</label>
+                        <input placeholder="Client Name" value="{{lgmDataList?.creditorFile_policyFileLGM_header_creditUnionName}} 
+                        {{lgmDataList?.creditorFile_policyReinstetementFileLGM_header_creditUnionName}}
+                        {{lgmDataList?.creditorFile_policyCancellationFileLGM_header_creditUnionName}}">
+                    </div>
+                    <div class="ym_form_group col-4">
+                        <label>Client Identifier</label>
+                        <input placeholder="Client Identifier" value="{{lgmDataList?.creditorFile_policyFileLGM_header_creditUnionIdentifier}}
+                        {{lgmDataList?.creditorFile_policyReinstetementFileLGM_header_creditUnionIdentifier}}
+                        {{lgmDataList?.creditorFile_policyCancellationFileLGM_header_creditUnionIdentifier}}">
+                    </div>
+                    <div class="ym_form_group col-4">
+                        <label>File Creation Date</label>
+                        <input placeholder="File Creation Date" value="{{lgmDataList?.creditorFile_policyFileLGM_header_fileCreationDate}}
+                        {{lgmDataList?.creditorFile_policyReinstetementFileLGM_header_fileCreationDate}}
+                        {{lgmDataList?.creditorFile_policyCancellationFileLGM_header_fileCreationDate}}">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="ym_form_group col-4">
+                        <label>Record Count</label>
+                        <input placeholder="Record Count" value="{{lgmDataList?.creditorFile_policyFileLGM_header_recordCount}}
+                        {{lgmDataList?.creditorFile_policyReinstetementFileLGM_header_recordCount}}
+                        {{lgmDataList?.creditorFile_policyCancellationFileLGM_header_recordCount}}">
+                    </div>
+                    <div class="ym_form_group col-4">
+                        <label>Policy Count</label>
+                        <input placeholder="Policy Count" value="{{lgmDataList?.creditorFile_policyFileLGM_header_policyCount}}
+                        {{lgmDataList?.creditorFile_policyReinstetementFileLGM_header_policyCount}}
+                        {{lgmDataList?.creditorFile_policyCancellationFileLGM_header_policyCount}}">
+                    </div>
+                    <div class="ym_form_group col-4">
+                        <label>Product Code</label>
+                        <input placeholder="Product Code" value="{{lgmDataList?.creditorFile_policyFileLGM_header_cumisProductTypeCode}}
+                        {{lgmDataList?.creditorFile_policyReinstetementFileLGM_header_cumisProductTypeCode}}
+                        {{lgmDataList?.creditorFile_policyCancellationFileLGM_header_cumisProductTypeCode}}">
+
+                    </div>
+                </div>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+    <!-- LGM File header ended -->
+
+    <!-- LGm Certificate starts -->
+    <div>
+        <mat-accordion>
+            <mat-expansion-panel [expanded]="true">
+                <mat-expansion-panel-header style="background-color: #307ecc;">
+                    <mat-panel-title style="color: white;">
+                        Certificate
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="row">
+                    <div class="col-3">
+                        <div>
+                            <div class="m-0 p-2 row mt-3" style="background-color: #ebebf1;">
+                                <div class="col-md-12 pl-2 pt-2">
+                                    <h3>Certificate</h3>
+                                </div>
+                            </div>
+                            <div id="ptableId">
+                                <p-table [value]="lgmCertificateList" selectionMode="single"
+                                    (onRowSelect)="onClickOfLgmCertificateDataRow($event)">
+                                    <ng-template pTemplate="header">
+                                        <tr class="ptableHeader">
+                                            <th>Policy Number</th>
+                                            <th>Contract Identifier</th>
+                                        </tr>
+                                    </ng-template>
+                                    <ng-template pTemplate="body" let-lgmResponseData>
+                                        <tr [pSelectableRow]="lgmResponseData">
+                                            <td>{{lgmResponseData?.policyNumber}}</td>
+                                            <td>{{lgmResponseData?.contractIdentifier}}</td>
+                                        </tr>
+                                    </ng-template>
+                                </p-table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-9">
+                        <div class="ym_form_group">
+                            <label>Record Errors</label>
+                            <textarea class="md-text-area-width" rows="3" placeholder="Header Errors"
+                                value={{lgmCertificateRowData?.recordErrors}}></textarea>
+                        </div>
+                        <div>
+                            <mat-card class="w-100 mt-2 md-boder">
+                                <mat-card-header>
+                                    <mat-card-title class="md-clr"><b>Certificate Details</b></mat-card-title>
+                                </mat-card-header>
+                                <mat-divider></mat-divider>
+                                <mat-card-content class="mt-3">
+                                    <div class="row">
+                                        <div class="ym_form_group col-4">
+                                            <label>Unique Key</label>
+                                            <input placeholder="Unique Key"
+                                                value="{{lgmCertificateRowData?.uniqueKey}}">
+                                        </div>
+                                        <div class="ym_form_group col-4">
+                                            <label>Policy Number</label>
+                                            <input placeholder="Policy Number"
+                                                value="{{lgmCertificateRowData?.policyNumber}}">
+                                        </div>
+                                        <div class="ym_form_group col-4">
+                                            <label>Contract Identifier</label>
+                                            <input placeholder="Contract Identifier"
+                                                value="{{lgmCertificateRowData?.contractIdentifier}}">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="ym_form_group col-4">
+                                            <label>Location Identifier</label>
+                                            <input placeholder="Location Identifier"
+                                                value="{{lgmCertificateRowData?.cUBranchIdentifier}}">
+                                        </div>
+                                        <div class="ym_form_group col-4"><label>Premium Payment Frequency
+                                            </label>
+                                            <input placeholder="Premium Payment Frequency"
+                                                value="{{lgmCertificateRowData?.premiumPaymentFrequency}}">
+                                        </div>
+                                        <div class="ym_form_group col-4">
+                                            <label>Is Financed</label>
+                                            <input placeholder="Is Financed"
+                                                value="{{lgmCertificateRowData?.isFinanced}}">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="ym_form_group col-4">
+                                            <label>Calculate Proportional Premium</label>
+                                            <input placeholder="Calculate Proportional Premium"
+                                                value="{{lgmCertificateRowData?.calculateProportionalPremium}}">
+                                        </div>
+                                        <div class="ym_form_group col-4"><label>Loan Account Number
+                                            </label>
+                                            <input placeholder="Loan Account Number"
+                                                value="{{lgmCertificateRowData?.loanAccountNumber}}">
+                                        </div>
+                                        <div class="ym_form_group col-4">
+                                            <label>Loan Type</label>
+                                            <input placeholder="Loan Type" value="{{lgmCertificateRowData?.loanType}}">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="ym_form_group col-4">
+                                            <label>Loan Amount</label>
+                                            <input placeholder="Loan Amount"
+                                                value="{{lgmCertificateRowData?.loanAmount}}">
+                                        </div>
+                                        <div class="ym_form_group col-4"><label>Outstanding Balance
+                                            </label>
+                                            <input placeholder="Outstanding Balance"
+                                                value="{{lgmCertificateRowData?.outstandingBalance}}">
+                                        </div>
+                                        <div class="ym_form_group col-4">
+                                            <label>Compound Frequency</label>
+                                            <input placeholder="Compound Frequency"
+                                                value="{{lgmCertificateRowData?.compoundFrequency}}">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="ym_form_group col-4">
+                                            <label>Interest Rate</label>
+                                            <input placeholder="Interest Rate"
+                                                value="{{lgmCertificateRowData?.interestRate}}">
+                                        </div>
+                                        <div class="ym_form_group col-4"><label>Payment Frequency
+                                            </label>
+                                            <input placeholder="Payment Frequency"
+                                                value="{{lgmCertificateRowData?.paymentFrequency}}">
+                                        </div>
+                                        <div class="ym_form_group col-4">
+                                            <label>Periodic Payment</label>
+                                            <input placeholder="Periodic Payment"
+                                                value="{{lgmCertificateRowData?.periodicPayment}}">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="ym_form_group col-4">
+                                            <label>Residual Payment Amount</label>
+                                            <input placeholder="Residual Payment Amount"
+                                                value="{{lgmCertificateRowData?.residualPaymentAmount}}">
+                                        </div>
+                                        <div class="ym_form_group col-4"><label>Term In Months
+                                            </label>
+                                            <input placeholder="Term In Months"
+                                                value="{{lgmCertificateRowData?.termInMonths}}">
+                                        </div>
+                                        <div class="ym_form_group col-4">
+                                            <label>Amortization In Months</label>
+                                            <input placeholder="Amortization In Months"
+                                                value="{{lgmCertificateRowData?.amortizationInMonths}}">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="ym_form_group col-4">
+                                            <label>Loan Type Category</label>
+                                            <input placeholder="Loan Type Category"
+                                                value="{{lgmCertificateRowData?.loanTypeCategory}}">
+                                        </div>
+                                        <div class="ym_form_group col-4"><label>Effective Date
+                                            </label>
+                                            <input placeholder="Effective Date"
+                                                value="{{lgmCertificateRowData?.effectiveDate}}">
+                                        </div>
+                                        <div class="ym_form_group col-4">
+                                            <label>Transit Branch Number</label>
+                                            <input placeholder="Transit Branch Number"
+                                                value="{{lgmCertificateRowData?.transitBranchNumber}}">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="ym_form_group col-4">
+                                            <label>Transit Institution Number</label>
+                                            <input placeholder="Transit Institution Number"
+                                                value="{{lgmCertificateRowData?.transitInstitutionNumber}}">
+                                        </div>
+                                        <div class="ym_form_group col-4"><label>Debit Number
+                                            </label>
+                                            <input placeholder="Debit Number"
+                                                value="{{lgmCertificateRowData?.debitNumber}}">
+                                        </div>
+                                        <div class="ym_form_group col-4">
+                                            <label>Draw Day</label>
+                                            <input placeholder="Draw Day" value="{{lgmCertificateRowData?.drawDay}}">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="ym_form_group col-4">
+                                            <label>Next Bill Date</label>
+                                            <input placeholder="Next Bill Date"
+                                                value="{{lgmCertificateRowData?.nextBillDate}}">
+                                        </div>
+                                        <div class="ym_form_group col-4"><label>Next Draw Date
+                                            </label>
+                                            <input placeholder="Next Draw Date"
+                                                value="{{lgmCertificateRowData?.nextDrawDate}}">
+                                        </div>
+                                    </div>
+                                </mat-card-content>
+                            </mat-card>
+                        </div>
+                    </div>
+                </div>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+    <!-- LGM Certificate starts -->
+    <!-- LGm Applicant starts -->
+    <div>
+        <mat-accordion>
+            <mat-expansion-panel [expanded]="true">
+                <mat-expansion-panel-header style="background-color: #307ecc;">
+                    <mat-panel-title style="color: white;">
+                        Applicant
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="row">
+                    <div class="col-3">
+                        <div>
+                            <div class="m-0 p-2 row mt-3" style="background-color: #ebebf1;">
+                                <div class="col-md-12 pl-2 pt-2">
+                                    <h3>Applicant</h3>
+                                </div>
+                            </div>
+                            <div id="ptableId">
+                                <p-table [value]="lgmCertificateRowData?.applicant" selectionMode="single"
+                                    (onRowSelect)="onClickOfApplicantDataRow($event)">
+                                    <ng-template pTemplate="header">
+                                        <tr class="ptableHeader">
+                                            <th>Unique Key</th>
+                                            <th>Applicant Type</th>
+                                        </tr>
+                                    </ng-template>
+                                    <ng-template pTemplate="body" let-lgmApplicantResponseData>
+                                        <tr [pSelectableRow]="lgmApplicantResponseData">
+                                            <td>{{lgmApplicantResponseData.uniqueKey}}</td>
+                                            <td>{{lgmApplicantResponseData.applicantType}}</td>
+                                        </tr>
+                                    </ng-template>
+                                </p-table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-9">
+                        <div>
+                            <mat-card class="w-100 mt-2 md-boder">
+                                <mat-card-header>
+                                    <mat-card-title class="md-clr"><b>Applicant Details</b></mat-card-title>
+                                </mat-card-header>
+                                <mat-divider></mat-divider>
+                                <mat-card-content class="mt-3">
+                                    <div class="row">
+                                        <div class="ym_form_group col-4">
+                                            <label>Unique Key</label>
+                                            <input placeholder="Unique Key" value="{{lgmApplicantRowData?.uniqueKey}}">
+                                        </div>
+                                        <div class="ym_form_group col-4">
+                                            <label>Applicant Type</label>
+                                            <input placeholder="Applicant Type"
+                                                value="{{lgmApplicantRowData?.applicantType}}">
+                                        </div>
+                                        <div class="ym_form_group col-4">
+                                            <label>Salutation</label>
+                                            <input placeholder="Salutation" value="{{lgmApplicantRowData?.salutation}}">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="ym_form_group col-4">
+                                            <label>First Name</label>
+                                            <input placeholder="First Name" value="{{lgmApplicantRowData?.firstName}}">
+                                        </div>
+                                        <div class="ym_form_group col-4"><label>Last Name
+                                            </label>
+                                            <input placeholder="Last Name" value="{{lgmApplicantRowData?.lastName}}">
+                                        </div>
+                                        <div class="ym_form_group col-4">
+                                            <label>Middle Initial</label>
+                                            <input placeholder="Middle Initial"
+                                                value="{{lgmApplicantRowData?.middleInitial}}">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="ym_form_group col-4">
+                                            <label>Birth Date</label>
+                                            <input placeholder="Birth Date" value="{{lgmApplicantRowData?.birthDate}}">
+                                        </div>
+                                        <div class="ym_form_group col-4"><label>Gender
+                                            </label>
+                                            <input placeholder="Gender" value="{{lgmApplicantRowData?.gender}}">
+                                        </div>
+                                        <div class="ym_form_group col-4">
+                                            <label>Is Smoker</label>
+                                            <input placeholder="Is Smoker" value="{{lgmApplicantRowData?.isSmoker}}">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="ym_form_group col-4">
+                                            <label>Correspondence Language</label>
+                                            <input placeholder="Correspondence Language"
+                                                value="{{lgmApplicantRowData?.correspondenceLanguage}}">
+                                        </div>
+                                        <div class="ym_form_group col-4">
+                                            <label>Communication Language</label>
+                                            <input placeholder="Communication Language"
+                                                value="{{lgmApplicantRowData?.communicationLanguage}}">
+                                        </div>
+                                        <div class="ym_form_group col-4"><label>Street
+                                            </label>
+                                            <input placeholder="Street" value="{{lgmApplicantRowData?.street}}">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="ym_form_group col-4">
+                                            <label>Street2
+                                            </label>
+                                            <input placeholder="Street2
+                                            " value="{{lgmApplicantRowData?.street2}}">
+                                        </div>
+                                        <div class="ym_form_group col-4"><label>City
+                                            </label>
+                                            <input placeholder="City" value="{{lgmApplicantRowData?.city}}">
+                                        </div>
+                                        <div class="ym_form_group col-4">
+                                            <label>Province State Code</label>
+                                            <input placeholder="Province State Code"
+                                                value="{{lgmApplicantRowData?.provinceStateCode}}">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="ym_form_group col-4">
+                                            <label>Postal Code</label>
+                                            <input placeholder="Postal Code"
+                                                value="{{lgmApplicantRowData?.postalCode}}">
+                                        </div>
+                                        <div class="ym_form_group col-4"><label>Country
+                                            </label>
+                                            <input placeholder="Country" value="{{lgmApplicantRowData?.country}}">
+                                        </div>
+                                        <div class="ym_form_group col-4">
+                                            <label>Home Phone</label>
+                                            <input placeholder="Home Phone" value="{{lgmApplicantRowData?.homePhone}}">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="ym_form_group col-4">
+                                            <label>Work Phone</label>
+                                            <input placeholder="Work Phone" value="{{lgmApplicantRowData?.workPhone}}">
+                                        </div>
+                                        <div class="ym_form_group col-4"><label>Email Address
+                                            </label>
+                                            <input placeholder="Email Address"
+                                                value="{{lgmApplicantRowData?.emailAddress}}">
+                                        </div>
+                                    </div>
+                                </mat-card-content>
+                            </mat-card>
+                        </div>
+                    </div>
+                </div>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+    <!-- LGM Applicant starts -->
+
+    <!-- Coverage Applicant starts -->
+    <div>
+        <mat-accordion>
+            <mat-expansion-panel [expanded]="true">
+                <mat-expansion-panel-header style="background-color: #307ecc;">
+                    <mat-panel-title style="color: white;">
+                        Coverage
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="row">
+                    <div class="col-3">
+                        <div>
+                            <div class="m-0 p-2 row mt-3" style="background-color: #ebebf1;">
+                                <div class="col-md-12 pl-2 pt-2">
+                                    <h3>Coverage</h3>
+                                </div>
+                            </div>
+                            <div id="ptableId">
+                                <p-table [value]="lgmApplicantRowData?.coverage" selectionMode="single"
+                                    (onRowSelect)="onClickOfCoverageDataRow($event)">
+                                    <ng-template pTemplate="header">
+                                        <tr class="ptableHeader">
+                                            <th>Applicant Type</th>
+                                            <th>Coverage Type</th>
+                                        </tr>
+                                    </ng-template>
+                                    <ng-template pTemplate="body" let-lgmCoverageResponseData>
+                                        <tr [pSelectableRow]="lgmCoverageResponseData">
+                                            <td>{{lgmCoverageResponseData?.applicantType}}</td>
+                                            <td>{{lgmCoverageResponseData?.coverageType}}</td>
+                                        </tr>
+                                    </ng-template>
+                                </p-table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-9">
+                        <div>
+                            <mat-card class="w-100 mt-2 md-boder">
+                                <mat-card-header>
+                                    <mat-card-title class="md-clr"><b>Coverage Details</b></mat-card-title>
+                                </mat-card-header>
+                                <mat-divider></mat-divider>
+                                <mat-card-content class="mt-3">
+                                    <div class="row">
+                                        <div class="ym_form_group col-4">
+                                            <label>Unique Key</label>
+                                            <input placeholder="Unique Key" value="{{lgmCoverageData?.uniqueKey}}">
+                                        </div>
+                                        <div class="ym_form_group col-4">
+                                            <label>Applicant Type</label>
+                                            <input placeholder="Applicant Type"
+                                                value="{{lgmCoverageData?.applicantType}}">
+                                        </div>
+                                        <div class="ym_form_group col-4">
+                                            <label>Coverage Type</label>
+                                            <input placeholder="Coverage Type"
+                                                value="{{lgmCoverageData?.coverageType}}">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="ym_form_group col-4">
+                                            <label>Coverage Effective Date</label>
+                                            <input placeholder="Coverage Effective Date"
+                                                value="{{lgmCoverageData?.coverageEffectiveDate}}">
+                                        </div>
+                                        <div class="ym_form_group col-4"><label>Coverage Termination Date
+                                            </label>
+                                            <input placeholder="Coverage Termination Date"
+                                                value="{{lgmCoverageData?.coverageTerminationDate}}">
+                                        </div>
+                                        <div class="ym_form_group col-4">
+                                            <label>Coverage or Benefit Amount </label>
+                                            <input placeholder="Coverage or Benefit Amount"
+                                                value="{{lgmCoverageData?.coverageorBenefitAmount}}">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="ym_form_group col-4">
+                                            <label>Premium</label>
+                                            <input placeholder="Premium" value="{{lgmCoverageData?.premium}}">
+                                        </div>
+                                        <div class="ym_form_group col-4"><label>Premium Tax
+                                            </label>
+                                            <input placeholder="Premium Tax" value="{{lgmCoverageData?.premiumTax}}">
+                                        </div>
+                                        <div class="ym_form_group col-4">
+                                            <label>Is Smoker</label>
+                                            <input placeholder="Is Smoker" value="{{lgmCoverageData?.isSmoker}}">
+                                        </div>
+                                    </div>
+                                </mat-card-content>
+                            </mat-card>
+                        </div>
+                    </div>
+                </div>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+    <!-- Coverage Applicant starts -->
+</div>

@@ -4,4 +4,9 @@ mat-expansion-panel-header{
 .ptableHeader> th {
     color: white !important;
     background-color: #00456a !important;
-      }
+}
+
+#splitFileId{
+overflow-y: auto!important;
+height: 30rem!important;
+}

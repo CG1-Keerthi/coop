@@ -20,6 +20,7 @@ export class lgmTwoComponent implements OnInit {
     public csfrToken: any;
     public downloadData: any;
     public fileUrl: any;
+    public processWithErrors: boolean;
 
 
     constructor(private mdMondServiceDS: MDMondServiceDS,
@@ -41,6 +42,18 @@ export class lgmTwoComponent implements OnInit {
         } else if (this.LGMTwoData.creditorFile_policyReinstatementFileLGM2_certificate.length > 0) {
             this.lgmTwoDataCertificate = this.LGMTwoData.creditorFile_policyReinstatementFileLGM2_certificate;
         }
+
+        if(this.LGMTwoData.creditorFile_policyFileLGM2_header_processedWithErrors != undefined){
+            this.processWithErrors = this.LGMTwoData.creditorFile_policyFileLGM2_header_processedWithErrors;
+        }else if(this.LGMTwoData.creditorFile_policyExpiredFileLGM2_header_processedWithErrors != undefined){
+            this.processWithErrors = this.LGMTwoData.creditorFile_policyExpiredFileLGM2_header_processedWithErrors;
+        }else if(this.LGMTwoData.creditorFile_policyUnexpiredFileLGM2_header_processedWithErrors != undefined){
+            this.processWithErrors = this.LGMTwoData.creditorFile_policyUnexpiredFileLGM2_header_processedWithErrors;
+        }else if(this.LGMTwoData.creditorFile_policyCancellationFileLGM2_header_processedWithErrors != undefined){
+            this.processWithErrors =  this.LGMTwoData.creditorFile_policyCancellationFileLGM2_header_processedWithErrors
+        }else if(this.LGMTwoData.creditorFile_policyReinstatementFileLGM2_header_processedWithErrors != undefined){
+            this.processWithErrors = this.LGMTwoData.creditorFile_policyReinstatementFileLGM2_header_processedWithErrors
+        }
        
         this.mdCommonGetterSetter.getCsfrToken().subscribe(data => {
             if (data) {
@@ -57,7 +70,7 @@ export class lgmTwoComponent implements OnInit {
 
     onClickOfPWE(event) {
         debugger
-        if (event.currentTarget.lastElementChild.control.checked == false) {
+        if (event.currentTarget.lastElementChild.control.checked == false || this.processWithErrors == true) {
             this.isShowField = true;
         } else {
             this.isShowField = false;

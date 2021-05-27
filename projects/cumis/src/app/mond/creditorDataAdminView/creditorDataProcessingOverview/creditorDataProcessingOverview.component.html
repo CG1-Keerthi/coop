@@ -9,25 +9,25 @@
                     <div class="row">
                         <div class="ym_form_group  col-6">
                             <label>Process Instance Number</label>
-                            <input placeholder="Process Instance Number"
+                            <input placeholder="Process Instance Number" [readonly]="isFieldreadonly"
                                 value="{{processingOverviewData?.creditorFileProcessingInfo_processInstanceNumber}}">
                         </div>
                         <div class="ym_form_group  col-6">
                             <label>Client Name</label>
-                            <input placeholder="Client Name"
+                            <input placeholder="Client Name" [readonly]="isFieldreadonly"
                                 value="{{processingOverviewData?.creditorFileProcessingInfo_partnerName}}">
                         </div>
                     </div>
                     <div class="row">
                         <div class="ym_form_group  col-6">
                             <label>File Name</label>
-                            <input placeholder="File Name"
+                            <input placeholder="File Name" [readonly]="isFieldreadonly"
                                 value="{{processingOverviewData?.creditorFileProcessingInfo_fileName}}">
                         </div>
                         <div class="ym_form_group  col-6">
                             <div class="row">
                                 <label>File Submission Date</label>
-                                <input class="col-md-9" matInput [matDatepicker]="picker"
+                                <input class="col-md-9" matInput [matDatepicker]="picker" [readonly]="isFieldreadonly"
                                     value="{{processingOverviewData?.creditorFileProcessingInfo_fileSubmissionDate}}">
                                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                                 <mat-datepicker class="col-md-3" #picker></mat-datepicker>
@@ -38,35 +38,47 @@
                         <div class="ym_form_group  col-6">
                             <div class="row ml-1">
                                 <label>File Processing Date</label>
-                                <input class="col-md-9" matInput [matDatepicker]="picker2"
+                                <input class="col-md-9" matInput [matDatepicker]="picker2" [readonly]="isFieldreadonly"
                                     value="{{processingOverviewData?.creditorFileProcessingInfo_fileProcessingDate}}">
                                 <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                                 <mat-datepicker class="col-md-3" #picker2></mat-datepicker>
                             </div>
                         </div>
+                        <div class="ym_form_group  col-6" *ngIf="isShowCrelogixField">
+                            <label>File Processing Status</label>
+                            <input placeholder="Parent File Processing Status" [readonly]="isFieldreadonly"
+                                value="{{processingOverviewData?.creditorFileProcessingInfo_fileProcessingStatus}}">
+                        </div>
                     </div>
-                    <hr>
-                    <div class="row">
+                    <div class="row" *ngIf="isShowCrelogixField">
+                        <div class="ym_form_group  col-6">
+                            <label>File Identifier</label>
+                            <input placeholder="Parent File Identifier" [readonly]="isFieldreadonly"
+                                value="{{processingOverviewData?.creditorFileProcessingInfo_fileIdentifier}}">
+                        </div>
+                    </div>
+                    <hr *ngIf="isShowLAISField">
+                    <div class="row"  *ngIf="isShowLAISField">
                         <div class="ym_form_group  col-6">
                             <label>Parent File Identifier</label>
-                            <input placeholder="Parent File Identifier"
+                            <input placeholder="Parent File Identifier" [readonly]="isFieldreadonly"
                                 value="{{processingOverviewData?.creditorFileProcessingInfo_fileIdentifier}}">
                         </div>
                         <div class="ym_form_group  col-6">
                             <label>Parent File Processing Status</label>
-                            <input placeholder="Parent File Processing Status"
+                            <input placeholder="Parent File Processing Status" [readonly]="isFieldreadonly"
                                 value="{{processingOverviewData?.creditorFileProcessingInfo_fileProcessingStatus}}">
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row" *ngIf="isShowLAISField">
                         <div class="ym_form_group  col-6">
                             <label>File Identifier</label>
-                            <input placeholder="File Identifier"
+                            <input placeholder="File Identifier" [readonly]="isFieldreadonly"
                                 value="{{processingOverviewData?.creditorSplitFileProcessingInfo_fileIdentifier}}">
                         </div>
                         <div class="ym_form_group  col-6">
                             <label>File Processing Status</label>
-                            <input placeholder="File Processing Status"
+                            <input placeholder="File Processing Status" [readonly]="isFieldreadonly"
                                 value="{{processingOverviewData?.creditorSplitFileProcessingInfo_fileProcessingStatus}}">
                         </div>
                     </div>
@@ -95,7 +107,7 @@
                     <div class="row mt-2">
                         <div class="ym_form_group  col-6">
                             <label>File Reviewed By</label>
-                            <input placeholder="File Reviewed By"
+                            <input placeholder="File Reviewed By" [readonly]="isFieldreadonly"
                                 value="{{processingOverviewData?.creditorFileProcessingInfo_fileReviewedBy}}">
                         </div>
                     </div>

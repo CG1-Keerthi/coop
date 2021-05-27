@@ -146,7 +146,7 @@
                                     <h3>Certificate</h3>
                                 </div>
                             </div>
-                            <div id="ptableId">
+                            <div id="md-scroll">
                                 <p-table [value]="lgmTwoDataCertificate" (onRowSelect)="onClickOflgmTwoCertificateRow($event)" selectionMode="single">
                                     <ng-template pTemplate="header">
                                         <tr class="ptableHeader">
@@ -634,12 +634,7 @@
                                         </div>                                       
                                         <div class="ym_form_group col-4">
                                             <label>Processed With Errors</label>
-                                            <!-- value="{{LGMTwoData?.creditorFile_policyFileLGM2_header_processedWithErrors}}
-                                                {{LGMTwoData?.creditorFile_policyExpiredFileLGM2_header_processedWithErrors}}
-                                                {{LGMTwoData?.creditorFile_policyUnexpiredFileLGM2_header_processedWithErrors}}
-                                                {{LGMTwoData?.creditorFile_policyCancellationFileLGM2_header_processedWithErrors}}
-                                                {{LGMTwoData?.creditorFile_policyReinstatementFileLGM2_header_processedWithErrors}}" -->
-                                           <mat-slide-toggle  (click)="onClickOfPWE($event)" ></mat-slide-toggle>
+                                           <mat-slide-toggle  (click)="onClickOfPWE($event)" [(ngModel)]="processWithErrors" ></mat-slide-toggle>
                                         </div>                                    
                                     </div>
                                     <div class="row" *ngIf="isShowField">

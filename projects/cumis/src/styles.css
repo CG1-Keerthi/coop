@@ -278,3 +278,8 @@ z-index:1100;
     overflow-x: hidden !important;
 }
 
+#md-scroll{
+    overflow-y: auto;
+    height: 17rem;
+}
+

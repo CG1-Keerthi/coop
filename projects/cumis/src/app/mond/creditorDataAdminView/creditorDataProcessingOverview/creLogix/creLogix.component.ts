@@ -38,13 +38,11 @@ export class CreLogixComponent implements OnInit {
     }
 
     onClickOfPolicyDataRow(event) {
-        debugger;
         this.policyDetailsList = event.data;
     }
 
 
     onClickOfDownloadErrorreport() {
-        debugger;
         this.invokePFDServiceWithDownload(this.processSummaryRowData.fileIdentifier, this.csfrToken);
     }
 
@@ -56,34 +54,29 @@ export class CreLogixComponent implements OnInit {
             + '&csfrToken=' + csfrToken;
         this.http.post("/mondrestws/services/executeService/invokePFDServiceWithDownload", dataToSend, { headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8' }, responseType: 'blob', observe: 'response' }).subscribe(
             data => {
-                console.log("data", data);
+                // console.log("data", data);
                 var contentDisposition = data.headers.get('content-disposition');
-                console.log("contentDisposition", contentDisposition);
+                // console.log("contentDisposition", contentDisposition);
                 var filename = contentDisposition.split(';')[1].split('filename')[1].split('=')[1].trim();
-                console.log("filename", filename);
-                console.log("Success data onClickOfFileDownload" + JSON.stringify(data));
-                console.log("Success data onClickOfFileDownload2" + data);
+                // console.log("filename", filename);
+                // console.log("Success data onClickOfFileDownload" + JSON.stringify(data));
+                // console.log("Success data onClickOfFileDownload2" + data);
                 this.downloadData = data.body;
-                console.log(" data.body", data.body)
-                console.dir("data.body", data.body);
-                console.log("data.body, JSONParse", JSON.parse(JSON.stringify(data.body)));
+                // console.log(" data.body", data.body)
+                // console.dir("data.body", data.body);
+                // console.log("data.body, JSONParse", JSON.parse(JSON.stringify(data.body)));
                 const blob = new Blob([this.downloadData], { type: 'application/xls' });
-                console.log("downloadData" + JSON.stringify(this.downloadData));
+                // console.log("downloadData" + JSON.stringify(this.downloadData));
                 this.fileUrl = window.URL.createObjectURL(blob);
                 let link = document.createElement('a');
                 link.href = this.fileUrl; //data is object received as response
                 link.download = JSON.parse(filename);
-                console.log("link.download", link.download);
-                console.log("link", link)
+                // console.log("link.download", link.download);
+                // console.log("link", link)
                 link.click();
-                console.log("after click on link,link.download", link.download);
+                // console.log("after click on link,link.download", link.download);
             }, error => {
-                debugger;
-                console.log("error", error);
                 this.mdMondServiceDS.MDError(error);
-                // var contentDisposition = "Jattachment; filename=TransactionReconcile_FG-08-Sep-2020.xlsx"
-                // var filename = contentDisposition.split(';')[1].split('filename')[1].split('=')[1].trim();
-                // var filename="Noname.zip"
             });
     }
 

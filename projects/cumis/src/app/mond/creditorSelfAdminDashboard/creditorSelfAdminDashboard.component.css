@@ -1,0 +1,22 @@
+.md-imgConfig{
+    height: 4rem;
+    width: 4rem;    
+}
+.md-imgConfigBlue{
+    background-color: #6fb3e0;
+}
+.md-imgConfigOrange{
+    background-color:#e8b110;
+}
+.md-imgConfigRed{
+    background-color:#d53f40;
+}
+.md-imgConfigGreen{
+    background-color:#9abc32;
+}
+.md-icon{
+    color: white;
+    font-size: 2rem;
+    margin-top: 1rem;
+    margin-left: 14px;
+}

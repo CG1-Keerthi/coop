@@ -11,6 +11,9 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MonthlyPickerComponent } from "./monthly-picker-component/monthlyPickerComponent";
 import { YearlyPickerComponent } from './yearly-picker-component/yearlyPickerComponent';
 import { MonthAndYearPickerComponent } from './monthAndYear-picker-component/monthAndYearPickerComponent';
+import { ChartsModule } from 'ng2-charts';
+import { yearChartComponent } from './chart/yearChart/yearChart.component';
+import { monthChartComponent } from './chart/monthChart/monthChart.component';
 
 export const MY_FORMATS: MatDateFormats = {
   parse: {
@@ -28,7 +31,9 @@ export const MY_FORMATS: MatDateFormats = {
   declarations: [
     MonthlyPickerComponent,
     YearlyPickerComponent,
-    MonthAndYearPickerComponent
+    MonthAndYearPickerComponent,
+    yearChartComponent,
+    monthChartComponent
   ],
   imports: [
     FormsModule,
@@ -38,11 +43,14 @@ export const MY_FORMATS: MatDateFormats = {
     MatAutocompleteModule,
     MatNativeDateModule,
     MatDatepickerModule,
+    ChartsModule
   ],
   exports: [
     MonthlyPickerComponent,
     YearlyPickerComponent,
-    MonthAndYearPickerComponent
+    MonthAndYearPickerComponent,
+    yearChartComponent,
+    monthChartComponent
   ],
   providers: [
     { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },

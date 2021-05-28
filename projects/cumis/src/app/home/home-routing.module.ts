@@ -11,6 +11,8 @@ import { RateStructureConfigurationComponent } from '../mond/rateStructureConfig
 import { creditorCertificateComponent } from '../mond/creditorCertificateMaintenance/creditorCertificate.component';
 import { CreditorDataAdminViewComponent } from '../mond/creditorDataAdminView/creditorDataAdminView.component';
 import { CreditorDataProcessingOverviewComponent } from '../mond/creditorDataAdminView/creditorDataProcessingOverview/creditorDataProcessingOverview.component';
+import { CreditorSelfAdminDashboardComponent } from '../mond/creditorSelfAdminDashboard/creditorSelfAdminDashboard.component';
+
 
 const homeRoutes: Routes = [
   {
@@ -25,7 +27,10 @@ const homeRoutes: Routes = [
       { path: 'rateStructureConfiguration', component: RateStructureConfigurationComponent },
       { path: 'creditorCertificate', component: creditorCertificateComponent },
       { path: 'creditorDataAdminView', component: CreditorDataAdminViewComponent },
-      { path: 'creditorDataProcessingOverview', component: CreditorDataProcessingOverviewComponent }
+      { path: 'creditorDataProcessingOverview', component: CreditorDataProcessingOverviewComponent },
+      { path: 'creditorSelfAdminDashboard', component: CreditorSelfAdminDashboardComponent },
+  
+      
 
 
     ]

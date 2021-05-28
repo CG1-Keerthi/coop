@@ -58,7 +58,17 @@ export class YearlyPickerComponent implements OnInit {
     ctrlValue.year(normalizedYear.year());
     this.date.setValue(ctrlValue);
     datepicker.close();
-    this.year.emit(this.selectedYear.nativeElement.value);
+    this.year.emit(normalizedYear);
+
+// let selectedYear = 
+
+    // this.date = new FormControl(moment());
+    // const ctrlValue = this.date.value;
+    // // ctrlValue.year(normalizedYear.year());
+    // // this.date.setValue(ctrlValue);
+    // datepicker.close();
+    // // this.year.emit(this.selectedYear.nativeElement.value);
+    // this.year.emit(event._i.year)
   }
 
   

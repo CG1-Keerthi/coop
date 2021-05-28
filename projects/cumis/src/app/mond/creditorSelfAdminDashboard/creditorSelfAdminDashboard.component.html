@@ -1,0 +1,74 @@
+<div class="ym_content">
+    <div class="col-md-12 col-lg-12 col-sm-12 mt-2 container">
+        <div class="row">
+            <div class="ym_form_group col-4">
+                <label>Client Status</label>
+                <div class="ym_form_select">
+                    <select (change)="onChangeOfClientStatus($event)">
+                        <option selected value="">Please select a value</option>
+                        <option let *ngFor="let list of clientStatus" value="{{list.clientName}}">
+                            {{list.clientName}} </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row" *ngIf="isShowCertificates">
+            <div class="col-4">
+                <mat-card class="m-0 p-0 md-border">
+                    <mat-card-header class="p-2">
+                        <div mat-card-avatar class="md-imgConfig md-imgConfigBlue">
+                            <i class="fa fa-files-o md-icon"></i>
+                        </div>
+                        <mat-card-title class="mt-1">{{dashBoardTotalData.numberOfActiveCertificates}}</mat-card-title>
+                        <mat-card-subtitle>Active Certificates</mat-card-subtitle>
+                    </mat-card-header>
+                </mat-card>
+            </div>
+            <div class="col-4">
+                <mat-card class="m-0 p-0 md-border">
+                    <mat-card-header class="p-2">
+                        <div mat-card-avatar class="md-imgConfig md-imgConfigOrange">
+                            <i class="fa fa-files-o md-icon"></i>
+                        </div>
+                        <mat-card-title class="mt-1">{{dashBoardTotalData.numberOfTerminatedCertificates}}
+                        </mat-card-title>
+                        <mat-card-subtitle>Terminated Certificates</mat-card-subtitle>
+                    </mat-card-header>
+                </mat-card>
+            </div>
+            <div class="col-4">
+                <mat-card class="m-0 p-0 md-border">
+                    <mat-card-header class="p-2">
+                        <div mat-card-avatar class="md-imgConfig md-imgConfigRed">
+                            <i class="fa fa-files-o md-icon"></i>
+                        </div>
+                        <mat-card-title class="mt-1">{{dashBoardTotalData.totalPremiumAsOfDate}}</mat-card-title>
+                        <mat-card-subtitle>Net Premium</mat-card-subtitle>
+                    </mat-card-header>
+                </mat-card>
+            </div>
+        </div>
+        <div class="mt-2" style="background-color: #ebebf1;" *ngIf="isShowCertificates">
+            <div class="row">
+                <div class="col-9"></div>
+                <div class="col-3">
+                    <div class="ym_form_group mt-2">
+                        <app-yearly-picker-component (year)="onClickOfYear($event)" #year></app-yearly-picker-component>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4 ml-4">Annual Premiums
+                    <app-yearChart-designer [chartLabel]="yearLabel" [chartData]="yearChartData">
+                    </app-yearChart-designer>
+                </div>
+                <div class="col-1"></div>
+                <div class="col-6" *ngIf="isShowMonthChart">Monthly Premiums
+                    <app-monthChart-designer [monthChartLabel]="monthLabel" [monthChartData]="monthChartData">
+                    </app-monthChart-designer>
+                </div>
+                <div class="col-1"></div>
+            </div>
+        </div>
+    </div>
+</div>

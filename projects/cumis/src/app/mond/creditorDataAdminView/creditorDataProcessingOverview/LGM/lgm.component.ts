@@ -25,7 +25,7 @@ export class LGMComponent implements OnInit {
     public fileUrl: any;
     public processSummaryRowData: any;
 
-    // old code
+    // old code need to check
     laisDataList: any;
     certificateRowData: any
 
@@ -34,7 +34,6 @@ export class LGMComponent implements OnInit {
         private mdCommonGetterSetter: MDCommonGetterSetter) { }
 
     ngOnInit() {
-        debugger;
         this.lgmDataList = this.lgmData;
         if(this.lgmDataList.creditorFile_policyFileLGM_certificate.length > 0){
             this.lgmCertificateList =  this.lgmDataList.creditorFile_policyFileLGM_certificate;
@@ -55,22 +54,18 @@ export class LGMComponent implements OnInit {
     }
 
     onClickOfLgmCertificateDataRow(event) {
-        debugger
         this.lgmCertificateRowData = event.data;
     }
 
     onClickOfApplicantDataRow(event){
-        debugger
         this.lgmApplicantRowData = event.data;
     }
 
     onClickOfCoverageDataRow(event){
-        debugger;
         this.lgmCoverageData = event.data;
     }
 
     onClickOfLGMDownloaderrorReport(){
-        debugger;
         this.invokePFDServiceWithDownload(this.processSummaryRowData.fileIdentifier, this.processSummaryRowData.partnerName,this.processSummaryRowData.fileFunctionType,this.csfrToken);
     }
 
@@ -103,12 +98,7 @@ export class LGMComponent implements OnInit {
                 link.click();
                 console.log("after click on link,link.download", link.download);
             }, error => {
-                debugger;
-                console.log("error", error);
-                this.mdMondServiceDS.MDError(error);
-                // var contentDisposition = "Jattachment; filename=TransactionReconcile_FG-08-Sep-2020.xlsx"
-                // var filename = contentDisposition.split(';')[1].split('filename')[1].split('=')[1].trim();
-                // var filename="Noname.xls";              
+                this.mdMondServiceDS.MDError(error);            
             });
     }
 

@@ -53,7 +53,6 @@ export class LAISComponent implements OnInit {
     }
 
     onClickOfPWE(event) {
-        debugger
         if (event.currentTarget.lastElementChild.control.checked == false) {
             this.isShowField = true;
         } else {
@@ -62,7 +61,6 @@ export class LAISComponent implements OnInit {
     }
 
     onClickOfLAISDownloadErrorreport() {
-        debugger;
         this.invokePFDServiceWithDownload(this.processSummaryRowData.fileIdentifier, this.processSummaryRowData.partnerName, this.processSummaryRowData.fileFunctionType, this.csfrToken);
     }
 
@@ -96,12 +94,7 @@ export class LAISComponent implements OnInit {
                 link.click();
                 console.log("after click on link,link.download", link.download);
             }, error => {
-                debugger;
-                console.log("error", error);
-                this.mdMondServiceDS.MDError(error);
-                // var contentDisposition = "Jattachment; filename=TransactionReconcile_FG-08-Sep-2020.xlsx"
-                // var filename = contentDisposition.split(';')[1].split('filename')[1].split('=')[1].trim();
-                // var filename="Noname.xls";              
+                this.mdMondServiceDS.MDError(error);              
             });
     }
 

@@ -56,6 +56,8 @@ import { lgmTwoComponent } from '../mond/creditorDataAdminView/creditorDataProce
 import { CreLogixComponent } from '../mond/creditorDataAdminView/creditorDataProcessingOverview/creLogix/creLogix.component';
 import { LAISComponent } from '../mond/creditorDataAdminView/creditorDataProcessingOverview/LAIS/lais.component';
 import { LGMComponent } from '../mond/creditorDataAdminView/creditorDataProcessingOverview/LGM/lgm.component';
+import { CreditorSelfAdminDashboardComponent } from '../mond/creditorSelfAdminDashboard/creditorSelfAdminDashboard.component';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -83,7 +85,8 @@ import { LGMComponent } from '../mond/creditorDataAdminView/creditorDataProcessi
     lgmTwoComponent,
     CreLogixComponent,
     LAISComponent,
-    LGMComponent
+    LGMComponent,
+    CreditorSelfAdminDashboardComponent
   ],
   imports: [
     CommonModule,
@@ -113,7 +116,8 @@ import { LGMComponent } from '../mond/creditorDataAdminView/creditorDataProcessi
     ClientAddressDetailFormBuilderModule,
     MatProgressSpinnerModule,
     RateDetailFormBuilderModule,
-    CreditorCertificateFormBuilderModule
+    CreditorCertificateFormBuilderModule,
+    ChartsModule
 
 
   ],

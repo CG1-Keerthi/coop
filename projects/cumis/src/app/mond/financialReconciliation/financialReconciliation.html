@@ -1,13 +1,17 @@
 <div class="ym_content">
     <div class="col-md-12 container">
+        <div class="row md-breadCrumbs">
+          Financial Reconciliation
+        </div>
+        <mat-card class="w-100 mt-2 md-border">
         <div class="row">
             <mat-tab-group class="col-md-12" [(selectedIndex)]="selectedTab">
                 <mat-tab label="Reconciliation Search">
                     <div class="row pt-2 m-0">
-                        <div class="col-md-2 p-2" style="background-color: #008acc;">
-                            <h3><i class="fa fa-bars"></i>Refine your Search</h3>
+                        <div class="col-md-2 p-2 md-refine-card md-refine-card-height">
+                            <h3 class="md-h3"><i class="fa fa-bars mr-1"></i>Refine your Search</h3>
                             <div class="ym_form_group">
-                                <label>Client Name</label>
+                                <label class="md-lbl">Client Name</label>
                                 <div class="ym_form_select">
                                     <select class="p-1" [(ngModel)]=reportClientName (change)="onChangeOfReportClientName($event)">
                                         <option selected value="">Select a client Name</option>
@@ -17,33 +21,33 @@
                                 </div>
                             </div>
                             <div class="ym_form_group">
-                                <label>Period Month</label>
+                                <label class="md-lbl">Period Month</label>
                                 <app-monthly-picker-component [monthPicked]="reportPeriodMonthSearch" (month)="onClickOfMonth($event)"></app-monthly-picker-component>
                             </div>
 
                             <div class="ym_form_group">
-                                <label>Period Year</label>
+                                <label class="md-lbl">Period Year</label>
                                 <app-yearly-picker-component [yearPicked]="reportPeriodYearSearch" (year)="onClickOfYear($event)"></app-yearly-picker-component>
                             </div>
-                            <div class="ym_form_group">
-                                <button (click)="resetReconciliation()" class="ym_button whiteBtn" style="margin-right: 10px;"><i class="fa fa-undo"></i> Reset</button>
-                                <button *ngIf="searchFl" (click)="getReconcilationRecords()" class="ym_button whiteBtn"><i
+                            <div class="ym_form_group md-btn-group">
+                                <button (click)="resetReconciliation()" class="ym_button" style="margin-right: 10px;"><i class="fa fa-undo"></i> Reset</button>
+                                <button *ngIf="searchFl" (click)="getReconcilationRecords()" class="ym_button"><i
                                         class="fa fa-search"></i>
                                     Search</button>
                             </div>
                         </div>
                         <div class="col-md-9">
-                            <div class="m-0 pt-2 pb-2 row" style="background-color: #008acc;">
+                            <div class="m-0 pt-2 pb-2 row" style="background-color: #ebebf1;">
                                 <div class="col-md-6">
                                     <h2>Reconciliation</h2>
                                 </div>
                                 <div *ngIf="addReconFl" class="col-md-6">
-                                    <button (click)="onClickOfAddReconcilation()" class="ym_button whiteBtn float-right">
+                                    <button (click)="onClickOfAddReconcilation()" class="ym_button float-right">
                                         <i class="fa fa-plus-square"></i> Add Reconciliation</button>
                                 </div>
                             </div>
                             <!-- <h3>Reconciliation List</h3> -->
-                            <div class="m-0 p-1 row mt-3 p-table-caption-container">
+                            <div class="m-0 p-1 row mt-3 p-table-caption-container md-bgClr">
                                 <div class="col-md-6 pl-2 pt-2">
                                     <h3 class="p-table-caption">Reconciliation List</h3>
                                 </div>
@@ -75,13 +79,13 @@
 
                 <mat-tab class="mx-3" label="Reconciliation Entry">
                     <div class="mx-3">
-                        <div class="cm-0 pt-2 pb-2" style="background-color: #008acc;text-align: center;">
-                            <h2>Financial Reconciliation</h2>
+                        <div class="cm-0 pt-2 pb-2 md-bgClr mt-2">
+                            <h2 style="text-align: center;">Financial Reconciliation</h2>
                         </div>
                         <div class="m-0 pt-2 pb-2 row">
                             <div class="row p-0 col-12">
                                 <div class="col-md-2 ym_form_group">
-                                    <label>Client</label>
+                                    <label class="md-lbl">Client</label>
                                     <div class="ym_form_select">
                                         <select class="p-1 pb-2" [(ngModel)]="reportClientNameDisp" (change)=checkIfReconciliationReportExists() [disabled]="isDisabledFl">
                                             <option value=""></option>
@@ -91,7 +95,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-2 p-0 ym_form_group">
-                                    <label>Period</label>
+                                    <label class="md-lbl">Period</label>
                                     <app-monthly-yearly-picker-component [disabledFl]="isDisabledFl" [month]="reportPeriodMonth" [year]="reportPeriodYear" (monthAndYear)="onClickOfMonthAndYear($event)">
                                     </app-monthly-yearly-picker-component>
                                 </div>
@@ -106,7 +110,7 @@
                                     </div>
                                 </div>
                                 <!-- <div class="col-md-2 p-0 ym_form_group">
-                                    <label>Tax Remitted by Client</label>
+                                    <label class="md-lbl">Tax Remitted by Client</label>
                                 <div class="ym_checks">
                                     <label class="ym_check">Yes
                                       <input type="radio" [value]="true">
@@ -573,5 +577,6 @@
                 </mat-tab>
             </mat-tab-group>
         </div>
+    </mat-card>
     </div>
 </div>

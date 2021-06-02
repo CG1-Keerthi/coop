@@ -1,17 +1,21 @@
 <div class="ym_content">
     <div class="col-md-12 col-lg-12 col-sm-12 mt-2 container">
+        <div class="row md-breadCrumbs">
+          Client Maintenance
+        </div>
+        <mat-card class="w-100 mt-2 md-border">
         <div class="row">
             <mat-tab-group class="col-md-12" [(selectedIndex)]="selectedTab">
                 <mat-tab label="Search Client">
                     <div class="row pt-2 m-0">
-                        <div class="col-md-2 p-2" style="background-color: #ebebf1;">
-                            <h3><i class="fa fa-bars pr-2"></i>Refine your Search</h3>
+                        <div class="col-md-2 p-1 md-refine-card md-refine-card-height">
+                            <h3 class="md-h3"><i class="fa fa-bars pr-2"></i>Refine your Search</h3>
                             <div class="ym_form_group">
-                                <label>Client Number</label>
+                                <label class="md-lbl">Client Number</label>
                                 <input type="text" placeholder="Client Number" [(ngModel)]="clientNumber">
                             </div>
                             <div class="ym_form_group">
-                                <label>Client Name</label>
+                                <label class="md-lbl">Client Name</label>
                                 <input type="text" placeholder="Pick one" aria-label="Number" matInput
                                     (keyup)="clientNameKeyup($event)" [(ngModel)]="clientName" [matAutocomplete]="auto">
                                 <mat-autocomplete #auto="matAutocomplete">
@@ -22,7 +26,7 @@
                             </div>
 
                             <div class="ym_form_group">
-                                <label>Client Status</label>
+                                <label class="md-lbl">Client Status</label>
                                 <div class="ym_form_select">
                                     <select [(ngModel)]="clientStatusVal">
                                         <option selected value="">Please select a value</option>
@@ -31,7 +35,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="ym_form_group">
+                            <div class="ym_form_group md-btn-group">
                                 <button class="ym_button" style="margin-right: 10px;" (click)="onClickOfClientReset()"><i class="fa fa-undo"></i>
                                     Reset</button>
                                 <button (click)="onClickOfClientMaintenanceSearch()" class="ym_button"><i class="fa fa-search"></i>
@@ -41,19 +45,23 @@
                         <div class="col-md-9">
                             <div class="m-0 pt-2 pb-2 row" style="background-color: #ebebf1;">
                                 <div class="col-md-6">
-                                    <h2>Client Maintenance</h2>
+                                    <h2 class="md-lbl">Client Maintenance</h2>
                                 </div>
                                 <div class="col-md-6">
                                     <button class="ym_button float-right" (click)="onClickOfAddClient()">
                                         <i class="fa fa-plus-square"></i> Add Client</button>
                                 </div>
                             </div>
-                            <div class="m-0 p-2 row mt-3" style="background-color: #ebebf1;">
+                            <div class="m-0 p-2 row mt-3 md-bgClr">
                                 <div class="col-md-6 pl-2 pt-2">
                                     <h3>Client List</h3>
                                 </div>
                             </div>
-                                <p-table [value]="clientMaintenanceListData" selectionMode="single" (onRowSelect)="onClientListRowSelect($event)">  
+                                <p-table [value]="clientMaintenanceListData" selectionMode="single" 
+                                [scrollable]="true"
+                                [responsive]="true" scrollHeight="300px" [autoLayout]="true"
+                                [resizableColumns]="isResizeTrue" columnResizeMode="expand"
+                                (onRowSelect)="onClientListRowSelect($event)">  
                                 <ng-template pTemplate="header">
                                     <tr class="ptableHeader">
                                         <th>Client Number</th>
@@ -78,5 +86,6 @@
                 <mat-tab label="Validation CheckList"> </mat-tab>
             </mat-tab-group>
         </div>
+    </mat-card>
     </div>
 </div>

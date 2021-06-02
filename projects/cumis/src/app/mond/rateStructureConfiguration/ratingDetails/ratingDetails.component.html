@@ -10,14 +10,14 @@
     <div formGroupName="planRatingStructureHeader">
         <div class="row">
             <div class="ym_form_group required col-4">
-                <label>Rate Name</label>
+                <label class="md-lbl">Rate Name</label>
                 <input placeholder="Rate Name" formControlName="rateName" [readonly]="isFieldreadonly">
                 <div *ngIf="isSubmit && !rateDetailsForm.get('planRatingStructureHeader.rateName').touched">
                     <p class="text-danger">Please Enter Rate Name</p>
                 </div>
             </div>
             <div class="ym_form_group required col-4">
-                <label>Joint Life Multiplier</label>
+                <label class="md-lbl">Joint Life Multiplier</label>
                 <div class="ym_input_info">
                     <div class="row">
                         <a (click)="subSpinnerLimits()" class="ym_button_outline mr-2 ml-2 p-2"><i
@@ -36,7 +36,7 @@
         </div>
         <div class="row">
             <div class="col-4">
-                <label>Rate Type</label>
+                <label class="md-lbl">Rate Type</label>
                 <div class="ym_form_select required">
                     <select formControlName="rateType">
                         <option selected value="">Please select a value</option>
@@ -49,7 +49,7 @@
                 </div>
             </div>
             <div class="ym_form_group required col-4">
-                <label>Tolerance Level</label>
+                <label class="md-lbl">Tolerance Level</label>
                 <div class="ym_input_info">
                     <div class="row">
                         <a (click)="subToleranceSpinnerLimits()" class="ym_button_outline mr-2 ml-2 p-2"><i

@@ -1,7 +1,11 @@
-.ptableHeader>th {
+/* .ptableHeader>th {
     font-size: 16px;
     color: #ffffff;
     background-color: #00456a;
     text-align: center;
     padding: 0.25em 0.5em;
+} */
+
+.md-refine-card-height{
+    height: 23rem;
 }

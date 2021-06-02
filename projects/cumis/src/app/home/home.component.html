@@ -1,26 +1,36 @@
 <form [formGroup]="homeForm">
     <div class="ym_header">
         <div class="container">
-            <div class="row">
-                <div class="col-sm-3">
+            <div class="row ml-4">
+                <div class="col-sm-2">
                     <div class="ym_header_logo">
-                        <a href="https://www.cumis.com/" target="_blank"><img src="assets/images/coop-logo.png"></a>
+                        <a href="https://www.cumis.com/" target="_blank"><img src="assets/images/mond.png" style="height: 88% !important;"></a>
                     </div>
                 </div>
-                <div class="col-sm-9">
+                <div class="col-sm-2">
+                    <div class="ym_header_logo">
+                        <a href="https://www.cumis.com/" target="_blank"><img src="assets/images/coop-logo.png" style="margin-left: -3rem;"></a>
+                    </div>
+                </div>
+                <div class="col-sm-7">
                     <div class="ym_header_mobile"><i class="fa fa-bars"></i></div>
                     <div class="ym_header_right">
                         <ul class="ym_header_nav">
-                            <li><a routerLink="/home/financialReconciliation" skipLocationChange>Financial
+                            <!-- <li><a routerLink="/home/financialReconciliation" skipLocationChange>Financial
                                     Reconciliation</a></li>
                             <li><a routerLink="/home/productMaintenanceComponent" skipLocationChange>Product
                                     Maintenance</a></li>
-                            <li><a routerLink="/home/reportsComponent" skipLocationChange>Reports</a></li>
-                                                       
+                            <li><a routerLink="/home/reportsComponent" skipLocationChange>Reports</a></li> -->
+                            <li><a routerLink="/home" style="color: white !important;" skipLocationChange>Home</a></li>                        
                             <li class="ym_parent">
                                 <a style="cursor: pointer;">Forms<i
                                         class="fas fa-angle-down"></i></a>
                                 <ul class="ym_submenu">
+                                    <li><a routerLink="/home/financialReconciliation" skipLocationChange>Financial
+                                        Reconciliation</a></li>
+                                <li><a routerLink="/home/productMaintenanceComponent" skipLocationChange>Product
+                                        Maintenance</a></li>
+                                <li><a routerLink="/home/reportsComponent" skipLocationChange>Reports</a></li>
                                     <li><a routerLink="/home/clientmaintenance" skipLocationChange>Client Maintenance</a></li>
                                     <li><a routerLink="/home/rateStructureConfiguration" skipLocationChange>Rate Structure configuration</a></li>
                                     <li><a routerLink="/home/creditorCertificate" skipLocationChange>Creditor Certificate Maintenance</a></li>
@@ -33,7 +43,7 @@
                                 <a style="cursor: pointer;">{{authCompleteObject?.userName}}<i
                                         class="fas fa-angle-down"></i></a>
                                 <ul class="ym_submenu">
-                                    <li><a (click)="logOut()" style="cursor:pointer;color:#008acc !important"><i
+                                    <li><a (click)="logOut()" style="cursor:pointer;color:#c41230 !important"><i
                                                 class="fas fa-sign-out-alt"></i> Log Out</a>
                                     </li>
                                 </ul>

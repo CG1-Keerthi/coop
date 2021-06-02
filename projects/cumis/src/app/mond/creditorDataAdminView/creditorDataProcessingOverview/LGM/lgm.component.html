@@ -1,13 +1,14 @@
 <div>
     <div class="ym_form_group md-group row">
-        <button class="float-right btn btn-primary" (click)="onClickOfLGMDownloaderrorReport()"><i class="fa fa-download mr-1"></i>Download Error Report </button>
+        <button class="float-right btn btn-primary" (click)="onClickOfLGMDownloaderrorReport()"><i
+                class="fa fa-download mr-1"></i>Download Error Report </button>
     </div>
 
     <!-- LAIS  Balancing Info -->
     <div>
         <mat-accordion>
             <mat-expansion-panel [expanded]="true">
-                <mat-expansion-panel-header style="background-color: #307ecc;">
+                <mat-expansion-panel-header style="background-color: #C41230;">
                     <mat-panel-title style="color: white;">
                         Balancing Information
                     </mat-panel-title>
@@ -73,14 +74,14 @@
     <div>
         <mat-accordion>
             <mat-expansion-panel [expanded]="true">
-                <mat-expansion-panel-header style="background-color: #307ecc;">
+                <mat-expansion-panel-header style="background-color: #C41230;">
                     <mat-panel-title style="color: white;">
                         File Header
                     </mat-panel-title>
                 </mat-expansion-panel-header>
                 <div class="row">
                     <div class="ym_form_group ml-3">
-                        <label>Header Errors</label>
+                        <label class="md-lbl">Header Errors</label>
                         <textarea class="md-text-area-width" rows="5" placeholder="Header Errors" value="{{lgmDataList?.creditorFile_policyFileLGM_header_headerErrors}}
                         {{lgmDataList?.creditorFile_policyReinstetementFileLGM_header_creditUnionName}}
                         {{lgmDataList?.creditorFile_policyCancellationFileLGM_header_headerErrors}}"></textarea>
@@ -88,19 +89,19 @@
                 </div>
                 <div class="row">
                     <div class="ym_form_group col-4">
-                        <label>Client Name</label>
+                        <label class="md-lbl">Client Name</label>
                         <input placeholder="Client Name" value="{{lgmDataList?.creditorFile_policyFileLGM_header_creditUnionName}} 
                         {{lgmDataList?.creditorFile_policyReinstetementFileLGM_header_creditUnionName}}
                         {{lgmDataList?.creditorFile_policyCancellationFileLGM_header_creditUnionName}}">
                     </div>
                     <div class="ym_form_group col-4">
-                        <label>Client Identifier</label>
+                        <label class="md-lbl">Client Identifier</label>
                         <input placeholder="Client Identifier" value="{{lgmDataList?.creditorFile_policyFileLGM_header_creditUnionIdentifier}}
                         {{lgmDataList?.creditorFile_policyReinstetementFileLGM_header_creditUnionIdentifier}}
                         {{lgmDataList?.creditorFile_policyCancellationFileLGM_header_creditUnionIdentifier}}">
                     </div>
                     <div class="ym_form_group col-4">
-                        <label>File Creation Date</label>
+                        <label class="md-lbl">File Creation Date</label>
                         <input placeholder="File Creation Date" value="{{lgmDataList?.creditorFile_policyFileLGM_header_fileCreationDate}}
                         {{lgmDataList?.creditorFile_policyReinstetementFileLGM_header_fileCreationDate}}
                         {{lgmDataList?.creditorFile_policyCancellationFileLGM_header_fileCreationDate}}">
@@ -108,19 +109,19 @@
                 </div>
                 <div class="row">
                     <div class="ym_form_group col-4">
-                        <label>Record Count</label>
+                        <label class="md-lbl">Record Count</label>
                         <input placeholder="Record Count" value="{{lgmDataList?.creditorFile_policyFileLGM_header_recordCount}}
                         {{lgmDataList?.creditorFile_policyReinstetementFileLGM_header_recordCount}}
                         {{lgmDataList?.creditorFile_policyCancellationFileLGM_header_recordCount}}">
                     </div>
                     <div class="ym_form_group col-4">
-                        <label>Policy Count</label>
+                        <label class="md-lbl">Policy Count</label>
                         <input placeholder="Policy Count" value="{{lgmDataList?.creditorFile_policyFileLGM_header_policyCount}}
                         {{lgmDataList?.creditorFile_policyReinstetementFileLGM_header_policyCount}}
                         {{lgmDataList?.creditorFile_policyCancellationFileLGM_header_policyCount}}">
                     </div>
                     <div class="ym_form_group col-4">
-                        <label>Product Code</label>
+                        <label class="md-lbl">Product Code</label>
                         <input placeholder="Product Code" value="{{lgmDataList?.creditorFile_policyFileLGM_header_cumisProductTypeCode}}
                         {{lgmDataList?.creditorFile_policyReinstetementFileLGM_header_cumisProductTypeCode}}
                         {{lgmDataList?.creditorFile_policyCancellationFileLGM_header_cumisProductTypeCode}}">
@@ -136,7 +137,7 @@
     <div>
         <mat-accordion>
             <mat-expansion-panel [expanded]="true">
-                <mat-expansion-panel-header style="background-color: #307ecc;">
+                <mat-expansion-panel-header style="background-color: #C41230;">
                     <mat-panel-title style="color: white;">
                         Certificate
                     </mat-panel-title>
@@ -144,23 +145,25 @@
                 <div class="row">
                     <div class="col-3">
                         <div>
-                            <div class="m-0 p-2 row mt-3" style="background-color: #ebebf1;">
+                            <div class="m-0 p-2 row mt-3" style="background-color: #C41230;">
                                 <div class="col-md-12 pl-2 pt-2">
                                     <h3>Certificate</h3>
                                 </div>
                             </div>
-                            <div id="md-scroll">
-                                <p-table [value]="lgmCertificateList" selectionMode="single"
+                            <div>
+                                <p-table [value]="lgmCertificateList" selectionMode="single" [scrollable]="true"
+                                    [responsive]="true" scrollHeight="200px" [autoLayout]="true"
+                                    [resizableColumns]="isResizeTrue" columnResizeMode="expand"
                                     (onRowSelect)="onClickOfLgmCertificateDataRow($event)">
                                     <ng-template pTemplate="header">
                                         <tr class="ptableHeader">
-                                            <th>Policy Number</th>
+                                            <th pResizableColumn>Policy Number</th>
                                             <th>Contract Identifier</th>
                                         </tr>
                                     </ng-template>
                                     <ng-template pTemplate="body" let-lgmResponseData>
                                         <tr [pSelectableRow]="lgmResponseData">
-                                            <td>{{lgmResponseData?.policyNumber}}</td>
+                                            <td class="ui-resizable-column">{{lgmResponseData?.policyNumber}}</td>
                                             <td>{{lgmResponseData?.contractIdentifier}}</td>
                                         </tr>
                                     </ng-template>
@@ -170,12 +173,12 @@
                     </div>
                     <div class="col-9">
                         <div class="ym_form_group">
-                            <label>Record Errors</label>
+                            <label class="md-lbl">Record Errors</label>
                             <textarea class="md-text-area-width" rows="3" placeholder="Header Errors"
                                 value={{lgmCertificateRowData?.recordErrors}}></textarea>
                         </div>
                         <div>
-                            <mat-card class="w-100 mt-2 md-boder">
+                            <mat-card class="w-100 mt-2 md-border">
                                 <mat-card-header>
                                     <mat-card-title class="md-clr"><b>Certificate Details</b></mat-card-title>
                                 </mat-card-header>
@@ -183,145 +186,145 @@
                                 <mat-card-content class="mt-3">
                                     <div class="row">
                                         <div class="ym_form_group col-4">
-                                            <label>Unique Key</label>
+                                            <label class="md-lbl">Unique Key</label>
                                             <input placeholder="Unique Key"
                                                 value="{{lgmCertificateRowData?.uniqueKey}}">
                                         </div>
                                         <div class="ym_form_group col-4">
-                                            <label>Policy Number</label>
+                                            <label class="md-lbl">Policy Number</label>
                                             <input placeholder="Policy Number"
                                                 value="{{lgmCertificateRowData?.policyNumber}}">
                                         </div>
                                         <div class="ym_form_group col-4">
-                                            <label>Contract Identifier</label>
+                                            <label class="md-lbl">Contract Identifier</label>
                                             <input placeholder="Contract Identifier"
                                                 value="{{lgmCertificateRowData?.contractIdentifier}}">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="ym_form_group col-4">
-                                            <label>Location Identifier</label>
+                                            <label class="md-lbl">Location Identifier</label>
                                             <input placeholder="Location Identifier"
                                                 value="{{lgmCertificateRowData?.cUBranchIdentifier}}">
                                         </div>
-                                        <div class="ym_form_group col-4"><label>Premium Payment Frequency
+                                        <div class="ym_form_group col-4"><label class="md-lbl">Premium Payment Frequency
                                             </label>
                                             <input placeholder="Premium Payment Frequency"
                                                 value="{{lgmCertificateRowData?.premiumPaymentFrequency}}">
                                         </div>
                                         <div class="ym_form_group col-4">
-                                            <label>Is Financed</label>
+                                            <label class="md-lbl">Is Financed</label>
                                             <input placeholder="Is Financed"
                                                 value="{{lgmCertificateRowData?.isFinanced}}">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="ym_form_group col-4">
-                                            <label>Calculate Proportional Premium</label>
+                                            <label class="md-lbl">Calculate Proportional Premium</label>
                                             <input placeholder="Calculate Proportional Premium"
                                                 value="{{lgmCertificateRowData?.calculateProportionalPremium}}">
                                         </div>
-                                        <div class="ym_form_group col-4"><label>Loan Account Number
+                                        <div class="ym_form_group col-4"><label class="md-lbl">Loan Account Number
                                             </label>
                                             <input placeholder="Loan Account Number"
                                                 value="{{lgmCertificateRowData?.loanAccountNumber}}">
                                         </div>
                                         <div class="ym_form_group col-4">
-                                            <label>Loan Type</label>
+                                            <label class="md-lbl">Loan Type</label>
                                             <input placeholder="Loan Type" value="{{lgmCertificateRowData?.loanType}}">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="ym_form_group col-4">
-                                            <label>Loan Amount</label>
+                                            <label class="md-lbl">Loan Amount</label>
                                             <input placeholder="Loan Amount"
                                                 value="{{lgmCertificateRowData?.loanAmount}}">
                                         </div>
-                                        <div class="ym_form_group col-4"><label>Outstanding Balance
+                                        <div class="ym_form_group col-4"><label class="md-lbl">Outstanding Balance
                                             </label>
                                             <input placeholder="Outstanding Balance"
                                                 value="{{lgmCertificateRowData?.outstandingBalance}}">
                                         </div>
                                         <div class="ym_form_group col-4">
-                                            <label>Compound Frequency</label>
+                                            <label class="md-lbl">Compound Frequency</label>
                                             <input placeholder="Compound Frequency"
                                                 value="{{lgmCertificateRowData?.compoundFrequency}}">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="ym_form_group col-4">
-                                            <label>Interest Rate</label>
+                                            <label class="md-lbl">Interest Rate</label>
                                             <input placeholder="Interest Rate"
                                                 value="{{lgmCertificateRowData?.interestRate}}">
                                         </div>
-                                        <div class="ym_form_group col-4"><label>Payment Frequency
+                                        <div class="ym_form_group col-4"><label class="md-lbl">Payment Frequency
                                             </label>
                                             <input placeholder="Payment Frequency"
                                                 value="{{lgmCertificateRowData?.paymentFrequency}}">
                                         </div>
                                         <div class="ym_form_group col-4">
-                                            <label>Periodic Payment</label>
+                                            <label class="md-lbl">Periodic Payment</label>
                                             <input placeholder="Periodic Payment"
                                                 value="{{lgmCertificateRowData?.periodicPayment}}">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="ym_form_group col-4">
-                                            <label>Residual Payment Amount</label>
+                                            <label class="md-lbl">Residual Payment Amount</label>
                                             <input placeholder="Residual Payment Amount"
                                                 value="{{lgmCertificateRowData?.residualPaymentAmount}}">
                                         </div>
-                                        <div class="ym_form_group col-4"><label>Term In Months
+                                        <div class="ym_form_group col-4"><label class="md-lbl">Term In Months
                                             </label>
                                             <input placeholder="Term In Months"
                                                 value="{{lgmCertificateRowData?.termInMonths}}">
                                         </div>
                                         <div class="ym_form_group col-4">
-                                            <label>Amortization In Months</label>
+                                            <label class="md-lbl">Amortization In Months</label>
                                             <input placeholder="Amortization In Months"
                                                 value="{{lgmCertificateRowData?.amortizationInMonths}}">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="ym_form_group col-4">
-                                            <label>Loan Type Category</label>
+                                            <label class="md-lbl">Loan Type Category</label>
                                             <input placeholder="Loan Type Category"
                                                 value="{{lgmCertificateRowData?.loanTypeCategory}}">
                                         </div>
-                                        <div class="ym_form_group col-4"><label>Effective Date
+                                        <div class="ym_form_group col-4"><label class="md-lbl">Effective Date
                                             </label>
                                             <input placeholder="Effective Date"
                                                 value="{{lgmCertificateRowData?.effectiveDate}}">
                                         </div>
                                         <div class="ym_form_group col-4">
-                                            <label>Transit Branch Number</label>
+                                            <label class="md-lbl">Transit Branch Number</label>
                                             <input placeholder="Transit Branch Number"
                                                 value="{{lgmCertificateRowData?.transitBranchNumber}}">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="ym_form_group col-4">
-                                            <label>Transit Institution Number</label>
+                                            <label class="md-lbl">Transit Institution Number</label>
                                             <input placeholder="Transit Institution Number"
                                                 value="{{lgmCertificateRowData?.transitInstitutionNumber}}">
                                         </div>
-                                        <div class="ym_form_group col-4"><label>Debit Number
+                                        <div class="ym_form_group col-4"><label class="md-lbl">Debit Number
                                             </label>
                                             <input placeholder="Debit Number"
                                                 value="{{lgmCertificateRowData?.debitNumber}}">
                                         </div>
                                         <div class="ym_form_group col-4">
-                                            <label>Draw Day</label>
+                                            <label class="md-lbl">Draw Day</label>
                                             <input placeholder="Draw Day" value="{{lgmCertificateRowData?.drawDay}}">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="ym_form_group col-4">
-                                            <label>Next Bill Date</label>
+                                            <label class="md-lbl">Next Bill Date</label>
                                             <input placeholder="Next Bill Date"
                                                 value="{{lgmCertificateRowData?.nextBillDate}}">
                                         </div>
-                                        <div class="ym_form_group col-4"><label>Next Draw Date
+                                        <div class="ym_form_group col-4"><label class="md-lbl">Next Draw Date
                                             </label>
                                             <input placeholder="Next Draw Date"
                                                 value="{{lgmCertificateRowData?.nextDrawDate}}">
@@ -340,7 +343,7 @@
     <div>
         <mat-accordion>
             <mat-expansion-panel [expanded]="true">
-                <mat-expansion-panel-header style="background-color: #307ecc;">
+                <mat-expansion-panel-header style="background-color: #C41230;">
                     <mat-panel-title style="color: white;">
                         Applicant
                     </mat-panel-title>
@@ -348,23 +351,25 @@
                 <div class="row">
                     <div class="col-3">
                         <div>
-                            <div class="m-0 p-2 row mt-3" style="background-color: #ebebf1;">
+                            <div class="m-0 p-2 row mt-3" style="background-color: #C41230;">
                                 <div class="col-md-12 pl-2 pt-2">
                                     <h3>Applicant</h3>
                                 </div>
                             </div>
-                            <div id="md-scroll">
+                            <div>
                                 <p-table [value]="lgmCertificateRowData?.applicant" selectionMode="single"
+                                    [scrollable]="true" [responsive]="true" scrollHeight="200px" [autoLayout]="true"
+                                    [resizableColumns]="isResizeTrue" columnResizeMode="expand"
                                     (onRowSelect)="onClickOfApplicantDataRow($event)">
                                     <ng-template pTemplate="header">
                                         <tr class="ptableHeader">
-                                            <th>Unique Key</th>
+                                            <th pResizableColumn>Unique Key</th>
                                             <th>Applicant Type</th>
                                         </tr>
                                     </ng-template>
                                     <ng-template pTemplate="body" let-lgmApplicantResponseData>
                                         <tr [pSelectableRow]="lgmApplicantResponseData">
-                                            <td>{{lgmApplicantResponseData.uniqueKey}}</td>
+                                            <td class="ui-resizable-column">{{lgmApplicantResponseData.uniqueKey}}</td>
                                             <td>{{lgmApplicantResponseData.applicantType}}</td>
                                         </tr>
                                     </ng-template>
@@ -374,7 +379,7 @@
                     </div>
                     <div class="col-9">
                         <div>
-                            <mat-card class="w-100 mt-2 md-boder">
+                            <mat-card class="w-100 mt-2 md-border">
                                 <mat-card-header>
                                     <mat-card-title class="md-clr"><b>Applicant Details</b></mat-card-title>
                                 </mat-card-header>
@@ -382,102 +387,102 @@
                                 <mat-card-content class="mt-3">
                                     <div class="row">
                                         <div class="ym_form_group col-4">
-                                            <label>Unique Key</label>
+                                            <label class="md-lbl">Unique Key</label>
                                             <input placeholder="Unique Key" value="{{lgmApplicantRowData?.uniqueKey}}">
                                         </div>
                                         <div class="ym_form_group col-4">
-                                            <label>Applicant Type</label>
+                                            <label class="md-lbl">Applicant Type</label>
                                             <input placeholder="Applicant Type"
                                                 value="{{lgmApplicantRowData?.applicantType}}">
                                         </div>
                                         <div class="ym_form_group col-4">
-                                            <label>Salutation</label>
+                                            <label class="md-lbl">Salutation</label>
                                             <input placeholder="Salutation" value="{{lgmApplicantRowData?.salutation}}">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="ym_form_group col-4">
-                                            <label>First Name</label>
+                                            <label class="md-lbl">First Name</label>
                                             <input placeholder="First Name" value="{{lgmApplicantRowData?.firstName}}">
                                         </div>
-                                        <div class="ym_form_group col-4"><label>Last Name
+                                        <div class="ym_form_group col-4"><label class="md-lbl">Last Name
                                             </label>
                                             <input placeholder="Last Name" value="{{lgmApplicantRowData?.lastName}}">
                                         </div>
                                         <div class="ym_form_group col-4">
-                                            <label>Middle Initial</label>
+                                            <label class="md-lbl">Middle Initial</label>
                                             <input placeholder="Middle Initial"
                                                 value="{{lgmApplicantRowData?.middleInitial}}">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="ym_form_group col-4">
-                                            <label>Birth Date</label>
+                                            <label class="md-lbl">Birth Date</label>
                                             <input placeholder="Birth Date" value="{{lgmApplicantRowData?.birthDate}}">
                                         </div>
-                                        <div class="ym_form_group col-4"><label>Gender
+                                        <div class="ym_form_group col-4"><label class="md-lbl">Gender
                                             </label>
                                             <input placeholder="Gender" value="{{lgmApplicantRowData?.gender}}">
                                         </div>
                                         <div class="ym_form_group col-4">
-                                            <label>Is Smoker</label>
+                                            <label class="md-lbl">Is Smoker</label>
                                             <input placeholder="Is Smoker" value="{{lgmApplicantRowData?.isSmoker}}">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="ym_form_group col-4">
-                                            <label>Correspondence Language</label>
+                                            <label class="md-lbl">Correspondence Language</label>
                                             <input placeholder="Correspondence Language"
                                                 value="{{lgmApplicantRowData?.correspondenceLanguage}}">
                                         </div>
                                         <div class="ym_form_group col-4">
-                                            <label>Communication Language</label>
+                                            <label class="md-lbl">Communication Language</label>
                                             <input placeholder="Communication Language"
                                                 value="{{lgmApplicantRowData?.communicationLanguage}}">
                                         </div>
-                                        <div class="ym_form_group col-4"><label>Street
+                                        <div class="ym_form_group col-4"><label class="md-lbl">Street
                                             </label>
                                             <input placeholder="Street" value="{{lgmApplicantRowData?.street}}">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="ym_form_group col-4">
-                                            <label>Street2
+                                            <label class="md-lbl">Street2
                                             </label>
                                             <input placeholder="Street2
                                             " value="{{lgmApplicantRowData?.street2}}">
                                         </div>
-                                        <div class="ym_form_group col-4"><label>City
+                                        <div class="ym_form_group col-4"><label class="md-lbl">City
                                             </label>
                                             <input placeholder="City" value="{{lgmApplicantRowData?.city}}">
                                         </div>
                                         <div class="ym_form_group col-4">
-                                            <label>Province State Code</label>
+                                            <label class="md-lbl">Province State Code</label>
                                             <input placeholder="Province State Code"
                                                 value="{{lgmApplicantRowData?.provinceStateCode}}">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="ym_form_group col-4">
-                                            <label>Postal Code</label>
+                                            <label class="md-lbl">Postal Code</label>
                                             <input placeholder="Postal Code"
                                                 value="{{lgmApplicantRowData?.postalCode}}">
                                         </div>
-                                        <div class="ym_form_group col-4"><label>Country
+                                        <div class="ym_form_group col-4"><label class="md-lbl">Country
                                             </label>
                                             <input placeholder="Country" value="{{lgmApplicantRowData?.country}}">
                                         </div>
                                         <div class="ym_form_group col-4">
-                                            <label>Home Phone</label>
+                                            <label class="md-lbl">Home Phone</label>
                                             <input placeholder="Home Phone" value="{{lgmApplicantRowData?.homePhone}}">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="ym_form_group col-4">
-                                            <label>Work Phone</label>
+                                            <label class="md-lbl">Work Phone</label>
                                             <input placeholder="Work Phone" value="{{lgmApplicantRowData?.workPhone}}">
                                         </div>
-                                        <div class="ym_form_group col-4"><label>Email Address
+                                        <div class="ym_form_group col-4"><label class="md-lbl">Email Address
                                             </label>
                                             <input placeholder="Email Address"
                                                 value="{{lgmApplicantRowData?.emailAddress}}">
@@ -497,7 +502,7 @@
     <div>
         <mat-accordion>
             <mat-expansion-panel [expanded]="true">
-                <mat-expansion-panel-header style="background-color: #307ecc;">
+                <mat-expansion-panel-header style="background-color: #C41230;">
                     <mat-panel-title style="color: white;">
                         Coverage
                     </mat-panel-title>
@@ -505,23 +510,25 @@
                 <div class="row">
                     <div class="col-3">
                         <div>
-                            <div class="m-0 p-2 row mt-3" style="background-color: #ebebf1;">
+                            <div class="m-0 p-2 row mt-3" style="background-color: #C41230;">
                                 <div class="col-md-12 pl-2 pt-2">
                                     <h3>Coverage</h3>
                                 </div>
                             </div>
-                            <div id="md-scroll">
+                            <div>
                                 <p-table [value]="lgmApplicantRowData?.coverage" selectionMode="single"
+                                    [scrollable]="true" [responsive]="true" scrollHeight="200px" [autoLayout]="true"
+                                    [resizableColumns]="isResizeTrue" columnResizeMode="expand"
                                     (onRowSelect)="onClickOfCoverageDataRow($event)">
                                     <ng-template pTemplate="header">
                                         <tr class="ptableHeader">
-                                            <th>Applicant Type</th>
+                                            <th pResizableColumn>Applicant Type</th>
                                             <th>Coverage Type</th>
                                         </tr>
                                     </ng-template>
                                     <ng-template pTemplate="body" let-lgmCoverageResponseData>
                                         <tr [pSelectableRow]="lgmCoverageResponseData">
-                                            <td>{{lgmCoverageResponseData?.applicantType}}</td>
+                                            <td class="ui-resizable-column">{{lgmCoverageResponseData?.applicantType}}</td>
                                             <td>{{lgmCoverageResponseData?.coverageType}}</td>
                                         </tr>
                                     </ng-template>
@@ -531,7 +538,7 @@
                     </div>
                     <div class="col-9">
                         <div>
-                            <mat-card class="w-100 mt-2 md-boder">
+                            <mat-card class="w-100 mt-2 md-border">
                                 <mat-card-header>
                                     <mat-card-title class="md-clr"><b>Coverage Details</b></mat-card-title>
                                 </mat-card-header>
@@ -539,48 +546,48 @@
                                 <mat-card-content class="mt-3">
                                     <div class="row">
                                         <div class="ym_form_group col-4">
-                                            <label>Unique Key</label>
+                                            <label class="md-lbl">Unique Key</label>
                                             <input placeholder="Unique Key" value="{{lgmCoverageData?.uniqueKey}}">
                                         </div>
                                         <div class="ym_form_group col-4">
-                                            <label>Applicant Type</label>
+                                            <label class="md-lbl">Applicant Type</label>
                                             <input placeholder="Applicant Type"
                                                 value="{{lgmCoverageData?.applicantType}}">
                                         </div>
                                         <div class="ym_form_group col-4">
-                                            <label>Coverage Type</label>
+                                            <label class="md-lbl">Coverage Type</label>
                                             <input placeholder="Coverage Type"
                                                 value="{{lgmCoverageData?.coverageType}}">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="ym_form_group col-4">
-                                            <label>Coverage Effective Date</label>
+                                            <label class="md-lbl">Coverage Effective Date</label>
                                             <input placeholder="Coverage Effective Date"
                                                 value="{{lgmCoverageData?.coverageEffectiveDate}}">
                                         </div>
-                                        <div class="ym_form_group col-4"><label>Coverage Termination Date
+                                        <div class="ym_form_group col-4"><label class="md-lbl">Coverage Termination Date
                                             </label>
                                             <input placeholder="Coverage Termination Date"
                                                 value="{{lgmCoverageData?.coverageTerminationDate}}">
                                         </div>
                                         <div class="ym_form_group col-4">
-                                            <label>Coverage or Benefit Amount </label>
+                                            <label class="md-lbl">Coverage or Benefit Amount </label>
                                             <input placeholder="Coverage or Benefit Amount"
                                                 value="{{lgmCoverageData?.coverageorBenefitAmount}}">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="ym_form_group col-4">
-                                            <label>Premium</label>
+                                            <label class="md-lbl">Premium</label>
                                             <input placeholder="Premium" value="{{lgmCoverageData?.premium}}">
                                         </div>
-                                        <div class="ym_form_group col-4"><label>Premium Tax
+                                        <div class="ym_form_group col-4"><label class="md-lbl">Premium Tax
                                             </label>
                                             <input placeholder="Premium Tax" value="{{lgmCoverageData?.premiumTax}}">
                                         </div>
                                         <div class="ym_form_group col-4">
-                                            <label>Is Smoker</label>
+                                            <label class="md-lbl">Is Smoker</label>
                                             <input placeholder="Is Smoker" value="{{lgmCoverageData?.isSmoker}}">
                                         </div>
                                     </div>

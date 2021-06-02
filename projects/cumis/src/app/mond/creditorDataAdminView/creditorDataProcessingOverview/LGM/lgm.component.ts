@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, Input, OnInit, ViewChild } from '@angular/core';
 import { MDMondServiceDS } from '../../../../_services/ds';
 import { MDCommonGetterSetter } from '../../../../_services/common';
 import { HttpClient } from '@angular/common/http';
@@ -24,6 +24,7 @@ export class LGMComponent implements OnInit {
     public downloadData: any;
     public fileUrl: any;
     public processSummaryRowData: any;
+    public isResizeTrue: boolean = false;
 
     // old code need to check
     laisDataList: any;
@@ -100,6 +101,15 @@ export class LGMComponent implements OnInit {
             }, error => {
                 this.mdMondServiceDS.MDError(error);            
             });
+    }
+
+    @HostListener('click', ['$event.target'])
+    onClick(element) {
+        debugger;
+        this.isResizeTrue = true;
+        setTimeout(() => {
+            this.isResizeTrue = false;
+        }, 2000)
     }
 
 }

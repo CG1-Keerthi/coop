@@ -1,18 +1,19 @@
 mat-expansion-panel-header{
 height: 39px !important;
+/* padding-right: 4rem; */
 }
 
-.ptableHeader> th {
+/* .ptableHeader> th {
 color: white !important;
 background-color: #00456a !important;
-  }
+  } */
 
 .mat-expansion-panel-body{
 background: blue !important;
 }
 
 #processSummaryId{
-overflow-x: auto;
+overflow-x: hidden;
 width: 1063px;
 overflow-y: auto!important;
 height: 30rem!important;
@@ -21,3 +22,22 @@ height: 30rem!important;
 ul{
   left: -49px !important;
 }
+
+
+.instructionListDiv {
+  font-size: 13px;
+  line-height: 1.5;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+h4 {
+  font-size: 18px;
+  font-weight: normal;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.md-overFlow{
+  white-space: nowrap;
+  /* width: 11rem; */
+  overflow: hidden;
+  /* text-overflow: ellipsis; */
+  }
+ 

@@ -4,19 +4,6 @@ mat-expansion-panel-header{
 .md-text-area-width{
     width: 100%;
 }
-.md-clr{
-   color: #0071b3 !important
-}
-
-.ptableHeader> th {
-    color: white !important;
-    background-color: #00456a !important;
-  }
-
-  #ptableId{
-    overflow-y: auto;
-    height: 232px;
-  }
-  .md-top{
+.md-top{
     margin-top: -3rem;
   }

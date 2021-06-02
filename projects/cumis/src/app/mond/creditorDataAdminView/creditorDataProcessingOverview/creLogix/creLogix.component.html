@@ -7,7 +7,7 @@
     <div>
         <mat-accordion>
             <mat-expansion-panel [expanded]="true">
-                <mat-expansion-panel-header style="background-color: #307ecc;">
+                <mat-expansion-panel-header style="background-color: #C41230;">
                     <mat-panel-title style="color: white;">
                         Balancing Information
                     </mat-panel-title>
@@ -67,24 +67,26 @@
         <div class="col-3">
             <mat-accordion>
                 <mat-expansion-panel [expanded]="true">
-                    <mat-expansion-panel-header style="background-color: #307ecc;">
+                    <mat-expansion-panel-header style="background-color: #C41230;">
                         <mat-panel-title style="color: white;">
                            Policy Data
                         </mat-panel-title>
                     </mat-expansion-panel-header>
                     <div>
-                        <div id="md-scroll">
+                        <div>
                             <p-table [value]="creLogixList?.creditorFile_policyFileCrelogix_policyData" selectionMode="single"
+                            [scrollable]="true" [responsive]="true" scrollHeight="200px" [autoLayout]="true"
+                            [resizableColumns]="isResizeTrue" columnResizeMode="expand"
                             (onRowSelect)="onClickOfPolicyDataRow($event)">
                                 <ng-template pTemplate="header">
                                     <tr class="ptableHeader">
-                                        <th>Client Id</th>
+                                        <th pResizableColumn>Client Id</th>
                                         <th>Application Id</th>                                  
                                     </tr>
                                 </ng-template>
                                 <ng-template pTemplate="body" let-creLogixResponseData>
                                     <tr [pSelectableRow]="creLogixResponseData">
-                                        <td>{{creLogixResponseData?.clientId}}</td>
+                                        <td class="ui-resizable-column">{{creLogixResponseData?.clientId}}</td>
                                         <td>{{creLogixResponseData?.applicationId}}</td>                                      
                                     </tr>
                                 </ng-template>
@@ -104,279 +106,279 @@
                 <mat-card-content class="mt-3">
                     <div class="row">
                         <div class="ym_form_group col-12">
-                            <label>Record Errors</label>
+                            <label class="md-lbl">Record Errors</label>
                             <textarea class="md-text-area-width" rows="3" placeholder="Header Errors" value="{{policyDetailsList?.recordErrors}}"></textarea>
                         </div>
                     </div>
                     <div class="row">
                         <div class="ym_form_group col-4">
-                            <label>Client Id</label>
+                            <label class="md-lbl">Client Id</label>
                             <input placeholder="Client Id" value="{{policyDetailsList?.clientId}}">
                         </div>
                         <div class="ym_form_group col-4">
-                            <label>Application Id</label>
+                            <label class="md-lbl">Application Id</label>
                             <input placeholder="Application Id" value="{{policyDetailsList?.applicationId}}">
                         </div>
                         <div class="ym_form_group col-4">
-                            <label>Insured Person</label>
+                            <label class="md-lbl">Insured Person</label>
                             <input placeholder="Insured Person" value="{{policyDetailsList?.insuredPerson}}">
                         </div>
                     </div>
                     <div class="row">
                         <div class="ym_form_group col-4">
-                            <label>Applicant First Name</label>
+                            <label class="md-lbl">Applicant First Name</label>
                             <input placeholder="Applicant First Name" value="{{policyDetailsList?.applicantFirstName}}">
                         </div>
                         <div class="ym_form_group col-4">
-                            <label>Applicant Middle Name</label>
+                            <label class="md-lbl">Applicant Middle Name</label>
                             <input placeholder="Applicant Middle Name" value="{{policyDetailsList?.applicantMiddleName}}">
                         </div>
                         <div class="ym_form_group col-4">
-                            <label>Applicant Last Name</label>
+                            <label class="md-lbl">Applicant Last Name</label>
                             <input placeholder="Applicant Last Name" value="{{policyDetailsList?.applicantLName}}">
                         </div>
                     </div>
                     <div class="row">
                         <div class="ym_form_group col-4">
-                            <label>Applicant Date Of Birth</label>
+                            <label class="md-lbl">Applicant Date Of Birth</label>
                             <input placeholder="Applicant Date Of Birth" value="{{policyDetailsList?.applicantDateOfBirth}}">
                         </div>
                         <div class="ym_form_group col-4">
-                            <label>Applicant Address</label>
+                            <label class="md-lbl">Applicant Address</label>
                             <input placeholder="Applicant Address" value="{{policyDetailsList?.applicantAddress}}">
                         </div>
                         <div class="ym_form_group col-4">
-                            <label>Applicant Address2</label>
+                            <label class="md-lbl">Applicant Address2</label>
                             <input placeholder="Applicant Address2" value="{{policyDetailsList?.applicantAddress2}}">
                         </div>
                     </div>
                     <div class="row">
                         <div class="ym_form_group col-4">
-                            <label>Applicant City</label>
+                            <label class="md-lbl">Applicant City</label>
                             <input placeholder="Applicant City" value="{{policyDetailsList?.applicantCity}}">
                         </div>
                         <div class="ym_form_group col-4">
-                            <label>Applicant Province</label>
+                            <label class="md-lbl">Applicant Province</label>
                             <input placeholder="Applicant Province" value="{{policyDetailsList?.applicantProvince}}">
                         </div>
                         <div class="ym_form_group col-4">
-                            <label>Applicant Postal Code</label>
+                            <label class="md-lbl">Applicant Postal Code</label>
                             <input placeholder="Applicant Postal Code" value="{{policyDetailsList?.applicantPostalCode}}">
                         </div>
                     </div>
                     <div class="row">
                         <div class="ym_form_group col-4">
-                            <label>Applicant Home Phone</label>
+                            <label class="md-lbl">Applicant Home Phone</label>
                             <input placeholder="Applicant Home Phone" value="{{policyDetailsList?.applicantHomePhone}}">
                         </div>
                         <div class="ym_form_group col-4">
-                            <label>Applicant Mobile Phone</label>
+                            <label class="md-lbl">Applicant Mobile Phone</label>
                             <input placeholder="Applicant Mobile Phone" value="{{policyDetailsList?.applicantMobilePhone}}">
                         </div>
                         <div class="ym_form_group col-4">
-                            <label>Applicant Email</label>
+                            <label class="md-lbl">Applicant Email</label>
                             <input placeholder="Applicant Email" value="{{policyDetailsList?.applicantEmail}}">
                         </div>
                     </div>
                     <div class="row">
                         <div class="ym_form_group col-4">
-                            <label>Co Applicant First Name</label>
+                            <label class="md-lbl">Co Applicant First Name</label>
                             <input placeholder="Co Applicant First Name" value="{{policyDetailsList?.coApplicantFirstName}}">
                         </div>
                         <div class="ym_form_group col-4">
-                            <label>Co Applicant Middle Name</label>
+                            <label class="md-lbl">Co Applicant Middle Name</label>
                             <input placeholder="Co Applicant Middle Name" value="{{policyDetailsList?.coApplicantMiddleName}}">
                         </div>
                         <div class="ym_form_group col-4">
-                            <label>Co Applicant Last Name</label>
+                            <label class="md-lbl">Co Applicant Last Name</label>
                             <input placeholder="Co Applicant Last Name" value="{{policyDetailsList?.coApplicantLName}}">
                         </div>
                     </div>
                     <div class="row">
                         <div class="ym_form_group col-4">
-                            <label>Co Applicant Date Of Birth </label>
+                            <label class="md-lbl">Co Applicant Date Of Birth </label>
                             <input placeholder="Co Applicant Date Of Birth" value="{{policyDetailsList?.coApplicantDateOfBirth}}">
                         </div>
                         <div class="ym_form_group col-4">
-                            <label>Co Applicant Address</label>
+                            <label class="md-lbl">Co Applicant Address</label>
                             <input placeholder="Co Applicant Address" value="{{policyDetailsList?.coApplicantAddress}}">
                         </div>
                         <div class="ym_form_group col-4">
-                            <label>Co Applicant Address2</label>
+                            <label class="md-lbl">Co Applicant Address2</label>
                             <input placeholder="Co Applicant Address2" value="{{policyDetailsList?.coApplicantAddress2}}">
                         </div>
                     </div>
                     <div class="row">                    
                         <div class="ym_form_group col-4">
-                            <label>Co Applicant City</label>
+                            <label class="md-lbl">Co Applicant City</label>
                             <input placeholder="Co Applicant City" value="{{policyDetailsList?.coApplicantCity}}">
                         </div>
                         <div class="ym_form_group col-4">
-                            <label>Co Applicant Province</label>
+                            <label class="md-lbl">Co Applicant Province</label>
                             <input placeholder="Co Applicant Province" value="{{policyDetailsList?.coApplicantProvince}}">
                         </div>
                         <div class="ym_form_group col-4">
-                            <label>Co Applicant Postal Code</label>
+                            <label class="md-lbl">Co Applicant Postal Code</label>
                             <input placeholder="Co Applicant Postal Code" value="{{policyDetailsList?.coApplicantPostalCode}}">
                         </div>
                     </div>
                     <div class="row">
                         <div class="ym_form_group col-4">
-                            <label>Co Applicant Home Phone </label>
+                            <label class="md-lbl">Co Applicant Home Phone </label>
                             <input placeholder="Co Applicant Home Phone" value="{{policyDetailsList?.coApplicantHomePhone}}">
                         </div>
                         <div class="ym_form_group col-4">
-                            <label>Co Applicant Mobile Phone</label>
+                            <label class="md-lbl">Co Applicant Mobile Phone</label>
                             <input placeholder="Co Applicant Mobile Phone" value="{{policyDetailsList?.coApplicantMobilePhone}}">
                         </div>
                         <div class="ym_form_group col-4">
-                            <label>Co Applicant Email</label>
+                            <label class="md-lbl">Co Applicant Email</label>
                             <input placeholder="Co Applicant Email" value="{{policyDetailsList?.coApplicantEmail}}">
                         </div>
                     </div>
                     <div class="row">
                         <div class="ym_form_group col-4">
-                            <label>Enrollment Date </label>
+                            <label class="md-lbl">Enrollment Date </label>
                             <input placeholder="Enrollment Date" value="{{policyDetailsList?.enrollmentDate}}">
                         </div>
                         <div class="ym_form_group col-4">
-                            <label>Residual Due Date</label>
+                            <label class="md-lbl">Residual Due Date</label>
                             <input placeholder="Residual Due Date" value="{{policyDetailsList?.residualDueDate}}">
                         </div>
                         <div class="ym_form_group col-4">
-                            <label>Loan Amount</label>
+                            <label class="md-lbl">Loan Amount</label>
                             <input placeholder="Loan Amount" value="{{policyDetailsList?.loanAmnt}}">
                         </div>
                     </div>
                     <div class="row">
                         <div class="ym_form_group col-4">
-                            <label>Amount Finance</label>
+                            <label class="md-lbl">Amount Finance</label>
                             <input placeholder="Amount Finance" value="{{policyDetailsList?.amountFinance}}">
                         </div>
                         <div class="ym_form_group col-4">
-                            <label>Term</label>
+                            <label class="md-lbl">Term</label>
                             <input placeholder="Term" value="{{policyDetailsList?.term}}">
                         </div>
                         <div class="ym_form_group col-4">
-                            <label>APR</label>
+                            <label class="md-lbl">APR</label>
                             <input placeholder="APR" value="{{policyDetailsList?.apr}}">
                         </div>
                     </div>
                     <div class="row">
                         <div class="ym_form_group col-4">
-                            <label>Monthly Loan Payment</label>
+                            <label class="md-lbl">Monthly Loan Payment</label>
                             <input placeholder="Monthly Loan Payment" value="{{policyDetailsList?.monthlyLoanPayment}}">
                         </div>
                         <div class="ym_form_group col-4">
-                            <label>Loan Protection Term</label>
+                            <label class="md-lbl">Loan Protection Term</label>
                             <input placeholder="Loan Protection Term" value="{{policyDetailsList?.loanProtectionTerm}}">
                         </div>
                         <div class="ym_form_group col-4">
-                            <label>Life Amount</label>
+                            <label class="md-lbl">Life Amount</label>
                             <input placeholder="Life Amount" value="{{policyDetailsList?.lifeAmount}}">
                         </div>
                     </div>
                     <div class="row">
                         <div class="ym_form_group col-4">
-                            <label>Life Premium Amount</label>
+                            <label class="md-lbl">Life Premium Amount</label>
                             <input placeholder="Life Premium Amount" value="{{policyDetailsList?.lifePremiumAmount}}">
                         </div>
                         <div class="ym_form_group col-4">
-                            <label>Life Residual Premium Amount</label>
+                            <label class="md-lbl">Life Residual Premium Amount</label>
                             <input placeholder="Life Residual Premium Amount" value="{{policyDetailsList?.lifeResidualPremiumAmount}}">
                         </div>
                         <div class="ym_form_group col-4">
-                            <label>Life AmountLife Premium Amount Co Applicant</label>
+                            <label class="md-lbl">Life AmountLife Premium Amount Co Applicant</label>
                             <input placeholder="Life Premium Amount Co Applicantt" value="{{policyDetailsList?.lifePremiumAmountCoApplicant}}">
                         </div>
                     </div>
                     <div class="row">
                         <div class="ym_form_group col-4">
-                            <label>Life Residual Premium Amount Co Applicant</label>
+                            <label class="md-lbl">Life Residual Premium Amount Co Applicant</label>
                             <input placeholder="Life Residual Premium Amount Co Applicant" value="{{policyDetailsList?.lifeResidualPremiumAmountCoApplicant}}">
                         </div>
                         <div class="ym_form_group col-4">
-                            <label>Disability Type</label>
+                            <label class="md-lbl">Disability Type</label>
                             <input placeholder="Disability Type" value="{{policyDetailsList?.disabilityType}}">
                         </div>
                         <div class="ym_form_group col-4">
-                            <label>Disability Amount</label>
+                            <label class="md-lbl">Disability Amount</label>
                             <input placeholder="Disability Amount" value="{{policyDetailsList?.disabilityAmount}}">
                         </div>
                     </div>
                     <div class="row">
                         <div class="ym_form_group col-4">
-                            <label>Ext Disability Amount</label>
+                            <label class="md-lbl">Ext Disability Amount</label>
                             <input placeholder="Ext Disability Amount" value="{{policyDetailsList?.extDisabilityAmount}}">
                         </div>
                         <div class="ym_form_group col-4">
-                            <label>Loss Of Employment</label>
+                            <label class="md-lbl">Loss Of Employment</label>
                             <input placeholder="Loss Of Employment" value="{{policyDetailsList?.lossOfEmployment}}">
                         </div>
                         <div class="ym_form_group col-4">
-                            <label>Critical Illness Amount</label>
+                            <label class="md-lbl">Critical Illness Amount</label>
                             <input placeholder="Critical Illness Amount" value="{{policyDetailsList?.criticalIllnessAmount}}">
                         </div>
                     </div>
                     <div class="row">
                         <div class="ym_form_group col-4">
-                            <label>Critical Illness Residual Amount</label>
+                            <label class="md-lbl">Critical Illness Residual Amount</label>
                             <input placeholder="Critical Illness Residual Amount" value="{{policyDetailsList?.criticalIllnessResidualAmount}}">
                         </div>
                         <div class="ym_form_group col-4">
-                            <label>Critical Illness Residual Amount Co Applicant</label>
+                            <label class="md-lbl">Critical Illness Residual Amount Co Applicant</label>
                             <input placeholder="Critical Illness Residual Amount Co Applicant" value="{{policyDetailsList?.criticalIllnessResidualAmountCoApplicant}}">
                         </div>
                         <div class="ym_form_group col-4">
-                            <label>Tax On Insurance</label>
+                            <label class="md-lbl">Tax On Insurance</label>
                             <input placeholder="Tax On Insurance" value="{{policyDetailsList?.taxOnInsurance}}">
                         </div>
                     </div>
                     <div class="row">
                         <div class="ym_form_group col-4">
-                            <label>Merchant Name</label>
+                            <label class="md-lbl">Merchant Name</label>
                             <input placeholder="Merchant Name" value="{{policyDetailsList?.merchantName}}">
                         </div>
                         <div class="ym_form_group col-4">
-                            <label>Merchant Name2</label>
+                            <label class="md-lbl">Merchant Name2</label>
                             <input placeholder="Merchant Name2" value="{{policyDetailsList?.merchantName2}}">
                         </div>
                         <div class="ym_form_group col-4">
-                            <label>Merchant Address1</label>
+                            <label class="md-lbl">Merchant Address1</label>
                             <input placeholder="Merchant Address1" value="{{policyDetailsList?.merchantAddress1}}">
                         </div>
                     </div>
                     <div class="row">
                         <div class="ym_form_group col-4">
-                            <label>Merchant Address2</label>
+                            <label class="md-lbl">Merchant Address2</label>
                             <input placeholder="Merchant Address2" value="{{policyDetailsList?.criticalIllnessmerchantAddress2}}">
                         </div>
                         <div class="ym_form_group col-4">
-                            <label>Merchant City </label>
+                            <label class="md-lbl">Merchant City </label>
                             <input placeholder="Merchant City" value="{{policyDetailsList?.merchantCity}}">
                         </div>
                         <div class="ym_form_group col-4">
-                            <label>Merchant Province</label>
+                            <label class="md-lbl">Merchant Province</label>
                             <input placeholder="Merchant Province" value="{{policyDetailsList?.merchantProvince}}">
                         </div>
                     </div>
                     <div class="row">
                         <div class="ym_form_group col-4">
-                            <label>Merchant Postal Code</label>
+                            <label class="md-lbl">Merchant Postal Code</label>
                             <input placeholder="Merchant Postal Code" value="{{policyDetailsList?.merchantPostalCode}}">
                         </div>
                         <div class="ym_form_group col-4">
-                            <label>Policy Early Termination Reason Code</label>
+                            <label class="md-lbl">Policy Early Termination Reason Code</label>
                             <input placeholder="Policy Early Termination Reason Code" value="{{policyDetailsList?.policyEarlyTerminationReasonCode}}">
                         </div>
                         <div class="ym_form_group col-4">
-                            <label>Policy Early Termination Amount</label>
+                            <label class="md-lbl">Policy Early Termination Amount</label>
                             <input placeholder="Policy Early Termination Amount" value="{{policyDetailsList?.policyEarlyTerminationAmount}}">
                         </div>
                     </div>
                     <div class="row">
                         <div class="ym_form_group col-4">
-                            <label>Policy Early Termination Date</label>
+                            <label class="md-lbl">Policy Early Termination Date</label>
                             <input placeholder="Policy Early Termination Date" value="{{policyDetailsList?.policyEarlyTermninationDate}}">
                         </div>
                     </div>

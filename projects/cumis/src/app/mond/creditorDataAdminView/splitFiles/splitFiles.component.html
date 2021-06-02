@@ -1,12 +1,12 @@
 <div class="row pt-2 m-0">
-    <div class="col-md-3 p-2" style="background-color: #ebebf1;">
-        <h3><i class="fa fa-bars pr-2"></i>Refine your Search</h3>
+    <div class="col-md-3 p-1 md-refine-card">
+        <h3 class="md-h3"><i class="fa fa-bars pr-2"></i>Refine your Search</h3>
         <div class="ym_form_group">
-            <label>File Identifier</label>
+            <label class="md-lbl">File Identifier</label>
             <input type="text" placeholder="File Identifier" [(ngModel)]="fileIdentifier">
         </div>
         <div class="ym_form_group">
-            <label>Certificate Number</label>
+            <label class="md-lbl">Certificate Number</label>
             <input type="text" placeholder="Certificate Number" [(ngModel)]="certificateNumber">
         </div>
         <div class="ym_form_group">
@@ -16,31 +16,39 @@
                 Search</button>
         </div>
     </div>
+    <div class="col-9"></div>
     <div class="row mt-4" style="margin-left: -1px;">
         <mat-accordion>
             <mat-expansion-panel [expanded]="true">
-                <mat-expansion-panel-header style="background-color: #307ecc;">
+                <mat-expansion-panel-header style="background-color: #C41230;">
                     <mat-panel-title style="color: white;">
                      Split Files
                     </mat-panel-title>
                 </mat-expansion-panel-header>
-                <div class="row m-1 mr-3" id="splitFileId">
-                    <p-table [value]="splitFilesList">
-                        <ng-template pTemplate="header">
-                            <tr class="ptableHeader">
-                                <th style="width: 15rem;">File Identifier - Certificate Number</th>
-                                <th style="width: 6rem;">File Processing Status</th>
-                                <th style="width: 9rem;">Process Instance Number</th>                              
-                            </tr>
-                        </ng-template>
-                        <ng-template pTemplate="body" let-splitFilesListData>
-                            <tr [pSelectableRow]="splitFilesListData">
-                                <td style="color: royalblue;" (click)="onClickOfFileIdentifier(splitFilesListData)">{{splitFilesListData?.fileIdentifier}}</td>
-                                <td>{{splitFilesListData?.fileProcessingStatus}}</td>                              
-                                <td>{{splitFilesListData?.processInstanceNumber}}</td>                           
-                            </tr>
-                        </ng-template>
-                    </p-table>
+                <div class="row md-top" >
+                    <div id="splitFileId" class="col-12 col-md-12 col-sm-12 col-lg-12" style="margin-left: -8px !important;">
+                        <p-table [value]="splitFilesList"  [scrollable]="true" [responsive]="true"
+                        scrollHeight="400px" [autoLayout]="true" [resizableColumns]="isResizeTrue" columnResizeMode="expand">
+                            <ng-template pTemplate="header">
+                                <tr class="ptableHeader">
+                                    <!-- <th style="width: 15rem;">File Identifier - Certificate Number</th>
+                                    <th style="width: 6rem;">File Processing Status</th>
+                                    <th style="width: 9rem;">Process Instance Number</th> -->
+                                    <th pResizableColumn>File Identifier - Certificate Number</th>
+                                    <th>File Processing Status</th>
+                                    <th>Process Instance Number</th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-splitFilesListData>
+                                <tr [pSelectableRow]="splitFilesListData">
+                                    <td style="color: royalblue;" (click)="onClickOfFileIdentifier(splitFilesListData)"  class="ui-resizable-column">{{splitFilesListData?.fileIdentifier}}</td>
+                                    <td>{{splitFilesListData?.fileProcessingStatus}}</td>                              
+                                    <td>{{splitFilesListData?.processInstanceNumber}}</td>                           
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                
                 </div>
             </mat-expansion-panel>
         </mat-accordion>

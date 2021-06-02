@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, Input, OnInit, ViewChild } from '@angular/core';
 import { MDMondServiceDS } from '../../../../_services/ds';
 import { MDCommonGetterSetter } from '../../../../_services/common';
 import { HttpClient } from '@angular/common/http';
@@ -21,6 +21,7 @@ export class LAISComponent implements OnInit {
     public csfrToken: any;
     public downloadData: any;
     public fileUrl: any;
+    public isResizeTrue: boolean = false;
 
     constructor(private mdMondServiceDS: MDMondServiceDS,
         private mdCommonGetterSetter: MDCommonGetterSetter,
@@ -96,6 +97,15 @@ export class LAISComponent implements OnInit {
             }, error => {
                 this.mdMondServiceDS.MDError(error);              
             });
+    }
+
+    @HostListener('click', ['$event.target'])
+    onClick(element) {
+        debugger;
+        this.isResizeTrue = true;
+        setTimeout(() => {
+            this.isResizeTrue = false;
+        }, 2000)
     }
 
 }

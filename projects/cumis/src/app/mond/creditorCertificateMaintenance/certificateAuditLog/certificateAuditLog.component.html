@@ -4,14 +4,14 @@
         <div>
             <mat-accordion>
                 <mat-expansion-panel [expanded]="true">
-                    <mat-expansion-panel-header style="background-color: #307ecc;">
+                    <mat-expansion-panel-header class="md-bgClr">
                         <mat-panel-title style="color: white;">
                             Certificate Transaction History
                         </mat-panel-title>
                     </mat-expansion-panel-header>
                     <div class="row">
                         <div class="ym_form_group  col-6">
-                            <label>Client Certificate Number
+                            <label class="md-lbl">Client Certificate Number
                             </label>
                             <input placeholder="Client Certificate Number"
                                 value="{{parsedAuditLogList[0]?.uniqueCertificateNumber}}" [readonly]="isFieldreadonly">
@@ -19,17 +19,20 @@
                     </div>
 
                     <div id="ptableId">
-                        <p-table [value]="parsedAuditLogList" selectionMode="single">
+                        <p-table [value]="parsedAuditLogList" selectionMode="single" [scrollable]="true"
+                            [responsive]="true" scrollHeight="200px" [autoLayout]="true"
+                            [resizableColumns]="isResizeTrue" columnResizeMode="expand">
                             <ng-template pTemplate="header">
                                 <tr class="ptableHeader">
-                                    <th>File Load Date and Time</th>
+                                    <th pResizableColumn>File Load Date and Time</th>
                                     <th>Transaction Type</th>
                                     <th>File Name</th>
                                 </tr>
                             </ng-template>
                             <ng-template pTemplate="body" let-transactionHistoryResponseData>
                                 <tr [pSelectableRow]="transactionHistoryResponseData">
-                                    <td>{{transactionHistoryResponseData?.fileLoadDateTime.split('T')[0]}} {{transactionHistoryResponseData?.fileLoadDateTime.split('T')[1]}}</td>
+                                    <td class="ui-resizable-column">{{transactionHistoryResponseData?.fileLoadDateTime.split('T')[0]}}
+                                        {{transactionHistoryResponseData?.fileLoadDateTime.split('T')[1]}}</td>
                                     <td>{{transactionHistoryResponseData?.transactionType}}</td>
                                     <td>{{transactionHistoryResponseData?.fileName}}</td>
                                 </tr>
@@ -41,21 +44,22 @@
         </div>
 
         <!-- Certificate Audit History -->
-        <div class="mt-2" id="ptableId">
+        <div class="mt-2">
             <mat-accordion>
                 <mat-expansion-panel [expanded]="true">
-                    <mat-expansion-panel-header style="background-color: #307ecc;">
+                    <mat-expansion-panel-header class="md-bgClr">
                         <mat-panel-title style="color: white;">
                             Certificate Audit History
                         </mat-panel-title>
                     </mat-expansion-panel-header>
                     <div>
-
-                        <p-table [value]="certificateAuditHistory" selectionMode="single">
+                        <p-table [value]="certificateAuditHistory" selectionMode="single"
+                        [scrollable]="true"
+                        [responsive]="true" scrollHeight="300px" [autoLayout]="true"
+                        [resizableColumns]="isResizeTrue" columnResizeMode="expand">
                             <ng-template pTemplate="header">
                                 <tr class="ptableHeader">
-
-                                    <th>Transaction Type</th>
+                                    <th pResizableColumn>Transaction Type</th>
                                     <th>Transaction Date</th>
                                     <th>Application/Co-Applicant</th>
                                     <th>Coverage</th>
@@ -66,7 +70,7 @@
                             </ng-template>
                             <ng-template pTemplate="body" let-auditHistoryResponseData>
                                 <tr [pSelectableRow]="auditHistoryResponseData">
-                                    <td>{{auditHistoryResponseData?.transactionType}}</td>
+                                    <td class="ui-resizable-column">{{auditHistoryResponseData?.transactionType}}</td>
                                     <td>{{auditHistoryResponseData?.transactionDate}}</td>
                                     <td>{{auditHistoryResponseData?.applicantName}}</td>
                                     <td>{{auditHistoryResponseData?.coverageCode}}</td>
@@ -76,12 +80,9 @@
                                 </tr>
                             </ng-template>
                         </p-table>
-
                     </div>
                 </mat-expansion-panel>
             </mat-accordion>
         </div>
-
-
     </div>
 </div>

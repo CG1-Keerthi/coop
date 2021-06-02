@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, Input, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MDMondServiceDS } from '../../../../_services/ds'
 import { MDCommonGetterSetter } from '../../../../_services/common';
@@ -19,6 +19,7 @@ export class CreLogixComponent implements OnInit {
     public fileUrl: any;
     public processSummaryRowData: any;
     public csfrToken: any;
+    public isResizeTrue: boolean = false;
     constructor(private http: HttpClient,
         private mdMondServiceDS: MDMondServiceDS,
         private mdCommonGetterSetter: MDCommonGetterSetter) { }
@@ -78,6 +79,15 @@ export class CreLogixComponent implements OnInit {
             }, error => {
                 this.mdMondServiceDS.MDError(error);
             });
+    }
+
+    @HostListener('click', ['$event.target'])
+    onClick(element) {
+        debugger;
+        this.isResizeTrue = true;
+        setTimeout(() => {
+            this.isResizeTrue = false;
+        }, 2000)
     }
 
 }

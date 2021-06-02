@@ -5,52 +5,52 @@
         <div>
             <mat-accordion>
                 <mat-expansion-panel [expanded]="true">
-                    <mat-expansion-panel-header style="background-color: #307ecc;">
+                    <mat-expansion-panel-header class="md-bgClr">
                         <mat-panel-title style="color: white;">
                             Header
                         </mat-panel-title>
                     </mat-expansion-panel-header>
                     <div class="row">
                         <div class="ym_form_group  col-3">
-                            <label>File Identifier</label>
+                            <label class="md-lbl">File Identifier</label>
                             <input placeholder="File Identifier" value="{{creditorDataJson?.fileInfo?.fileIdentifier}}"
                                 [readonly]="isFieldreadonly">
                         </div>
                         <div class="ym_form_group  col-3">
-                            <label>Client Name</label>
+                            <label class="md-lbl">Client Name</label>
                             <input placeholder="Client Name" value="{{creditorDataJson?.fileInfo?.partnerName}}"
                                 [readonly]="isFieldreadonly">
                         </div>
                         <div class="ym_form_group  col-3">
-                            <label>Client Identifier</label>
+                            <label class="md-lbl">Client Identifier</label>
                             <input placeholder="Client Identifier"
                                 value="{{creditorDataJson?.fileInfo?.partnerIdentifier}}" [readonly]="isFieldreadonly">
                         </div>
                         <div class="ym_form_group  col-3">
-                            <label>Transaction Type</label>
+                            <label class="md-lbl">Transaction Type</label>
                             <input placeholder="Transaction Type"
                                 value="{{creditorDataJson?.fileInfo?.transactionType}}" [readonly]="isFieldreadonly">
                         </div>
                     </div>
                     <div class="row">
                         <div class="ym_form_group  col-3">
-                            <label>Product Type</label>
+                            <label class="md-lbl">Product Type</label>
                             <input placeholder="Product Type" value="{{creditorDataJson?.fileInfo?.productType}}"
                                 [readonly]="isFieldreadonly">
                         </div>
                         <div class="ym_form_group  col-3">
-                            <label>Number Of Records</label>
+                            <label class="md-lbl">Number Of Records</label>
                             <input placeholder="Number Of Records"
                                 value="{{creditorDataJson?.fileInfo?.numberOfRecords}}" [readonly]="isFieldreadonly">
                         </div>
                         <div class="ym_form_group  col-3">
-                            <label>Processed With Error</label>
+                            <label class="md-lbl">Processed With Error</label>
                             <input placeholder="Processed With Error"
                                 value="{{creditorDataJson?.fileInfo?.processedWithErrorFlag}}"
                                 [readonly]="isFieldreadonly">
                         </div>
                         <div class="ym_form_group  col-3">
-                            <label>Processed With Warnings</label>
+                            <label class="md-lbl">Processed With Warnings</label>
                             <input placeholder="Processed With Warnings"
                                 value="{{creditorDataJson?.fileInfo?.processedWithWarningFlag}}"
                                 [readonly]="isFieldreadonly">
@@ -59,7 +59,7 @@
                     <div class="row" style="margin-left: -10px;">
                         <div class="ym_form_group  col-3">
                             <div class="row">
-                                <label>File Created Date</label>
+                                <label class="md-lbl">File Created Date</label>
                                 <input class="col-md-9" matInput [matDatepicker]="picker"
                                     value="{{creditorDataJson?.fileInfo?.fileCreatedDate}}"
                                     [readonly]="isFieldreadonly">
@@ -69,7 +69,7 @@
                         </div>
                         <div class="ym_form_group  col-3">
                             <div class="row">
-                                <label>File Load Date</label>
+                                <label class="md-lbl">File Load Date</label>
                                 <input class="col-md-9" matInput [matDatepicker]="picker2"
                                     value="{{creditorDataJson?.fileInfo?.fileLoadDate}}" [readonly]="isFieldreadonly">
                                 <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
@@ -87,26 +87,26 @@
         <div class="mt-2">
             <mat-accordion>
                 <mat-expansion-panel [expanded]="true">
-                    <mat-expansion-panel-header style="background-color: #307ecc;">
+                    <mat-expansion-panel-header class="md-bgClr">
                         <mat-panel-title style="color: white;">
                             Certificate Details
                         </mat-panel-title>
                     </mat-expansion-panel-header>
                     <div class="row">
                         <div class="ym_form_group  col-4">
-                            <label>Certificate Number</label>
+                            <label class="md-lbl">Certificate Number</label>
                             <input placeholder="Certificate Number"
                                 value="{{creditorDataJson?.certificate?.certificateNumber}}"
                                 [readonly]="isFieldreadonly">
                         </div>
                         <div class="ym_form_group  col-4">
-                            <label>Unique Certificate Identifier</label>
+                            <label class="md-lbl">Unique Certificate Identifier</label>
                             <input placeholder="Unique Certificate Identifier"
                                 value="{{creditorDataJson?.certificate?.uniqueCertificateIdentifier}}"
                                 [readonly]="isFieldreadonly">
                         </div>
                         <div class="ym_form_group  col-4">
-                            <label>Unique Certificate Identifier2</label>
+                            <label class="md-lbl">Unique Certificate Identifier2</label>
                             <input placeholder="Unique Certificate Identifier2"
                                 value="{{creditorDataJson?.certificate?.uniqueCertificateIdentifier2}}"
                                 [readonly]="isFieldreadonly">
@@ -115,7 +115,7 @@
                     <div class="row" style="margin-left: -10px;">
                         <div class="ym_form_group  col-4">
                             <div class="row">
-                                <label>Certificate Effective Date</label>
+                                <label class="md-lbl">Certificate Effective Date</label>
                                 <input class="col-md-9" matInput [matDatepicker]="picker3"
                                     value="{{creditorDataJson?.certificate?.certificateEffectiveDate}}"
                                     [readonly]="isFieldreadonly">
@@ -125,7 +125,7 @@
                         </div>
                         <div class="ym_form_group  col-4">
                             <div class="row">
-                                <label>Certificate Termination Date</label>
+                                <label class="md-lbl">Certificate Termination Date</label>
                                 <input class="col-md-9" matInput [matDatepicker]="picker4"
                                     value="{{creditorDataJson?.certificate?.certificateTermDate}}"
                                     [readonly]="isFieldreadonly">
@@ -134,7 +134,7 @@
                             </div>
                         </div>
                         <div class="ym_form_group  col-4">
-                            <label>Internal Location Number</label>
+                            <label class="md-lbl">Internal Location Number</label>
                             <input placeholder="Internal Location Number"
                                 value="{{creditorDataJson?.certificate?.internalLocationNumber}}"
                                 [readonly]="isFieldreadonly">
@@ -142,19 +142,19 @@
                     </div>
                     <div class="row">
                         <div class="ym_form_group  col-4">
-                            <label>Certificate Status</label>
+                            <label class="md-lbl">Certificate Status</label>
                             <input placeholder="Certificate Status"
                                 value="{{creditorDataJson?.certificate?.certificateStatus}}"
                                 [readonly]="isFieldreadonly">
                         </div>
                         <div class="ym_form_group  col-4">
-                            <label>Certificate Sub Status</label>
+                            <label class="md-lbl">Certificate Sub Status</label>
                             <input placeholder="Certificate Sub Status"
                                 value="{{creditorDataJson?.certificate?.certificateSubStatus}}"
                                 [readonly]="isFieldreadonly">
                         </div>
                         <div class="ym_form_group  col-4">
-                            <label>Certificate Termination Reason</label>
+                            <label class="md-lbl">Certificate Termination Reason</label>
                             <input placeholder="Certificate Termination Reason"
                                 value="{{creditorDataJson?.certificate?.certificateStatusReason}}"
                                 [readonly]="isFieldreadonly">
@@ -162,25 +162,25 @@
                     </div>
                     <div class="row">
                         <div class="ym_form_group  col-4">
-                            <label>Certificate Product Type</label>
+                            <label class="md-lbl">Certificate Product Type</label>
                             <input placeholder="Certificate Product Type"
                                 value="{{creditorDataJson?.certificate?.certificateProductType}}"
                                 [readonly]="isFieldreadonly">
                         </div>
                         <div class="ym_form_group  col-4">
-                            <label>Plan Name</label>
+                            <label class="md-lbl">Plan Name</label>
                             <input placeholder="Plan Name" value="{{creditorDataJson?.certificate?.planName}}"
                                 [readonly]="isFieldreadonly">
                         </div>
                         <div class="ym_form_group  col-4">
-                            <label>Plan Number</label>
+                            <label class="md-lbl">Plan Number</label>
                             <input placeholder="Plan Number" value="{{creditorDataJson?.certificate?.planNumber}}"
                                 [readonly]="isFieldreadonly">
                         </div>
                     </div>
                     <div class="row">
                         <div class="ym_form_group  col-8">
-                            <label>Plan Description</label>
+                            <label class="md-lbl">Plan Description</label>
                             <textarea class="md-text-area-width" rows="3" placeholder="Plan Description"
                                 value="{{creditorDataJson?.certificate?.planDescription}}"
                                 [readonly]="isFieldreadonly"></textarea>
@@ -191,13 +191,13 @@
                     </div>
                     <div class="row">
                         <div class="ym_form_group  col-4">
-                            <label>Logical Delete Flag</label>
+                            <label class="md-lbl">Logical Delete Flag</label>
                             <input placeholder="Logical Delete Flag"
                                 value="{{creditorDataJson?.certificate?.certificateLogicalDeleteFlag}}"
                                 [readonly]="isFieldreadonly">
                         </div>
                         <div class="ym_form_group  col-8">
-                            <label>Logical Delete Notes</label>
+                            <label class="md-lbl">Logical Delete Notes</label>
                             <textarea class="md-text-area-width" rows="3" placeholder="Logical Delete Notes"
                                 value="{{creditorDataJson?.certificate?.logicalDeleteNotes}}"
                                 [readonly]="isFieldreadonly"></textarea>
@@ -205,13 +205,13 @@
                     </div>
                     <div class="row">
                         <div class="ym_form_group  col-4">
-                            <label>Processed With Error Flag</label>
+                            <label class="md-lbl">Processed With Error Flag</label>
                             <input placeholder="Processed With Error Flag"
                                 value={{creditorDataJson?.certificate?.certificateProcessedWithErrorFlag}}
                                 [readonly]="isFieldreadonly">
                         </div>
                         <div class="ym_form_group  col-8">
-                            <label>Processed With Error Note</label>
+                            <label class="md-lbl">Processed With Error Note</label>
                             <textarea class="md-text-area-width" rows="3" placeholder="Processed With Error Note"
                                 value="{{creditorDataJson?.certificate?.processedWithErrorReason}}"
                                 [readonly]="isFieldreadonly"></textarea>
@@ -219,13 +219,13 @@
                     </div>
                     <div class="row">
                         <div class="ym_form_group  col-4">
-                            <label>Processed With Warning Flag</label>
+                            <label class="md-lbl">Processed With Warning Flag</label>
                             <input placeholder="Processed With Warning Flag"
                                 value="{{creditorDataJson?.certificate?.certificateProcessedWithWarningFlag}}"
                                 [readonly]="isFieldreadonly">
                         </div>
                         <div class="ym_form_group  col-8">
-                            <label>Processed With Warning Note</label>
+                            <label class="md-lbl">Processed With Warning Note</label>
                             <textarea class="md-text-area-width" rows="3" placeholder="Processed With Warning Note"
                                 value="{{creditorDataJson?.certificate?.certificateProcessedWithWarningNote}}"
                                 [readonly]="isFieldreadonly"></textarea>
@@ -238,38 +238,40 @@
         <div>
             <div class="row">
                 <div class="col-4">
-                    <div class="m-0 p-2 row mt-3" style="background-color: #ebebf1;">
+                    <div class="m-0 p-2 row mt-3 md-bgClr">
                         <div class="col-md-12 pl-2 pt-2">
                             <h3>Applicants On Certificate</h3>
                         </div>
                     </div>
                     <div id="ptableId">
                         <p-table [value]="creditorDataJson?.certificate?.applicant" selectionMode="single"
+                            [scrollable]="true" [responsive]="true" scrollHeight="200px" [autoLayout]="true"
+                            [resizableColumns]="isResizeTrue" columnResizeMode="expand"
                             (onRowSelect)="onClickOfApplicantCertficateRow($event)">
                             <ng-template pTemplate="header">
                                 <tr class="ptableHeader">
-                                    <th>Applicant Type</th>
+                                    <th pResizableColumn>Applicant Type</th>
                                     <th>First Name</th>
                                     <th>Last name</th>
                                 </tr>
                             </ng-template>
                             <ng-template pTemplate="body" let-responseData>
                                 <tr [pSelectableRow]="responseData">
-                                    <td>{{responseData.applicantSequenceNumber}}</td>
+                                    <td class="ui-resizable-column">{{responseData.applicantSequenceNumber}}</td>
                                     <td>{{responseData.applicantFirstName}}</td>
                                     <td>{{responseData.applicantLastName}}</td>
                                 </tr>
                             </ng-template>
                         </p-table>
                     </div>
-                    <div class="row">
-                       <b>Note<span style="color: red;">*</span>:</b>                    
+                    <div class="row ml-2">
+                        <b>Note<span style="color: red;">*</span>:</b>
                         Select the applicant row in the table above to view the applicant
                         details.
                     </div>
                 </div>
                 <div class="col-8 mt-2">
-                    <mat-card class="w-100 mt-2 md-boder">
+                    <mat-card class="w-100 mt-2 md-border">
                         <mat-card-header>
                             <mat-card-title class="md-clr md-font">Applicant Details</mat-card-title>
                         </mat-card-header>
@@ -277,24 +279,24 @@
                         <mat-card-content class="mt-1">
                             <div class="row">
                                 <div class="ym_form_group  col-6">
-                                    <label>Insured Flag</label>
+                                    <label class="md-lbl">Insured Flag</label>
                                     <input placeholder="Insured Flag" value={{applicantDetails?.insuredFlag}}
                                         [readonly]="isFieldreadonly">
                                 </div>
                                 <div class="ym_form_group  col-6">
-                                    <label>First Name</label>
+                                    <label class="md-lbl">First Name</label>
                                     <input placeholder="First Name" value="{{applicantDetails?.applicantFirstName}}"
                                         [readonly]="isFieldreadonly">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="ym_form_group  col-6">
-                                    <label>Middle Name</label>
+                                    <label class="md-lbl">Middle Name</label>
                                     <input placeholder="Middle Name" value="{{applicantDetails?.applicantMiddleName}}"
                                         [readonly]="isFieldreadonly">
                                 </div>
                                 <div class="ym_form_group  col-6">
-                                    <label>Last Name</label>
+                                    <label class="md-lbl">Last Name</label>
                                     <input placeholder="Last Name" value="{{applicantDetails?.applicantLastName}}"
                                         [readonly]="isFieldreadonly">
                                 </div>
@@ -302,7 +304,7 @@
                             <div class="row">
                                 <div class="ym_form_group  col-6">
                                     <div class="row ml-1">
-                                        <label>Date Of Birth</label>
+                                        <label class="md-lbl">Date Of Birth</label>
                                         <input class="col-md-9" matInput [matDatepicker]="picker5"
                                             value="{{applicantDetails?.applicantDateOfBirth}}"
                                             [readonly]="isFieldreadonly">
@@ -311,43 +313,43 @@
                                     </div>
                                 </div>
                                 <div class="ym_form_group  col-6">
-                                    <label>Gender</label>
+                                    <label class="md-lbl">Gender</label>
                                     <input placeholder="Gender" value={{applicantDetails?.gender}}
                                         [readonly]="isFieldreadonly">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="ym_form_group  col-6">
-                                    <label>Phone1</label>
+                                    <label class="md-lbl">Phone1</label>
                                     <input placeholder="Phone1" value="{{applicantDetails?.applicantPhone1}}"
                                         [readonly]="isFieldreadonly">
                                 </div>
                                 <div class="ym_form_group  col-6">
-                                    <label>Phone2</label>
+                                    <label class="md-lbl">Phone2</label>
                                     <input placeholder="Phone2" value="{{applicantDetails?.applicantPhone2}}"
                                         [readonly]="isFieldreadonly">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="ym_form_group  col-6">
-                                    <label>Email</label>
+                                    <label class="md-lbl">Email</label>
                                     <input placeholder="Email" value="{{applicantDetails?.applicantEmail}}"
                                         [readonly]="isFieldreadonly">
                                 </div>
                                 <div class="ym_form_group  col-6">
-                                    <label>Province</label>
+                                    <label class="md-lbl">Province</label>
                                     <input placeholder="Province" value="{{applicantDetails?.applicantProvince}}"
                                         [readonly]="isFieldreadonly">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="ym_form_group  col-6">
-                                    <label>Is Smoker</label>
+                                    <label class="md-lbl">Is Smoker</label>
                                     <input placeholder="Is Smoker" value="{{applicantDetails?.isSmoker}}"
                                         [readonly]="isFieldreadonly">
                                 </div>
                                 <div class="ym_form_group  col-6">
-                                    <label>Correspondence Language</label>
+                                    <label class="md-lbl">Correspondence Language</label>
                                     <input placeholder="Correspondence Language"
                                         value="{{applicantDetails?.correspondenceLanguage}}"
                                         [readonly]="isFieldreadonly">
@@ -355,12 +357,12 @@
                             </div>
                             <div class="row">
                                 <div class="ym_form_group  col-6">
-                                    <label>Correspondence Type</label>
+                                    <label class="md-lbl">Correspondence Type</label>
                                     <input placeholder="Correspondence Type"
                                         value="{{applicantDetails?.correpondenceType}}" [readonly]="isFieldreadonly">
                                 </div>
                                 <div class="ym_form_group  col-6">
-                                    <label>Communication Consent Flag</label>
+                                    <label class="md-lbl">Communication Consent Flag</label>
                                     <input placeholder="Communication Consent Flag"
                                         value="{{applicantDetails?.communicationConsentFlag}}"
                                         [readonly]="isFieldreadonly">
@@ -368,13 +370,13 @@
                             </div>
                             <div class="row">
                                 <div class="ym_form_group  col-6">
-                                    <label>Processed With Error Flag</label>
+                                    <label class="md-lbl">Processed With Error Flag</label>
                                     <input placeholder="Processed With Error Flag"
                                         value="{{applicantDetails?.applicantProcessedWithErrorFlag}}"
                                         [readonly]="isFieldreadonly">
                                 </div>
                                 <div class="ym_form_group  col-6">
-                                    <label>Processed With Warning Flag</label>
+                                    <label class="md-lbl">Processed With Warning Flag</label>
                                     <input placeholder="Processed With Warning Flag"
                                         value="{{applicantDetails?.applicantProcessedWithWarningFlag}}"
                                         [readonly]="isFieldreadonly">
@@ -382,13 +384,13 @@
                             </div>
                             <div class="row">
                                 <div class="ym_form_group  col-6">
-                                    <label>Logical Delete Flag</label>
+                                    <label class="md-lbl">Logical Delete Flag</label>
                                     <input placeholder="Logical Delete Flag"
                                         value="{{applicantDetails?.applicantLogicalDeleteFlag}}"
                                         [readonly]="isFieldreadonly">
                                 </div>
                                 <div class="ym_form_group  col-6">
-                                    <label>Tax Exempt Flag</label>
+                                    <label class="md-lbl">Tax Exempt Flag</label>
                                     <input placeholder="Tax Exempt Flag" value="{{applicantDetails?.taxExemptFlag}}"
                                         [readonly]="isFieldreadonly">
                                 </div>
@@ -407,13 +409,14 @@
         <div>
             <div class="row">
                 <div class="col-4">
-                    <div class="m-0 p-2 row mt-3" style="background-color: #ebebf1;">
+                    <div class="m-0 p-2 row mt-3 md-bgClr">
                         <div class="col-md-12 pl-2 pt-2">
                             <h3>Applicant Address</h3>
                         </div>
                     </div>
                     <div id="ptableId">
-                        <p-table [value]="applicantAddress" selectionMode="single">
+                        <p-table [value]="applicantAddress" selectionMode="single"
+                        [scrollable]="true" [responsive]="true" scrollHeight="200px" [autoLayout]="true">
                             <ng-template pTemplate="header">
                                 <tr class="ptableHeader">
                                     <th>Address Type</th>
@@ -428,16 +431,18 @@
                     </div>
                 </div>
                 <div class="col-8">
-                    <div class="m-0 p-2 row mt-3" style="background-color: #ebebf1;">
+                    <div class="m-0 p-2 row mt-3 md-bgClr">
                         <div class="col-md-12 pl-2 pt-2">
                             <h3>Applicant Coverage</h3>
                         </div>
                     </div>
                     <div id="ptableId">
-                        <p-table [value]="applicantCoverage" selectionMode="single">
+                        <p-table [value]="applicantCoverage" selectionMode="single"
+                        [scrollable]="true" [responsive]="true" scrollHeight="200px" [autoLayout]="true"
+                            [resizableColumns]="isResizeTrue" columnResizeMode="expand">
                             <ng-template pTemplate="header">
                                 <tr class="ptableHeader">
-                                    <th>Coverage Amount</th>
+                                    <th pResizableColumn>Coverage Amount</th>
                                     <th>Coverage Term</th>
                                     <th>Coverage Effective Date</th>
                                     <th>Coverage Code</th>
@@ -446,7 +451,7 @@
                             </ng-template>
                             <ng-template pTemplate="body" let-coverageResponseData>
                                 <tr [pSelectableRow]="coverageResponseData">
-                                    <td>{{coverageResponseData?.coverageAmount}}</td>
+                                    <td class="ui-resizable-column">{{coverageResponseData?.coverageAmount}}</td>
                                     <td>{{coverageResponseData?.coverageTerm}}</td>
                                     <td>{{coverageResponseData?.coverageEffectiveDate.split('T')[0]}}</td>
                                     <td>{{coverageResponseData?.coverageCode}}</td>
@@ -462,28 +467,30 @@
         <!-- Premium List -->
         <div>
             <div class="row">
-                <div class="col-12 m-0 p-2 row mt-3" style="background-color: #ebebf1;">
+                <div class="col-12 m-0 p-2 row mt-3 md-bgClr">
                     <div class="col-md-12 pl-2 pt-2">
                         <h3>Premium List</h3>
                     </div>
                 </div>
                 <div id="ptableId">
-                    <p-table [value]="premiumHistoryList?.premiumListSP_premium" selectionMode="single">
+                    <p-table [value]="premiumHistoryList?.premiumListSP_premium" selectionMode="single"
+                    [scrollable]="true" [responsive]="true" scrollHeight="200px" [autoLayout]="true"
+                            [resizableColumns]="isResizeTrue" columnResizeMode="expand">
                         <ng-template pTemplate="header">
                             <tr class="ptableHeader">
-                                <th>Billing Period</th>
+                                <th pResizableColumn>Billing Period</th>
                                 <th>Transaction Type</th>
                                 <th>Applicant</th>
                                 <th>Disability Premium</th>
-                                <th style="width: 12rem;">Disability Premium Tax</th>
+                                <th>Disability Premium Tax</th>
                                 <th>Total Premium</th>
                                 <th>Total Tax</th>
-                                <th style="width: 13rem;">Total Premium With Tax</th>
+                                <th>Total Premium With Tax</th>
                             </tr>
                         </ng-template>
                         <ng-template pTemplate="body" let-premiumResponseData>
                             <tr [pSelectableRow]="premiumResponseData">
-                                <td>{{premiumResponseData.transactionDate.split('T')[0]}}</td>
+                                <td class="ui-resizable-column">{{premiumResponseData.transactionDate.split('T')[0]}}</td>
                                 <td>{{premiumResponseData.baseTransactionType}}</td>
                                 <td>{{premiumResponseData.applicantName}}</td>
                                 <td>{{premiumResponseData.disabilityPremium}}</td>

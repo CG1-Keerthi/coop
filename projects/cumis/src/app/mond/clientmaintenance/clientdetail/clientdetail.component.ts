@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild, Input, Renderer2 } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, Input, Renderer2, HostListener } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
@@ -96,6 +96,7 @@ export class ClientDetailComponent implements OnInit {
     public clientAddressIdentifier: string;
     public isUpdate: string;
     public isDateUpdate: string;
+    public isResizeTrue: boolean = false;
   
 
     @ViewChild('clientStatusList') clientStatusList: ElementRef;
@@ -360,6 +361,15 @@ export class ClientDetailComponent implements OnInit {
                 //     var parseDecodeData = JSON.parse(decodedData);
                 //     this.recentAddress = parseDecodeData.clientAddressInfo_clientAddressInfo;
             });
+    }
+
+    @HostListener('click', ['$event.target'])
+    onClick(element) {
+        debugger;
+        this.isResizeTrue = true;
+        setTimeout(() => {
+            this.isResizeTrue = false;
+        }, 2000)
     }
 
 }

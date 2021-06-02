@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MDCommonGetterSetter } from '../../_services/common';
 import { MDMondServiceDS } from '../../_services/ds/MDMondServiceDS';
@@ -20,6 +20,7 @@ export class RateStructureConfigurationComponent implements OnInit {
     public selectedTab: number = 0;
     public formVariables: any;
     public rateDetailsData: any = {};
+    public isResizeTrue: boolean = false;
     constructor(private http: HttpClient,
         private mdCommonGetterAndSetter: MDCommonGetterSetter,
         private mdMondServiceDS: MDMondServiceDS) { }
@@ -83,6 +84,15 @@ export class RateStructureConfigurationComponent implements OnInit {
             //     }
             //     this.rateDetailsData = ratestructureJSON;
             });
+    }
+
+    @HostListener('click', ['$event.target'])
+    onClick(element) {
+        debugger;
+        this.isResizeTrue = true;
+        setTimeout(() => {
+            this.isResizeTrue = false;
+        }, 2000)
     }
 
 }

@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, Input, OnInit, ViewChild } from '@angular/core';
 
 
 
@@ -27,6 +27,7 @@ export class certificateDetailsComponent implements OnInit {
   public taxTotal: number;
   public premiumWithTaxTotal: string;
   public isFieldreadonly: boolean = true;
+  public isResizeTrue: boolean = false;
   constructor() { }
 
 
@@ -114,6 +115,16 @@ export class certificateDetailsComponent implements OnInit {
     this.applicantDetails = event.data;
     this.applicantAddress = event.data.applicantAddress;
     this.applicantCoverage = event.data.applicantCoverage;
+  }
+
+
+  @HostListener('click', ['$event.target'])
+  onClick(element) {
+      debugger;
+      this.isResizeTrue = true;
+      setTimeout(() => {
+          this.isResizeTrue = false;
+      }, 2000)
   }
 
 }

@@ -8,7 +8,7 @@
     <div>
         <mat-accordion>
             <mat-expansion-panel [expanded]="true">
-                <mat-expansion-panel-header style="background-color: #307ecc;">
+                <mat-expansion-panel-header style="background-color: #C41230;">
                     <mat-panel-title style="color: white;">
                         Balancing Information
                     </mat-panel-title>
@@ -74,14 +74,14 @@
     <div>
         <mat-accordion>
             <mat-expansion-panel [expanded]="true">
-                <mat-expansion-panel-header style="background-color: #307ecc;">
+                <mat-expansion-panel-header style="background-color: #C41230;">
                     <mat-panel-title style="color: white;">
                         File Header
                     </mat-panel-title>
                 </mat-expansion-panel-header>
                 <div class="row">
                     <div class="ym_form_group ml-3">
-                        <label>Header Errors</label>
+                        <label class="md-lbl">Header Errors</label>
                         <textarea class="md-text-area-width" rows="3" placeholder="Header Errors"
                             value="{{laisDataList?.creditorFile_policyReinstatementFileLAIS_header_headerErrors}}
                             {{laisDataList?.creditorFile_policyFileLAIS_header_headerErrors}}
@@ -90,20 +90,20 @@
                 </div>
                 <div class="row">
                     <div class="ym_form_group col-4">
-                        <label>Transaction Month</label>
+                        <label class="md-lbl">Transaction Month</label>
                         <input placeholder="Transaction Month" value="{{laisDataList?.creditorFile_policyReinstatementFileLAIS_header_transactionMonth}} 
                             {{laisDataList?.creditorFile_policyFileLAIS_header_transactionMonth}}
                             {{laisDataList?.creditorFile_policyCancellationFileLAIS_header_transactionMonth}}">
                     </div>
                     <div class="ym_form_group col-4">
-                        <label>Period Start Date</label>
+                        <label class="md-lbl">Period Start Date</label>
                         <input placeholder="Period Start Date"
                             value="{{laisDataList?.creditorFile_policyReinstatementFileLAIS_header_periodStartDate}}
                             {{laisDataList?.creditorFile_policyFileLAIS_header_periodStartDate}}
                             {{laisDataList?.creditorFile_policyCancellationFileLAIS_header_periodStartDate}}">
                     </div>
                     <div class="ym_form_group col-4">
-                        <label>Period End Date
+                        <label class="md-lbl">Period End Date
                         </label>
                         <input placeholder="Period End Date"
                             value="{{laisDataList?.creditorFile_policyReinstatementFileLAIS_header_periodEndDate}}
@@ -113,14 +113,14 @@
                 </div>
                 <div class="row">
                     <div class="ym_form_group col-4">
-                        <label>File Creation Date</label>
+                        <label class="md-lbl">File Creation Date</label>
                         <input placeholder="File Creation Date"
                             value="{{laisDataList?.creditorFile_policyReinstatementFileLAIS_header_fileCreationDate}}
                             {{laisDataList?.creditorFile_policyFileLAIS_header_fileCreationDate}}
                             {{laisDataList?.creditorFile_policyCancellationFileLAIS_header_fileCreationDate}}">
                     </div>
                     <div class="ym_form_group col-4">
-                        <label>Insurance Policy Number</label>
+                        <label class="md-lbl">Insurance Policy Number</label>
                         <input placeholder="Insurance Policy Number"
                             value="{{laisDataList?.creditorFile_policyUnexpiredFileLGM2_header_creditorGroupInsurancePolicyNumber}}
                             {{laisDataList?.creditorFile_policyFileLAIS_header_creditorGroupInsurancePolicyNumber}}
@@ -129,7 +129,7 @@
                 </div>
                 <div class="row">
                     <div class="ym_form_group col-4">
-                        <label>Total Number Of Records</label>
+                        <label class="md-lbl">Total Number Of Records</label>
                         <input placeholder="Total Number Of Records"
                         value="{{laisDataList?.creditorFile_policyReinstatementFileLAIS_header_totalNumberOfRecords}}
                         {{laisDataList?.creditorFile_policyFileLAIS_header_totalNumberOfRecords}}
@@ -137,7 +137,7 @@
                      
                     </div>
                     <div class="ym_form_group col-4">
-                        <label>Total Number Of Certificates</label>
+                        <label class="md-lbl">Total Number Of Certificates</label>
                         <input placeholder="Total Number Of Certificates"
                         value="{{laisDataList?.creditorFile_policyReinstatementFileLAIS_header_totalNumberOfCertificates}}
                         {{laisDataList?.creditorFile_policyFileLAIS_header_totalNumberOfCertificates}}
@@ -155,7 +155,7 @@
     <div>
         <mat-accordion>
             <mat-expansion-panel [expanded]="true">
-                <mat-expansion-panel-header style="background-color: #307ecc;">
+                <mat-expansion-panel-header style="background-color: #C41230;">
                     <mat-panel-title style="color: white;">
                         Certificate
                     </mat-panel-title>
@@ -163,23 +163,25 @@
                 <div class="row">
                     <div class="col-3">
                         <div>
-                            <div class="m-0 p-2 row mt-3" style="background-color: #ebebf1;">
+                            <div class="m-0 p-2 row mt-3" style="background-color: #C41230;">
                                 <div class="col-md-12 pl-2 pt-2">
                                     <h3>Certificate</h3>
                                 </div>
                             </div>
-                            <div id="md-scroll">
+                            <div>
                                 <p-table [value]="laisCertificateList" selectionMode="single"
+                                [scrollable]="true" [responsive]="true" scrollHeight="200px" [autoLayout]="true"
+                                [resizableColumns]="isResizeTrue" columnResizeMode="expand"
                                     (onRowSelect)="onClickOfCertificateDataRow($event)">
                                     <ng-template pTemplate="header">
                                         <tr class="ptableHeader">
-                                            <th>Transaction Type</th>
+                                            <th pResizableColumn>Transaction Type</th>
                                             <th>Policy Number</th>
                                         </tr>
                                     </ng-template>
                                     <ng-template pTemplate="body" let-laisResponseData>
                                         <tr [pSelectableRow]="laisResponseData">
-                                            <td>{{laisResponseData?.transactionType}}</td>
+                                            <td class="ui-resizable-column">{{laisResponseData?.transactionType}}</td>
                                             <td>{{laisResponseData?.policyNumber}}</td>
                                         </tr>
                                     </ng-template>
@@ -189,12 +191,12 @@
                     </div>
                     <div class="col-9">
                         <div class="ym_form_group">
-                            <label>Record Errors</label>
+                            <label class="md-lbl">Record Errors</label>
                             <textarea class="md-text-area-width" rows="3" placeholder="Header Errors"
                                 value={{laisDataList?.creditorFile_policyReinstatementFileLAIS_header_recordErrors}}></textarea>
                         </div>
                         <div>
-                            <mat-card class="w-100 mt-2 md-boder">
+                            <mat-card class="w-100 mt-2 md-border">
                                 <mat-card-header>
                                     <mat-card-title class="md-clr"><b>Certificate Details</b></mat-card-title>
                                 </mat-card-header>
@@ -202,34 +204,34 @@
                                 <mat-card-content class="mt-3">
                                     <div class="row">
                                         <div class="ym_form_group col-4">
-                                            <label>Transaction Code</label>
+                                            <label class="md-lbl">Transaction Code</label>
                                             <input placeholder="Total Number Of Records"
                                                 value="{{certificateRowData?.transactionType}}">
                                         </div>
                                         <div class="ym_form_group col-4">
-                                            <label>Certificate / Policy / POS Number</label>
+                                            <label class="md-lbl">Certificate / Policy / POS Number</label>
                                             <input placeholder="Certificate / Policy / POS Number"
                                                 value="{{certificateRowData?.policyNumber}}">
                                         </div>
                                         <div class="ym_form_group col-4">
-                                            <label>Plan Code</label>
+                                            <label class="md-lbl">Plan Code</label>
                                             <input placeholder="Plan Code" value="{{certificateRowData?.planCode}}">
                                         </div>
                                     </div>
                                     <hr>
                                     <div class="row mt-2">
                                         <div class="ym_form_group col-4">
-                                            <label>Applicant First Name </label>
+                                            <label class="md-lbl">Applicant First Name </label>
                                             <input placeholder="Applicant First Name"
                                                 value="{{certificateRowData?.applicantFirstName}}">
                                         </div>
                                         <div class="ym_form_group col-4">
-                                            <label>Applicant Last Name</label>
+                                            <label class="md-lbl">Applicant Last Name</label>
                                             <input placeholder="Applicant Last Name"
                                                 value="{{certificateRowData?.applicantLastName}}">
                                         </div>
                                         <div class="ym_form_group col-4">
-                                            <label>Applicant Birth Date</label>
+                                            <label class="md-lbl">Applicant Birth Date</label>
                                             <input placeholder="Applicant Birth Date"
                                                 value="{{certificateRowData?.applicantDateOfBirth}}">
                                         </div>
@@ -237,81 +239,81 @@
 
                                     <div class="row">
                                         <div class="ym_form_group col-4">
-                                            <label>Applicant Gender</label>
+                                            <label class="md-lbl">Applicant Gender</label>
                                             <input placeholder="Applicant Gender"
                                                 value="{{certificateRowData?.applicantGender}}">
                                         </div>
                                         <div class="ym_form_group col-4">
-                                            <label>Applicant Smoker</label>
+                                            <label class="md-lbl">Applicant Smoker</label>
                                             <input placeholder="Applicant Smoker"
                                                 value="{{certificateRowData?.isApplicantSmoker}}">
                                         </div>
                                         <div class="ym_form_group col-4">
-                                            <label>Applicant Mailing Address</label>
+                                            <label class="md-lbl">Applicant Mailing Address</label>
                                             <input placeholder="Applicant Mailing Address"
                                                 value="{{certificateRowData?.applicantMailingAddress}}">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="ym_form_group col-4">
-                                            <label>Applicant City</label>
+                                            <label class="md-lbl">Applicant City</label>
                                             <input placeholder="Applicant City"
                                                 value="{{certificateRowData?.applicantCity}}">
                                         </div>
                                         <div class="ym_form_group col-4">
-                                            <label>Applicant Province</label>
+                                            <label class="md-lbl">Applicant Province</label>
                                             <input placeholder="Applicant Province"
                                                 value="{{certificateRowData?.applicantProvince}}">
                                         </div>
                                         <div class="ym_form_group col-4">
-                                            <label>Applicant Postal Code</label>
+                                            <label class="md-lbl">Applicant Postal Code</label>
                                             <input placeholder="Applicant Postal Code"
                                                 value="{{certificateRowData?.applicantPostalCode}}">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="ym_form_group col-4">
-                                            <label>Applicant Country</label>
+                                            <label class="md-lbl">Applicant Country</label>
                                             <input placeholder="Applicant Country"
                                                 value="{{certificateRowData?.applicantCountry}}">
                                         </div>
                                         <div class="ym_form_group col-4">
-                                            <label>Applicant Telephone Number</label>
+                                            <label class="md-lbl">Applicant Telephone Number</label>
                                             <input placeholder="Applicant Telephone Number"
                                                 value="{{certificateRowData?.applicantTelephoneNumber}}">
                                         </div>
                                         <div class="ym_form_group col-4">
-                                            <label>Applicant Email</label>
+                                            <label class="md-lbl">Applicant Email</label>
                                             <input placeholder="Applicant Email"
                                                 value="{{certificateRowData?.applicantEmail}}">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="ym_form_group col-4">
-                                            <label>Tax Exempt (Y/N)</label>
+                                            <label class="md-lbl">Tax Exempt (Y/N)</label>
                                             <input placeholder="Tax Exempt (Y/N)"
                                                 value="{{certificateRowData?.taxExemptFlag}}">
                                         </div>
                                         <div class="ym_form_group col-4">
-                                            <label>Retro / Non-Retro</label>
+                                            <label class="md-lbl">Retro / Non-Retro</label>
                                             <input placeholder="Retro / Non-Retro"
                                                 value="{{certificateRowData?.retroOrNonRetroFlag}}">
                                         </div>
                                         <div class="ym_form_group col-4">
-                                            <label>Applicant Coverage Expiry Date</label>
+                                            <label class="md-lbl">Applicant Coverage Expiry Date</label>
                                             <input placeholder="Applicant Coverage Expiry Date"
                                                 value="{{certificateRowData?.applicantCoverageExpiryDate}}">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="ym_form_group col-4">
-                                            <label>Applicant Coverage Status</label>
+                                            <label class="md-lbl">Applicant Coverage Status</label>
                                             <input placeholder="Applicant Coverage Status"
                                                 value="{{certificateRowData?.applicantCoverageStatus}}">
                                         </div>
 
                                         <div class="ym_form_group col-4">
-                                            <label>Applicant Insurance Term in months (By Coverage)</label>
+                                            <label class="md-lbl">Applicant Insurance Term in months (By Coverage)</label>
                                             <input placeholder="Applicant Insurance Term in months (By Coverage)"
                                                 value="{{certificateRowData?.applicantInsuranceTerm}}">
                                         </div>
@@ -321,92 +323,92 @@
                                     <!-- new code -->
                                     <div class="row mt-2">
                                         <div class="ym_form_group col-4">
-                                            <label>Co-Applicant First Name</label>
+                                            <label class="md-lbl">Co-Applicant First Name</label>
                                             <input placeholder="Co-Applicant First Name"
                                                 value="{{certificateRowData?.coApplicantFirstName}}">
                                         </div>
                                         <div class="ym_form_group col-4">
-                                            <label>Co-Applicant Last Name</label>
+                                            <label class="md-lbl">Co-Applicant Last Name</label>
                                             <input placeholder="Co-Applicant Last Name"
                                                 value="{{certificateRowData?.coApplicantLastName}}">
                                         </div>
                                         <div class="ym_form_group col-4">
-                                            <label>Co-Applicant Birth Date</label>
+                                            <label class="md-lbl">Co-Applicant Birth Date</label>
                                             <input placeholder="Co-Applicant Birth Date"
                                                 value="{{certificateRowData?.coApplicantDateOfBirth}}">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="ym_form_group col-4">
-                                            <label>Co-Applicant Gender</label>
+                                            <label class="md-lbl">Co-Applicant Gender</label>
                                             <input placeholder="Co-Applicant Gender"
                                                 value="{{certificateRowData?.coApplicantGender}}">
                                         </div>
                                         <div class="ym_form_group col-4">
-                                            <label>Co-Applicant Smoker</label>
+                                            <label class="md-lbl">Co-Applicant Smoker</label>
                                             <input placeholder="Co-Applicant Smoker"
                                                 value="{{certificateRowData?.isCoApplicantSmoker}}">
                                         </div>
                                         <div class="ym_form_group col-4">
-                                            <label>Single / Joint</label>
+                                            <label class="md-lbl">Single / Joint</label>
                                             <input placeholder="Single / Joint"
                                                 value="{{certificateRowData?.singleOrJointFlag}}">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="ym_form_group col-4">
-                                            <label>Co-Applicant Mailing Address</label>
+                                            <label class="md-lbl">Co-Applicant Mailing Address</label>
                                             <input placeholder="Co-Applicant Mailing Address"
                                                 value="{{certificateRowData?.coApplicantMailingAddress}}">
                                         </div>
                                         <div class="ym_form_group col-4">
-                                            <label>Co-Applicant City</label>
+                                            <label class="md-lbl">Co-Applicant City</label>
                                             <input placeholder="Co-Applicant City"
                                                 value="{{certificateRowData?.coApplicantCity}}">
                                         </div>
                                         <div class="ym_form_group col-4">
-                                            <label>Co-Applicant Province</label>
+                                            <label class="md-lbl">Co-Applicant Province</label>
                                             <input placeholder="Co-Applicant Province"
                                                 value="{{certificateRowData?.coApplicantProvince}}">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="ym_form_group col-4">
-                                            <label>Co-Applicant Postal Code</label>
+                                            <label class="md-lbl">Co-Applicant Postal Code</label>
                                             <input placeholder="Co-Applicant Postal Code"
                                                 value="{{certificateRowData?.coApplicantPostalCode}}">
                                         </div>
                                         <div class="ym_form_group col-4">
-                                            <label>Co-Applicant Country</label>
+                                            <label class="md-lbl">Co-Applicant Country</label>
                                             <input placeholder="Co-Applicant Country"
                                                 value="{{certificateRowData?.coApplicantCountry}}">
                                         </div>
                                         <div class="ym_form_group col-4">
-                                            <label>Co-Applicant Telephone Number</label>
+                                            <label class="md-lbl">Co-Applicant Telephone Number</label>
                                             <input placeholder="Co-Applicant Telephone Number"
                                                 value="{{certificateRowData?.coApplicantTelephoneNumber}}">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="ym_form_group col-4">
-                                            <label>Co-Applicant Email</label>
+                                            <label class="md-lbl">Co-Applicant Email</label>
                                             <input placeholder="Co-Applicant Email"
                                                 value="{{certificateRowData?.coApplicantEmail}}">
                                         </div>
                                         <div class="ym_form_group col-4">
-                                            <label>Co-Applicant Coverage Expiry Date</label>
+                                            <label class="md-lbl">Co-Applicant Coverage Expiry Date</label>
                                             <input placeholder="Co-Applicant Coverage Expiry Date"
                                                 value="{{certificateRowData?.coApplicantCoverageExpiryDate}}">
                                         </div>
                                         <div class="ym_form_group col-4">
-                                            <label>Co-Applicant Coverage Status</label>
+                                            <label class="md-lbl">Co-Applicant Coverage Status</label>
                                             <input placeholder="Co-Applicant Coverage Status"
                                                 value="{{certificateRowData?.coApplicantCoverageStatus}}">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="ym_form_group col-4">
-                                            <label>Co-Applicant Insurance Term in months (By Coverage)</label>
+                                            <label class="md-lbl">Co-Applicant Insurance Term in months (By Coverage)</label>
                                             <input placeholder="Co-Applicant Insurance Term in months"
                                                 value="{{certificateRowData?.coApplicantInsuranceTerm}}">
                                         </div>
@@ -414,34 +416,34 @@
                                     <hr>
                                     <div class="row">
                                         <div class="ym_form_group col-4">
-                                            <label>Coverage Type</label>
+                                            <label class="md-lbl">Coverage Type</label>
                                             <input placeholder="Coverage Type"
                                                 value="{{certificateRowData?.coverageType}}">
                                         </div>
                                         <div class="ym_form_group col-4">
-                                            <label>Coverage Effective Date</label>
+                                            <label class="md-lbl">Coverage Effective Date</label>
                                             <input placeholder="Coverage Effective Date"
                                                 value="{{certificateRowData?.coverageEffectiveDate}}">
                                         </div>
                                         <div class="ym_form_group col-4">
-                                            <label>Coverage Termination Date</label>
+                                            <label class="md-lbl">Coverage Termination Date</label>
                                             <input placeholder="Coverage Termination Date"
                                                 value="{{certificateRowData?.coverageTerminationDate}}">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="ym_form_group col-4">
-                                            <label>Coverage Termination Date</label>
+                                            <label class="md-lbl">Coverage Termination Date</label>
                                             <input placeholder="Coverage Termination Date"
                                                 value="{{certificateRowData?.premiumSplit}}">
                                         </div>
                                         <div class="ym_form_group col-4">
-                                            <label>Coverage Refund Amount</label>
+                                            <label class="md-lbl">Coverage Refund Amount</label>
                                             <input placeholder="Coverage Refund Amount"
                                                 value="{{certificateRowData?.coveragePremiumRefundAmount}}">
                                         </div>
                                         <div class="ym_form_group col-4">
-                                            <label>Coverage Refund Tax</label>
+                                            <label class="md-lbl">Coverage Refund Tax</label>
                                             <input placeholder="Coverage Refund Tax"
                                                 value="{{certificateRowData?.coveragePremiumRefundTax}}">
                                         </div>
@@ -449,12 +451,12 @@
                                     </div>
                                     <div class="row">
                                         <div class="ym_form_group col-4">
-                                            <label>Coverage Termination Reason</label>
+                                            <label class="md-lbl">Coverage Termination Reason</label>
                                             <input placeholder="Coverage Termination Reason"
                                                 value="{{certificateRowData?.coverageTerminationReason}}">
                                         </div>
                                         <div class="ym_form_group col-4">
-                                            <label>Insured Monthly Benefit</label>
+                                            <label class="md-lbl">Insured Monthly Benefit</label>
                                             <input placeholder="Insured Monthly Benefit"
                                                 value="{{certificateRowData?.insuredMonthlyBenefit}}">
                                         </div>
@@ -462,46 +464,46 @@
                                     <hr>
                                     <div class="row">
                                         <div class="ym_form_group col-4">
-                                            <label>Creditor Name</label>
+                                            <label class="md-lbl">Creditor Name</label>
                                             <input placeholder="Creditor Name"
                                                 value="{{certificateRowData?.creditorName}}">
                                         </div>
                                         <div class="ym_form_group col-4">
-                                            <label>Creditor Address</label>
+                                            <label class="md-lbl">Creditor Address</label>
                                             <input placeholder="Creditor Address"
                                                 value="{{certificateRowData?.creditorAddress}}">
                                         </div>
                                         <div class="ym_form_group col-4">
-                                            <label>Creditor City</label>
+                                            <label class="md-lbl">Creditor City</label>
                                             <input placeholder="Creditor City"
                                                 value="{{certificateRowData?.creditorCity}}">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="ym_form_group col-4">
-                                            <label>Creditor Province</label>
+                                            <label class="md-lbl">Creditor Province</label>
                                             <input placeholder="Creditor Province"
                                                 value="{{certificateRowData?.creditorProvince}}">
                                         </div>
                                         <div class="ym_form_group col-4">
-                                            <label>Creditor Postal Code</label>
+                                            <label class="md-lbl">Creditor Postal Code</label>
                                             <input placeholder="Creditor Postal Code"
                                                 value="{{certificateRowData?.creditorPostalCode}}">
                                         </div>
                                         <div class="ym_form_group col-4">
-                                            <label>Creditor Country</label>
+                                            <label class="md-lbl">Creditor Country</label>
                                             <input placeholder="Creditor Country"
                                                 value="{{certificateRowData?.creditorCountry}}">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="ym_form_group col-4">
-                                            <label>Creditor Telephone</label>
+                                            <label class="md-lbl">Creditor Telephone</label>
                                             <input placeholder="Creditor Telephone"
                                                 value="{{certificateRowData?.creditorTelephone}}">
                                         </div>
                                         <div class="ym_form_group col-4">
-                                            <label>Creditor Email</label>
+                                            <label class="md-lbl">Creditor Email</label>
                                             <input placeholder="Creditor Email"
                                                 value="{{certificateRowData?.creditorEmailAddress}}">
                                         </div>
@@ -509,51 +511,51 @@
                                     <hr>
                                     <div class="row">
                                         <div class="ym_form_group col-4">
-                                            <label>Group Policy Holder</label>
+                                            <label class="md-lbl">Group Policy Holder</label>
                                             <input placeholder="Group Policy Holder"
                                                 value="{{certificateRowData?.groupPolicyHolder}}">
                                         </div>
                                         <div class="ym_form_group col-4">
-                                            <label>Group Policy Holder Address</label>
+                                            <label class="md-lbl">Group Policy Holder Address</label>
                                             <input placeholder="Group Policy Holder Address"
                                                 value="{{certificateRowData?.groupPolicyHolderAddress}}">
                                         </div>
                                         <div class="ym_form_group col-4">
-                                            <label>Group Policy Holder City</label>
+                                            <label class="md-lbl">Group Policy Holder City</label>
                                             <input placeholder="Group Policy Holder City"
                                                 value="{{certificateRowData?.groupPolicyHolderCity}}">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="ym_form_group col-4">
-                                            <label>Group Policy Holder Province</label>
+                                            <label class="md-lbl">Group Policy Holder Province</label>
                                             <input placeholder="Group Policy Holder Province"
                                                 value="{{certificateRowData?.groupPolicyHolderProvince}}">
                                         </div>
                                         <div class="ym_form_group col-4">
-                                            <label>Group Policy Holder Postal Code</label>
+                                            <label class="md-lbl">Group Policy Holder Postal Code</label>
                                             <input placeholder="Group Policy Holder Postal Code"
                                                 value="{{certificateRowData?.groupPolicyHolderPostalCode}}">
                                         </div>
                                         <div class="ym_form_group col-4">
-                                            <label>Group Policy Holder Country</label>
+                                            <label class="md-lbl">Group Policy Holder Country</label>
                                             <input placeholder="Group Policy Holder Country"
                                                 value="{{certificateRowData?.groupPolicyHolderCountry}}">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="ym_form_group col-4">
-                                            <label>Group Policy Holder Telephone</label>
+                                            <label class="md-lbl">Group Policy Holder Telephone</label>
                                             <input placeholder="Group Policy Holder Telephone"
                                                 value="{{certificateRowData?.groupPolicyHolderTelephone}}">
                                         </div>
                                         <div class="ym_form_group col-4">
-                                            <label>Group Policy Holder Email</label>
+                                            <label class="md-lbl">Group Policy Holder Email</label>
                                             <input placeholder="Group Policy Holder Email"
                                                 value="{{certificateRowData?.groupPolicyHolderEmailAddress}}">
                                         </div>
                                         <div class="ym_form_group col-4">
-                                            <label>Dealer Remits Tax</label>
+                                            <label class="md-lbl">Dealer Remits Tax</label>
                                             <input placeholder="Dealer Remits Tax"
                                                 value="{{certificateRowData?.groupPolicyHolderDealerRemitsTax}}">
                                         </div>
@@ -561,47 +563,47 @@
                                     <hr>
                                     <div class="row">
                                         <div class="ym_form_group col-4">
-                                            <label>Merchant Name</label>
+                                            <label class="md-lbl">Merchant Name</label>
                                             <input placeholder="Merchant Name"
                                                 value="{{certificateRowData?.merchantName}}">
                                         </div>
                                         <div class="ym_form_group col-4">
-                                            <label>Merchant Address</label>
+                                            <label class="md-lbl">Merchant Address</label>
                                             <input placeholder="Merchant Address"
                                                 value="{{certificateRowData?.merchantAddress}}">
                                         </div>
                                         <div class="ym_form_group col-4">
-                                            <label>Merchant City</label>
+                                            <label class="md-lbl">Merchant City</label>
                                             <input placeholder="Merchant City"
                                                 value="{{certificateRowData?.merchantCity}}">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="ym_form_group col-4">
-                                            <label>Merchant Province</label>
+                                            <label class="md-lbl">Merchant Province</label>
                                             <input placeholder="Merchant Province"
                                                 value="{{certificateRowData?.merchantProvince}}">
                                         </div>
                                         <div class="ym_form_group col-4">
-                                            <label>Merchant Postal Code
+                                            <label class="md-lbl">Merchant Postal Code
                                             </label>
                                             <input placeholder="Merchant Postal Code"
                                                 value="{{certificateRowData?.merchantPostalCode}}">
                                         </div>
                                         <div class="ym_form_group col-4">
-                                            <label>Merchant Country</label>
+                                            <label class="md-lbl">Merchant Country</label>
                                             <input placeholder="Merchant Country"
                                                 value="{{certificateRowData?.merchantCountry}}">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="ym_form_group col-4">
-                                            <label>Merchant Telephone</label>
+                                            <label class="md-lbl">Merchant Telephone</label>
                                             <input placeholder="Merchant Telephone"
                                                 value="{{certificateRowData?.merchantTelephoneNumber}}">
                                         </div>
                                         <div class="ym_form_group col-4">
-                                            <label>Merchant Email</label>
+                                            <label class="md-lbl">Merchant Email</label>
                                             <input placeholder="Merchant Email"
                                                 value="{{certificateRowData?.merchantEmail}}">
                                         </div>
@@ -609,23 +611,23 @@
                                     <hr>
                                     <div class="row">
                                         <div class="ym_form_group col-4">
-                                            <label>Total Single Premium</label>
+                                            <label class="md-lbl">Total Single Premium</label>
                                             <input placeholder="Total Single Premium"
                                                 value="{{certificateRowData?.totalPremiumAmount}}">
                                         </div>
                                         <div class="ym_form_group col-4">
-                                            <label>Sales Tax</label>
+                                            <label class="md-lbl">Sales Tax</label>
                                             <input placeholder="Sales Tax" value="{{certificateRowData?.salesTax}}">
                                         </div>
                                         <div class="ym_form_group col-4">
-                                            <label>Total Refund Amount</label>
+                                            <label class="md-lbl">Total Refund Amount</label>
                                             <input placeholder="Total Refund Amount"
                                                 value="{{certificateRowData?.coveragePremiumRefundTotalAmount}}">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="ym_form_group col-4">
-                                            <label>Refund Method</label>
+                                            <label class="md-lbl">Refund Method</label>
                                             <input placeholder="Refund Method"
                                                 value="{{certificateRowData?.refundMethod}}">
                                         </div>
@@ -633,78 +635,78 @@
                                     <hr>
                                     <div class="row">
                                         <div class="ym_form_group col-4">
-                                            <label>Loan Account Number</label>
+                                            <label class="md-lbl">Loan Account Number</label>
                                             <input placeholder="Loan Account Number"
                                                 value="{{certificateRowData?.loanAccountNumber}}">
                                         </div>
                                         <div class="ym_form_group col-4">
-                                            <label>Loan Term</label>
+                                            <label class="md-lbl">Loan Term</label>
                                             <input placeholder="Loan Term" value="{{certificateRowData?.loanTerm}}">
                                         </div>
                                         <div class="ym_form_group col-4">
-                                            <label>Loan Amount without Insurance</label>
+                                            <label class="md-lbl">Loan Amount without Insurance</label>
                                             <input placeholder="Loan Amount without Insurance"
                                                 value="{{certificateRowData?.loanAmountWithoutInsurance}}">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="ym_form_group col-4">
-                                            <label>Interest Rate</label>
+                                            <label class="md-lbl">Interest Rate</label>
                                             <input placeholder="Interest Rate"
                                                 value="{{certificateRowData?.interestRate}}">
                                         </div>
                                         <div class="ym_form_group col-4">
-                                            <label>Loan Payment Frequency</label>
+                                            <label class="md-lbl">Loan Payment Frequency</label>
                                             <input placeholder="Loan Payment Frequency"
                                                 value="{{certificateRowData?.loanPaymentFrequency}}">
                                         </div>
                                         <div class="ym_form_group col-4">
-                                            <label>Deal Type</label>
+                                            <label class="md-lbl">Deal Type</label>
                                             <input placeholder="Deal Type" value="{{certificateRowData?.dealType}}">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="ym_form_group col-4">
-                                            <label>Loan Payment with Insurance</label>
+                                            <label class="md-lbl">Loan Payment with Insurance</label>
                                             <input placeholder="Loan Payment with Insurance"
                                                 value="{{certificateRowData?.loanPaymentWithInsurance}}">
                                         </div>
                                         <div class="ym_form_group col-4">
-                                            <label>Loan Payment Without Insurance</label>
+                                            <label class="md-lbl">Loan Payment Without Insurance</label>
                                             <input placeholder="Loan Payment Without Insurance"
                                                 value="{{certificateRowData?.loanPaymentWithoutInsurance}}">
                                         </div>
                                         <div class="ym_form_group col-4">
-                                            <label>Balloon (Residual) Payment Amount</label>
+                                            <label class="md-lbl">Balloon (Residual) Payment Amount</label>
                                             <input placeholder="Balloon (Residual) Payment Amount"
                                                 value="{{certificateRowData?.residualPaymentAmount}}">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="ym_form_group col-4">
-                                            <label>Residual Insured</label>
+                                            <label class="md-lbl">Residual Insured</label>
                                             <input placeholder="Residual Insured"
                                                 value="{{certificateRowData?.residualInsured}}">
                                         </div>
                                         <div class="ym_form_group col-4">
-                                            <label>Residual Due Date</label>
+                                            <label class="md-lbl">Residual Due Date</label>
                                             <input placeholder="Residual Due Date"
                                                 value="{{certificateRowData?.residualDueDate}}">
                                         </div>
                                         <div class="ym_form_group col-4">
-                                            <label>Loan Amount with Insurance</label>
+                                            <label class="md-lbl">Loan Amount with Insurance</label>
                                             <input placeholder="Loan Amount with Insurance"
                                                 value="{{certificateRowData?.loanAmountWithInsurance}}">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="ym_form_group col-4">
-                                            <label>Amount of Insured Loan or Lease</label>
+                                            <label class="md-lbl">Amount of Insured Loan or Lease</label>
                                             <input placeholder="Amount of Insured Loan or Lease"
                                                 value="{{certificateRowData?.loanAmountInsured}}">
                                         </div>
                                         <div class="ym_form_group col-4">
-                                            <label>Processed With Errors</label>
+                                            <label class="md-lbl">Processed With Errors</label>
                                             <!-- value="{{certificateRowData?.creditorFile_policyUnexpiredFileLGM2_header_processedWithErrors}}" -->
                                             <mat-slide-toggle (click)="onClickOfPWE($event)"></mat-slide-toggle>
                                         </div>
@@ -712,7 +714,7 @@
                                     <div class="row" *ngIf="isShowField">
                                         <div class="col-4"></div>
                                         <div class="ym_form_group col-8">
-                                            <label>Processed With Error Reason</label>
+                                            <label class="md-lbl">Processed With Error Reason</label>
                                             <textarea class="md-text-area-width" rows="3"
                                                 placeholder="Processed With Error Reason"
                                                 value="{{certificateRowData?.creditorFile_policyCancellationFileLAIS_header_processedWithErrorReason}}"></textarea>

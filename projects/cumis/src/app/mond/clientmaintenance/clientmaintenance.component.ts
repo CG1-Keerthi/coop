@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { MDConnectedPartnersDS } from '../../_services/ds/MDConnectedPartnersDS';
 import { HttpClient } from '@angular/common/http';
 import { MDCodeListHeaderDS, MDMondServiceDS } from '../../_services/ds';
@@ -21,6 +21,7 @@ export class ClientMaintenanceComponent implements OnInit {
   selectedTab: number = 0;
   planDetailsData: any = {}
   public csfrToken: any;
+  public isResizeTrue: boolean = false;
   constructor(private http: HttpClient,
     private mdCommonGetterAndSetter: MDCommonGetterSetter,
     private mdConnectedPartnersDS: MDConnectedPartnersDS,
@@ -106,15 +107,13 @@ export class ClientMaintenanceComponent implements OnInit {
   }
 
 
-
-
-
-
-
-
-
-
-
-
+  @HostListener('click', ['$event.target'])
+    onClick(element) {
+        debugger;
+        this.isResizeTrue = true;
+        setTimeout(() => {
+            this.isResizeTrue = false;
+        }, 2000)
+    }
 
 }

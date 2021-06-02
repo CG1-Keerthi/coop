@@ -18,9 +18,7 @@ mat-expansion-panel-header{
 .mat-card-subtitle{
     display: revert;
 }
-.md-border{
-    border: 2px solid #008acc;
-}
+
 .md-text-area-width{
     width: 100%;
 }
@@ -35,7 +33,4 @@ mat-expansion-panel-header{
 }
 .md-imgConfigGreen{
     background-color:#9abc32;
-}
-.md-clr{
-    color:#008acc;
 }

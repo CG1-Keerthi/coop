@@ -11,7 +11,7 @@
     <div formGroupName="clientInfo">
         <div class="row">
             <div class="ym_form_group required col-4">
-                <label>Client Number</label>
+                <label class="md-lbl">Client Number</label>
                 <input placeholder="Client Number" formControlName="clientNumber" [readonly]="isFieldreadonly">
                 <div
                     *ngIf="isSubmit && !clientDetailsForm.get('clientInfo.clientNumber').touched  && clientDetailsForm.get('clientInfo.clientNumber').invalid">
@@ -19,7 +19,7 @@
                 </div>
             </div>
             <div class="ym_form_group required col-4">
-                <label>Client Name</label>
+                <label class="md-lbl">Client Name</label>
                 <input placeholder="Client Name" formControlName="clientName" [readonly]="isFieldreadonly">
                 <div
                     *ngIf="isSubmit && !clientDetailsForm.get('clientInfo.clientName').touched && clientDetailsForm.get('clientInfo.clientName').invalid">
@@ -28,7 +28,7 @@
             </div>
             <div class="ym_form_group required col-4">
                 <div class="row">
-                    <label>Client Effective Date</label>
+                    <label class="md-lbl">Client Effective Date</label>
                     <input class="col-md-9" matInput [matDatepicker]="picker" #fromDate
                         formControlName="clientEffectiveDate" [readonly]="isFieldreadonly"
                         (dateInput)="clientEffectiveDateKeyup($event.value)">
@@ -45,7 +45,7 @@
 
         <div class="row">
             <div class="ym_form_group col-4">
-                <label>Client Status</label>
+                <label class="md-lbl">Client Status</label>
                 <div class="ym_form_select">
                     <select formControlName="clientStatus" #clientStatusList>
                         <option selected value="">Please select a value</option>
@@ -56,7 +56,7 @@
             </div>
             <div class="ym_form_group col-4">
                 <div class="row">
-                    <label>Client Termination Date</label>
+                    <label class="md-lbl">Client Termination Date</label>
                     <input class="col-md-9" matInput [matDatepicker]="picker2" formControlName="clientTerminationDate"
                         [readonly]="isFieldreadonly" #tillDate (dateInput)="onClickOfTerminationDate($event.value)">
                     <mat-datepicker-toggle matSuffix [for]="picker2" [disabled]="isTerminationDateFieldreadonly">
@@ -65,7 +65,7 @@
                 </div>
             </div>
             <div class="ym_form_group required col-4">
-                <label>Client Province</label>
+                <label class="md-lbl">Client Province</label>
                 <div class="ym_form_select">
                     <select formControlName="clientProvinceCode" #clientProvinceList>
                         <option selected value="">Please select a value</option>
@@ -82,7 +82,7 @@
 
         <div class="row">
             <div class="ym_form_group required col-4">
-                <label>Client Language Code</label>
+                <label class="md-lbl">Client Language Code</label>
                 <div class="ym_form_select">
                     <select formControlName="clientLanguageCode" #clientLanguageList>
                         <option selected value="">Please select a value</option>
@@ -96,13 +96,13 @@
                 </div>
             </div>
             <div class="ym_form_group col-4">
-                <label>Client Profit Sharing Flag</label>
+                <label class="md-lbl">Client Profit Sharing Flag</label>
                 <!-- <mat-slide-toggle [(ngModel)]="isChecked">Slide Toggle Checked: {{isChecked}}</mat-slide-toggle> -->
                 <mat-slide-toggle formControlName="clientProfitSharingFlag" [disabled]="isFieldreadonly">
                 </mat-slide-toggle>
             </div>
             <div class="ym_form_group col-4">
-                <label>Group Policy Holder</label>
+                <label class="md-lbl">Group Policy Holder</label>
                 <mat-slide-toggle formControlName="groupPolicyHolder" [disabled]="isFieldreadonly"></mat-slide-toggle>
             </div>
         </div>
@@ -110,15 +110,15 @@
 
         <div class="row">
             <div class="ym_form_group col-4">
-                <label>Client Phone1</label>
+                <label class="md-lbl">Client Phone1</label>
                 <input placeholder="Client Phone1" formControlName="clientPhone1" [readonly]="isFieldreadonly">
             </div>
             <div class="ym_form_group col-4">
-                <label>Client Phone2</label>
+                <label class="md-lbl">Client Phone2</label>
                 <input placeholder="Client Phone2" formControlName="clientPhone2" [readonly]="isFieldreadonly">
             </div>
             <div class="ym_form_group col-4">
-                <label>Client Fax Number</label>
+                <label class="md-lbl">Client Fax Number</label>
                 <input placeholder="Client Fax Number" formControlName="clientFaxNumber" [readonly]="isFieldreadonly">
             </div>
         </div>
@@ -126,7 +126,7 @@
 
         <div class="row">
             <div class="ym_form_group col-4">
-                <label>Client Email</label>
+                <label class="md-lbl">Client Email</label>
                 <input placeholder="Client Email" formControlName="clientEmail" [readonly]="isFieldreadonly">
             </div>
         </div>
@@ -142,7 +142,7 @@
 
 <mat-accordion class="col-sm-12">
     <mat-expansion-panel [expanded]="true">
-        <mat-expansion-panel-header style="background-color: #307ecc;">
+        <mat-expansion-panel-header class="md-bgClr">
             <mat-panel-title style="color: white;">
                 Client Address
             </mat-panel-title>
@@ -171,23 +171,26 @@
         </div>
         <div class="row">
             <div class="col-6">
-                <div class="m-0 p-2 row mt-3" style="background-color: #ebebf1;">
+                <div class="m-0 p-2 row mt-3 md-bgClr">
                     <div class="col-md-6 pl-2 pt-2">
                         <h3>Address</h3>
                     </div>
                 </div>
                 <p-table [value]="clientAddressList" selectionMode="single"
+                [scrollable]="true"
+                [responsive]="true" scrollHeight="300px" [autoLayout]="true"
+                [resizableColumns]="isResizeTrue" columnResizeMode="expand"
                     (onRowSelect)="onClickOfClientAddressListRow($event)">
                     <ng-template pTemplate="header">
                         <tr class="ptableHeader">
-                            <th>Address Type</th>
+                            <th pResizableColumn>Address Type</th>
                             <th>Address Effective Date</th>
                             <th>Province Code</th>
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="body" let-responseData>
                         <tr [pSelectableRow]="responseData">
-                            <td>{{responseData.addressType}}</td>
+                            <td class="ui-resizable-column">{{responseData.addressType}}</td>
                             <td>{{responseData.addressEffectiveDate.split('T')[0] }}</td>
                             <td>{{responseData.province}}</td>
                         </tr>
@@ -198,7 +201,7 @@
                 <div formGroupName="clientAddressInfo">
                     <div class="row">
                         <div class="ym_form_group required col-4">
-                            <label>Address Type </label>
+                            <label class="md-lbl">Address Type </label>
                             <div class="ym_form_select">
                                 <select formControlName="addressType" #addressTypeList>
                                     <option selected value="">Please select a value</option>
@@ -215,7 +218,7 @@
                     <div class="row">
                         <div class="ym_form_group required col-6">
                             <div class="row">
-                                <label>Address Effective Date</label>
+                                <label class="md-lbl">Address Effective Date</label>
                                 <input class="col-md-9" matInput [matDatepicker]="picker3"
                                     formControlName="addressEffectiveDate" [readonly]="isAddressFieldreadonly"
                                     (dateInput)="onClickOfAddEffDate($event.value)" #addEffDate>
@@ -229,7 +232,7 @@
                         </div>
                         <div class="ym_form_group col-6">
                             <div class="row">
-                                <label>Address Termination Date</label>
+                                <label class="md-lbl">Address Termination Date</label>
                                 <input class="col-md-9" matInput [matDatepicker]="picker4"
                                     formControlName="addressTerminationDate" [readonly]="isAddressFieldreadonly"
                                     [readonly]="isAddressFieldreadonly"
@@ -242,25 +245,25 @@
                     </div>
                     <div class="row">
                         <div class="ym_form_group col-12">
-                            <label>Address Line 1</label>
+                            <label class="md-lbl">Address Line 1</label>
                             <input placeholder="Address Line 1" formControlName="addressLine1"
                                 [readonly]="isAddressFieldreadonly">
                         </div>
                     </div>
                     <div class="row">
                         <div class="ym_form_group col-12">
-                            <label>Address Line 2</label>
+                            <label class="md-lbl">Address Line 2</label>
                             <input placeholder="Address Line 2" formControlName="addressLine2"
                                 [readonly]="isAddressFieldreadonly">
                         </div>
                     </div>
                     <div class="row">
                         <div class="ym_form_group col-6">
-                            <label>City</label>
+                            <label class="md-lbl">City</label>
                             <input placeholder="City" formControlName="city" [readonly]="isAddressFieldreadonly">
                         </div>
                         <div class="ym_form_group  col-6">
-                            <label>Province Code</label>
+                            <label class="md-lbl">Province Code</label>
                             <div class="ym_form_select">
                                 <select formControlName="province" #provinceCodeList>
                                     <option selected value="">Please select a value</option>
@@ -272,12 +275,12 @@
                     </div>
                     <div class="row">
                         <div class="ym_form_group col-6">
-                            <label>Postal Code</label>
+                            <label class="md-lbl">Postal Code</label>
                             <input placeholder="Postal Code" formControlName="postalCode"
                                 [readonly]="isAddressFieldreadonly">
                         </div>
                         <div class="ym_form_group  col-6">
-                            <label>Country</label>
+                            <label class="md-lbl">Country</label>
                             <div class="ym_form_select">
                                 <select formControlName="country" #countryAddress>
                                     <option selected value="">Please select a value</option>
@@ -289,14 +292,14 @@
                     </div>
                     <div class="row" style="display: none;">
                         <div class="ym_form_group col-12">
-                            <label>Address Line 2</label>
+                            <label class="md-lbl">Address Line 2</label>
                             <input placeholder="Client Identifier" formControlName="clientIdentifier"
                                 [readonly]="isAddressFieldreadonly">
                         </div>
                     </div>
                     <div class="row" style="display: none;">
                         <div class="ym_form_group col-12">
-                            <label>Address Line 2</label>
+                            <label class="md-lbl">Address Line 2</label>
                             <input placeholder="Client clientNumber" formControlName="clientNumber"
                                 [readonly]="isAddressFieldreadonly">
                         </div>

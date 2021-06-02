@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, HostListener, Input, OnInit } from '@angular/core';
+
 
 @Component({
     selector: 'app-certificateAuditLog-designer',
@@ -16,6 +17,7 @@ export class CertificateAuditLogComponent implements OnInit {
     public parsedAuditHistoryData: any;
     public certificateAuditHistory: any;
     public isFieldreadonly: boolean = true;
+    public isResizeTrue: boolean = false;
     constructor() { }
 
     ngOnInit() {
@@ -40,6 +42,15 @@ export class CertificateAuditLogComponent implements OnInit {
         Array.prototype.push.apply(applicantLoanAuditHistory,applicantCreditorAuditHistory);
         this.certificateAuditHistory = [];
         this.certificateAuditHistory = applicantLoanAuditHistory;
+   }
+
+   @HostListener('click', ['$event.target'])
+   onClick(element) {
+       debugger;
+       this.isResizeTrue = true;
+       setTimeout(() => {
+           this.isResizeTrue = false;
+       }, 2000)
    }
 
 }

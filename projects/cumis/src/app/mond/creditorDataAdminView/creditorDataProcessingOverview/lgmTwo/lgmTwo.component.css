@@ -5,16 +5,15 @@
 mat-expansion-panel-header{
     height: 39px !important;
 }
-.ptableHeader> th {
+/* .ptableHeader> th {
     color: white !important;
     background-color: #00456a !important;
-}
+} */
 .md-text-area-width{
     width: 99%;
 }
-.md-boder{
-    border: 2px solid #008acc;
-}
-.md-clr{
-    color: #008acc;;
+
+
+.md-top{
+    margin-top: -4px;
 }

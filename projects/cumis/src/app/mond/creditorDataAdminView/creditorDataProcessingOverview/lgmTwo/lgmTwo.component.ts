@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, Input, OnInit, ViewChild } from '@angular/core';
 import { MDMondServiceDS } from '../../../../_services/ds';
 import { MDCommonGetterSetter } from '../../../../_services/common';
 import { HttpClient } from '@angular/common/http';
@@ -21,6 +21,7 @@ export class lgmTwoComponent implements OnInit {
     public downloadData: any;
     public fileUrl: any;
     public processWithErrors: boolean;
+    public isResizeTrue: boolean = false
 
 
     constructor(private mdMondServiceDS: MDMondServiceDS,
@@ -126,6 +127,15 @@ export class lgmTwoComponent implements OnInit {
             }, error => {
                 this.mdMondServiceDS.MDError(error);           
             });
+    }
+
+    @HostListener('click', ['$event.target'])
+    onClick(element) {
+        debugger;
+        this.isResizeTrue = true;
+        setTimeout(() => {
+            this.isResizeTrue = false;
+        }, 2000)
     }
 
 }

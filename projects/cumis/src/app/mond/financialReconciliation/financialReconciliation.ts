@@ -456,7 +456,7 @@ export class FinancialReconciliationComponent implements OnInit {
     return months[number - 1];
   }
 
-  getReconcilationRecords() {
+  onClickOfReconcilationSearch() {
     debugger;
     if (this.reportClientName == undefined) {
       this.reportClientName = "";

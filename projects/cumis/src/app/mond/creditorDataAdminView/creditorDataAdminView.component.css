@@ -40,4 +40,7 @@ h4 {
   overflow: hidden;
   /* text-overflow: ellipsis; */
   }
+  .mad-card-height{
+    height: 16rem;
+  }
  

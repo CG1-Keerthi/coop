@@ -18,7 +18,7 @@ export class MDMondServiceDS extends MDBaseDS {
     getFormDataFromMondService(projectName: String, serviceName: String, formVariables: String, csfrToken: String): Observable<any> {
        let param;
         if(csfrToken == null){
-        param = { projectName: projectName, serviceName: serviceName, version: "1.00", formVariables: formVariables };
+        param = { projectName: projectName, serviceName: serviceName, version: "1.00", formVariables: formVariables, addSessionInfoFlag: true };
        }else{
         param = { projectName: projectName, serviceName: serviceName, version: "1.00", formVariables: formVariables, addSessionInfoFlag: true, csfrToken: csfrToken };
        }           
@@ -72,12 +72,12 @@ export class MDMondServiceDS extends MDBaseDS {
     }
 
     getFormDataDebugLevel(projectName: any,debugLevel: any,serviceName:any,version: any,formVariables: any,foobar: any): Observable<any>{
-        let param = {projectName: projectName,debugLevel:debugLevel,serviceName:serviceName,version:version,formVariables: formVariables,foobar:foobar};       
+        let param = {projectName: projectName,debugLevel:debugLevel,serviceName:serviceName,version:version,formVariables: formVariables,foobar:foobar, addSessionInfoFlag: true};       
         return this.invokeGET("/mondrestws/services/executeService/invokeMondProcessDesignerServiceGET", param);
     }
 
     getBinDataModelBasedOnFKTypeDescriptionVersion(foreignKeyType: any,description: any,version:any): Observable<any>{
-        let param = {foreignKeyType: foreignKeyType,description:description,version:version};       
+        let param = {foreignKeyType: foreignKeyType,description:description,version:version, addSessionInfoFlag: true};       
         return this.invokeGET("/mondrestws/services/binData/getBinDataModelBasedOnFKTypeDescriptionVersion", param);
     }
 

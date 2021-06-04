@@ -389,6 +389,14 @@ mat-panel-title{
     margin-left: 2rem;
 }
 
+.mat-calendar-body-selected{
+    background-color:#C41230;
+}
+.mat-datepicker-toggle-active{
+    color: #C41230;
+}
+
+
 
 
 

@@ -14,8 +14,12 @@ color: white;
 }
 
 .md-icon{
-    position: absolute;
-    left: 89%;
+    position: sticky;
+    left: 94%;
+}
+.md-customer-icon{
+  position: sticky;
+    left: 100%;
 }
 
 .md-Btn-fst{

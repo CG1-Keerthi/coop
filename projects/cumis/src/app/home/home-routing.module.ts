@@ -12,14 +12,16 @@ import { creditorCertificateComponent } from '../mond/creditorCertificateMainten
 import { CreditorDataAdminViewComponent } from '../mond/creditorDataAdminView/creditorDataAdminView.component';
 import { CreditorDataProcessingOverviewComponent } from '../mond/creditorDataAdminView/creditorDataProcessingOverview/creditorDataProcessingOverview.component';
 import { CreditorSelfAdminDashboardComponent } from '../mond/creditorSelfAdminDashboard/creditorSelfAdminDashboard.component';
+import { CumisHomePageComponent } from '../mond/cumisHomePage/cumisHomePage.component';
 
 
 const homeRoutes: Routes = [
   {
     path: 'home', component: HomeComponent,
     children: [
+      { path: 'userHome', component: CumisHomePageComponent },
       { path: 'financialReconciliation', component: FinancialReconciliationComponent },
-      { path: 'productMaintenanceComponent', component: ProductMaintenanceComponent },
+      { path: 'productMaintenance', component: ProductMaintenanceComponent },
       { path: 'reportsComponent', component: ReportsComponent },
       { path: 'netpremiumreportComponent', component: NetpremiumreportComponent },
       { path: 'logicalDeleteReportComponent', component: LogicalDeleteReportComponent },
@@ -28,11 +30,8 @@ const homeRoutes: Routes = [
       { path: 'creditorCertificate', component: creditorCertificateComponent },
       { path: 'creditorDataAdminView', component: CreditorDataAdminViewComponent },
       { path: 'creditorDataProcessingOverview', component: CreditorDataProcessingOverviewComponent },
-      { path: 'creditorSelfAdminDashboard', component: CreditorSelfAdminDashboardComponent },
-  
-      
-
-
+      { path: 'creditorSelfAdminDashboard', component: CreditorSelfAdminDashboardComponent }
+     
     ]
   }
 ];

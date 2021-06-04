@@ -1,0 +1,30 @@
+<div class="ym_content">
+    <div class="col-md-12 col-lg-12 col-sm-12 mt-2 container">
+
+        <div class="row">
+            <div class="col-3">
+                <mat-card class="w-100 m-0 p-0 md-border mad-card-height homepage-mat-card">
+                    <mat-card-header class="homepage-mat-card-header">
+                        <mat-card-title>
+                            Creditors Insurance
+                        </mat-card-title>
+                    </mat-card-header>
+                    <mat-divider></mat-divider>
+                    <mat-card-content class="homepage-mat-card-content">
+                        <ul class="list-unstyled spaced">
+                            <li class="mt-2" id="menuId" *ngFor="let menu of menuListData[0]?.menuList">
+                                <a href="javascript:void(0);" *ngIf="menu.menuLink != ''"
+                                    (click)="onClickOfApplicationMenu(menu.menuName)">{{menu.menuName}}</a>
+                            </li>
+                        </ul>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+            <div class="col-9 pt-0 pb-0 pl-0">
+                <img class="mondPng" alt="Mountain View" src="assets/images/Home-Landing.png">
+              
+            </div>
+
+        </div>
+    </div>
+</div>

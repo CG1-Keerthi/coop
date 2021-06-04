@@ -6,6 +6,7 @@ import * as _moment from "moment";
 import { default as _rollupMoment, Moment } from "moment";
 import { MatDatepicker } from '@angular/material/datepicker';
 
+
 const moment = _rollupMoment || _moment;
 
 // See the Moment.js docs for the meaning of these formats:
@@ -53,11 +54,13 @@ export class MonthlyPickerComponent implements OnInit {
   }
 
   chosenMonthHandler(normalizedMonth: Moment, datepicker: MatDatepicker<Moment>) {
+    // debugger;
     this.date = new FormControl(moment());
     const ctrlValue = this.date.value;
     ctrlValue.month(normalizedMonth.month());
     this.date.setValue(ctrlValue);
-    this.month.emit(this.selectedMonth.nativeElement.value);
+    // this.month.emit(this.selectedMonth.nativeElement.value);
+    this.month.emit(normalizedMonth)
     datepicker.close();
   }
 

@@ -171,6 +171,9 @@ export class AuthComponent extends HomeComponent implements OnInit {
                     disableTimeOut: true
                 });
                 this.loading = false;
+
+                // // soumya code to redirect home page in local
+                // this.loginRouter.navigate(['/home'], { skipLocationChange: true });
             });
     }
 

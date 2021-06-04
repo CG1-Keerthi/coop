@@ -58,6 +58,7 @@ import { LAISComponent } from '../mond/creditorDataAdminView/creditorDataProcess
 import { LGMComponent } from '../mond/creditorDataAdminView/creditorDataProcessingOverview/LGM/lgm.component';
 import { CreditorSelfAdminDashboardComponent } from '../mond/creditorSelfAdminDashboard/creditorSelfAdminDashboard.component';
 import { ChartsModule } from 'ng2-charts';
+import { CumisHomePageComponent } from '../mond/cumisHomePage/cumisHomePage.component';
 
 @NgModule({
   declarations: [
@@ -86,7 +87,8 @@ import { ChartsModule } from 'ng2-charts';
     CreLogixComponent,
     LAISComponent,
     LGMComponent,
-    CreditorSelfAdminDashboardComponent
+    CreditorSelfAdminDashboardComponent,
+    CumisHomePageComponent
   ],
   imports: [
     CommonModule,

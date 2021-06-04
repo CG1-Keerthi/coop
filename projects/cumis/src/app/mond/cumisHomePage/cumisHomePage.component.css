@@ -1,0 +1,36 @@
+.homepage-mat-card-header{
+    border: 5px double #fff;
+    color: #fff;
+    font-size: 16px!important;
+    padding: .5rem .5rem .005rem;
+    border-radius: 15px 15px 0 0!important;
+    background: #C41230;
+    background-blend-mode: overlay;
+}
+
+.homepage-mat-card{
+    border-radius: 15px 15px 0 0!important;
+}
+
+.list-unstyled{
+    padding-left: 0;
+    list-style: none
+}
+.homepage-mat-card-content{
+    padding: 1.1rem;
+}
+a:hover {
+    color: #850C20;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+#menuId > a{
+    color: #C41230;
+    font-size: 13px!important;
+}
+.mondPng{
+    width: 100%;
+    height: 329px;
+}
+
+

@@ -15,8 +15,8 @@
                                 <div class="ym_form_select">
                                     <select class="p-1" [(ngModel)]=reportClientName (change)="onChangeOfReportClientName($event)">
                                         <option selected value="">Select a client Name</option>
-                                        <option value="lais">LAIS</option>
-                                        <option value="lgm">LGM</option>
+                                        <option value="LAIS">LAIS</option>
+                                        <option value="LGM">LGM</option>
                                     </select>
                                 </div>
                             </div>
@@ -60,7 +60,7 @@
                                         <th>Period Month</th>
                                         <th>Period Year</th>
                                         <th>Created By</th>
-                                        <th></th>
+                                        <!-- <th></th> -->
                                     </tr>
                                 </ng-template>
                                 <ng-template pTemplate="body" let-reconciliationHeaderSummary>
@@ -69,7 +69,7 @@
                                         <td>{{reconciliationHeaderSummary.reportPeriodMonth}}</td>
                                         <td>{{reconciliationHeaderSummary.reportPeriodYear}}</td>
                                         <td>{{reconciliationHeaderSummary.reportCreatedBy}}</td>
-                                        <td>{{reconciliationHeaderSummary.reconciliationHeaderIdentifier}}</td>
+                                        <!-- <td>{{reconciliationHeaderSummary.reconciliationHeaderIdentifier}}</td> -->
                                     </tr>
                                 </ng-template>
                             </p-table>
@@ -292,8 +292,10 @@
                                     <td style="text-align:left">
                                         <p-cellEditor>
                                             <ng-template pTemplate="input">
-                                                <p-dropdown [options]="taxesProvinceList" optionLabel="name" [(ngModel)]="taxesRowData.taxProvince" placeholder="Select" [style]="{ 'width': '100%'}">
+                                                <p-dropdown [options]="taxesProvinceList" [(ngModel)]="taxesRowData.taxProvince" placeholder="Select" [style]="{ 'width': '100%'}">
                                                 </p-dropdown>
+                                                <!-- <p-dropdown [options]="premiumProvinceList" optionLabel="name" [(ngModel)]="taxesRowData.taxProvince" placeholder="Select" [style]="{ 'width': '100%'}">
+                                                </p-dropdown> -->
                                             </ng-template>
                                             <ng-template pTemplate="output">
                                                 {{getDropdownDisplayValue(taxesRowData.taxProvince)}}
@@ -406,7 +408,7 @@
                                     <td style="text-align:left">
                                         <p-cellEditor>
                                             <ng-template pTemplate="input">
-                                                <p-dropdown [options]="commissionProvinceList" optionLabel="name" [(ngModel)]="commissionRowData.commissionProvince" placeholder="Select" [style]="{ 'width': '100%'}"></p-dropdown>
+                                                <p-dropdown [options]="commissionProvinceList"  [(ngModel)]="commissionRowData.commissionProvince" placeholder="Select" [style]="{ 'width': '100%'}"></p-dropdown>
                                             </ng-template>
                                             <ng-template pTemplate="output">
                                                 {{getDropdownDisplayValue(commissionRowData.commissionProvince)}}

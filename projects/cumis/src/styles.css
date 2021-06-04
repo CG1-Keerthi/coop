@@ -126,7 +126,8 @@
 }
 
 .signIn {
-    background-color: #CF4910 !important;
+    /* background-color: #CF4910 !important; */
+    background-color: #C41230 !important;
     width: 188px;
 }
 
@@ -137,8 +138,9 @@
 }
 
 .loginPageText {
-    background-color: #008acc;
-    color: #fff;
+    /* background-color: #008acc; */
+    background-color: #C41230;
+    color: white;
     text-align: center;
     padding: 20px;
     height: 70px;
@@ -146,7 +148,8 @@
 
 .ym_title_bar_overlay {
     background: #fff !important;
-    border: 1px solid #008acc !important;
+    /* border: 1px solid #008acc !important; */
+    border: 1px solid #C41230 !important;    
 }
 
 .ym_title_bar_overlay>.container>img {
@@ -155,7 +158,8 @@
 }
 
 .coop_header {
-    background: #00456a !important;
+    /* background: #00456a !important; */
+    background: #C41230 !important;
     height: 40px;
 }
 
@@ -166,6 +170,8 @@
 
 .signInLogo {
     margin-top: 2.15rem;
+    height: 100%;
+    padding: 1rem; 
 }
 
 h1,

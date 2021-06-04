@@ -10,6 +10,7 @@ import { MDMondServiceDS } from '../_services/ds';
 import { ToastrService } from 'ngx-toastr';
 import { MDCountdownTimer } from '../_services/utils';
 import $ from 'jquery';
+
 import { getMatFormFieldDuplicatedHintError } from '@angular/material/form-field';
 
 @Component({
@@ -32,6 +33,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   autoReactivatingInterval: any;
   sessionCheckInterval: any;
   showBackButton: boolean = false;
+  menuList: any;
+  // showCumisHomePage: boolean = false;
 
 
   @ViewChild('cancelBtn') cancelBtn: ElementRef;
@@ -69,6 +72,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.isB2CFl = this.mdCommonGetterAndSetter.isB2CFl;
     if (!this.isB2CFl) {
       this.getAuthorizationInfo();
+      this.router.navigate(['/home/userHome'], { skipLocationChange: true });
     }
     this.homeForm = this.formBuilder.group({
     });
@@ -165,7 +169,8 @@ export class HomeComponent implements OnInit, OnDestroy {
         //       menuNameAndTooltipObj = { menuName: "", tooltip: "", applicationPath: "" };
         //     }
         //   }
-        // }
+        // }  
+      
       });
 
   }
@@ -234,42 +239,13 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.authCompleteObject = authObject;
     this.mdApplicationDetailDS.getListOfApplicationDetailsWithMenuAndAccessRights().pipe(first()).subscribe(
       data => {
-        // console.dir(data);
-        // var completeApplicationListObj = data;
-        var completeApplicationListObj = [{ "applicationDetailsId": "5b2c9e8e64de27df6eda3526", "applicationDetailsIdLong": 1, "companyId": 6958, "applicationName": "Commercial Insurance", "menuList": [{ "menuId": "5b2c9ee064de27df6eda3527", "menuIdLong": 1, "applicationDetailsId": "5b2c9e8e64de27df6eda3526", "companyId": 6958, "menuName": "Agency Maintenance", "menuLink": "form_175065", "menuProcessLink": "-1", "toolTip": "Define \u0026 maintain insurance agents", "parentMenuId": "" }, { "menuId": "5b34b37164dea9bbae3f9d71", "menuIdLong": 3, "applicationDetailsId": "5b2c9e8e64de27df6eda3526", "companyId": 6958, "menuName": "Insurer Maintenance", "menuLink": "form_170546", "menuProcessLink": "-1", "toolTip": "Define \u0026 maintain insurance companies", "parentMenuId": "" }, { "menuId": "5b34d0ad64de8e2cc9b526f5", "menuIdLong": 4, "applicationDetailsId": "5b2c9e8e64de27df6eda3526", "companyId": 6958, "menuName": "Quote Overview", "menuLink": "form_170551", "menuProcessLink": "-1", "toolTip": "View Quote request and responses", "parentMenuId": "" }, { "menuId": "5b3b6ca964def1e94179d3b9", "menuIdLong": 6, "applicationDetailsId": "5b2c9e8e64de27df6eda3526", "companyId": 6958, "menuName": "Update Agent Profile", "menuLink": "form_175289", "menuProcessLink": "-1", "toolTip": "Define \u0026 maintain producers of agencies", "parentMenuId": "" }, { "menuId": "5b3f38de64deac71cafda7a0", "menuIdLong": 7, "applicationDetailsId": "5b2c9e8e64de27df6eda3526", "companyId": 6958, "menuName": "Agency Branch Maintenance", "menuLink": "form_171091", "menuProcessLink": "-1", "toolTip": "Agent Maintenance form", "parentMenuId": "" }, { "menuId": "5b6be6a72cdc128e829be9ab", "menuIdLong": 8, "applicationDetailsId": "5b2c9e8e64de27df6eda3526", "companyId": 6958, "menuName": "Dashboard", "menuLink": "form_173000", "menuProcessLink": "-1", "toolTip": "Recent Activities", "parentMenuId": "" }, { "menuId": "5cac42d32cdc342bebed90b1", "menuIdLong": 9, "applicationDetailsId": "5b2c9e8e64de27df6eda3526", "companyId": 6958, "menuName": "Create Quote", "menuLink": "-1", "menuProcessLink": "-1", "toolTip": "Initiate new quote request", "parentMenuId": "" }, { "menuId": "5cac42d32cdc342bebed90b2", "menuIdLong": 10, "applicationDetailsId": "5b2c9e8e64de27df6eda3526", "companyId": 6958, "menuName": "Quote Overview Support", "menuLink": "-1", "menuProcessLink": "-1", "toolTip": "View support data", "parentMenuId": "" }], "homePagePresent": false }]
-        for (let applicationObj of completeApplicationListObj) {
-          if (applicationObj.applicationName == "Commercial Insurance") {
-            for (let menuListArr of applicationObj.menuList) {
-              var menuNameAndTooltipObj = { menuName: "", tooltip: "", applicationPath: "" };
-              menuNameAndTooltipObj.menuName = menuListArr.menuName;
-              menuNameAndTooltipObj.tooltip = menuListArr.toolTip;
-              if (menuNameAndTooltipObj.menuName == "Create Quote") {
-                menuNameAndTooltipObj.applicationPath = "createQuoteClassification";
-                this.menuNameAndTooltipList.push(menuNameAndTooltipObj);
-              }
-              else if (menuNameAndTooltipObj.menuName == "Quote Overview") {
-                menuNameAndTooltipObj.applicationPath = "quoteOverview";
-                this.menuNameAndTooltipList.push(menuNameAndTooltipObj);
-              }
-              else if (menuNameAndTooltipObj.menuName == "Update Agent Profile") {
-                menuNameAndTooltipObj.applicationPath = "agentConfiguration";
-                this.menuNameAndTooltipList.push(menuNameAndTooltipObj);
-              }
-              else if (menuNameAndTooltipObj.menuName == "Dashboard") {
-                menuNameAndTooltipObj.applicationPath = "dashboard";
-                this.menuNameAndTooltipList.push(menuNameAndTooltipObj);
-              }
-              else if (menuNameAndTooltipObj.menuName == "Quote Overview Support") {
-                menuNameAndTooltipObj.applicationPath = "quoteOverviewSupport";
-                this.menuNameAndTooltipList.push(menuNameAndTooltipObj);
-              }
-              menuNameAndTooltipObj = { menuName: "", tooltip: "", applicationPath: "" };
-            }
-          }
-        }
+       this.menuList = data;        
       },
       error => {
+        debugger;
         console.log(error);
+        let data = [{"applicationDetailsId":"59eea95c2cdcf771b041c30f","applicationDetailsIdLong":2,"companyId":6881,"applicationName":"Creditors Insurance","bpmEngineVersion":1,"menuList":[{"menuId":"59eeaa192cdcf771b041c310","menuIdLong":3,"applicationDetailsId":"59eea95c2cdcf771b041c30f","companyId":6881,"menuName":"Creditor Data - Admin View","menuLink":"form_155489","menuProcessLink":"-1","toolTip":"View policy data files submitted by Creditors \u0026 their processing status","parentMenuId":""},{"menuId":"5a1e7a952cdc3d5494434c93","menuIdLong":5,"applicationDetailsId":"59eea95c2cdcf771b041c30f","companyId":6881,"menuName":"Creditor Certificate Maintenance","menuLink":"form_157744","menuProcessLink":"-1","toolTip":"Search and maintain creditor certificate","parentMenuId":""},{"menuId":"5a3345a32cdc7238f41c0bfc","menuIdLong":8,"applicationDetailsId":"59eea95c2cdcf771b041c30f","companyId":6881,"menuName":"Client Maintenance","menuLink":"form_159112","menuProcessLink":"-1","toolTip":"Search and maintain Client","parentMenuId":""},{"menuId":"5a4179022cdcded8a5a7d1df","menuIdLong":10,"applicationDetailsId":"59eea95c2cdcf771b041c30f","companyId":6881,"menuName":"Product Maintenance","menuLink":"form_159889","menuProcessLink":"-1","toolTip":"Search and maintain Product ","parentMenuId":""},{"menuId":"5aa75d5164deef848ec83094","menuIdLong":11,"applicationDetailsId":"59eea95c2cdcf771b041c30f","companyId":6881,"menuName":"Reports","menuLink":"form_165662","menuProcessLink":"-1","toolTip":"Reports","parentMenuId":""},{"menuId":"5bcffef92cdcd46a03039b96","menuIdLong":12,"applicationDetailsId":"59eea95c2cdcf771b041c30f","companyId":6881,"menuName":"Creditor Self Admin Dashboard","menuLink":"form_178306","menuProcessLink":"-1","toolTip":"Creditor Self Admin Dashboard","parentMenuId":""},{"menuId":"5e4bb5a32cdc3f44ae386bda","menuIdLong":16,"applicationDetailsId":"59eea95c2cdcf771b041c30f","companyId":6881,"menuName":"Rate Structure configuration","menuLink":"form_244694","menuProcessLink":"-1","toolTip":"Rate Structure configuration","parentMenuId":""},{"menuId":"5e4e4fc32cdcf18e366e2328","menuIdLong":17,"applicationDetailsId":"59eea95c2cdcf771b041c30f","companyId":6881,"menuName":"Financial Reconciliation","menuLink":"form_245289","menuProcessLink":"-1","toolTip":"Financial Reconciliation","parentMenuId":""}],"homePagePresent":false}]
+        this.menuList = data;       
       });
   }
 

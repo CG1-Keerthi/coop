@@ -9,26 +9,27 @@
                 </mat-expansion-panel-header>
                 <div class="row" style="padding: 0  16px;">
 
-                    <div class="col-3">
-                        <mat-form-field class="w-100">
-                            <mat-label>From Date</mat-label>
-                            <input matInput [matDatepicker]="picker" #fromDate
-                                (dateInput)="OnLogicalDeleteFromDateChange($event.value)">
+                    <div class="col-3 ym_form_group">
+                        <div class="row">
+                            <label class="md-lbl">From Date
+                            </label>
+                            <input class="col-md-9" matInput  [matDatepicker]="picker" #fromDate
+                            (dateInput)="OnLogicalDeleteFromDateChange($event.value)">
                             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                             <mat-datepicker #picker></mat-datepicker>
-                        </mat-form-field>
+                        </div>
                     </div>
-                    <div class="col-3">
-
-                        <mat-form-field class="w-100">
-                            <mat-label>To Date</mat-label>
-                            <input matInput [matDatepicker]="picker2" #tillDate
-                                (dateInput)="OnLogicalDeleteTillDateChange($event.value)">
+                    <div class="col-3 ym_form_group">
+                        <div class="row">
+                            <label class="md-lbl">To Date
+                            </label>
+                            <input class="col-md-9" matInput [matDatepicker]="picker2" #tillDate
+                            (dateInput)="OnLogicalDeleteTillDateChange($event.value)">
                             <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                             <mat-datepicker #picker2></mat-datepicker>
-                        </mat-form-field>
+                        </div>
                     </div>
-                    <div class="col-3 mt-2">
+                    <div class="col-3 mt-4">
                         <button mat-button mat-raised-button class="md-Btn" (click)="onClickOfLogicalDeleteReset()">
                             <mat-icon>refresh</mat-icon>Reset
                         </button>

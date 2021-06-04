@@ -1,7 +1,7 @@
 <div class="ym_content">
     <div class="col-md-12 container">
         <div class="row md-breadCrumbs">
-           Reports
+            Reports
         </div>
         <!-- First Report  -->
 
@@ -13,12 +13,12 @@
                     </mat-card-header>
                     <mat-divider></mat-divider>
                     <mat-card-content class="mt-3">
-                        <span style="font-size: 15px;">This report shows the net premiums</span> 
+                        <span style="font-size: 15px;">This report shows the net premiums</span>
                     </mat-card-content>
                     <mat-divider></mat-divider>
                     <mat-card-actions align="end">
                         <div class="example-button-row">
-                            <button mat-button mat-raised-button class="md-Btn-fst"
+                            <button mat-button mat-raised-button class="md-Btn-fst mr-2"
                                 (click)="onClickOfNetPremiumPlay()">
                                 <mat-icon>play_circle_outline</mat-icon>
                             </button>
@@ -34,11 +34,13 @@
                     </mat-card-header>
                     <mat-divider></mat-divider>
                     <mat-card-content class="mt-3">
-                        <span style="font-size: 15px;">This report contains Logically Deleted and Processed with error certificates</span>
+                        <span style="font-size: 15px;">This report contains Logically Deleted and Processed with error
+                            certificates</span>
                     </mat-card-content>
                     <mat-divider></mat-divider>
                     <mat-card-actions align="end">
-                        <button mat-button mat-raised-button class="md-Btn-fst" (click)="onClickOfLogicalDeletePlay()">
+                        <button mat-button mat-raised-button class="md-Btn-fst mr-2"
+                            (click)="onClickOfLogicalDeletePlay()">
                             <mat-icon>play_circle_outline</mat-icon>
                         </button>
                     </mat-card-actions>
@@ -61,39 +63,40 @@
                             Clients</span>
                         <div class="md-hide mt-2" #filter>
                             <div class="row">
-                                <div class="col-6">
-                                    <mat-form-field class="w-100">
-                                        <mat-label>Client Name</mat-label>
-                                        <input type="text" placeholder="Pick one" aria-label="Number" matInput
-                                            (keyup)="acturialKeyup($event)" [(ngModel)]="clientName"
-                                            [matAutocomplete]="auto">
+                                <div class="col-6 ym_form_group">
+                                    <div class="row">
+                                        <label class="md-lbl">Client Name</label>
+                                        <input type="text" aria-label="Number" (keyup)="acturialKeyup($event)"
+                                            [(ngModel)]="clientName" [matAutocomplete]="auto">
                                         <mat-autocomplete #auto="matAutocomplete">
                                             <mat-option *ngFor="let list of clientNameVal" [value]="list.companyName">
                                                 {{list.companyName}}
                                             </mat-option>
                                         </mat-autocomplete>
-                                    </mat-form-field>
+                                    </div>
                                 </div>
                                 <div class="col-6"></div>
                             </div>
                             <div class="row">
-                                <div class="col-6">
-                                    <mat-form-field class="w-100">
-                                        <mat-label>From Date</mat-label>
-                                        <input matInput [matDatepicker]="picker" #fromDate
+                                <div class="col-6 ym_form_group">
+                                    <div class="row">
+                                        <label class="md-lbl">From Date
+                                        </label>
+                                        <input class="col-md-9" matInput [matDatepicker]="picker" #fromDate
                                             (dateInput)="OnFromDateChange($event.value)">
                                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                                        <mat-datepicker #picker></mat-datepicker>
-                                    </mat-form-field>
+                                        <mat-datepicker class="col-md-3" #picker></mat-datepicker>
+                                    </div>
                                 </div>
-                                <div class="col-6">
-                                    <mat-form-field class="w-100">
-                                        <mat-label>To Date</mat-label>
-                                        <input matInput [matDatepicker]="picker2" #tillDate
+                                <div class="col-6 ym_form_group">
+                                    <div class="row">
+                                        <label class="md-lbl">To Date
+                                        </label>
+                                        <input class="col-md-9" matInput [matDatepicker]="picker2" #tillDate
                                             (dateInput)="OnTillDateChange($event.value)">
                                         <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-                                        <mat-datepicker #picker2></mat-datepicker>
-                                    </mat-form-field>
+                                        <mat-datepicker class="col-md-3" #picker2></mat-datepicker>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -101,7 +104,7 @@
                     <mat-divider></mat-divider>
                     <mat-card-actions>
                         <div class="example-button-row">
-                            <button mat-button mat-raised-button class="md-Btn" (click)="onClickOfAddFilters()">Add
+                            <button mat-button mat-raised-button class="md-Btn ml-2" (click)="onClickOfAddFilters()">Add
                                 Filters</button>
                             <button mat-button mat-raised-button class="md-Btn md-icon"
                                 (click)="onClickOfActuarialPlay()">
@@ -123,49 +126,52 @@
                             Clients</span>
                         <div class="md-hide mt-2" #customerFilter>
                             <div class="row">
-                                <div class="col-6">
-                                    <mat-form-field class="w-100">
-                                        <mat-label>Client Name</mat-label>
-                                        <input type="text" placeholder="Pick one" aria-label="Name" matInput
-                                            (keyup)="customerKeyup($event)" [(ngModel)]="customerClientName"
-                                            [matAutocomplete]="auto2">
+                                <div class="col-6 ym_form_group">
+                                    <div class="row">
+                                        <label class="md-lbl">Client Name</label>
+                                        <input type="text" aria-label="Name" matInput (keyup)="customerKeyup($event)"
+                                            [(ngModel)]="customerClientName" [matAutocomplete]="auto2">
                                         <mat-autocomplete #auto2="matAutocomplete">
                                             <mat-option *ngFor="let item of customerClientNameVal"
                                                 [value]="item.companyName">
                                                 {{item.companyName}}
                                             </mat-option>
                                         </mat-autocomplete>
-                                    </mat-form-field>
+                                    </div>
                                 </div>
                                 <div class="col-6"></div>
                             </div>
                             <div class="row">
-                                <div class="col-6">
-                                    <mat-form-field class="w-100">
-                                        <mat-label>From Date</mat-label>
-                                        <input matInput [matDatepicker]="picker3" #customerFromDate
+                                <div class="col-6 ym_form_group">
+                                    <div class="row">
+                                        <label class="md-lbl">From Date
+                                        </label>
+                                        <input class="col-md-9" matInput [matDatepicker]="picker3" #customerFromDate
                                             (dateInput)="OnCustomerFromDateChange($event.value)">
                                         <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
                                         <mat-datepicker #picker3></mat-datepicker>
-                                    </mat-form-field>
+                                    </div>
                                 </div>
-                                <div class="col-6">
-                                    <mat-form-field class="w-100">
-                                        <mat-label>To Date</mat-label>
-                                        <input matInput [matDatepicker]="picker4" #customerTillDate
+                                <div class="col-6 ym_form_group">
+                                    <div class="row">
+                                        <label class="md-lbl">To Date
+                                        </label>
+                                        <input class="col-md-9" matInput [matDatepicker]="picker4" #customerTillDate
                                             (dateInput)="OnCustomerTillDateChange($event.value)">
                                         <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
                                         <mat-datepicker #picker4></mat-datepicker>
-                                    </mat-form-field>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </mat-card-content>
                     <mat-divider></mat-divider>
                     <mat-card-actions>
-                        <button mat-button mat-raised-button class="md-Btn" (click)="onClickOfCustomerAddFilters()">Add
+                        <button mat-button mat-raised-button class="md-Btn ml-2"
+                            (click)="onClickOfCustomerAddFilters()">Add
                             Filters</button>
-                        <button mat-button mat-raised-button class="md-Btn md-icon" (click)="onClickOfCustomerPlay()">
+                        <button mat-button mat-raised-button class="md-Btn md-customer-icon"
+                            (click)="onClickOfCustomerPlay()">
                             <mat-icon>play_circle_outline</mat-icon>
                         </button>
                     </mat-card-actions>

@@ -1,89 +1,83 @@
-<form [formGroup]="homeForm">
-    <div class="ym_header">
-        <div class="container">
-            <div class="row ml-4">
-                <div class="col-sm-2">
-                    <div class="ym_header_logo">
-                        <a href="https://www.cumis.com/" target="_blank"><img src="assets/images/mond.png" style="height: 88% !important;"></a>
-                    </div>
-                </div>
-                <div class="col-sm-2">
-                    <div class="ym_header_logo">
-                        <a href="https://www.cumis.com/" target="_blank"><img src="assets/images/coop-logo.png" style="margin-left: -3rem;"></a>
-                    </div>
-                </div>
-                <div class="col-sm-7">
-                    <div class="ym_header_mobile"><i class="fa fa-bars"></i></div>
-                    <div class="ym_header_right">
-                        <ul class="ym_header_nav">
-                            <!-- <li><a routerLink="/home/financialReconciliation" skipLocationChange>Financial
-                                    Reconciliation</a></li>
-                            <li><a routerLink="/home/productMaintenanceComponent" skipLocationChange>Product
-                                    Maintenance</a></li>
-                            <li><a routerLink="/home/reportsComponent" skipLocationChange>Reports</a></li> -->
-                            <li><a routerLink="/home" style="color: white !important;" skipLocationChange>Home</a></li>                        
-                            <li class="ym_parent">
-                                <a style="cursor: pointer;">Forms<i
-                                        class="fas fa-angle-down"></i></a>
-                                <ul class="ym_submenu">
-                                    <li><a routerLink="/home/financialReconciliation" skipLocationChange>Financial
-                                        Reconciliation</a></li>
-                                <li><a routerLink="/home/productMaintenanceComponent" skipLocationChange>Product
-                                        Maintenance</a></li>
-                                <li><a routerLink="/home/reportsComponent" skipLocationChange>Reports</a></li>
-                                    <li><a routerLink="/home/clientmaintenance" skipLocationChange>Client Maintenance</a></li>
-                                    <li><a routerLink="/home/rateStructureConfiguration" skipLocationChange>Rate Structure configuration</a></li>
-                                    <li><a routerLink="/home/creditorCertificate" skipLocationChange>Creditor Certificate Maintenance</a></li>
-                                    <li><a routerLink="/home/creditorDataAdminView" skipLocationChange>Creditor Data-Admin View</a></li>
-                                    <li><a routerLink="/home/creditorSelfAdminDashboard" skipLocationChange>creditor Self Admin Dashboard</a></li>
-                                    
-                                </ul>
-                            </li>
-                            <li class="ym_parent">
-                                <a style="cursor: pointer;">{{authCompleteObject?.userName}}<i
-                                        class="fas fa-angle-down"></i></a>
-                                <ul class="ym_submenu">
-                                    <li><a (click)="logOut()" style="cursor:pointer;color:#c41230 !important"><i
-                                                class="fas fa-sign-out-alt"></i> Log Out</a>
+        <form [formGroup]="homeForm">
+            <div class="ym_header">
+                <div class="container">
+                    <div class="row ml-4">
+                        <div class="col-sm-2">
+                            <div class="ym_header_logo">
+                                <!-- <a href="https://www.cumis.com/" target="_blank"><img src="assets/images/mond.png" style="height: 88% !important;"></a> -->
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="ym_header_logo">
+                                <a href="https://www.cumis.com/" target="_blank"><img src="assets/images/CUMIS-logo-white.png" style="margin-left: -3rem;"></a>
+                            </div>
+                        </div>
+                        <div class="col-sm-7">
+                            <div class="ym_header_mobile"><i class="fa fa-bars"></i></div>
+                            <div class="ym_header_right">
+                                <ul class="ym_header_nav">
+                                    <li><a routerLink="/home/userHome" style="color: white !important;" skipLocationChange>Home</a></li>                        
+                                    <!-- <li class="ym_parent">
+                                        <a style="cursor: pointer;">Forms<i
+                                                class="fas fa-angle-down"></i></a>
+                                        <ul class="ym_submenu">
+                                            <li><a routerLink="/home/financialReconciliation" skipLocationChange>Financial
+                                                Reconciliation</a></li>
+                                        <li><a routerLink="/home/productMaintenanceComponent" skipLocationChange>Product
+                                                Maintenance</a></li>
+                                        <li><a routerLink="/home/reportsComponent" skipLocationChange>Reports</a></li>
+                                            <li><a routerLink="/home/clientmaintenance" skipLocationChange>Client Maintenance</a></li>
+                                            <li><a routerLink="/home/rateStructureConfiguration" skipLocationChange>Rate Structure configuration</a></li>
+                                            <li><a routerLink="/home/creditorCertificate" skipLocationChange>Creditor Certificate Maintenance</a></li>
+                                            <li><a routerLink="/home/creditorDataAdminView" skipLocationChange>Creditor Data-Admin View</a></li>
+                                            <li><a routerLink="/home/creditorSelfAdminDashboard" skipLocationChange>creditor Self Admin Dashboard</a></li>
+                                            
+                                        </ul>
+                                    </li> -->
+                                    <li class="ym_parent">
+                                        <a style="cursor: pointer;">{{authCompleteObject?.userName}}<i
+                                                class="fas fa-angle-down"></i></a>
+                                        <ul class="ym_submenu">
+                                            <li><a (click)="logOut()" style="cursor:pointer;color:#c41230 !important"><i
+                                                        class="fas fa-sign-out-alt"></i> Log Out</a>
+                                            </li>
+                                        </ul>
                                     </li>
                                 </ul>
-                            </li>
-                        </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <ng-container>
-        <button type="button" class="btn btn-primary" id="sessionTimeout_Btn" data-toggle="modal"
-            data-target="#sessionTime_loading" style="display:none"></button>
-        <div class="modal ym_modal" tabindex="-1" role="dialog" id="sessionTime_loading" aria-labelledby="loadingLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content p-4">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="display:none">
-                        <span aria-hidden="true" class="fa">&times;</span>
-                    </button>
-                    <p id="sessionTimeOutMessage"></p>
-                    <div class="modal-footer p-0">
-                        <a style="cursor:pointer !important" (click)="reactivateSession()">Click here to activate your
-                            session</a>
+            <ng-container>
+                <button type="button" class="btn btn-primary" id="sessionTimeout_Btn" data-toggle="modal"
+                    data-target="#sessionTime_loading" style="display:none"></button>
+                <div class="modal ym_modal" tabindex="-1" role="dialog" id="sessionTime_loading" aria-labelledby="loadingLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content p-4">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="display:none">
+                                <span aria-hidden="true" class="fa">&times;</span>
+                            </button>
+                            <p id="sessionTimeOutMessage"></p>
+                            <div class="modal-footer p-0">
+                                <a style="cursor:pointer !important" (click)="reactivateSession()">Click here to activate your
+                                    session</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </ng-container>
-    <router-outlet></router-outlet>
-</form>
+            </ng-container>
+            <router-outlet></router-outlet>
+        </form>
 
 <!-- logout Code -->
-
 <button type="button" id="logoutHomePage" data-toggle="modal" data-target="#logoutModel" style="display:none"></button>
 <div class="modal fade" id="logoutModel" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title modalHeaderClr">Logout of the application</h5>
+                <h5 class="modal-title modalHeaderClr md-lbl">Logout of the application</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -112,4 +106,3 @@
         </div>
     </div>
 </div>
-<!-- <alert></alert> -->

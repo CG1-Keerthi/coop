@@ -267,7 +267,8 @@ input[type="text"] {
     color: #008acc !important;
 }
 .md-Btn{
-    background-color: #008acc !important;
+    /* background-color: #008acc !important; */
+    background-color: #C41230;
 }
 /* .ui-table{
     overflow-y: auto;

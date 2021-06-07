@@ -94,7 +94,7 @@ export class NetpremiumreportComponent implements OnInit {
   invokeMondService(projectName: string, serviceName: string, version: string, fromDate: string, toDate: string, partnerName: any, context: string, downloadAsFile: string, returnByteArrayVariableName: string, returnByteArrayFileName: string, csfrToken: string) {
     let dataToSend = 'projectName=' + projectName + '&serviceName=' + serviceName + '&version=' + version + '&fromDate=' + fromDate +
       '&toDate=' + toDate + '&partnerName=' + partnerName + '&context=' +
-      context + '&downloadAsFile=' + downloadAsFile + '&returnByteArrayVariableName=' + returnByteArrayVariableName + '&returnByteArrayFileName=' + returnByteArrayFileName + '&csfrToken=' + csfrToken;
+      context + '&downloadAsFile=' + downloadAsFile + '&returnByteArrayVariableName=' + returnByteArrayVariableName + '&returnByteArrayFileName=' + returnByteArrayFileName + '&csfrToken=' + csfrToken +'&addSessionInfoFlag=' + true;;
     this.http.post("/mondrestws/services/executeService/invokePFDServiceWithDownload", dataToSend, { headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8' }, responseType: 'blob', observe: 'response' }).subscribe(
       data => {
         console.log("data", data);

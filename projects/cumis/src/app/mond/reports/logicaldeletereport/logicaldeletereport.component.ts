@@ -24,6 +24,8 @@ export class LogicalDeleteReportComponent implements OnInit {
     public selectedNetPremiumTillDate: string;
     public downloadData: any;
     public fileUrl: any;
+    public isFromDateSubmit: boolean = false;
+    public isToDateSubmit: boolean = false;
 
     @ViewChild('fromDate') fromDate: ElementRef;
     @ViewChild('tillDate') tillDate: ElementRef;
@@ -57,6 +59,21 @@ export class LogicalDeleteReportComponent implements OnInit {
 
     onClickOfLogicalDeleteDownload() {
         debugger;
+        if(this.fromDate.nativeElement.value == ""){
+            this.isFromDateSubmit = true;
+            this.mdMondServiceDS.showErrorMessage("Please fill out the From Date field.");
+            return;
+        }else{
+            this.isFromDateSubmit = false;
+        }
+
+        if(this.tillDate.nativeElement.value == ""){
+            this.isToDateSubmit = true;
+            this.mdMondServiceDS.showErrorMessage("Please fill out the To Date field.");
+            return;
+        }else{
+            this.isToDateSubmit = false;
+        }
         let projectName = 'Reports';
         let serviceName = 'CreateLogicalDeleteReport';
         let version = '1.00';
@@ -75,7 +92,7 @@ export class LogicalDeleteReportComponent implements OnInit {
     invokeMondService(projectName: string, serviceName: string, version: string, fromDate: string, toDate: string, context: string, downloadAsFile: string, returnByteArrayVariableName: string, returnByteArrayFileName: string, csfrToken: string) {
         let dataToSend = 'projectName=' + projectName + '&serviceName=' + serviceName + '&version=' + version + '&fromDate=' + fromDate +
             '&toDate=' + toDate + '&context=' +
-            context + '&downloadAsFile=' + downloadAsFile + '&returnByteArrayVariableName=' + returnByteArrayVariableName + '&returnByteArrayFileName=' + returnByteArrayFileName + '&csfrToken=' + csfrToken;
+            context + '&downloadAsFile=' + downloadAsFile + '&returnByteArrayVariableName=' + returnByteArrayVariableName + '&returnByteArrayFileName=' + returnByteArrayFileName + '&csfrToken=' + csfrToken +'&addSessionInfoFlag=' + true;
         this.http.post("/mondrestws/services/executeService/invokePFDServiceWithDownload", dataToSend, { headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8' }, responseType: 'blob', observe: 'response' }).subscribe(
             data => {
                 console.log("data", data);

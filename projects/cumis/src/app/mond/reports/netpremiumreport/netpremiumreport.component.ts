@@ -28,11 +28,14 @@ export class NetpremiumreportComponent implements OnInit {
   public selectedNetPremiumTillDate: string;
   public downloadData: any;
   public fileUrl: any;
+  public isFromDateSubmit: boolean = false;
+  public isToDateSubmit: boolean = false;
+  public isClientNameSubmit: boolean = false;
+  public selectedClientName: string;
 
   @ViewChild('fromDate') fromDate: ElementRef;
   @ViewChild('tillDate') tillDate: ElementRef;
-
-
+  
 
   constructor(private mdMondServiceDS: MDMondServiceDS,
     private mdCommonGetterAndSetter: MDCommonGetterSetter,
@@ -62,24 +65,50 @@ export class NetpremiumreportComponent implements OnInit {
   }
 
   OnNetPremiumFromDateChange(event) {
-    debugger
+    // debugger
     this.selectedNetPremiumFromDate = this.fromDate.nativeElement.value;
   }
 
   OnNetPremiumTillDateChange(event) {
-    debugger;
+    // debugger;
     this.selectedNetPremiumTillDate = this.tillDate.nativeElement.value;
   }
 
+  onSelectClientName(event){
+    // debugger;
+    this.selectedClientName = event.source.value;
+  }
+
   onClickOfNetPremiumDownload() {
-    debugger;
+    // debugger;
+    if (this.fromDate.nativeElement.value == "") {
+      this.isFromDateSubmit = true;
+      this.mdMondServiceDS.showErrorMessage("Please enter the From Date.");
+      return;
+    } else {
+      this.isFromDateSubmit = false;
+    }
+
+    if (this.tillDate.nativeElement.value == "") {
+      this.isToDateSubmit = true;
+      this.mdMondServiceDS.showErrorMessage("Please enter the To Date.");
+      return;
+    } else {
+      this.isToDateSubmit = false;
+    }
+
+    if (this.selectedClientName == undefined) {
+      this.isClientNameSubmit = true;
+      this.mdMondServiceDS.showErrorMessage("Please select the Client Name.");
+      return;
+    } else {
+      this.isClientNameSubmit = false;
+    }
     let projectName = 'Reports';
     let serviceName = 'CreateNetPremiumReport';
     let version = '1.00';
-    // const momentDate = new Date(this.selectedNetPremiumFromDate); // Replace event.value with your date value
-    // const formattedDate = moment(momentDate).format("YYYY/MM/DD");
-    let fromDate = this.selectedNetPremiumFromDate+"T00:00:00.000Z";
-    let toDate = this.selectedNetPremiumTillDate+"T00:00:00.000Z";
+    let fromDate = this.selectedNetPremiumFromDate + "T00:00:00.000Z";
+    let toDate = this.selectedNetPremiumTillDate + "T00:00:00.000Z";
     let partnerName = this.clientName;
     let context = 'Download';
     let downloadAsFile = 'true';
@@ -94,7 +123,7 @@ export class NetpremiumreportComponent implements OnInit {
   invokeMondService(projectName: string, serviceName: string, version: string, fromDate: string, toDate: string, partnerName: any, context: string, downloadAsFile: string, returnByteArrayVariableName: string, returnByteArrayFileName: string, csfrToken: string) {
     let dataToSend = 'projectName=' + projectName + '&serviceName=' + serviceName + '&version=' + version + '&fromDate=' + fromDate +
       '&toDate=' + toDate + '&partnerName=' + partnerName + '&context=' +
-      context + '&downloadAsFile=' + downloadAsFile + '&returnByteArrayVariableName=' + returnByteArrayVariableName + '&returnByteArrayFileName=' + returnByteArrayFileName + '&csfrToken=' + csfrToken +'&addSessionInfoFlag=' + true;;
+      context + '&downloadAsFile=' + downloadAsFile + '&returnByteArrayVariableName=' + returnByteArrayVariableName + '&returnByteArrayFileName=' + returnByteArrayFileName + '&csfrToken=' + csfrToken + '&addSessionInfoFlag=' + true;;
     this.http.post("/mondrestws/services/executeService/invokePFDServiceWithDownload", dataToSend, { headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8' }, responseType: 'blob', observe: 'response' }).subscribe(
       data => {
         console.log("data", data);
@@ -128,7 +157,7 @@ export class NetpremiumreportComponent implements OnInit {
       });
   }
 
-  onClickOfReset(){
+  onClickOfReset() {
     debugger;
     this.fromDate.nativeElement.value = "";
     this.tillDate.nativeElement.value = "";

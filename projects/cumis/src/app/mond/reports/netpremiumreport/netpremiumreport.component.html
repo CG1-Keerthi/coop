@@ -9,7 +9,7 @@
                 </mat-expansion-panel-header>
                 <div class="row" style="padding: 0  16px;">
   
-                    <div class="col-3 ym_form_group">
+                    <div class="col-3 ym_form_group required">
                         <div class="row">
                             <label class="md-lbl">From Date
                             </label>
@@ -17,9 +17,12 @@
                             (dateInput)="OnNetPremiumFromDateChange($event.value)">
                             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                             <mat-datepicker #picker></mat-datepicker>
+                            <div *ngIf="isFromDateSubmit">
+                                <p class="text-danger"> Please enter the From Date.</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-3 ym_form_group">
+                    <div class="col-3 ym_form_group required">
                         <div class="row">
                             <label class="md-lbl">To Date
                             </label>
@@ -27,20 +30,25 @@
                             (dateInput)="OnNetPremiumTillDateChange($event.value)">
                             <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                             <mat-datepicker #picker2></mat-datepicker>
+                            <div *ngIf="isToDateSubmit">
+                                <p class="text-danger"> Please enter the To Date.</p>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="col-3 ym_form_group">
+                    <div class="col-3 ym_form_group required">
                         <label class="md-lbl">Client Name</label>          
                             <input type="text"  aria-label="Number" matInput
                                 (keyup)="netPremiumKeyup($event)" [(ngModel)]="clientName"
                                 [matAutocomplete]="auto">
                             <mat-autocomplete #auto="matAutocomplete">
-                                <mat-option *ngFor="let list of clientNameVal" [value]="list.companyName">
+                                <mat-option *ngFor="let list of clientNameVal" (onSelectionChange)="onSelectClientName($event)" [value]="list.companyName">
                                     {{list.companyName}}
                                 </mat-option>
                             </mat-autocomplete>
-                   
+                            <div *ngIf="isClientNameSubmit">
+                                <p class="text-danger"> Please select the Client Name.</p>
+                            </div>
                     </div>
                     <div class="col-3 mt-4">
                         <button mat-button mat-raised-button class="md-Btn" (click)="onClickOfReset()"><mat-icon>refresh</mat-icon>Reset</button>

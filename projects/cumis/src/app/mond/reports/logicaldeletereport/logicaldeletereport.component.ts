@@ -61,7 +61,7 @@ export class LogicalDeleteReportComponent implements OnInit {
         debugger;
         if(this.fromDate.nativeElement.value == ""){
             this.isFromDateSubmit = true;
-            this.mdMondServiceDS.showErrorMessage("Please fill out the From Date field.");
+            this.mdMondServiceDS.showErrorMessage("Please enter the From Date.");
             return;
         }else{
             this.isFromDateSubmit = false;
@@ -69,7 +69,7 @@ export class LogicalDeleteReportComponent implements OnInit {
 
         if(this.tillDate.nativeElement.value == ""){
             this.isToDateSubmit = true;
-            this.mdMondServiceDS.showErrorMessage("Please fill out the To Date field.");
+            this.mdMondServiceDS.showErrorMessage("Please enter the To Date.");
             return;
         }else{
             this.isToDateSubmit = false;

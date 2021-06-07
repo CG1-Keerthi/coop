@@ -270,6 +270,9 @@ input[type="text"] {
     /* background-color: #008acc !important; */
     background-color: #C41230;
 }
+.btn-danger{
+    background-color: #C41230;
+}
 /* .ui-table{
     overflow-y: auto;
     height: 232px;
@@ -387,7 +390,7 @@ mat-panel-title{
     background-color:#C41230 !important;
 }
 .md-btn-group{
-    margin-left: 2rem;
+    margin-left: 8%;
 }
 
 .mat-calendar-body-selected{

@@ -3,7 +3,7 @@
         <div class="col-md-6">
         </div>
         <div class="col-md-6">
-            <button class="float-right ml-2 btn btn-primary" [disabled]="isUpdateDateFieldReadonly"
+            <button class="float-right ml-2 btn btn-danger" [disabled]="isUpdateDateFieldReadonly"
                 (click)="onClickOfClientUpdatePlan()"> Update
                 Client</button>
         </div>
@@ -133,9 +133,9 @@
     </div>
 
     <div class="ym_form_group">
-        <button class="float-right btn btn-primary" (click)="onClickOfClientSubmit()" #clientSubmit><i
+        <button class="float-right btn btn-danger md-btn-width" (click)="onClickOfClientSubmit()" #clientSubmit><i
                 class="fa fa-save mr-1"></i>Submit</button>
-        <button class="float-right btn btn-primary" style="margin-right: 10px;" (click)="onClickOfClientClear()"><i
+        <button class="float-right btn btn-danger md-btn-width" style="margin-right: 10px;" (click)="onClickOfClientClear()"><i
                 class="fa fa-times"></i> Clear</button>
     </div>
 </form>
@@ -152,19 +152,19 @@
             </div>
             <div class="col-md-6">
                 <div class="dropdown float-right ml-2">
-                    <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
+                    <button class="btn btn-danger dropdown-toggle" data-toggle="dropdown"
                         [disabled]="isClientAddressDisable">
                         More Action
                     </button>
-                    <div class="dropdown-menu">
+                    <div class="dropdown-menu md-menu">
                         <a class="dropdown-item" (click)="onClickOfClientAddressUpdatePlan()">Update Client Address</a>
                         <a class="dropdown-item" (click)="onClickOfHistoricalAddress()">View Historical Address</a>
                     </div>
                 </div>
                 <!-- <button class="ym_button float-right ml-2" (click)="onClickOfClientAddressUpdatePlan()"> Update Client
                     Address</button> -->
-                <button type="button" class="float-right ml-2 btn btn-primary" (click)="onClickOfClientAddAddress()"
-                    [disabled]="isClientAddressDisable"><i class="fa fa-plus"></i>Add Address</button>
+                <button type="button" class="float-right ml-2 btn btn-danger" (click)="onClickOfClientAddAddress()"
+                    [disabled]="isClientAddressDisable"><i class="fa fa-plus mr-1"></i>Add Address</button>
 
 
             </div>
@@ -304,7 +304,7 @@
                                 [readonly]="isAddressFieldreadonly">
                         </div>
                     </div>
-                    <button class="float-right btn btn-primary" (click)="onClickOfClientAddressSubmit()"
+                    <button class="float-right btn btn-danger" (click)="onClickOfClientAddressSubmit()"
                         #clientAddressSubmit><i class="fa fa-save mr-1"></i>Submit</button>
                 </div>
             </div>
@@ -356,7 +356,7 @@
                 </p-table>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal"><i
+                <button type="button" class="btn btn-danger" data-dismiss="modal"><i
                         class="fa fa-times ml-2"></i>Close</button>
             </div>
         </div>

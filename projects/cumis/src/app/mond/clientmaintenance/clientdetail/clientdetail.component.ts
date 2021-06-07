@@ -7,6 +7,7 @@ import { MDCodeListHeaderDS, MDMondServiceDS } from '../../../_services/ds';
 import { MDCommonGetterSetter } from '../../../_services/common';
 import { ClientDetailFormBuilderService } from "../../../form-builder/clientMaintenance/clientDetails/client-detail-form-builder.service";
 import { ClientAddressDetailFormBuilderService } from "../../../form-builder/clientMaintenance/clientAddressdetails/client-address-detail-form-builder.service";
+import { of } from 'rxjs';
 declare var $: any;
 
 
@@ -184,13 +185,40 @@ export class ClientDetailComponent implements OnInit {
     }
 
     onClickOfClientSubmit() {
-        if (this.clientDetailsForm.value.clientInfo.clientNumber == null && this.clientDetailsForm.value.clientInfo.clientName == null &&
-            this.clientDetailsForm.value.clientInfo.clientEffectiveDate == null && this.clientDetailsForm.value.clientInfo.clientProvinceCode == null &&
-            this.clientDetailsForm.value.clientInfo.clientLanguageCode == null) {
+        // if (this.clientDetailsForm.value.clientInfo.clientNumber == null && this.clientDetailsForm.value.clientInfo.clientName == null &&
+        //     this.clientDetailsForm.value.clientInfo.clientEffectiveDate == null && this.clientDetailsForm.value.clientInfo.clientProvinceCode == null &&
+        //     this.clientDetailsForm.value.clientInfo.clientLanguageCode == null) {
+        //     this.isSubmit = true;
+        //     this.mdMondServiceDS.showErrorMessage("Please fill out the field.");
+        //     return
+        // }
+        if(this.clientDetailsForm.value.clientInfo.clientNumber == null){
             this.isSubmit = true;
-            this.mdMondServiceDS.showErrorMessage("Please fill out the field.");
-            return
+         this.mdMondServiceDS.showErrorMessage("Please fill out the Client Number field.");
+         return;
         }
+        if(this.clientDetailsForm.value.clientInfo.clientName == null){
+            this.isSubmit = true;
+            this.mdMondServiceDS.showErrorMessage("Please fill out the  Client Name field.");
+            return;
+        }
+        if(this.clientDetailsForm.value.clientInfo.clientEffectiveDate == null){
+            this.isSubmit = true;
+            this.mdMondServiceDS.showErrorMessage("Please fill out the Client Effective Date field.");
+            return;
+        }
+        if(this.clientDetailsForm.value.clientInfo.clientProvinceCode == null){
+            this.isSubmit = true;
+            this.mdMondServiceDS.showErrorMessage("Please fill out the Client Province field.");
+            return;
+        }
+        if( this.clientDetailsForm.value.clientInfo.clientLanguageCode == null){
+            this.isSubmit = true;
+            this.mdMondServiceDS.showErrorMessage("Please fill out the Client Language Code field.");
+            return;
+        }
+
+
         if (this.isDateUpdate != "Date") {
             this.clientDetailsForm.value.clientInfo.lastUpdateDate = "";
             this.clientDetailsForm.value.clientInfo.clientStatusEndDate = "";
@@ -262,13 +290,19 @@ export class ClientDetailComponent implements OnInit {
     }
 
     onClickOfClientAddressSubmit() {
-        if (this.clientAddressForm.value.clientAddressInfo.addressType != undefined) {
-            if (this.clientAddressForm.value.clientAddressInfo.addressType == null && this.clientAddressForm.value.clientAddressInfo.addressEffectiveDate == null) {
+        // if (this.clientAddressForm.value.clientAddressInfo.addressType != undefined) {
+            if (this.clientAddressForm.value.clientAddressInfo.addressType == null) {
                 this.isAddressSubmit = true;
-                this.mdMondServiceDS.showErrorMessage("Please fill out the field.");
+                this.mdMondServiceDS.showErrorMessage("Please fill out the Address Type field.");
                 return;
             }
-        }
+            if (this.clientAddressForm.value.clientAddressInfo.addressEffectiveDate == null) {
+                this.isAddressSubmit = true;
+                this.mdMondServiceDS.showErrorMessage("Please fill out the Address Effective Date field.");
+                return;
+            }
+
+        // }
         if (this.isUpdate != 'updateAddress') {
             this.clientAddressForm.value.clientAddressInfo.currentRecordFlag = "N";
         }

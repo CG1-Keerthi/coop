@@ -5,3 +5,9 @@ mat-expansion-panel-header{
 /* .md-disable-Btn{
     cursor: no-drop;
 } */
+.md-btn-width{
+    width: 7%;;
+}
+.md-menu{
+    left: -15px !important;
+}

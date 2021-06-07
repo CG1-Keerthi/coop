@@ -12,11 +12,12 @@
                                 <a href="https://www.cumis.com/" target="_blank"><img src="assets/images/CUMIS-logo-white.png" style="margin-left: -3rem;"></a>
                             </div>
                         </div>
-                        <div class="col-sm-7">
+                     
+                        <div class="col-sm-8" >
                             <div class="ym_header_mobile"><i class="fa fa-bars"></i></div>
                             <div class="ym_header_right">
                                 <ul class="ym_header_nav">
-                                    <li><a routerLink="/home/userHome" style="color: white !important;" skipLocationChange>Home</a></li>                        
+                                    <li><a routerLink="/home/userHome" style="color: white !important;" skipLocationChange><b>Home</b></a></li>                        
                                     <!-- <li class="ym_parent">
                                         <a style="cursor: pointer;">Forms<i
                                                 class="fas fa-angle-down"></i></a>
@@ -36,7 +37,7 @@
                                     </li> -->
                                     <li class="ym_parent">
                                         <a style="cursor: pointer;">{{authCompleteObject?.userName}}<i
-                                                class="fas fa-angle-down"></i></a>
+                                                class="fas fa-angle-down ml-2"></i></a>
                                         <ul class="ym_submenu">
                                             <li><a (click)="logOut()" style="cursor:pointer;color:#c41230 !important"><i
                                                         class="fas fa-sign-out-alt"></i> Log Out</a>

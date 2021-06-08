@@ -21,6 +21,8 @@ import { MY_FORMATS } from '../../../_services/constants/MDDateFormate';
 export class NetpremiumreportComponent implements OnInit {
   // date = new FormControl(moment());
 
+  public fromDateDatePicker: Date;
+  public toDateDatePicker: Date;
   public csfrToken: string;
   public clientNameVal: any;
   public clientName: string;
@@ -32,10 +34,13 @@ export class NetpremiumreportComponent implements OnInit {
   public isToDateSubmit: boolean = false;
   public isClientNameSubmit: boolean = false;
   public selectedClientName: string;
+  public clearSelectedTillDate: any;
+
 
   @ViewChild('fromDate') fromDate: ElementRef;
   @ViewChild('tillDate') tillDate: ElementRef;
-  
+ 
+
 
   constructor(private mdMondServiceDS: MDMondServiceDS,
     private mdCommonGetterAndSetter: MDCommonGetterSetter,
@@ -54,6 +59,7 @@ export class NetpremiumreportComponent implements OnInit {
 
   netPremiumKeyup(event) {
     // debugger;
+    this.selectedClientName = undefined;
     this.mdConnectedPartnersDS.getListOfPartnerCompaniesTypeAhead(event.target.value).subscribe(
       data => {
         this.clientNameVal = data;
@@ -67,20 +73,23 @@ export class NetpremiumreportComponent implements OnInit {
   OnNetPremiumFromDateChange(event) {
     // debugger
     this.selectedNetPremiumFromDate = this.fromDate.nativeElement.value;
+    this.isFromDateSubmit = false;
   }
 
   OnNetPremiumTillDateChange(event) {
-    // debugger;
+    debugger;
     this.selectedNetPremiumTillDate = this.tillDate.nativeElement.value;
+    this.isToDateSubmit = false;
   }
 
-  onSelectClientName(event){
-    // debugger;
+  onSelectClientName(event) {
+    debugger;
     this.selectedClientName = event.source.value;
+    this.isClientNameSubmit = false;
   }
 
   onClickOfNetPremiumDownload() {
-    // debugger;
+    debugger;
     if (this.fromDate.nativeElement.value == "") {
       this.isFromDateSubmit = true;
       this.mdMondServiceDS.showErrorMessage("Please enter the From Date.");
@@ -162,6 +171,10 @@ export class NetpremiumreportComponent implements OnInit {
     this.fromDate.nativeElement.value = "";
     this.tillDate.nativeElement.value = "";
     this.clientName = "";
+    this.fromDateDatePicker = null;
+    this.toDateDatePicker = null;
+    this.selectedClientName = undefined;
+  
   }
 
 }

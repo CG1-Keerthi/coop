@@ -14,7 +14,7 @@
                             <label class="md-lbl">From Date
                             </label>
                             <input class="col-md-9" matInput [matDatepicker]="picker" #fromDate
-                            (dateInput)="OnNetPremiumFromDateChange($event.value)">
+                            (dateInput)="OnNetPremiumFromDateChange($event.value)"  [(ngModel)]="fromDateDatePicker">
                             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                             <mat-datepicker #picker></mat-datepicker>
                             <div *ngIf="isFromDateSubmit">
@@ -27,7 +27,7 @@
                             <label class="md-lbl">To Date
                             </label>
                             <input class="col-md-9" matInput [matDatepicker]="picker2" #tillDate
-                            (dateInput)="OnNetPremiumTillDateChange($event.value)">
+                            (dateInput)="OnNetPremiumTillDateChange($event.value)" [(ngModel)]="toDateDatePicker">
                             <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                             <mat-datepicker #picker2></mat-datepicker>
                             <div *ngIf="isToDateSubmit">

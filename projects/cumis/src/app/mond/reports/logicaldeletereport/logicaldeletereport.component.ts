@@ -19,6 +19,8 @@ import { MY_FORMATS } from '../../../_services/constants/MDDateFormate';
 })
 
 export class LogicalDeleteReportComponent implements OnInit {
+    public fromDateDatePicker: Date;
+    public toDateDatePicker: Date;
     public csfrToken: string;
     public selectedNetPremiumFromDate: string;
     public selectedNetPremiumTillDate: string;
@@ -50,11 +52,13 @@ export class LogicalDeleteReportComponent implements OnInit {
     OnLogicalDeleteFromDateChange(event) {
         debugger
         this.selectedNetPremiumFromDate = this.fromDate.nativeElement.value;
+        this.isFromDateSubmit = false;
     }
 
     OnLogicalDeleteTillDateChange(event) {
         debugger;
         this.selectedNetPremiumTillDate = this.tillDate.nativeElement.value;
+        this.isToDateSubmit = false;
     }
 
     onClickOfLogicalDeleteDownload() {
@@ -130,6 +134,8 @@ export class LogicalDeleteReportComponent implements OnInit {
         debugger;
         this.fromDate.nativeElement.value = "";
         this.tillDate.nativeElement.value = "";
+        this.fromDateDatePicker = null;
+        this.toDateDatePicker = null;
     }
 
 }

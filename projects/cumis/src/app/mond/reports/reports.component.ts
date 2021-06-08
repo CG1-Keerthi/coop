@@ -22,6 +22,10 @@ export class ReportsComponent implements OnInit {
   public customerSelectedTillDate: string;
   public clientNameVal: any;
   public customerClientNameVal: any;
+  public selectedActuarialClientName: any;
+  public acturialSelect: string;
+  public selectedCustomerClientName: any;
+  public customerSelect:string; 
 
   @ViewChild('fromDate') fromDate: ElementRef;
   @ViewChild('tillDate') tillDate: ElementRef;
@@ -29,6 +33,7 @@ export class ReportsComponent implements OnInit {
   @ViewChild('customerFromDate') customerFromDate: ElementRef;
   @ViewChild('customerTillDate') customerTillDate: ElementRef;
   @ViewChild('customerFilter') customerFilter: ElementRef;
+
 
   constructor(private mdMondServiceDS: MDMondServiceDS,
     private mdCommonGetterAndSetter: MDCommonGetterSetter,
@@ -46,7 +51,9 @@ export class ReportsComponent implements OnInit {
   }
 
   acturialKeyup(event) {
-    // debugger;
+    debugger;
+    this.selectedActuarialClientName = undefined;
+    this.acturialSelect = "acturialSelect";  
     this.mdConnectedPartnersDS.getListOfPartnerCompaniesTypeAhead(event.target.value).subscribe(
       data => {
         this.clientNameVal = data;
@@ -55,6 +62,8 @@ export class ReportsComponent implements OnInit {
         // this.clientNameVal = [{ "companyId": 6883, "inheritFromCompanyId": -1, "companyIdentifier": "24002", "companyName": "Crelogix", "password": "", "baseCompanyFl": false, "selectedCompany": false, "createUser": 67, "updateUser": 156, "createDate": "Oct 13, 2017 5:43:01 AM", "updateDate": "Oct 14, 2017 1:23:27 PM", "partnerCompLogo": "", "as2Identifier": "", "emailDomain": "", "companyTZ": "-05:00", "companyLogo": "", "dunsNumber": "", "rnifLocation": "", "rnifPartnerURL": "", "rnifIdentifier": "", "groupFl": false, "groupCompanyId": -1, "archiveToS3": false, "archiveYears": 0, "archiveAfterDays": 0, "userBelongToFl": 0, "decodedPassword": "", "invalidLoginAllowed": 3, "marconnCompanyRole": 1, "adminChannel": -1, "purgeAfterDays": 60, "moveToBackupDays": 30, "mdCompanyFl": true, "mcCompanyFl": false, "dmsCompanyFl": false, "bpmCompanyFl": false, "homeFolderId": 0, "authIdentifier": 1 }, { "companyId": 7102, "inheritFromCompanyId": -1, "companyIdentifier": "24003", "companyName": "LAIS", "password": "", "baseCompanyFl": false, "selectedCompany": false, "createUser": 67, "updateUser": 67, "createDate": "Apr 12, 2019 5:13:34 AM", "updateDate": "Apr 12, 2019 5:13:34 AM", "partnerCompLogo": "", "as2Identifier": "", "emailDomain": "", "companyTZ": "", "companyLogo": "", "dunsNumber": "", "rnifLocation": "", "rnifPartnerURL": "", "rnifIdentifier": "", "groupFl": false, "groupCompanyId": -1, "archiveToS3": false, "archiveYears": 0, "archiveAfterDays": 0, "userBelongToFl": 0, "decodedPassword": "", "invalidLoginAllowed": 3, "marconnCompanyRole": 1, "adminChannel": -1, "purgeAfterDays": 60, "moveToBackupDays": 30, "mdCompanyFl": true, "mcCompanyFl": false, "dmsCompanyFl": false, "bpmCompanyFl": false, "homeFolderId": 0, "authIdentifier": 1 }, { "companyId": 6882, "inheritFromCompanyId": -1, "companyIdentifier": "24001", "companyName": "LGM", "password": "", "baseCompanyFl": false, "selectedCompany": false, "createUser": 67, "updateUser": 67, "createDate": "Oct 13, 2017 5:42:37 AM", "updateDate": "Oct 23, 2017 5:10:03 AM", "partnerCompLogo": "", "as2Identifier": "", "emailDomain": "", "companyTZ": "-05:00", "companyLogo": "", "dunsNumber": "", "rnifLocation": "", "rnifPartnerURL": "", "rnifIdentifier": "", "groupFl": false, "groupCompanyId": -1, "archiveToS3": false, "archiveYears": 0, "archiveAfterDays": 0, "userBelongToFl": 0, "decodedPassword": "", "invalidLoginAllowed": 3, "marconnCompanyRole": 1, "adminChannel": -1, "purgeAfterDays": 60, "moveToBackupDays": 30, "mdCompanyFl": true, "mcCompanyFl": false, "dmsCompanyFl": false, "bpmCompanyFl": false, "homeFolderId": 0, "authIdentifier": 1 }]
       }
     )
+  
+   
   }
 
 
@@ -73,7 +82,21 @@ export class ReportsComponent implements OnInit {
     this.filter.nativeElement.style.display = 'block';
   }
 
+  onSelectActuarialClientName(event){
+    debugger;
+    this.selectedActuarialClientName == undefined
+    this.selectedActuarialClientName = event.source.value;
+  }
+
   onClickOfActuarialPlay() {
+   
+    if( this.acturialSelect == "acturialSelect"){
+      if (this.selectedActuarialClientName == undefined) {
+        this.mdMondServiceDS.showErrorMessage("Please select the Client Name.");
+        return;
+      }
+    }
+    // this.acturialSelect = "";
 
     this.formVariables = {
       startDate: this.selectedFromDate,
@@ -95,10 +118,13 @@ export class ReportsComponent implements OnInit {
   // Customer Report functionalities
   customerKeyup(event) {
     // debugger
+    this.selectedCustomerClientName = undefined;
+    this.customerSelect = "customerSelect";  
     this.mdConnectedPartnersDS.getListOfPartnerCompaniesTypeAhead(event.target.value).subscribe(
       data => {
         this.customerClientNameVal = data;
       }, error => {
+        // this.customerClientNameVal  = [{ "companyId": 6883, "inheritFromCompanyId": -1, "companyIdentifier": "24002", "companyName": "Crelogix", "password": "", "baseCompanyFl": false, "selectedCompany": false, "createUser": 67, "updateUser": 156, "createDate": "Oct 13, 2017 5:43:01 AM", "updateDate": "Oct 14, 2017 1:23:27 PM", "partnerCompLogo": "", "as2Identifier": "", "emailDomain": "", "companyTZ": "-05:00", "companyLogo": "", "dunsNumber": "", "rnifLocation": "", "rnifPartnerURL": "", "rnifIdentifier": "", "groupFl": false, "groupCompanyId": -1, "archiveToS3": false, "archiveYears": 0, "archiveAfterDays": 0, "userBelongToFl": 0, "decodedPassword": "", "invalidLoginAllowed": 3, "marconnCompanyRole": 1, "adminChannel": -1, "purgeAfterDays": 60, "moveToBackupDays": 30, "mdCompanyFl": true, "mcCompanyFl": false, "dmsCompanyFl": false, "bpmCompanyFl": false, "homeFolderId": 0, "authIdentifier": 1 }, { "companyId": 7102, "inheritFromCompanyId": -1, "companyIdentifier": "24003", "companyName": "LAIS", "password": "", "baseCompanyFl": false, "selectedCompany": false, "createUser": 67, "updateUser": 67, "createDate": "Apr 12, 2019 5:13:34 AM", "updateDate": "Apr 12, 2019 5:13:34 AM", "partnerCompLogo": "", "as2Identifier": "", "emailDomain": "", "companyTZ": "", "companyLogo": "", "dunsNumber": "", "rnifLocation": "", "rnifPartnerURL": "", "rnifIdentifier": "", "groupFl": false, "groupCompanyId": -1, "archiveToS3": false, "archiveYears": 0, "archiveAfterDays": 0, "userBelongToFl": 0, "decodedPassword": "", "invalidLoginAllowed": 3, "marconnCompanyRole": 1, "adminChannel": -1, "purgeAfterDays": 60, "moveToBackupDays": 30, "mdCompanyFl": true, "mcCompanyFl": false, "dmsCompanyFl": false, "bpmCompanyFl": false, "homeFolderId": 0, "authIdentifier": 1 }, { "companyId": 6882, "inheritFromCompanyId": -1, "companyIdentifier": "24001", "companyName": "LGM", "password": "", "baseCompanyFl": false, "selectedCompany": false, "createUser": 67, "updateUser": 67, "createDate": "Oct 13, 2017 5:42:37 AM", "updateDate": "Oct 23, 2017 5:10:03 AM", "partnerCompLogo": "", "as2Identifier": "", "emailDomain": "", "companyTZ": "-05:00", "companyLogo": "", "dunsNumber": "", "rnifLocation": "", "rnifPartnerURL": "", "rnifIdentifier": "", "groupFl": false, "groupCompanyId": -1, "archiveToS3": false, "archiveYears": 0, "archiveAfterDays": 0, "userBelongToFl": 0, "decodedPassword": "", "invalidLoginAllowed": 3, "marconnCompanyRole": 1, "adminChannel": -1, "purgeAfterDays": 60, "moveToBackupDays": 30, "mdCompanyFl": true, "mcCompanyFl": false, "dmsCompanyFl": false, "bpmCompanyFl": false, "homeFolderId": 0, "authIdentifier": 1 }]
         this.mdMondServiceDS.MDError(error);
       }
     )
@@ -118,7 +144,19 @@ export class ReportsComponent implements OnInit {
     this.customerFilter.nativeElement.style.display = 'block';
   }
 
+  onSelectCustomerClientName(event){
+    this.selectedCustomerClientName == undefined;
+    this.selectedCustomerClientName = event.source.value;
+  }
+
   onClickOfCustomerPlay() {
+
+    if( this.customerSelect == "customerSelect"){
+      if (this.selectedCustomerClientName == undefined) {
+        this.mdMondServiceDS.showErrorMessage("Please select the Client Name.");
+        return;
+      }
+    }
     this.formVariables = {
       startDate: this.customerSelectedFromDate,
       endDate: this.customerSelectedTillDate,

@@ -7,6 +7,7 @@ import moment from 'moment';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { MY_FORMATS } from '../../../_services/constants/MDDateFormate';
+import { MDCountdownTimer } from '../../../_services/utils';
 
 @Component({
     selector: 'app-logicaldeletereport-designer',
@@ -29,6 +30,7 @@ export class LogicalDeleteReportComponent implements OnInit {
     public isFromDateSubmit: boolean = false;
     public isToDateSubmit: boolean = false;
 
+
     @ViewChild('fromDate') fromDate: ElementRef;
     @ViewChild('tillDate') tillDate: ElementRef;
 
@@ -37,7 +39,8 @@ export class LogicalDeleteReportComponent implements OnInit {
     constructor(private mdMondServiceDS: MDMondServiceDS,
         private mdCommonGetterAndSetter: MDCommonGetterSetter,
         private mdConnectedPartnersDS: MDConnectedPartnersDS,
-        private http: HttpClient) { }
+        private http: HttpClient,
+        private counterTimerService: MDCountdownTimer) { }
 
 
     ngOnInit() {
@@ -99,6 +102,9 @@ export class LogicalDeleteReportComponent implements OnInit {
             context + '&downloadAsFile=' + downloadAsFile + '&returnByteArrayVariableName=' + returnByteArrayVariableName + '&returnByteArrayFileName=' + returnByteArrayFileName + '&csfrToken=' + csfrToken +'&addSessionInfoFlag=' + true;
         this.http.post("/mondrestws/services/executeService/invokePFDServiceWithDownload", dataToSend, { headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8' }, responseType: 'blob', observe: 'response' }).subscribe(
             data => {
+                let d = new Date().getTime();
+                this.counterTimerService.setValidationSession(d);
+                this.counterTimerService.isTimerReset = true;
                 console.log("data", data);
                 var contentDisposition = data.headers.get('content-disposition');
                 console.log("contentDisposition", contentDisposition);

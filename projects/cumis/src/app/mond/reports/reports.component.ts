@@ -90,14 +90,15 @@ export class ReportsComponent implements OnInit {
 
   onClickOfActuarialPlay() {
    
-    if( this.acturialSelect == "acturialSelect"){
-      if (this.selectedActuarialClientName == undefined) {
-        this.mdMondServiceDS.showErrorMessage("Please select the Client Name.");
-        return;
+    if(this.clientName != ""){
+      if( this.acturialSelect == "acturialSelect"){
+        if (this.selectedActuarialClientName == undefined) {
+          this.mdMondServiceDS.showErrorMessage("Please select the Client Name.");
+          return;
+        }
       }
     }
-    // this.acturialSelect = "";
-
+   
     this.formVariables = {
       startDate: this.selectedFromDate,
       endDate: this.selectedTillDate,
@@ -150,13 +151,15 @@ export class ReportsComponent implements OnInit {
   }
 
   onClickOfCustomerPlay() {
-
-    if( this.customerSelect == "customerSelect"){
-      if (this.selectedCustomerClientName == undefined) {
-        this.mdMondServiceDS.showErrorMessage("Please select the Client Name.");
-        return;
+    if(this.customerClientName != ""){
+      if( this.customerSelect == "customerSelect"){
+        if (this.selectedCustomerClientName == undefined) {
+          this.mdMondServiceDS.showErrorMessage("Please select the Client Name.");
+          return;
+        }
       }
     }
+
     this.formVariables = {
       startDate: this.customerSelectedFromDate,
       endDate: this.customerSelectedTillDate,

@@ -98,7 +98,14 @@ export class ClientDetailComponent implements OnInit {
     public isUpdate: string;
     public isDateUpdate: string;
     public isResizeTrue: boolean = false;
-  
+    public isClientNumberSubmit: boolean = false;
+    public isClientNameSubmit: boolean = false;
+    public isClientEffectiveDateSubmit: boolean = false;
+    public isClientProvinceCodeSubmit: boolean = false;
+    public isClientLanguageCodeSubmit: boolean = false;
+    public isAddressEffectiveDateSubmit: boolean = false;
+    public isAddressTypeSubmit: boolean = false;
+
 
     @ViewChild('clientStatusList') clientStatusList: ElementRef;
     @ViewChild('clientProvinceList') clientProvinceList: ElementRef;
@@ -192,28 +199,28 @@ export class ClientDetailComponent implements OnInit {
         //     this.mdMondServiceDS.showErrorMessage("Please fill out the field.");
         //     return
         // }
-        if(this.clientDetailsForm.value.clientInfo.clientNumber == null){
-            this.isSubmit = true;
-         this.mdMondServiceDS.showErrorMessage("Please fill out the Client Number field.");
-         return;
+        if (this.clientDetailsForm.value.clientInfo.clientNumber == null) {
+            this.isClientNumberSubmit = true;
+            this.mdMondServiceDS.showErrorMessage("Please fill out the Client Number field.");
+            return;
         }
-        if(this.clientDetailsForm.value.clientInfo.clientName == null){
-            this.isSubmit = true;
+        if (this.clientDetailsForm.value.clientInfo.clientName == null) {
+            this.isClientNameSubmit = true;
             this.mdMondServiceDS.showErrorMessage("Please fill out the  Client Name field.");
             return;
         }
-        if(this.clientDetailsForm.value.clientInfo.clientEffectiveDate == null){
-            this.isSubmit = true;
+        if (this.clientDetailsForm.value.clientInfo.clientEffectiveDate == null) {
+            this.isClientEffectiveDateSubmit = true;
             this.mdMondServiceDS.showErrorMessage("Please fill out the Client Effective Date field.");
             return;
         }
-        if(this.clientDetailsForm.value.clientInfo.clientProvinceCode == null){
-            this.isSubmit = true;
+        if (this.clientDetailsForm.value.clientInfo.clientProvinceCode == null) {
+            this.isClientProvinceCodeSubmit = true;
             this.mdMondServiceDS.showErrorMessage("Please fill out the Client Province field.");
             return;
         }
-        if( this.clientDetailsForm.value.clientInfo.clientLanguageCode == null){
-            this.isSubmit = true;
+        if (this.clientDetailsForm.value.clientInfo.clientLanguageCode == null) {
+            this.isClientLanguageCodeSubmit = true;
             this.mdMondServiceDS.showErrorMessage("Please fill out the Client Language Code field.");
             return;
         }
@@ -258,13 +265,13 @@ export class ClientDetailComponent implements OnInit {
 
         console.log('Form Submitted with value: ', JSON.stringify(this.clientDetailsForm.value));
         let formData = btoa(JSON.stringify(this.clientDetailsForm.value));
-        this.mdMondServiceDS.invokeMondService("Creditor Self Admin", "SaveClientData-V2", "1.00", formData, this.csfrToken, true, true, true,true).subscribe(
+        this.mdMondServiceDS.invokeMondService("Creditor Self Admin", "SaveClientData-V2", "1.00", formData, this.csfrToken, true, true, true, true).subscribe(
             data => {
                 // console.log("onClickOfClientSubmit data", data);
                 this.mdMondServiceDS.showSuccessMessage(JSON.parse(atob(data)).message);
 
-            }, error => {                
-                this.mdMondServiceDS.MDError(error);           
+            }, error => {
+                this.mdMondServiceDS.MDError(error);
             });
 
     }
@@ -291,16 +298,16 @@ export class ClientDetailComponent implements OnInit {
 
     onClickOfClientAddressSubmit() {
         // if (this.clientAddressForm.value.clientAddressInfo.addressType != undefined) {
-            if (this.clientAddressForm.value.clientAddressInfo.addressType == null) {
-                this.isAddressSubmit = true;
-                this.mdMondServiceDS.showErrorMessage("Please fill out the Address Type field.");
-                return;
-            }
-            if (this.clientAddressForm.value.clientAddressInfo.addressEffectiveDate == null) {
-                this.isAddressSubmit = true;
-                this.mdMondServiceDS.showErrorMessage("Please fill out the Address Effective Date field.");
-                return;
-            }
+        if (this.clientAddressForm.value.clientAddressInfo.addressType == null) {
+            this.isAddressTypeSubmit = true;
+            this.mdMondServiceDS.showErrorMessage("Please fill out the Address Type field.");
+            return;
+        }
+        if (this.clientAddressForm.value.clientAddressInfo.addressEffectiveDate == null) {
+            this.isAddressEffectiveDateSubmit = true;
+            this.mdMondServiceDS.showErrorMessage("Please fill out the Address Effective Date field.");
+            return;
+        }
 
         // }
         if (this.isUpdate != 'updateAddress') {
@@ -323,15 +330,15 @@ export class ClientDetailComponent implements OnInit {
                 // console.log("onClickOfClientSubmit data", data);
                 let newAddressList = JSON.parse(atob(data)).clientAddressInfo.clientAddressInfo
                 this.clientAddressList = [];
-                for(var i=0; i<newAddressList.length; i++){                   
+                for (var i = 0; i < newAddressList.length; i++) {
                     this.clientAddressList.push(newAddressList[i]);
                 }
-                this.mdMondServiceDS.showSuccessMessage(JSON.parse(atob(data)).message);         
+                this.mdMondServiceDS.showSuccessMessage(JSON.parse(atob(data)).message);
                 this.clientAddressForm.reset();
-                
+
             }, error => {
-                this.mdMondServiceDS.MDError(error);         
-            //    let data = "eyJjbGllbnRBZGRyZXNzSW5mbyI6eyJjbGllbnRBZGRyZXNzSW5mbyI6W3siY291bnRyeSI6IkNhbmFkYSIsImN1cnJlbnRSZWNvcmRGbGFnIjoiWSIsImNpdHkiOiJSTlIiLCJhZGRyZXNzVGVybWluYXRpb25EYXRlIjoiOTk5OS0xMi0zMVQwOTowODoyNi4wMDBaIiwiYWRkcmVzc1R5cGUiOiJNYWlsaW5nIiwibGFzdFVwZGF0ZURhdGUiOiIyMDIxLTA1LTA0VDA0OjQxOjQxLjAwMFoiLCJjbGllbnRJZGVudGlmaWVyIjo2OCwicG9zdGFsQ29kZSI6IjEyMzQiLCJhZGRyZXNzRWZmZWN0aXZlRGF0ZSI6IjIwMjEtMDUtMDNUMDA6MDA6MDAuMDAwWiIsImNsaWVudE51bWJlciI6IjQ4IiwicHJvdmluY2UiOiJJRCIsImNsaWVudEFkZHJlc3NJZGVudGlmaWVyIjoxMjAsImFkZHJlc3NMaW5lMSI6IkxpbmUxIiwiYWRkcmVzc0xpbmUyIjoiTGluZTIifSx7ImNvdW50cnkiOiJDYW5hZGEiLCJjdXJyZW50UmVjb3JkRmxhZyI6IlkiLCJjaXR5IjoiY2l0eSIsImFkZHJlc3NUZXJtaW5hdGlvbkRhdGUiOiI5OTk5LTEyLTMxVDA5OjA4OjI2LjAwMFoiLCJhZGRyZXNzVHlwZSI6Ik1haWxpbmciLCJsYXN0VXBkYXRlRGF0ZSI6IjIwMjEtMDUtMDRUMDU6MTA6NDEuMDAwWiIsImNsaWVudElkZW50aWZpZXIiOjY4LCJwb3N0YWxDb2RlIjoiMTExMSIsImFkZHJlc3NFZmZlY3RpdmVEYXRlIjoiMjAyMS0wNC0wMVQwMDowMDowMC4wMDBaIiwiY2xpZW50TnVtYmVyIjoiNDgiLCJwcm92aW5jZSI6IkhJIiwiY2xpZW50QWRkcmVzc0lkZW50aWZpZXIiOjEyMSwiYWRkcmVzc0xpbmUxIjoibGluZTEiLCJhZGRyZXNzTGluZTIiOiJsaW5lMiJ9XX0sIm1lc3NhZ2UiOiJSZWNvcmQgSW5zZXJ0ZWQgU3VjY2Vzc2Z1bGx5Iiwic3RhdHVzIjoiU3VjY2VzcyJ9"
+                this.mdMondServiceDS.MDError(error);
+                //    let data = "eyJjbGllbnRBZGRyZXNzSW5mbyI6eyJjbGllbnRBZGRyZXNzSW5mbyI6W3siY291bnRyeSI6IkNhbmFkYSIsImN1cnJlbnRSZWNvcmRGbGFnIjoiWSIsImNpdHkiOiJSTlIiLCJhZGRyZXNzVGVybWluYXRpb25EYXRlIjoiOTk5OS0xMi0zMVQwOTowODoyNi4wMDBaIiwiYWRkcmVzc1R5cGUiOiJNYWlsaW5nIiwibGFzdFVwZGF0ZURhdGUiOiIyMDIxLTA1LTA0VDA0OjQxOjQxLjAwMFoiLCJjbGllbnRJZGVudGlmaWVyIjo2OCwicG9zdGFsQ29kZSI6IjEyMzQiLCJhZGRyZXNzRWZmZWN0aXZlRGF0ZSI6IjIwMjEtMDUtMDNUMDA6MDA6MDAuMDAwWiIsImNsaWVudE51bWJlciI6IjQ4IiwicHJvdmluY2UiOiJJRCIsImNsaWVudEFkZHJlc3NJZGVudGlmaWVyIjoxMjAsImFkZHJlc3NMaW5lMSI6IkxpbmUxIiwiYWRkcmVzc0xpbmUyIjoiTGluZTIifSx7ImNvdW50cnkiOiJDYW5hZGEiLCJjdXJyZW50UmVjb3JkRmxhZyI6IlkiLCJjaXR5IjoiY2l0eSIsImFkZHJlc3NUZXJtaW5hdGlvbkRhdGUiOiI5OTk5LTEyLTMxVDA5OjA4OjI2LjAwMFoiLCJhZGRyZXNzVHlwZSI6Ik1haWxpbmciLCJsYXN0VXBkYXRlRGF0ZSI6IjIwMjEtMDUtMDRUMDU6MTA6NDEuMDAwWiIsImNsaWVudElkZW50aWZpZXIiOjY4LCJwb3N0YWxDb2RlIjoiMTExMSIsImFkZHJlc3NFZmZlY3RpdmVEYXRlIjoiMjAyMS0wNC0wMVQwMDowMDowMC4wMDBaIiwiY2xpZW50TnVtYmVyIjoiNDgiLCJwcm92aW5jZSI6IkhJIiwiY2xpZW50QWRkcmVzc0lkZW50aWZpZXIiOjEyMSwiYWRkcmVzc0xpbmUxIjoibGluZTEiLCJhZGRyZXNzTGluZTIiOiJsaW5lMiJ9XX0sIm1lc3NhZ2UiOiJSZWNvcmQgSW5zZXJ0ZWQgU3VjY2Vzc2Z1bGx5Iiwic3RhdHVzIjoiU3VjY2VzcyJ9"
             });
     }
 
@@ -378,7 +385,7 @@ export class ClientDetailComponent implements OnInit {
     }
 
 
-    onClickOfHistoricalAddress() { 
+    onClickOfHistoricalAddress() {
         $("#historicalModelId").click();
         let formVariables = JSON.stringify({ "clientId": this.clientDetailsValues.clientInfo.clientIdentifier });
         this.mdMondServiceDS.getFormDataDebugLevel('Creditor Self Admin', 'BasedOnService', 'FetchClientAddressHistory', '1.00', formVariables, new Date().getTime()).subscribe(
@@ -399,7 +406,7 @@ export class ClientDetailComponent implements OnInit {
 
     @HostListener('click', ['$event.target'])
     onClick(element) {
-        debugger;
+        // debugger;
         this.isResizeTrue = true;
         setTimeout(() => {
             this.isResizeTrue = false;

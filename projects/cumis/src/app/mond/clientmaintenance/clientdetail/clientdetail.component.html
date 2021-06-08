@@ -14,16 +14,16 @@
                 <label class="md-lbl">Client Number</label>
                 <input placeholder="Client Number" formControlName="clientNumber" [readonly]="isFieldreadonly">
                 <div
-                    *ngIf="isSubmit && !clientDetailsForm.get('clientInfo.clientNumber').touched  && clientDetailsForm.get('clientInfo.clientNumber').invalid">
-                    <p class="text-danger"> Please fill out this field.</p>
+                    *ngIf="isClientNumberSubmit && !clientDetailsForm.get('clientInfo.clientNumber').touched  && clientDetailsForm.get('clientInfo.clientNumber').invalid">
+                    <p class="text-danger"> Please enter the Client Number.</p>
                 </div>
             </div>
             <div class="ym_form_group required col-4">
                 <label class="md-lbl">Client Name</label>
                 <input placeholder="Client Name" formControlName="clientName" [readonly]="isFieldreadonly">
                 <div
-                    *ngIf="isSubmit && !clientDetailsForm.get('clientInfo.clientName').touched && clientDetailsForm.get('clientInfo.clientName').invalid">
-                    <p class="text-danger"> Please fill out this field.</p>
+                    *ngIf="isClientNameSubmit && !clientDetailsForm.get('clientInfo.clientName').touched && clientDetailsForm.get('clientInfo.clientName').invalid">
+                    <p class="text-danger"> Please enter the Client Name.</p>
                 </div>
             </div>
             <div class="ym_form_group required col-4">
@@ -35,8 +35,8 @@
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker class="col-md-3" #picker></mat-datepicker>
                     <div
-                        *ngIf="isSubmit && !clientDetailsForm.get('clientInfo.clientEffectiveDate').touched && clientDetailsForm.get('clientInfo.clientEffectiveDate').invalid">
-                        <p class="text-danger"> Please fill out this field.</p>
+                        *ngIf="isClientEffectiveDateSubmit && !clientDetailsForm.get('clientInfo.clientEffectiveDate').touched && clientDetailsForm.get('clientInfo.clientEffectiveDate').invalid">
+                        <p class="text-danger"> Please select the Client Effective Date.</p>
                     </div>
                 </div>
 
@@ -74,8 +74,8 @@
                     </select>
                 </div>
                 <div
-                    *ngIf="isSubmit && !clientDetailsForm.get('clientInfo.clientProvinceCode').touched && clientDetailsForm.get('clientInfo.clientProvinceCode').invalid">
-                    <p class="text-danger"> Please fill out this field.</p>
+                    *ngIf="isClientProvinceCodeSubmit && !clientDetailsForm.get('clientInfo.clientProvinceCode').touched && clientDetailsForm.get('clientInfo.clientProvinceCode').invalid">
+                    <p class="text-danger"> Please select the Client Province.</p>
                 </div>
             </div>
         </div>
@@ -91,8 +91,8 @@
                     </select>
                 </div>
                 <div
-                    *ngIf="isSubmit && !clientDetailsForm.get('clientInfo.clientLanguageCode').touched && clientDetailsForm.get('clientInfo.clientLanguageCode').invalid">
-                    <p class="text-danger"> Please fill out this field.</p>
+                    *ngIf="isClientLanguageCodeSubmit && !clientDetailsForm.get('clientInfo.clientLanguageCode').touched && clientDetailsForm.get('clientInfo.clientLanguageCode').invalid">
+                    <p class="text-danger"> Please select the Client Language Code.</p>
                 </div>
             </div>
             <div class="ym_form_group col-4">
@@ -135,8 +135,8 @@
     <div class="ym_form_group">
         <button class="float-right btn btn-danger md-btn-width" (click)="onClickOfClientSubmit()" #clientSubmit><i
                 class="fa fa-save mr-1"></i>Submit</button>
-        <button class="float-right btn btn-danger md-btn-width" style="margin-right: 10px;" (click)="onClickOfClientClear()"><i
-                class="fa fa-times"></i> Clear</button>
+        <button class="float-right btn btn-danger md-btn-width" style="margin-right: 10px;"
+            (click)="onClickOfClientClear()"><i class="fa fa-times"></i> Clear</button>
     </div>
 </form>
 
@@ -176,10 +176,8 @@
                         <h3>Address</h3>
                     </div>
                 </div>
-                <p-table [value]="clientAddressList" selectionMode="single"
-                [scrollable]="true"
-                [responsive]="true" scrollHeight="300px" [autoLayout]="true"
-                [resizableColumns]="isResizeTrue" columnResizeMode="expand"
+                <p-table [value]="clientAddressList" selectionMode="single" [scrollable]="true" [responsive]="true"
+                    scrollHeight="300px" [autoLayout]="true" [resizableColumns]="isResizeTrue" columnResizeMode="expand"
                     (onRowSelect)="onClickOfClientAddressListRow($event)">
                     <ng-template pTemplate="header">
                         <tr class="ptableHeader">
@@ -210,8 +208,8 @@
                                 </select>
                             </div>
                             <div
-                                *ngIf="isAddressSubmit && !clientAddressForm.get('clientAddressInfo.addressType').touched && clientAddressForm.get('clientAddressInfo.addressType').invalid">
-                                <p class="text-danger"> Please fill out this field.</p>
+                                *ngIf="isAddressTypeSubmit && !clientAddressForm.get('clientAddressInfo.addressType').touched && clientAddressForm.get('clientAddressInfo.addressType').invalid">
+                                <p class="text-danger"> Please select the Address Type.</p>
                             </div>
                         </div>
                     </div>
@@ -224,10 +222,10 @@
                                     (dateInput)="onClickOfAddEffDate($event.value)" #addEffDate>
                                 <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
                                 <mat-datepicker class="col-md-3" #picker3></mat-datepicker>
-                                <div
-                                    *ngIf="isAddressSubmit && !clientAddressForm.get('clientAddressInfo.addressEffectiveDate').touched && clientAddressForm.get('clientAddressInfo.addressEffectiveDate').invalid">
-                                    <p class="text-danger"> Please fill out this field.</p>
-                                </div>
+                            </div>
+                            <div
+                                *ngIf="isAddressEffectiveDateSubmit && !clientAddressForm.get('clientAddressInfo.addressEffectiveDate').touched && clientAddressForm.get('clientAddressInfo.addressEffectiveDate').invalid">
+                                <p class="text-danger"> Please enter the Address Effective Date.</p>
                             </div>
                         </div>
                         <div class="ym_form_group col-6">

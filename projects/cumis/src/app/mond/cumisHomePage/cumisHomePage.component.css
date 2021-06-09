@@ -4,7 +4,7 @@
     font-size: 16px!important;
     padding: .5rem .5rem .005rem;
     border-radius: 15px 15px 0 0!important;
-    background: #C41230;
+    background: #008acc;
     background-blend-mode: overlay;
 }
 
@@ -20,12 +20,12 @@
     padding: 1.1rem;
 }
 a:hover {
-    color: #850C20;
+    color: #00456a;
     text-decoration: underline;
     cursor: pointer;
   }
 #menuId > a{
-    color: #C41230;
+    color: #008acc;
     font-size: 13px!important;
 }
 .mondPng{

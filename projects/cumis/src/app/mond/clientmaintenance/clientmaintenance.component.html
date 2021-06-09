@@ -36,9 +36,9 @@
                                 </div>
                             </div>
                             <div class="ym_form_group md-btn-group">
-                                <button class="btn btn-danger" style="margin-right: 10px;" (click)="onClickOfClientReset()"><i class="fa fa-undo"></i>
+                                <button class=" ym_button" style="margin-right: 10px;" (click)="onClickOfClientReset()"><i class="fa fa-undo"></i>
                                     Reset</button>
-                                <button (click)="onClickOfClientMaintenanceSearch()" class="btn btn-danger"><i class="fa fa-search"></i>
+                                <button (click)="onClickOfClientMaintenanceSearch()" class=" ym_button"><i class="fa fa-search"></i>
                                     Search</button>
                             </div>
                         </div>
@@ -48,7 +48,7 @@
                                     <h2 class="md-lbl">Client Maintenance</h2>
                                 </div>
                                 <div class="col-md-6">
-                                    <button class="float-right btn btn-danger" (click)="onClickOfAddClient()">
+                                    <button class="float-right  ym_button" (click)="onClickOfAddClient()">
                                         <i class="fa fa-plus-square"></i> Add Client</button>
                                 </div>
                             </div>
@@ -61,25 +61,25 @@
                             <div id="clientPtable">
                                 <p-table [value]="clientMaintenanceListData" selectionMode="single" 
                                 [scrollable]="true"
-                                [responsive]="true" scrollHeight="300px" [autoLayout]="true"   
-                                [resizableColumns]="isResizeTrue" columnResizeMode="expand"                            
+                                [responsive]="true" scrollHeight="360px" [autoLayout]="true"   
+                                                           
                                 (onRowSelect)="onClientListRowSelect($event)">  
                                 <ng-template pTemplate="header">
                                     <tr class="ptableHeader">
-                                        <th pResizableColumn>Client Number</th>
-                                        <th>Client Name</th>
-                                        <th>Client Status</th>
-                                        <th>Last Update Date</th>
-                                        <th>Updated By</th>
+                                        <th style="width: 7rem;">Client Number</th>
+                                        <th style="width: 12rem;">Client Name</th>
+                                        <th style="width: 115px;" >Client Status</th>
+                                        <th style="width: 129px;">Last Update Date</th>
+                                        <th style="width: 20rem;" >Updated By</th>
                                     </tr>
                                 </ng-template>
                                 <ng-template pTemplate="body" let-responseData>
                                     <tr [pSelectableRow]="responseData" *ngIf="isShowTblRow">
-                                        <td class="ui-resizable-column">{{responseData.clientNumber}}</td>
-                                        <td>{{responseData.clientName}}</td>
-                                        <td>{{responseData.clientStatus}}</td>
-                                        <td>{{responseData.lastUpdateDate}}</td>
-                                        <td><div class="md-overFlow" title="{{responseData.updatedBy}}">
+                                        <td style="width: 7rem;"><div class="md-overFlow" title="{{responseData.clientNumber}}">{{responseData.clientNumber}}</div></td>
+                                        <td style="width: 12rem;"><div class="md-overFlow" title="{{responseData.clientName}}">{{responseData.clientName}}</div></td>
+                                        <td  style="width: 115px;"><div class="md-overFlow" title="{{responseData.clientStatus}}">{{responseData.clientStatus}}</div></td>
+                                        <td style="width: 129px;"><div class="md-overFlow" title="{{responseData.lastUpdateDate.split('T')[0]}}">{{responseData.lastUpdateDate.split('T')[0]}}</div></td>
+                                        <td  style="width: 20rem;"><div class="md-overFlow" title="{{responseData.updatedBy}}">
                                             {{responseData.updatedBy}}
                                         </div></td>
                                     </tr>

@@ -69,7 +69,8 @@ export class CreditorDataAdminViewComponent implements OnInit {
             }, error => {
                 this.mdMondServiceDS.MDError(error);
                 // let data = { "key": "key", "value": "eyJjcmVkaXRvclNwbGl0RmlsZVByb2Nlc3NpbmdTdW1tYXJ5X2NyZWRpdG9yU3BsaXRGaWxlUHJvY2Vzc2luZ1N1bW1hcnkiOlt7InBhcmVudEZpbGVJZGVudGlmaWVyIjoiMDAwMDExMTUiLCJmaWxlUHJvY2Vzc2luZ1N0YXR1cyI6IkZpbGUgUHJvY2Vzc2VkIFN1Y2Nlc3NmdWxseSIsImZpbGVJZGVudGlmaWVyIjoiMDAwMDExMTUtTVMwMDAwMTYxLTIwMjEwNDA1ICAxNDowMzozOS1OZXcgQnVzaW5lc3MiLCJmaWxlRnVuY3Rpb25UeXBlIjoiTmV3IEJ1c2luZXNzIn0seyJwYXJlbnRGaWxlSWRlbnRpZmllciI6IjAwMDAxMTE1IiwiZmlsZVByb2Nlc3NpbmdTdGF0dXMiOiJGaWxlIFByb2Nlc3NlZCBTdWNjZXNzZnVsbHkiLCJmaWxlSWRlbnRpZmllciI6IjAwMDAxMTE1LU1TMDAwMDE2Mi0yMDIxMDQxNSAgMTI6NTM6MDgtTmV3IEJ1c2luZXNzIiwiZmlsZUZ1bmN0aW9uVHlwZSI6Ik5ldyBCdXNpbmVzcyJ9XX0\u003d" }
-               
+                // this.splitDataList = JSON.parse(atob(data.value));
+                // this.isShowSplitView = true;
             })
 
     }

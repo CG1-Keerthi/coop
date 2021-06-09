@@ -350,7 +350,7 @@ p strong {
 
 hr {
     margin: 0.5rem 0 1rem;
-    border-top: 2px solid #c41230;
+    border-top: 2px solid #008acc;
 }
 
 .ym_button_right {
@@ -566,8 +566,8 @@ hr {
 
 .ym_form_group input:focus,
 .ym_form_select select:focus {
-    /* outline: #00456a auto 5px; */
-    outline: #C41230 auto 5px;
+    outline: #00456a auto 5px;
+    /* outline: #C41230 auto 5px; */
 }
 
 .ym_form_select {
@@ -731,7 +731,7 @@ hr {
     left: 3px;
     right: 3px;
     bottom: 3px;
-    background: #c41230;
+    background: #008acc;
 }
 
 .ym_form_group .row {
@@ -750,7 +750,7 @@ hr {
     width: 100%;
     position: fixed;
     /* background: white; */
-    background-color: #C41230;
+    background-color:#008acc;
     color: white;
     z-index: 1000;
     top: 0;
@@ -791,7 +791,7 @@ hr {
 .ym_header_nav li a {
     display: block;
     padding: 1.125rem 1rem;
-    color: #c41230;
+    color: #008acc;
 }
 
 .ym_header_nav li a:hover {
@@ -836,13 +836,13 @@ hr {
     width: 100%;
     height: 2px;
     display: block;
-    background: #c41230;
+    background: #008acc;
     /* Old browsers */
     background: -moz-linear-gradient(left, rgba(84, 46, 145, 1) 0%, rgba(169, 33, 121, 1) 100%);
     /* FF3.6-15 */
     background: -webkit-linear-gradient(left, rgba(84, 46, 145, 1) 0%, rgba(169, 33, 121, 1) 100%);
     /* Chrome10-25,Safari5.1-6 */
-    background: #c41230;
+    background: #008acc;
     /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#c41230', endColorstr='#a92179', GradientType=1);
     /* IE6-9 */
@@ -860,7 +860,7 @@ hr {
 
 .ym_alert_bar {
     width: 100%;
-    background: #c41230;
+    background: #008acc;
     color: white;
     padding: 0.75rem 0;
 }
@@ -1639,7 +1639,7 @@ hr {
     content: '';
     width: 2px;
     height: 70%;
-    background: #c41230;
+    background: #008acc;
     position: absolute;
     left: 15%;
     top: 15%;
@@ -1856,7 +1856,7 @@ hr {
 }
 
 .ym_quote_search {
-    background: #c41230;
+    background: #008acc;
     padding: 0.5rem;
     margin: 0 0 2rem;
 }
@@ -2054,7 +2054,7 @@ hr {
     .ym_header,
     .ym_header .container {
         /* background: #fff; */
-        background: #C41230;
+        background: #008acc;
     }
 }
 

@@ -57,26 +57,36 @@
                                     <h3>Client List</h3>
                                 </div>
                             </div>
+                            <mat-spinner class="md-spinner" *ngIf="isSpinnerShow"></mat-spinner>
+                            <div id="clientPtable">
                                 <p-table [value]="clientMaintenanceListData" selectionMode="single" 
                                 [scrollable]="true"
-                                [responsive]="true" scrollHeight="300px" [autoLayout]="true"
-                                [resizableColumns]="isResizeTrue" columnResizeMode="expand"
+                                [responsive]="true" scrollHeight="300px" [autoLayout]="true"   
+                                [resizableColumns]="isResizeTrue" columnResizeMode="expand"                            
                                 (onRowSelect)="onClientListRowSelect($event)">  
                                 <ng-template pTemplate="header">
                                     <tr class="ptableHeader">
-                                        <th>Client Number</th>
+                                        <th pResizableColumn>Client Number</th>
                                         <th>Client Name</th>
                                         <th>Client Status</th>
+                                        <th>Last Update Date</th>
+                                        <th>Updated By</th>
                                     </tr>
                                 </ng-template>
                                 <ng-template pTemplate="body" let-responseData>
-                                    <tr [pSelectableRow]="responseData">
-                                        <td>{{responseData.clientNumber}}</td>
+                                    <tr [pSelectableRow]="responseData" *ngIf="isShowTblRow">
+                                        <td class="ui-resizable-column">{{responseData.clientNumber}}</td>
                                         <td>{{responseData.clientName}}</td>
                                         <td>{{responseData.clientStatus}}</td>
+                                        <td>{{responseData.lastUpdateDate}}</td>
+                                        <td><div class="md-overFlow" title="{{responseData.updatedBy}}">
+                                            {{responseData.updatedBy}}
+                                        </div></td>
                                     </tr>
                                 </ng-template>
                             </p-table>
+                            </div>
+                               
                         </div>
                     </div>
                 </mat-tab>

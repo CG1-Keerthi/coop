@@ -6,3 +6,19 @@
 .md-refine-card-height{
     height: 23rem;
 }
+
+.md-spinner{
+    margin-left: 29rem;
+}
+
+.ptableId{
+    overflow-y: auto;
+    height: 300px;
+    overflow-x: hidden;
+}
+.md-overFlow{
+    white-space: nowrap;
+    overflow: hidden;
+ }
+
+

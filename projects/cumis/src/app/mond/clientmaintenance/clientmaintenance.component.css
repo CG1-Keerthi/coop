@@ -7,3 +7,10 @@
 .md-refine-card-height{
     height: 27rem !important;
 }
+.md-spinner{
+    margin-left: 29rem;
+}
+.md-overFlow{
+    white-space: nowrap;
+    overflow: hidden;
+    }

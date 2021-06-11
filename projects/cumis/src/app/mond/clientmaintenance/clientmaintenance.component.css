@@ -5,7 +5,8 @@
 } */
 
 .md-refine-card-height{
-    height: 27rem !important;
+    /* height: 27rem !important; */
+    height: 531px !important;
 }
 .md-spinner{
     margin-left: 29rem;
@@ -13,4 +14,11 @@
 .md-overFlow{
     white-space: nowrap;
     overflow: hidden;
-    }
+}
+.md-mat-tab{
+    margin-left: 6px;
+}
+.md-btn-width{
+    /* width: 7%; */
+}
+

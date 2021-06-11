@@ -11,3 +11,12 @@ mat-expansion-panel-header{
 .md-menu{
     left: -15px !important;
 }
+.md-col{
+    flex: 0 0 93.666667% !important;
+    max-width: 89.666667%  !important;
+    margin-left: 6px !important;
+}
+.md-mat-panel{
+    margin-bottom: -24px;
+    margin-top: -9px !important;
+}

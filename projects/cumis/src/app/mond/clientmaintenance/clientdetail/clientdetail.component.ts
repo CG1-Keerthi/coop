@@ -23,7 +23,9 @@ declare var $: any;
 })
 
 export class ClientDetailComponent implements OnInit {
+   
     @Input() set clientDetails(data) {
+        debugger;
         console.log("clientDetails-Data", data)
         if (Object.keys(data).length > 0) {
             this.isFieldreadonly = true;
@@ -48,6 +50,8 @@ export class ClientDetailComponent implements OnInit {
             this.clientDetailsForm.value.clientInfo.clientStatusEndDate = this.clientDetailsForm.value.clientInfo.clientTerminationDate;
             this.clientDetailsForm.value.clientInfo.currentRecordFlag = "Y";
             this.clientAddressForm.value.clientAddressInfo.currentRecordFlag = "Y";
+            this.isAddressTypeSubmit = false;
+            this.isAddressEffectiveDateSubmit = false;
 
         } else {
             this.clientDetailsForm.reset();
@@ -64,6 +68,8 @@ export class ClientDetailComponent implements OnInit {
             this.renderer.setProperty(this.clientLanguageList.nativeElement, 'disabled', false);
             this.renderer.setProperty(this.clientSubmit.nativeElement, 'disabled', false);
             this.renderer.setAttribute(this.clientAddressSubmit.nativeElement, 'disabled', 'true');
+            this.isAddressTypeSubmit = false;
+            this.isAddressEffectiveDateSubmit = false;
             // this.clientDetailsForm.value.clientInfo.lastUpdateDate = "";
 
         }
@@ -404,13 +410,13 @@ export class ClientDetailComponent implements OnInit {
             });
     }
 
-    @HostListener('click', ['$event.target'])
-    onClick(element) {
-        // debugger;
-        this.isResizeTrue = true;
-        setTimeout(() => {
-            this.isResizeTrue = false;
-        }, 2000)
-    }
+    // @HostListener('click', ['$event.target'])
+    // onClick(element) {
+    //     // debugger;
+    //     this.isResizeTrue = true;
+    //     setTimeout(() => {
+    //         this.isResizeTrue = false;
+    //     }, 2000)
+    // }
 
 }

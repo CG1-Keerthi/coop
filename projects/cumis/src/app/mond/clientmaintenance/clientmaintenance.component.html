@@ -1,101 +1,129 @@
 <div class="ym_content">
-    <div class="col-md-12 col-lg-12 col-sm-12 mt-2 container">
+    <div class="p-1 m-1">
         <div class="row md-breadCrumbs">
-          Client Maintenance
+            Client Maintenance
         </div>
-        <mat-card class="w-100 mt-2 md-border">
-        <div class="row">
-            <mat-tab-group class="col-md-12" [(selectedIndex)]="selectedTab">
-                <mat-tab label="Search Client">
-                    <div class="row pt-2 m-0">
-                        <div class="col-md-2 p-1 md-refine-card md-refine-card-height">
-                            <h3 class="md-h3"><i class="fa fa-bars pr-2"></i>Refine your Search</h3>
-                            <div class="ym_form_group">
-                                <label class="md-lbl">Client Number</label>
-                                <input type="text" placeholder="Client Number" [(ngModel)]="clientNumber">
-                            </div>
-                            <div class="ym_form_group">
-                                <label class="md-lbl">Client Name</label>
-                                <input type="text" placeholder="Pick one" aria-label="Number" matInput
-                                    (keyup)="clientNameKeyup($event)" [(ngModel)]="clientName" [matAutocomplete]="auto">
-                                <mat-autocomplete #auto="matAutocomplete">
-                                    <mat-option *ngFor="let list of clientNameVal" [value]="list.companyName">
-                                        {{list.companyName}}
-                                    </mat-option>
-                                </mat-autocomplete>
-                            </div>
+        <div class="row ml-0 mr-0 pr-0 pt-1 mt-1 pl-0 pb-0 mb-0">
+            <mat-card class="w-100 md-border md-mat-card">
+                <div class="row">
+                    <mat-tab-group class="col-md-12 p-0 m-0" [(selectedIndex)]="selectedTab">
+                        <mat-tab label="Search Client">
+                            <div class="row pt-1 pr-1 pb-1 mb-1 mt-1 mr-1 mb-1 md-mat-tab">
+                                <div class="col-md-2 p-2 md-refine-card md-refine-card-height">
+                                    <h3 class="md-h3"><i class="fa fa-bars pr-2"></i>Refine your Search</h3>
+                                    <div class="ym_form_group row mb-0 pb-0">
+                                        <label class="md-lbl">Client Number</label>
+                                        <input type="text" placeholder="Client Number" [(ngModel)]="clientNumber">
+                                    </div>
+                                    <div class="ym_form_group row mb-0 pb-0">
+                                        <label class="md-lbl">Client Name</label>
+                                        <input type="text" placeholder="Pick one" aria-label="Number" matInput
+                                            (keyup)="clientNameKeyup($event)" [(ngModel)]="clientName"
+                                            [matAutocomplete]="auto">
+                                        <mat-autocomplete #auto="matAutocomplete">
+                                            <mat-option *ngFor="let list of clientNameVal" [value]="list.companyName">
+                                                {{list.companyName}}
+                                            </mat-option>
+                                        </mat-autocomplete>
+                                    </div>
 
-                            <div class="ym_form_group">
-                                <label class="md-lbl">Client Status</label>
-                                <div class="ym_form_select">
-                                    <select [(ngModel)]="clientStatusVal">
-                                        <option selected value="">Please select a value</option>
-                                        <option let *ngFor="let list of clientStatus" value="{{list.description}}">
-                                            {{list.description}}</option>
-                                    </select>
+                                    <div class="ym_form_group row mb-0 pb-0">
+                                        <label class="md-lbl">Client Status</label>
+                                        <div class="ym_form_select">
+                                            <select [(ngModel)]="clientStatusVal">
+                                                <option selected value="">Please select a value</option>
+                                                <option let *ngFor="let list of clientStatus"
+                                                    value="{{list.description}}">
+                                                    {{list.description}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="ym_form_group_mat_btn  row">
+                                        <!-- <button class="ym_button md-btn-width" style="margin-right: 10px;" (click)="onClickOfClientReset()"><i class="fa fa-undo"></i>
+                                            Reset</button>
+                                        <button (click)="onClickOfClientMaintenanceSearch()" class="ym_button"><i class="fa fa-search"></i>
+                                            Search</button> -->
+                                        <button class="btn btn-primary md-btn-width" (click)="onClickOfClientReset()"><i
+                                                class="fa fa-undo"></i>
+                                            Reset</button>
+                                        <button class="btn btn-primary ml-2"
+                                            (click)="onClickOfClientMaintenanceSearch()"><i class="fa fa-search"></i>
+                                            Search</button>
+                                    </div>
+                                </div>
+                                <div class="col-md-10 p-0 m-0">
+                                    <div class="row ml-2 mb-0 mr-0 mt-0 pt-2 pb-2" style="background-color: #ebebf1;">
+                                        <div class="col-md-6 m-0 p-0">
+                                            <h2 class="md-lbl ml-2 mb-1">Client Maintenance</h2>
+                                        </div>
+                                        <div class="col-md-6 pt-0 pb-0 pr-2 pl-0">
+                                            <button class="float-right btn btn-primary" (click)="onClickOfAddClient()">
+                                                <i class="fa fa-plus-square"></i> Add Client</button>
+                                        </div>
+                                    </div>
+                                    <div class="row ml-2 mb-0 mr-0 mt-2 pt-0 pb-0 md-bgClr">
+                                        <div class="col-md-6 pl-2 pt-3 pb-2">
+                                            <h3>Client List</h3>
+                                        </div>
+                                    </div>
+                                    <mat-spinner class="md-spinner" *ngIf="isSpinnerShow"></mat-spinner>
+                                    <div id="clientPtable" class="ml-2 mb-0 mr-0 mt-0 pt-0 pb-0">
+                                        <p-table [value]="clientMaintenanceListData" selectionMode="single"
+                                            [scrollable]="true" [responsive]="true" scrollHeight="379px"
+                                            [autoLayout]="true" (onRowSelect)="onClientListRowSelect($event)">
+                                            <ng-template pTemplate="header">
+                                                <tr class="ptableHeader">
+                                                    <th class="ptable-width-header" style="width: 7rem;">Client Number
+                                                    </th>
+                                                    <th class="ptable-width-header" style="width: 12rem;">Client Name
+                                                    </th>
+                                                    <th class="ptable-width-header" style="width: 115px;">Client Status
+                                                    </th>
+                                                    <th class="ptable-width-header" style="width: 129px;">Last Update
+                                                        Date</th>
+                                                    <th class="ptable-width-header" style="width: 20rem;">Updated By
+                                                    </th>
+
+                                                </tr>
+                                            </ng-template>
+                                            <ng-template pTemplate="body" let-responseData>
+                                                <tr [pSelectableRow]="responseData" *ngIf="isShowTblRow">
+                                                    <td style="width: 7rem;">
+                                                        <div class="md-overFlow" title="{{responseData.clientNumber}}">
+                                                            {{responseData.clientNumber}}</div>
+                                                    </td>
+                                                    <td style="width: 12rem;">
+                                                        <div class="md-overFlow" title="{{responseData.clientName}}">
+                                                            {{responseData.clientName}}</div>
+                                                    </td>
+                                                    <td style="width: 115px;">
+                                                        <div class="md-overFlow" title="{{responseData.clientStatus}}">
+                                                            {{responseData.clientStatus}}</div>
+                                                    </td>
+                                                    <td style="width: 129px;">
+                                                        <div class="md-overFlow"
+                                                            title="{{responseData.lastUpdateDate.split('T')[0]}}">
+                                                            {{responseData.lastUpdateDate.split('T')[0]}}</div>
+                                                    </td>
+                                                    <td style="width: 20rem;">
+                                                        <div class="md-overFlow" title="{{responseData.updatedBy}}">
+                                                            {{responseData.updatedBy}}
+                                                        </div>
+                                                    </td>
+                                            </ng-template>
+                                        </p-table>
+                                    </div>
+
                                 </div>
                             </div>
-                            <div class="ym_form_group md-btn-group">
-                                <button class=" ym_button" style="margin-right: 10px;" (click)="onClickOfClientReset()"><i class="fa fa-undo"></i>
-                                    Reset</button>
-                                <button (click)="onClickOfClientMaintenanceSearch()" class=" ym_button"><i class="fa fa-search"></i>
-                                    Search</button>
-                            </div>
-                        </div>
-                        <div class="col-md-9">
-                            <div class="m-0 pt-2 pb-2 row" style="background-color: #ebebf1;">
-                                <div class="col-md-6">
-                                    <h2 class="md-lbl">Client Maintenance</h2>
-                                </div>
-                                <div class="col-md-6">
-                                    <button class="float-right  ym_button" (click)="onClickOfAddClient()">
-                                        <i class="fa fa-plus-square"></i> Add Client</button>
-                                </div>
-                            </div>
-                            <div class="m-0 p-2 row mt-3 md-bgClr">
-                                <div class="col-md-6 pl-2 pt-2">
-                                    <h3>Client List</h3>
-                                </div>
-                            </div>
-                            <mat-spinner class="md-spinner" *ngIf="isSpinnerShow"></mat-spinner>
-                            <div id="clientPtable">
-                                <p-table [value]="clientMaintenanceListData" selectionMode="single" 
-                                [scrollable]="true"
-                                [responsive]="true" scrollHeight="360px" [autoLayout]="true"   
-                                                           
-                                (onRowSelect)="onClientListRowSelect($event)">  
-                                <ng-template pTemplate="header">
-                                    <tr class="ptableHeader">
-                                        <th style="width: 7rem;">Client Number</th>
-                                        <th style="width: 12rem;">Client Name</th>
-                                        <th style="width: 115px;" >Client Status</th>
-                                        <th style="width: 129px;">Last Update Date</th>
-                                        <th style="width: 20rem;" >Updated By</th>
-                                    </tr>
-                                </ng-template>
-                                <ng-template pTemplate="body" let-responseData>
-                                    <tr [pSelectableRow]="responseData" *ngIf="isShowTblRow">
-                                        <td style="width: 7rem;"><div class="md-overFlow" title="{{responseData.clientNumber}}">{{responseData.clientNumber}}</div></td>
-                                        <td style="width: 12rem;"><div class="md-overFlow" title="{{responseData.clientName}}">{{responseData.clientName}}</div></td>
-                                        <td  style="width: 115px;"><div class="md-overFlow" title="{{responseData.clientStatus}}">{{responseData.clientStatus}}</div></td>
-                                        <td style="width: 129px;"><div class="md-overFlow" title="{{responseData.lastUpdateDate.split('T')[0]}}">{{responseData.lastUpdateDate.split('T')[0]}}</div></td>
-                                        <td  style="width: 20rem;"><div class="md-overFlow" title="{{responseData.updatedBy}}">
-                                            {{responseData.updatedBy}}
-                                        </div></td>
-                                    </tr>
-                                </ng-template>
-                            </p-table>
-                            </div>
-                               
-                        </div>
-                    </div>
-                </mat-tab>
-                <mat-tab label="Client Details">
-                    <app-clientdetail-designer  [clientDetails]="planDetailsData"></app-clientdetail-designer>
-                </mat-tab>
-                <mat-tab label="Validation CheckList"> </mat-tab>
-            </mat-tab-group>
+                        </mat-tab>
+                        <mat-tab label="Client Details">
+                            <app-clientdetail-designer [clientDetails]="planDetailsData"></app-clientdetail-designer>
+                        </mat-tab>
+                        <mat-tab label="Validation CheckList"> </mat-tab>
+                    </mat-tab-group>
+                </div>
+            </mat-card>
         </div>
-    </mat-card>
     </div>
 </div>

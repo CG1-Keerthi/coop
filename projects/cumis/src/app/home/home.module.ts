@@ -59,6 +59,7 @@ import { LGMComponent } from '../mond/creditorDataAdminView/creditorDataProcessi
 import { CreditorSelfAdminDashboardComponent } from '../mond/creditorSelfAdminDashboard/creditorSelfAdminDashboard.component';
 import { ChartsModule } from 'ng2-charts';
 import { CumisHomePageComponent } from '../mond/cumisHomePage/cumisHomePage.component';
+import { NgxMaskModule } from 'ngx-mask';
 
 @NgModule({
   declarations: [
@@ -119,7 +120,8 @@ import { CumisHomePageComponent } from '../mond/cumisHomePage/cumisHomePage.comp
     MatProgressSpinnerModule,
     RateDetailFormBuilderModule,
     CreditorCertificateFormBuilderModule,
-    ChartsModule
+    ChartsModule,
+    NgxMaskModule
 
 
   ],

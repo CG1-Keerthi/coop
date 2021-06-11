@@ -36,7 +36,7 @@ export class ClientInfoFormBuilderService {
                 clientPhone1: [''],
                 clientPhone2: [''],
                 clientFaxNumber: [''],
-                clientEmail: [''],
+                clientEmail: ['',[Validators.required, Validators.email,Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
                 clientIdentifier:[''],
                 lastUpdateDate:[''],
                 currentRecordFlag:[''],

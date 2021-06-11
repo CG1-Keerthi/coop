@@ -16,9 +16,10 @@
         <div class="row">
             <div class="ym_form_group required col-3">
                 <label class="md-lbl">Client Number</label>
-                <input placeholder="Client Number" formControlName="clientNumber" [readonly]="isFieldreadonly">
+                <input style="width: 50%;" placeholder="Client Number" formControlName="clientNumber"
+                    [readonly]="isFieldreadonly">
                 <div
-                    *ngIf="isClientNumberSubmit && !clientDetailsForm.get('clientInfo.clientNumber').touched  && clientDetailsForm.get('clientInfo.clientNumber').invalid">
+                    *ngIf="isClientNumberSubmit  && clientDetailsForm.get('clientInfo.clientNumber').invalid">
                     <p class="text-danger"> Please enter the Client Number.</p>
                 </div>
             </div>
@@ -26,28 +27,28 @@
                 <label class="md-lbl">Client Name</label>
                 <input placeholder="Client Name" formControlName="clientName" [readonly]="isFieldreadonly">
                 <div
-                    *ngIf="isClientNameSubmit && !clientDetailsForm.get('clientInfo.clientName').touched && clientDetailsForm.get('clientInfo.clientName').invalid">
+                    *ngIf="isClientNameSubmit && clientDetailsForm.get('clientInfo.clientName').invalid">
                     <p class="text-danger"> Please enter the Client Name.</p>
                 </div>
             </div>
             <div class="ym_form_group required col-3">
                 <div class="row" style="margin-left: 1px;">
                     <label class="md-lbl">Client Effective Date</label>
-                    <input class="col-md-10" matInput [matDatepicker]="picker" #fromDate
+                    <input style="width: 50%;" matInput [matDatepicker]="picker" #fromDate
                         formControlName="clientEffectiveDate" [readonly]="isFieldreadonly"
                         (dateInput)="clientEffectiveDateKeyup($event.value)">
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker class="col-md-3" #picker></mat-datepicker>
                     <div
-                        *ngIf="isClientEffectiveDateSubmit && !clientDetailsForm.get('clientInfo.clientEffectiveDate').touched && clientDetailsForm.get('clientInfo.clientEffectiveDate').invalid">
-                        <p class="text-danger" style="margin-left: -85px;"> Please select the Client Effective Date.</p>
+                        *ngIf="isClientEffectiveDateSubmit && clientDetailsForm.get('clientInfo.clientEffectiveDate').invalid">
+                        <p class="text-danger"> Please enter the Client Effective Date.</p>
                     </div>
                 </div>
 
             </div>
             <div class="ym_form_group col-3">
                 <label class="md-lbl">Client Status</label>
-                <div class="ym_form_select">
+                <div class="ym_form_select" style="width: 52%;">
                     <select formControlName="clientStatus" #clientStatusList>
                         <option selected value="">Please select a value</option>
                         <option let *ngFor="let list of clientStatus" value="{{list.description}}">
@@ -61,8 +62,9 @@
             <div class="ym_form_group col-3">
                 <div class="row" style="margin-left: 1px;">
                     <label class="md-lbl">Client Termination Date</label>
-                    <input class="col-md-10" matInput [matDatepicker]="picker2" formControlName="clientTerminationDate"
-                        [readonly]="isFieldreadonly" #tillDate (dateInput)="onClickOfTerminationDate($event.value)">
+                    <input style="width: 50%;" matInput [matDatepicker]="picker2"
+                        formControlName="clientTerminationDate" [readonly]="isFieldreadonly" #tillDate
+                        (dateInput)="onClickOfTerminationDate($event.value)">
                     <mat-datepicker-toggle matSuffix [for]="picker2" [disabled]="isTerminationDateFieldreadonly">
                     </mat-datepicker-toggle>
                     <mat-datepicker class="col-md-3" #picker2></mat-datepicker>
@@ -70,7 +72,7 @@
             </div>
             <div class="ym_form_group required col-3">
                 <label class="md-lbl">Client Province</label>
-                <div class="ym_form_select">
+                <div class="ym_form_select" style="width: 50%;">
                     <select formControlName="clientProvinceCode" #clientProvinceList>
                         <option selected value="">Please select a value</option>
                         <option let *ngFor="let list of clientProvinceCode" value="{{list.description}}">
@@ -78,13 +80,13 @@
                     </select>
                 </div>
                 <div
-                    *ngIf="isClientProvinceCodeSubmit && !clientDetailsForm.get('clientInfo.clientProvinceCode').touched && clientDetailsForm.get('clientInfo.clientProvinceCode').invalid">
+                    *ngIf="isClientProvinceCodeSubmit  && clientDetailsForm.get('clientInfo.clientProvinceCode').invalid">
                     <p class="text-danger"> Please select the Client Province.</p>
                 </div>
             </div>
             <div class="ym_form_group required col-3">
                 <label class="md-lbl">Client Language Code</label>
-                <div class="ym_form_select">
+                <div class="ym_form_select" style="width: 50%;">
                     <select formControlName="clientLanguageCode" #clientLanguageList>
                         <option selected value="">Please select a value</option>
                         <option let *ngFor="let list of clientLanguage" value="{{list.description}}">
@@ -92,7 +94,7 @@
                     </select>
                 </div>
                 <div
-                    *ngIf="isClientLanguageCodeSubmit && !clientDetailsForm.get('clientInfo.clientLanguageCode').touched && clientDetailsForm.get('clientInfo.clientLanguageCode').invalid">
+                    *ngIf="isClientLanguageCodeSubmit && clientDetailsForm.get('clientInfo.clientLanguageCode').invalid">
                     <p class="text-danger"> Please select the Client Language Code.</p>
                 </div>
             </div>
@@ -116,19 +118,39 @@
         <div class="row">
             <div class="ym_form_group col-3">
                 <label class="md-lbl">Client Phone1</label>
-                <input placeholder="Client Phone1" formControlName="clientPhone1" [readonly]="isFieldreadonly">
+                <input style="width: 34%;" type="text" mask="(000) 000-0000" placeholder="Client Phone1"
+                    formControlName="clientPhone1" [readonly]="isFieldreadonly">
+                <div *ngIf="clientDetailsForm.get('clientInfo.clientPhone1').hasError('mask')">
+                    <p class="text-danger">Client Phone1 entered is
+                        {{clientDetailsForm.get('clientInfo.clientPhone1').value}}. Client Phone1 should be the format
+                        '(999)999-9999'</p>
+                </div>
             </div>
             <div class="ym_form_group col-3">
                 <label class="md-lbl">Client Phone2</label>
-                <input placeholder="Client Phone2" formControlName="clientPhone2" [readonly]="isFieldreadonly">
+                <input style="width: 34%;" type="text" mask="(000) 000-0000" placeholder="Client Phone2"
+                    formControlName="clientPhone2" [readonly]="isFieldreadonly">
+                <div *ngIf="clientDetailsForm.get('clientInfo.clientPhone2').hasError('mask')">
+                    <p class="text-danger">Client Phone2 entered is
+                        {{clientDetailsForm.get('clientInfo.clientPhone2').value}}. Client Phone2 should be the format
+                        '(999)999-9999'</p>
+                </div>
             </div>
             <div class="ym_form_group col-3">
                 <label class="md-lbl">Client Fax Number</label>
-                <input placeholder="Client Fax Number" formControlName="clientFaxNumber" [readonly]="isFieldreadonly">
+                <input style="width: 50%;" placeholder="Client Fax Number" formControlName="clientFaxNumber"
+                    [readonly]="isFieldreadonly">
             </div>
             <div class="ym_form_group col-3">
                 <label class="md-lbl">Client Email</label>
-                <input placeholder="Client Email" formControlName="clientEmail" [readonly]="isFieldreadonly">
+                <input type="email" placeholder="Client Email" formControlName="clientEmail"
+                    [readonly]="isFieldreadonly" (keyup)="clientEmailKeyup($event)">
+                <p class="text-danger" *ngIf="isEmailSubmit && clientDetailsForm.get('clientInfo.clientEmail').invalid">
+                    Please enter the valid Client Email
+                </p>
+                <!-- <p class="text-danger" *ngIf="clientDetailsForm.get('clientInfo.clientEmail').hasError('email')">
+                    enter valid email
+                </p> -->
             </div>
         </div>
     </div>
@@ -155,8 +177,8 @@
                 </div>
                 <div class="col-md-6">
                     <div class="dropdown float-right ml-2">
-                        <button  class="btn btn-primary btn dropdown-toggle"
-                            data-toggle="dropdown" [disabled]="isClientAddressDisable">
+                        <button class="btn btn-primary btn dropdown-toggle" data-toggle="dropdown"
+                            [disabled]="isClientAddressDisable">
                             More Action
                         </button>
                         <div class="dropdown-menu md-menu">
@@ -167,8 +189,7 @@
                     </div>
                     <!-- <button class="ym_button float-right ml-2" (click)="onClickOfClientAddressUpdatePlan()"> Update Client
                         Address</button> -->
-                    <button type="button"
-                        class="btn btn-primary float-right ml-2" (click)="onClickOfClientAddAddress()"
+                    <button type="button" class="btn btn-primary float-right ml-2" (click)="onClickOfClientAddAddress()"
                         [disabled]="isClientAddressDisable"><i class="fa fa-plus mr-1"></i>Add Address</button>
 
 
@@ -182,12 +203,12 @@
                         </div>
                     </div>
                     <p-table [value]="clientAddressList" selectionMode="single" [scrollable]="true" [responsive]="true"
-                        scrollHeight="408px" [autoLayout]="true"  (onRowSelect)="onClickOfClientAddressListRow($event)">
+                        scrollHeight="408px" [autoLayout]="true" (onRowSelect)="onClickOfClientAddressListRow($event)">
                         <ng-template pTemplate="header">
                             <tr class="ptableHeader">
                                 <th class="ptable-width-header" pResizableColumn>Address Type</th>
-                                <th class="ptable-width-header" >Address Effective Date</th>
-                                <th class="ptable-width-header" >Province Code</th>
+                                <th class="ptable-width-header">Address Effective Date</th>
+                                <th class="ptable-width-header">Province Code</th>
                             </tr>
                         </ng-template>
                         <ng-template pTemplate="body" let-responseData>
@@ -204,7 +225,7 @@
                         <div class="row mt-3">
                             <div class="ym_form_group required col-6">
                                 <label class="md-lbl">Address Type </label>
-                                <div class="ym_form_select">
+                                <div class="ym_form_select" style="width: 50%;">
                                     <select formControlName="addressType" #addressTypeList>
                                         <option selected value="">Please select a value</option>
                                         <option let *ngFor="let list of addressType" value="{{list.description}}">
@@ -212,7 +233,7 @@
                                     </select>
                                 </div>
                                 <div
-                                    *ngIf="isAddressTypeSubmit && !clientAddressForm.get('clientAddressInfo.addressType').touched && clientAddressForm.get('clientAddressInfo.addressType').invalid">
+                                    *ngIf="isAddressTypeSubmit &&  clientAddressForm.get('clientAddressInfo.addressType').invalid">
                                     <p class="text-danger"> Please select the Address Type.</p>
                                 </div>
                             </div>
@@ -221,21 +242,21 @@
                             <div class="ym_form_group required col-6">
                                 <div class="row" style="padding-left: 5px;">
                                     <label class="md-lbl">Address Effective Date</label>
-                                    <input class="col-md-10" matInput [matDatepicker]="picker3"
+                                    <input style="width: 50%;" matInput [matDatepicker]="picker3"
                                         formControlName="addressEffectiveDate" [readonly]="isAddressFieldreadonly"
                                         (dateInput)="onClickOfAddEffDate($event.value)" #addEffDate>
                                     <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
                                     <mat-datepicker class="col-md-3" #picker3></mat-datepicker>
                                 </div>
                                 <div
-                                    *ngIf="isAddressEffectiveDateSubmit && !clientAddressForm.get('clientAddressInfo.addressEffectiveDate').touched && clientAddressForm.get('clientAddressInfo.addressEffectiveDate').invalid">
+                                    *ngIf="isAddressEffectiveDateSubmit && clientAddressForm.get('clientAddressInfo.addressEffectiveDate').invalid">
                                     <p class="text-danger"> Please enter the Address Effective Date.</p>
                                 </div>
                             </div>
                             <div class="ym_form_group col-6">
                                 <div class="row">
                                     <label class="md-lbl">Address Termination Date</label>
-                                    <input class="col-md-10" matInput [matDatepicker]="picker4"
+                                    <input style="width: 50%;" matInput [matDatepicker]="picker4"
                                         formControlName="addressTerminationDate" [readonly]="isAddressFieldreadonly"
                                         [readonly]="isAddressFieldreadonly"
                                         (dateInput)="onClickOfAddTerminationDate($event.value)" #addTerDate>
@@ -262,11 +283,12 @@
                         <div class="row">
                             <div class="ym_form_group col-6">
                                 <label class="md-lbl">City</label>
-                                <input placeholder="City" formControlName="city" [readonly]="isAddressFieldreadonly">
+                                <input style="width: 50%;" placeholder="City" formControlName="city"
+                                    [readonly]="isAddressFieldreadonly">
                             </div>
                             <div class="ym_form_group  col-6">
                                 <label class="md-lbl">Province Code</label>
-                                <div class="ym_form_select">
+                                <div class="ym_form_select" style="width: 50%;">
                                     <select formControlName="province" #provinceCodeList>
                                         <option selected value="">Please select a value</option>
                                         <option let *ngFor="let list of clientProvinceCode"
@@ -279,12 +301,12 @@
                         <div class="row">
                             <div class="ym_form_group col-6">
                                 <label class="md-lbl">Postal Code</label>
-                                <input placeholder="Postal Code" formControlName="postalCode"
+                                <input style="width: 50%;" placeholder="Postal Code" formControlName="postalCode"
                                     [readonly]="isAddressFieldreadonly">
                             </div>
                             <div class="ym_form_group  col-6">
                                 <label class="md-lbl">Country</label>
-                                <div class="ym_form_select">
+                                <div class="ym_form_select" style="width: 50%;">
                                     <select formControlName="country" #countryAddress>
                                         <option selected value="">Please select a value</option>
                                         <option let *ngFor="let list of countryList" value="{{list.description}}">

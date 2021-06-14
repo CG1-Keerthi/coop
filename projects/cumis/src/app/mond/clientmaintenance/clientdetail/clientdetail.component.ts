@@ -53,10 +53,10 @@ export class ClientDetailComponent implements OnInit {
             this.isAddressTypeSubmit = false;
             this.isAddressEffectiveDateSubmit = false;
             let selectedAddressData = {
-                "clientAddressInfo":{
+                "clientAddressInfo": {
                     "addressType": "Please select a value",
-                    "province":"Please select a value",
-                    "country":"Please select a value"
+                    "province": "Please select a value",
+                    "country": "Please select a value"
                 }
             }
             this.clientAddressForm.patchValue(selectedAddressData);
@@ -75,10 +75,10 @@ export class ClientDetailComponent implements OnInit {
             this.clientAddressList = [];
             this.clientAddressForm.reset();
             let selectedAddressData = {
-                "clientAddressInfo":{
+                "clientAddressInfo": {
                     "addressType": "Please select a value",
-                    "province":"Please select a value",
-                    "country":"Please select a value"
+                    "province": "Please select a value",
+                    "country": "Please select a value"
                 }
             }
             this.clientAddressForm.patchValue(selectedAddressData);
@@ -94,13 +94,13 @@ export class ClientDetailComponent implements OnInit {
             this.isClientEffectiveDateSubmit = false;
             this.isEmailSubmit = false;
             this.isClientProvinceCodeSubmit = false;
-            this.isClientLanguageCodeSubmit = false;
-            this.clientDetailsValues.clientInfo.clientIdentifier = undefined;
+            this.isClientLanguageCodeSubmit = false;         
             this.renderer.setAttribute(this.clientStatusList.nativeElement, 'disabled', 'true');
             this.renderer.setProperty(this.clientProvinceList.nativeElement, 'disabled', false);
             this.renderer.setProperty(this.clientLanguageList.nativeElement, 'disabled', false);
             this.renderer.setProperty(this.clientSubmit.nativeElement, 'disabled', false);
             this.renderer.setAttribute(this.clientAddressSubmit.nativeElement, 'disabled', 'true');
+            this.clientDetailsValues.clientInfo.clientIdentifier = undefined;
             // this.clientDetailsForm.value.clientInfo.lastUpdateDate = "";
         }
 
@@ -167,7 +167,7 @@ export class ClientDetailComponent implements OnInit {
 
 
     ngOnInit() {
-debugger;
+        debugger;
         this.mdCommonGetterAndSetter.getCsfrToken().subscribe(data => {
             if (data) {
                 this.csfrToken = data;
@@ -180,78 +180,119 @@ debugger;
         this.mdCodeListHeaderDS.getListOfCodeLists('Coop-ClientStatus').subscribe(
             data => {
                 this.clientStatus = data;
-                this.clientStatus = data;
-                let selectedObj = {};
-                selectedObj["description"] = "Please select a value";
-                this.clientStatus.push(selectedObj);
+                let clientStatusArray = [];
+                let clientStatusObj = {};
+                clientStatusObj["description"] = "Please select a value";
+                clientStatusArray.push(clientStatusObj);
+                for(let i=0; i<data.length; i++){
+                    clientStatusArray.push(data[i]);
+                }
+                this.clientStatus = clientStatusArray;
             }, error => {
                 this.mdMondServiceDS.MDError(error);
                 // console.log(error);
                 // let data = [{ "codeListValuesId": 145716, "codeListHeaderId": 1578, "code": "1", "description": "Active" }, { "codeListValuesId": 145717, "codeListHeaderId": 1578, "code": "2", "description": "Terminated" }];
-                // this.clientStatus = data;
-                // let selectedObj = {};
-                // selectedObj["description"] = "Please select a value";
-                // this.clientStatus.push(selectedObj);
+                // let clientStatusArray = [];
+                // let clientStatusObj = {};
+                // clientStatusObj["description"] = "Please select a value";
+                // clientStatusArray.push(clientStatusObj);
+                // for(let i=0; i<data.length; i++){
+                //     clientStatusArray.push(data[i]);
+                // }
+                // this.clientStatus = clientStatusArray;
             });
 
         this.mdCodeListHeaderDS.getListOfCodeLists('Coop-LanguageCode').subscribe(
             data => {
                 this.clientLanguage = data;
-                let selectedObj = {};
-                selectedObj["description"] = "Please select a value";
-                this.clientLanguage.push(selectedObj);
+                let clientLanguageArray = [];
+                let clientLanguageObj = {};
+                clientLanguageObj["description"] = "Please select a value";
+                clientLanguageArray.push(clientLanguageObj);
+                for(let i=0; i<data.length; i++){
+                    clientLanguageArray.push(data[i]);
+                }
+                this.clientLanguage = clientLanguageArray;
             }, error => {
                 this.mdMondServiceDS.MDError(error);
                 // let data = [{ "codeListValuesId": 145695, "codeListHeaderId": 1575, "code": "1", "description": "English" }, { "codeListValuesId": 145697, "codeListHeaderId": 1575, "code": "2", "description": "French" }]
-                // this.clientLanguage = data;
-                // let selectedObj = {};
-                // selectedObj["description"] = "Please select a value";
-                // this.clientLanguage.push(selectedObj);
+                // let clientLanguageArray = [];
+                // let clientLanguageObj = {};
+                // clientLanguageObj["description"] = "Please select a value";
+                // clientLanguageArray.push(clientLanguageObj);
+                // for(let i=0; i<data.length; i++){
+                //     clientLanguageArray.push(data[i]);
+                // }
+                // this.clientLanguage = clientLanguageArray;
             });
 
         this.mdCodeListHeaderDS.getListOfCodeLists('Coop-ClientAddressProvince').subscribe(
             data => {
-                this.clientProvinceCode = data;
-                let selectedObj = {};
-                selectedObj["description"] = "Please select a value";
-                this.clientProvinceCode.push(selectedObj);
+                let clientProvinceCodeArray = [];
+                let clientProvinceCodeObj = {};
+                clientProvinceCodeObj["description"] = "Please select a value";
+                clientProvinceCodeArray.push(clientProvinceCodeObj);
+                for(let i=0; i<data.length; i++){
+                    clientProvinceCodeArray.push(data[i]);
+                }
+                this.clientProvinceCode = clientProvinceCodeArray;
             }, error => {
-                debugger;
+                // debugger;
                 this.mdMondServiceDS.MDError(error);
-                // let data = [{ "codeListValuesId": 145758, "codeListHeaderId": 1583, "code": "AB", "description": "AB" }, { "codeListValuesId": 145759, "codeListHeaderId": 1583, "code": "BC", "description": "BC" }, { "codeListValuesId": 145760, "codeListHeaderId": 1583, "code": "AL", "description": "AL" }, { "codeListValuesId": 145761, "codeListHeaderId": 1583, "code": "AR", "description": "AR" }];
-                // this.clientProvinceCode = data;
-                // let selectedObj = {};
-                // selectedObj["description"] = "Please select a value";
-                // this.clientProvinceCode.push(selectedObj);               
+                // let data = [{ "codeListValuesId": 145758, "codeListHeaderId": 1583, "code": "AB", "description": "AB" }, { "codeListValuesId": 145759, "codeListHeaderId": 1583, "code": "BC", "description": "BC" }, { "codeListValuesId": 145760, "codeListHeaderId": 1583, "code": "AL", "description": "AL" }, { "codeListValuesId": 145761, "codeListHeaderId": 1583, "code": "AR", "description": "AR" }];          
+                // let clientProvinceCodeArray = [];
+                // let clientProvinceCodeObj = {};
+                // clientProvinceCodeObj["description"] = "Please select a value";
+                // clientProvinceCodeArray.push(clientProvinceCodeObj);
+                // for(let i=0; i<data.length; i++){
+                //     clientProvinceCodeArray.push(data[i]);
+                // }
+                // this.clientProvinceCode = clientProvinceCodeArray;
             });
 
         this.mdCodeListHeaderDS.getListOfCodeLists('Coop-ClientAddressType').subscribe(
             data => {
-                this.addressType = data;
-                let selectedObj = {};
-                selectedObj["description"] = "Please select a value";
-                this.addressType.push(selectedObj);
+                let addressTypeArray = [];
+                let addressTypeObj = {};
+                addressTypeObj["description"] = "Please select a value";
+                addressTypeArray.push(addressTypeObj);
+                for(let i=0; i<data.length; i++){
+                    addressTypeArray.push(data[i]);
+                }
+                this.addressType = addressTypeArray;
             }, error => {
                 this.mdMondServiceDS.MDError(error);
-                // let data = [{ "codeListValuesId": 145756, "codeListHeaderId": 1582, "code": "1", "description": "Mailing" }, { "codeListValuesId": 145757, "codeListHeaderId": 1582, "code": "2", "description": "Billing" }];
-                // this.addressType = data;
-                // let selectedObj = {};
-                // selectedObj["description"] = "Please select a value";
-                // this.addressType.push(selectedObj); 
+                // let data = [{ "codeListValuesId": 145756, "codeListHeaderId": 1582, "code": "1", "description": "Mailing" }, { "codeListValuesId": 145757, "codeListHeaderId": 1582, "code": "2", "description": "Billing" }];              
+                // let addressTypeArray = [];
+                // let addressTypeObj = {};
+                // addressTypeObj["description"] = "Please select a value";
+                // addressTypeArray.push(addressTypeObj);
+                // for(let i=0; i<data.length; i++){
+                //     addressTypeArray.push(data[i]);
+                // }
+                // this.addressType = addressTypeArray;
             });
         this.mdCodeListHeaderDS.getListOfCodeLists('Coop-ClientAddressCountry').subscribe(
             data => {
-                this.countryList = data;
-                let selectedObj = {};
-                selectedObj["description"] = "Please select a value";
-                this.countryList.push(selectedObj); 
+                let countryListArray = [];
+                let countryListObj = {};
+                countryListObj["description"] = "Please select a value";
+                countryListArray.push(countryListObj);
+                for(let i=0; i<data.length; i++){
+                    countryListArray.push(data[i]);
+                }
+                this.countryList = countryListArray;
             }, error => {
                 this.mdMondServiceDS.MDError(error);
                 // let data = [{ "codeListValuesId": 145754, "codeListHeaderId": 1581, "code": "CA", "description": "Canada" }, { "codeListValuesId": 145755, "codeListHeaderId": 1581, "code": "US", "description": "United States" }];
-                // this.countryList = data;
-                // let selectedObj = {};
-                // selectedObj["description"] = "Please select a value";
-                // this.countryList.push(selectedObj); 
+                // let countryListArray = [];
+                // let countryListObj = {};
+                // countryListObj["description"] = "Please select a value";
+                // countryListArray.push(countryListObj);
+                // for(let i=0; i<data.length; i++){
+                //     countryListArray.push(data[i]);
+                // }
+                // this.countryList = countryListArray;
             });
 
     }
@@ -269,16 +310,16 @@ debugger;
             this.isEmailSubmit = false;
         }
     }
-    onChangeOfCLC(){
+    onChangeOfCLC() {
         debugger;
         this.isClientLanguageCodeSubmit = false;
     }
-    onChangeOfCP(){
+    onChangeOfCP() {
         this.isClientProvinceCodeSubmit = false;
     }
 
     onClickOfClientSubmit() {
-        debugger
+        // debugger    
         if (this.clientDetailsForm.value.clientInfo.clientName == "" || this.clientDetailsForm.value.clientInfo.clientName == null) {
             this.isClientNameSubmit = true;
             this.mdMondServiceDS.showErrorMessage("Please enter the  Client Name.");
@@ -288,7 +329,7 @@ debugger;
             this.isClientNumberSubmit = true;
             this.mdMondServiceDS.showErrorMessage("Please enter the Client Number.");
             return;
-        }     
+        }
         if (this.clientDetailsForm.value.clientInfo.clientEffectiveDate == "Please " || this.clientDetailsForm.value.clientInfo.clientEffectiveDate == null) {
             this.isClientEffectiveDateSubmit = true;
             this.mdMondServiceDS.showErrorMessage("Please enter the Client Effective Date.");
@@ -396,7 +437,7 @@ debugger;
         this.renderer.setAttribute(this.countryAddress.nativeElement, 'disabled', 'true');
     }
 
-    onChangeOfAT(){
+    onChangeOfAT() {
         this.isAddressTypeSubmit = false;
     }
 
@@ -487,10 +528,10 @@ debugger;
     onClickOfClientAddAddress() {
         this.clientAddressForm.reset();
         let selectedAddressData = {
-            "clientAddressInfo":{
+            "clientAddressInfo": {
                 "addressType": "Please select a value",
-                "province":"Please select a value",
-                "country":"Please select a value"
+                "province": "Please select a value",
+                "country": "Please select a value"
             }
         }
         this.clientAddressForm.patchValue(selectedAddressData);
@@ -522,14 +563,5 @@ debugger;
                 //     this.recentAddress = parseDecodeData.clientAddressInfo_clientAddressInfo;
             });
     }
-
-    // @HostListener('click', ['$event.target'])
-    // onClick(element) {
-    //     // debugger;
-    //     this.isResizeTrue = true;
-    //     setTimeout(() => {
-    //         this.isResizeTrue = false;
-    //     }, 2000)
-    // }
-
+  
 }

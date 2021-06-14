@@ -15,15 +15,6 @@
     <div formGroupName="clientInfo">
         <div class="row">
             <div class="ym_form_group required col-3">
-                <label class="md-lbl">Client Number</label>
-                <input style="width: 50%;" placeholder="Client Number" formControlName="clientNumber"
-                    [readonly]="isFieldreadonly">
-                <div
-                    *ngIf="isClientNumberSubmit  && clientDetailsForm.get('clientInfo.clientNumber').invalid">
-                    <p class="text-danger"> Please enter the Client Number.</p>
-                </div>
-            </div>
-            <div class="ym_form_group required col-3">
                 <label class="md-lbl">Client Name</label>
                 <input placeholder="Client Name" formControlName="clientName" [readonly]="isFieldreadonly">
                 <div
@@ -32,37 +23,33 @@
                 </div>
             </div>
             <div class="ym_form_group required col-3">
+                <label class="md-lbl">Client Number</label>
+                <input style="width: 70%;" placeholder="Client Number" formControlName="clientNumber"
+                    [readonly]="isFieldreadonly">
+                <div
+                    *ngIf="isClientNumberSubmit  && clientDetailsForm.get('clientInfo.clientNumber').invalid">
+                    <p class="text-danger"> Please enter the Client Number.</p>
+                </div>
+            </div>
+            <div class="ym_form_group required col-3">
                 <div class="row" style="margin-left: 1px;">
                     <label class="md-lbl">Client Effective Date</label>
-                    <input style="width: 50%;" matInput [matDatepicker]="picker" #fromDate
+                    <input style="width: 70%;" matInput [matDatepicker]="picker" #fromDate
                         formControlName="clientEffectiveDate" [readonly]="isFieldreadonly"
                         (dateInput)="clientEffectiveDateKeyup($event.value)">
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker class="col-md-3" #picker></mat-datepicker>
                     <div
                         *ngIf="isClientEffectiveDateSubmit && clientDetailsForm.get('clientInfo.clientEffectiveDate').invalid">
-                        <p class="text-danger"> Please enter the Client Effective Date.</p>
+                        <p class="text-danger" style="margin-left: -83px;"> Please enter the Client Effective Date.</p>
                     </div>
                 </div>
 
             </div>
             <div class="ym_form_group col-3">
-                <label class="md-lbl">Client Status</label>
-                <div class="ym_form_select" style="width: 52%;">
-                    <select formControlName="clientStatus" #clientStatusList>
-                        <option selected value="">Please select a value</option>
-                        <option let *ngFor="let list of clientStatus" value="{{list.description}}">
-                            {{list.description}}</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="ym_form_group col-3">
                 <div class="row" style="margin-left: 1px;">
                     <label class="md-lbl">Client Termination Date</label>
-                    <input style="width: 50%;" matInput [matDatepicker]="picker2"
+                    <input style="width: 70%;" matInput [matDatepicker]="picker2"
                         formControlName="clientTerminationDate" [readonly]="isFieldreadonly" #tillDate
                         (dateInput)="onClickOfTerminationDate($event.value)">
                     <mat-datepicker-toggle matSuffix [for]="picker2" [disabled]="isTerminationDateFieldreadonly">
@@ -70,34 +57,9 @@
                     <mat-datepicker class="col-md-3" #picker2></mat-datepicker>
                 </div>
             </div>
-            <div class="ym_form_group required col-3">
-                <label class="md-lbl">Client Province</label>
-                <div class="ym_form_select" style="width: 50%;">
-                    <select formControlName="clientProvinceCode" #clientProvinceList>
-                        <option selected value="">Please select a value</option>
-                        <option let *ngFor="let list of clientProvinceCode" value="{{list.description}}">
-                            {{list.description}}</option>
-                    </select>
-                </div>
-                <div
-                    *ngIf="isClientProvinceCodeSubmit  && clientDetailsForm.get('clientInfo.clientProvinceCode').invalid">
-                    <p class="text-danger"> Please select the Client Province.</p>
-                </div>
-            </div>
-            <div class="ym_form_group required col-3">
-                <label class="md-lbl">Client Language Code</label>
-                <div class="ym_form_select" style="width: 50%;">
-                    <select formControlName="clientLanguageCode" #clientLanguageList>
-                        <option selected value="">Please select a value</option>
-                        <option let *ngFor="let list of clientLanguage" value="{{list.description}}">
-                            {{list.description}}</option>
-                    </select>
-                </div>
-                <div
-                    *ngIf="isClientLanguageCodeSubmit && clientDetailsForm.get('clientInfo.clientLanguageCode').invalid">
-                    <p class="text-danger"> Please select the Client Language Code.</p>
-                </div>
-            </div>
+        </div>
+
+        <div class="row">
             <div class="ym_form_group col-3">
                 <div class="row">
                     <div class="col-md-6">
@@ -114,33 +76,46 @@
                 </div>
 
             </div>
+            <div class="ym_form_group col-3">
+                <label class="md-lbl">Client Status</label>
+                <div class="ym_form_select" style="width: 70%;">
+                    <select formControlName="clientStatus" #clientStatusList>
+                        <!-- <option  value="">Please select a value</option> -->
+                        <option let *ngFor="let list of clientStatus" value="{{list.description}}">
+                            {{list.description}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="ym_form_group required col-3">
+                <label class="md-lbl">Client Province</label>
+                <div class="ym_form_select" style="width: 70%;">
+                    <select formControlName="clientProvinceCode" #clientProvinceList (change)="onChangeOfCP()">
+                        <!-- <option selected value="">Please select a value</option> -->
+                        <option let *ngFor="let list of clientProvinceCode" value="{{list.description}}">
+                            {{list.description}}</option>
+                    </select>
+                </div>
+                <div
+                    *ngIf="isClientProvinceCodeSubmit">
+                    <p class="text-danger"> Please select the Client Province.</p>
+                </div>
+            </div>
+            <div class="ym_form_group required col-3">
+                <label class="md-lbl">Client Language Code</label>
+                <div class="ym_form_select" style="width: 70%;">
+                    <select formControlName="clientLanguageCode" #clientLanguageList (change)="onChangeOfCLC()">
+                        <!-- <option selected value="">Please select a value</option> -->
+                        <option let *ngFor="let list of clientLanguage" value="{{list.description}}">
+                            {{list.description}}</option>
+                    </select>
+                </div>
+                <div
+                    *ngIf="isClientLanguageCodeSubmit">
+                    <p class="text-danger"> Please select the Client Language Code.</p>
+                </div>
+            </div>         
         </div>
         <div class="row">
-            <div class="ym_form_group col-3">
-                <label class="md-lbl">Client Phone1</label>
-                <input style="width: 34%;" type="text" mask="(000) 000-0000" placeholder="Client Phone1"
-                    formControlName="clientPhone1" [readonly]="isFieldreadonly">
-                <div *ngIf="clientDetailsForm.get('clientInfo.clientPhone1').hasError('mask')">
-                    <p class="text-danger">Client Phone1 entered is
-                        {{clientDetailsForm.get('clientInfo.clientPhone1').value}}. Client Phone1 should be the format
-                        '(999)999-9999'</p>
-                </div>
-            </div>
-            <div class="ym_form_group col-3">
-                <label class="md-lbl">Client Phone2</label>
-                <input style="width: 34%;" type="text" mask="(000) 000-0000" placeholder="Client Phone2"
-                    formControlName="clientPhone2" [readonly]="isFieldreadonly">
-                <div *ngIf="clientDetailsForm.get('clientInfo.clientPhone2').hasError('mask')">
-                    <p class="text-danger">Client Phone2 entered is
-                        {{clientDetailsForm.get('clientInfo.clientPhone2').value}}. Client Phone2 should be the format
-                        '(999)999-9999'</p>
-                </div>
-            </div>
-            <div class="ym_form_group col-3">
-                <label class="md-lbl">Client Fax Number</label>
-                <input style="width: 50%;" placeholder="Client Fax Number" formControlName="clientFaxNumber"
-                    [readonly]="isFieldreadonly">
-            </div>
             <div class="ym_form_group col-3">
                 <label class="md-lbl">Client Email</label>
                 <input type="email" placeholder="Client Email" formControlName="clientEmail"
@@ -152,6 +127,32 @@
                     enter valid email
                 </p> -->
             </div>
+            <div class="ym_form_group col-3">
+                <label class="md-lbl">Client Phone1</label>
+                <input style="width: 70%;" type="text" mask="(000) 000-0000" placeholder="Client Phone1"
+                    formControlName="clientPhone1" [readonly]="isFieldreadonly">
+                <div *ngIf="clientDetailsForm.get('clientInfo.clientPhone1').hasError('mask')">
+                    <p class="text-danger">Client Phone1 entered is
+                        {{clientDetailsForm.get('clientInfo.clientPhone1').value}}. Client Phone1 should be the format
+                        '(999)999-9999'</p>
+                </div>
+            </div>
+            <div class="ym_form_group col-3">
+                <label class="md-lbl">Client Phone2</label>
+                <input style="width: 70%;" type="text" mask="(000) 000-0000" placeholder="Client Phone2"
+                    formControlName="clientPhone2" [readonly]="isFieldreadonly">
+                <div *ngIf="clientDetailsForm.get('clientInfo.clientPhone2').hasError('mask')">
+                    <p class="text-danger">Client Phone2 entered is
+                        {{clientDetailsForm.get('clientInfo.clientPhone2').value}}. Client Phone2 should be the format
+                        '(999)999-9999'</p>
+                </div>
+            </div>
+            <div class="ym_form_group col-3">
+                <label class="md-lbl">Client Fax Number</label>
+                <input style="width: 70%;" placeholder="Client Fax Number" formControlName="clientFaxNumber"
+                    [readonly]="isFieldreadonly">
+            </div>
+          
         </div>
     </div>
 
@@ -225,15 +226,15 @@
                         <div class="row mt-3">
                             <div class="ym_form_group required col-6">
                                 <label class="md-lbl">Address Type </label>
-                                <div class="ym_form_select" style="width: 50%;">
-                                    <select formControlName="addressType" #addressTypeList>
-                                        <option selected value="">Please select a value</option>
+                                <div class="ym_form_select" style="width: 70%;">
+                                    <select formControlName="addressType" #addressTypeList (change)="onChangeOfAT()">
+                                        <!-- <option selected value="">Please select a value</option> -->
                                         <option let *ngFor="let list of addressType" value="{{list.description}}">
                                             {{list.description}}</option>
                                     </select>
                                 </div>
                                 <div
-                                    *ngIf="isAddressTypeSubmit &&  clientAddressForm.get('clientAddressInfo.addressType').invalid">
+                                    *ngIf="isAddressTypeSubmit">
                                     <p class="text-danger"> Please select the Address Type.</p>
                                 </div>
                             </div>
@@ -242,7 +243,7 @@
                             <div class="ym_form_group required col-6">
                                 <div class="row" style="padding-left: 5px;">
                                     <label class="md-lbl">Address Effective Date</label>
-                                    <input style="width: 50%;" matInput [matDatepicker]="picker3"
+                                    <input style="width: 70%;" matInput [matDatepicker]="picker3"
                                         formControlName="addressEffectiveDate" [readonly]="isAddressFieldreadonly"
                                         (dateInput)="onClickOfAddEffDate($event.value)" #addEffDate>
                                     <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
@@ -256,7 +257,7 @@
                             <div class="ym_form_group col-6">
                                 <div class="row">
                                     <label class="md-lbl">Address Termination Date</label>
-                                    <input style="width: 50%;" matInput [matDatepicker]="picker4"
+                                    <input style="width: 70%;" matInput [matDatepicker]="picker4"
                                         formControlName="addressTerminationDate" [readonly]="isAddressFieldreadonly"
                                         [readonly]="isAddressFieldreadonly"
                                         (dateInput)="onClickOfAddTerminationDate($event.value)" #addTerDate>
@@ -283,14 +284,14 @@
                         <div class="row">
                             <div class="ym_form_group col-6">
                                 <label class="md-lbl">City</label>
-                                <input style="width: 50%;" placeholder="City" formControlName="city"
+                                <input style="width: 70%;" placeholder="City" formControlName="city"
                                     [readonly]="isAddressFieldreadonly">
                             </div>
                             <div class="ym_form_group  col-6">
                                 <label class="md-lbl">Province Code</label>
-                                <div class="ym_form_select" style="width: 50%;">
+                                <div class="ym_form_select" style="width: 70%;">
                                     <select formControlName="province" #provinceCodeList>
-                                        <option selected value="">Please select a value</option>
+                                        <!-- <option selected value="">Please select a value</option> -->
                                         <option let *ngFor="let list of clientProvinceCode"
                                             value="{{list.description}}">
                                             {{list.description}}</option>
@@ -301,14 +302,14 @@
                         <div class="row">
                             <div class="ym_form_group col-6">
                                 <label class="md-lbl">Postal Code</label>
-                                <input style="width: 50%;" placeholder="Postal Code" formControlName="postalCode"
+                                <input style="width: 70%;" placeholder="Postal Code" formControlName="postalCode"
                                     [readonly]="isAddressFieldreadonly">
                             </div>
                             <div class="ym_form_group  col-6">
                                 <label class="md-lbl">Country</label>
-                                <div class="ym_form_select" style="width: 50%;">
+                                <div class="ym_form_select" style="width: 70%;">
                                     <select formControlName="country" #countryAddress>
-                                        <option selected value="">Please select a value</option>
+                                        <!-- <option selected value="">Please select a value</option> -->
                                         <option let *ngFor="let list of countryList" value="{{list.description}}">
                                             {{list.description}}</option>
                                     </select>

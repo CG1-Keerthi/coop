@@ -563,18 +563,20 @@ hr {
     border: 1px solid lightgrey;
     margin: 0 0 0.5rem;
     font-size: 15px;
+    border-radius: 5px;
 }
 
 .ym_form_group input:focus,
 .ym_form_select select:focus {
-    outline: #00456a auto 5px;
+ 
+    outline: #00456a auto 5px;  
     /* outline: #C41230 auto 5px; */
 }
 
 .ym_form_select {
     position: relative;
-    border: 1px solid lightgrey;
-    margin: 0 0 0.5rem;
+    /* border: 1px solid lightgrey; */
+    margin: 0 0 0.5rem;  
 }
 
 .ym_form_select::after {
@@ -598,6 +600,8 @@ hr {
     height: 100%;
     padding: 8px 5px;
     font-size: 15px;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
 }
 
 .ym_form_group span {

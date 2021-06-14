@@ -7,7 +7,6 @@ import { MDCodeListHeaderDS, MDMondServiceDS } from '../../../_services/ds';
 import { MDCommonGetterSetter } from '../../../_services/common';
 import { ClientDetailFormBuilderService } from "../../../form-builder/clientMaintenance/clientDetails/client-detail-form-builder.service";
 import { ClientAddressDetailFormBuilderService } from "../../../form-builder/clientMaintenance/clientAddressdetails/client-address-detail-form-builder.service";
-import { of } from 'rxjs';
 declare var $: any;
 
 
@@ -25,13 +24,14 @@ declare var $: any;
 export class ClientDetailComponent implements OnInit {
 
     @Input() set clientDetails(data) {
-        debugger;
+        // debugger;
         console.log("clientDetails-Data", data)
         if (Object.keys(data).length > 0) {
             this.isFieldreadonly = true;
             this.isTerminationDateFieldreadonly = true;
             this.isAddressterminationDateFieldreadonly = true;
             this.isUpdateDateFieldReadonly = false;
+            this.isEmailSubmit = false;
             // this.isAddressFieldreadonly = false;
             this.renderer.setAttribute(this.clientStatusList.nativeElement, 'disabled', 'true');
             this.renderer.setAttribute(this.clientProvinceList.nativeElement, 'disabled', 'true');
@@ -52,11 +52,36 @@ export class ClientDetailComponent implements OnInit {
             this.clientAddressForm.value.clientAddressInfo.currentRecordFlag = "Y";
             this.isAddressTypeSubmit = false;
             this.isAddressEffectiveDateSubmit = false;
+            let selectedAddressData = {
+                "clientAddressInfo":{
+                    "addressType": "Please select a value",
+                    "province":"Please select a value",
+                    "country":"Please select a value"
+                }
+            }
+            this.clientAddressForm.patchValue(selectedAddressData);
 
         } else {
+            // debugger;
             this.clientDetailsForm.reset();
+            let selectedData = {
+                "clientInfo": {
+                    "clientStatus": "Please select a value",
+                    "clientProvinceCode": "Please select a value",
+                    "clientLanguageCode": "Please select a value"
+                }
+            }
+            this.clientDetailsForm.patchValue(selectedData);
             this.clientAddressList = [];
             this.clientAddressForm.reset();
+            let selectedAddressData = {
+                "clientAddressInfo":{
+                    "addressType": "Please select a value",
+                    "province":"Please select a value",
+                    "country":"Please select a value"
+                }
+            }
+            this.clientAddressForm.patchValue(selectedAddressData);
             this.isFieldreadonly = false;
             this.isClientAddressDisable = true;
             this.isTerminationDateFieldreadonly = true;
@@ -77,7 +102,6 @@ export class ClientDetailComponent implements OnInit {
             this.renderer.setProperty(this.clientSubmit.nativeElement, 'disabled', false);
             this.renderer.setAttribute(this.clientAddressSubmit.nativeElement, 'disabled', 'true');
             // this.clientDetailsForm.value.clientInfo.lastUpdateDate = "";
-
         }
 
     }
@@ -120,6 +144,7 @@ export class ClientDetailComponent implements OnInit {
     public isEmailSubmit: boolean = false;
 
 
+
     @ViewChild('clientStatusList') clientStatusList: ElementRef;
     @ViewChild('clientProvinceList') clientProvinceList: ElementRef;
     @ViewChild('clientLanguageList') clientLanguageList: ElementRef;
@@ -137,64 +162,96 @@ export class ClientDetailComponent implements OnInit {
         private fb: FormBuilder,
         private mdCommonGetterAndSetter: MDCommonGetterSetter,
         private renderer: Renderer2,
-        private clientDetailervice: ClientDetailFormBuilderService,
+        private clientDetailService: ClientDetailFormBuilderService,
         private clientAddressDetailService: ClientAddressDetailFormBuilderService) { }
 
 
     ngOnInit() {
-
+debugger;
         this.mdCommonGetterAndSetter.getCsfrToken().subscribe(data => {
             if (data) {
                 this.csfrToken = data;
             }
         });
 
-        this.clientDetailsForm = this.clientDetailervice.form;
+        this.clientDetailsForm = this.clientDetailService.form;
         this.clientAddressForm = this.clientAddressDetailService.form;
 
         this.mdCodeListHeaderDS.getListOfCodeLists('Coop-ClientStatus').subscribe(
             data => {
                 this.clientStatus = data;
+                this.clientStatus = data;
+                let selectedObj = {};
+                selectedObj["description"] = "Please select a value";
+                this.clientStatus.push(selectedObj);
             }, error => {
                 this.mdMondServiceDS.MDError(error);
-                console.log(error);
+                // console.log(error);
                 // let data = [{ "codeListValuesId": 145716, "codeListHeaderId": 1578, "code": "1", "description": "Active" }, { "codeListValuesId": 145717, "codeListHeaderId": 1578, "code": "2", "description": "Terminated" }];
                 // this.clientStatus = data;
+                // let selectedObj = {};
+                // selectedObj["description"] = "Please select a value";
+                // this.clientStatus.push(selectedObj);
             });
 
         this.mdCodeListHeaderDS.getListOfCodeLists('Coop-LanguageCode').subscribe(
             data => {
                 this.clientLanguage = data;
+                let selectedObj = {};
+                selectedObj["description"] = "Please select a value";
+                this.clientLanguage.push(selectedObj);
             }, error => {
                 this.mdMondServiceDS.MDError(error);
                 // let data = [{ "codeListValuesId": 145695, "codeListHeaderId": 1575, "code": "1", "description": "English" }, { "codeListValuesId": 145697, "codeListHeaderId": 1575, "code": "2", "description": "French" }]
                 // this.clientLanguage = data;
+                // let selectedObj = {};
+                // selectedObj["description"] = "Please select a value";
+                // this.clientLanguage.push(selectedObj);
             });
 
         this.mdCodeListHeaderDS.getListOfCodeLists('Coop-ClientAddressProvince').subscribe(
             data => {
                 this.clientProvinceCode = data;
+                let selectedObj = {};
+                selectedObj["description"] = "Please select a value";
+                this.clientProvinceCode.push(selectedObj);
             }, error => {
+                debugger;
                 this.mdMondServiceDS.MDError(error);
                 // let data = [{ "codeListValuesId": 145758, "codeListHeaderId": 1583, "code": "AB", "description": "AB" }, { "codeListValuesId": 145759, "codeListHeaderId": 1583, "code": "BC", "description": "BC" }, { "codeListValuesId": 145760, "codeListHeaderId": 1583, "code": "AL", "description": "AL" }, { "codeListValuesId": 145761, "codeListHeaderId": 1583, "code": "AR", "description": "AR" }];
                 // this.clientProvinceCode = data;
+                // let selectedObj = {};
+                // selectedObj["description"] = "Please select a value";
+                // this.clientProvinceCode.push(selectedObj);               
             });
 
         this.mdCodeListHeaderDS.getListOfCodeLists('Coop-ClientAddressType').subscribe(
             data => {
                 this.addressType = data;
+                let selectedObj = {};
+                selectedObj["description"] = "Please select a value";
+                this.addressType.push(selectedObj);
             }, error => {
                 this.mdMondServiceDS.MDError(error);
                 // let data = [{ "codeListValuesId": 145756, "codeListHeaderId": 1582, "code": "1", "description": "Mailing" }, { "codeListValuesId": 145757, "codeListHeaderId": 1582, "code": "2", "description": "Billing" }];
                 // this.addressType = data;
+                // let selectedObj = {};
+                // selectedObj["description"] = "Please select a value";
+                // this.addressType.push(selectedObj); 
             });
         this.mdCodeListHeaderDS.getListOfCodeLists('Coop-ClientAddressCountry').subscribe(
             data => {
                 this.countryList = data;
+                let selectedObj = {};
+                selectedObj["description"] = "Please select a value";
+                this.countryList.push(selectedObj); 
             }, error => {
                 this.mdMondServiceDS.MDError(error);
                 // let data = [{ "codeListValuesId": 145754, "codeListHeaderId": 1581, "code": "CA", "description": "Canada" }, { "codeListValuesId": 145755, "codeListHeaderId": 1581, "code": "US", "description": "United States" }];
                 // this.countryList = data;
+                // let selectedObj = {};
+                // selectedObj["description"] = "Please select a value";
+                // this.countryList.push(selectedObj); 
             });
 
     }
@@ -204,39 +261,45 @@ export class ClientDetailComponent implements OnInit {
         this.clientDetailsForm.reset();
     }
 
-    clientEmailKeyup(event){
+    clientEmailKeyup(event) {
         debugger;
-        if(event.target.value != ""){
+        if (event.target.value != "") {
             this.isEmailSubmit = true;
-        }else{
+        } else {
             this.isEmailSubmit = false;
         }
+    }
+    onChangeOfCLC(){
+        debugger;
+        this.isClientLanguageCodeSubmit = false;
+    }
+    onChangeOfCP(){
+        this.isClientProvinceCodeSubmit = false;
     }
 
     onClickOfClientSubmit() {
         debugger
-        if (this.clientDetailsForm.value.clientInfo.clientNumber == "" || this.clientDetailsForm.value.clientInfo.clientNumber == null) {
-            this.isClientNumberSubmit = true;
-            this.mdMondServiceDS.showErrorMessage("Please enter the Client Number.");
-            return;
-        }
-
         if (this.clientDetailsForm.value.clientInfo.clientName == "" || this.clientDetailsForm.value.clientInfo.clientName == null) {
             this.isClientNameSubmit = true;
             this.mdMondServiceDS.showErrorMessage("Please enter the  Client Name.");
             return;
         }
-        if (this.clientDetailsForm.value.clientInfo.clientEffectiveDate == "" || this.clientDetailsForm.value.clientInfo.clientEffectiveDate == null) {
+        if (this.clientDetailsForm.value.clientInfo.clientNumber == "" || this.clientDetailsForm.value.clientInfo.clientNumber == null) {
+            this.isClientNumberSubmit = true;
+            this.mdMondServiceDS.showErrorMessage("Please enter the Client Number.");
+            return;
+        }     
+        if (this.clientDetailsForm.value.clientInfo.clientEffectiveDate == "Please " || this.clientDetailsForm.value.clientInfo.clientEffectiveDate == null) {
             this.isClientEffectiveDateSubmit = true;
             this.mdMondServiceDS.showErrorMessage("Please enter the Client Effective Date.");
             return;
         }
-        if (this.clientDetailsForm.value.clientInfo.clientProvinceCode == "" || this.clientDetailsForm.value.clientInfo.clientProvinceCode == null) {
+        if (this.clientDetailsForm.value.clientInfo.clientProvinceCode == "Please select a value" || this.clientDetailsForm.value.clientInfo.clientProvinceCode == null) {
             this.isClientProvinceCodeSubmit = true;
             this.mdMondServiceDS.showErrorMessage("Please select the Client Province.");
             return;
         }
-        if (this.clientDetailsForm.value.clientInfo.clientLanguageCode == "" || this.clientDetailsForm.value.clientInfo.clientLanguageCode == null) {
+        if (this.clientDetailsForm.value.clientInfo.clientLanguageCode == "Please select a value" || this.clientDetailsForm.value.clientInfo.clientLanguageCode == null) {
             this.isClientLanguageCodeSubmit = true;
             this.mdMondServiceDS.showErrorMessage("Please select the Client Language Code.");
             return;
@@ -246,20 +309,20 @@ export class ClientDetailComponent implements OnInit {
             return;
         }
         if (this.clientDetailsForm.get('clientInfo.clientPhone2').hasError('mask')) {
-            this.mdMondServiceDS.showErrorMessage( "Client Phone2 entered is" + this.clientDetailsForm.get('clientInfo.clientPhone2').value + " Client Phone2 number should be the format '(999)999-9999' ");
+            this.mdMondServiceDS.showErrorMessage("Client Phone2 entered is" + this.clientDetailsForm.get('clientInfo.clientPhone2').value + " Client Phone2 number should be the format '(999)999-9999' ");
             return;
         }
-       
-       if(this.clientDetailsForm.value.clientInfo.clientEmail != ""){
-        if(this.clientDetailsForm.value.clientInfo.clientEmail != null){
-            if(this.clientDetailsForm.get('clientInfo.clientEmail').invalid){
-                this.mdMondServiceDS.showErrorMessage("Please enter the valid Client Email.");
-                this.isEmailSubmit = true;
-                return
+
+        if (this.clientDetailsForm.value.clientInfo.clientEmail != "") {
+            if (this.clientDetailsForm.value.clientInfo.clientEmail != null) {
+                if (this.clientDetailsForm.get('clientInfo.clientEmail').invalid) {
+                    this.mdMondServiceDS.showErrorMessage("Please enter the valid Client Email.");
+                    this.isEmailSubmit = true;
+                    return
+                }
             }
         }
-       }
-       
+
 
         if (this.isDateUpdate != "Date") {
             this.clientDetailsForm.value.clientInfo.lastUpdateDate = "";
@@ -333,14 +396,18 @@ export class ClientDetailComponent implements OnInit {
         this.renderer.setAttribute(this.countryAddress.nativeElement, 'disabled', 'true');
     }
 
+    onChangeOfAT(){
+        this.isAddressTypeSubmit = false;
+    }
+
     onClickOfClientAddressSubmit() {
         debugger;
-        if(this.clientAddressForm.get('clientAddressInfo.addressType').invalid){
+        if (this.clientAddressForm.value.clientAddressInfo.addressType == "Please select a value") {
             this.mdMondServiceDS.showErrorMessage("Please select the Address Type.");
             this.isAddressTypeSubmit = true;
             return;
         }
-        if(this.clientAddressForm.get('clientAddressInfo.addressEffectiveDate').invalid){
+        if (this.clientAddressForm.get('clientAddressInfo.addressEffectiveDate').invalid) {
             this.mdMondServiceDS.showErrorMessage("Please enter the Address Effective Date.");
             this.isAddressEffectiveDateSubmit = true;
             return;
@@ -419,8 +486,17 @@ export class ClientDetailComponent implements OnInit {
 
     onClickOfClientAddAddress() {
         this.clientAddressForm.reset();
+        let selectedAddressData = {
+            "clientAddressInfo":{
+                "addressType": "Please select a value",
+                "province":"Please select a value",
+                "country":"Please select a value"
+            }
+        }
+        this.clientAddressForm.patchValue(selectedAddressData);
         this.isAddressFieldreadonly = false;
         this.isAddressterminationDateFieldreadonly = true;
+        this.clientAddressIdentifier = "";
         this.renderer.setProperty(this.addressTypeList.nativeElement, 'disabled', false);
         this.renderer.setProperty(this.provinceCodeList.nativeElement, 'disabled', false);
         this.renderer.setProperty(this.countryAddress.nativeElement, 'disabled', false);

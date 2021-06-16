@@ -1,0 +1,134 @@
+<div [formGroup]="productDetailsForm" class="m-1 p-1">
+    <div class="row">
+        <div class="col-md-6">
+        </div>
+        <div class="col-md-6">
+            <button class="btn btn-primary float-right ml-2" (click)="onClickOfUpdatePlan()"> Update Product</button>
+            <button class="btn btn-primary float-right ml-2"> View Plan <i class="fa fa-arrow-right"></i></button>
+            <button class="btn btn-primary float-right ml-2"> Add Plan <i class="fa fa-plus"></i></button>
+        </div>
+    </div>
+<div formGroupName="productInfo">
+    <div class="row mt-1 pt-1">
+        <div class="ym_form_group required col-3">
+            <label class="md-lbl">Product Type</label>
+            <input style="width: 70%;" placeholder="Product Type" [readonly]="isFieldsreadonly" formControlName="productType"
+                name="productInfo_productType">
+        </div>
+        <div class="ym_form_group required col-3">
+            <label class="md-lbl">Product Name</label>
+            <input style="width: 70%;" placeholder="Product Name" [readonly]="isFieldsreadonly" formControlName="productName"
+                name="productInfo_productName">
+        </div>
+        <div class="ym_form_group required col-3">
+            <label class="md-lbl">Product Number</label>
+            <input style="width: 70%;" placeholder="Product Number" [readonly]="isFieldsreadonly"
+                formControlName="productNumber" name="productNumber">
+        </div>
+        <div class="ym_form_group required col-3">
+            <label class="md-lbl">Product Business Model</label>
+            <div class="ym_form_select" style="width: 70%;">
+                <select formControlName="productBusinessModel">
+                    <option selected value="">Select Business Model</option>
+                    <option value="Merchant">Merchant</option>
+                    <option value="Location">Location</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-1 pt-1">
+        <div class="ym_form_group required col-3">
+            <label class="md-lbl">Product Effective Date</label>
+            <div class="row pl-1">
+                <input style="width: 70%;" class="col-md-9" matInput data-name="dateFormat"
+                    formControlName="productEffectiveDate" name="productEffectiveDate"
+                    [matDatepicker]="picker" placeholder="Choose a date">
+                <mat-datepicker-toggle matSuffix [for]="picker">
+                </mat-datepicker-toggle>
+                <mat-datepicker class="col-md-3" #picker></mat-datepicker>
+            </div>
+        </div>
+        <div class="ym_form_group col-3">
+            <label class="md-lbl">Product Status</label>
+            <div class="ym_form_select" style="width: 70%;">
+                <select formControlName="productStatus" #productStatusList>
+                    <option selected value="">Select Product Status</option>
+                    <option value="Active">Active</option>
+                    <option value="Terminated">Terminated</option>
+                </select>
+            </div>
+        </div>
+        <div class="ym_form_group col-3">
+            <label class="md-lbl">Product Termination Date</label>
+            <div class="row pl-1">
+                <input style="width: 70%;" class="col-md-9" matInput data-name="dateFormat"
+                    formControlName="productTerminationDate" name="productTerminationDate"
+                    [matDatepicker]="picker1" placeholder="Choose a date">
+                <mat-datepicker-toggle matSuffix [for]="picker1">
+                </mat-datepicker-toggle>
+                <mat-datepicker class="col-md-3" #picker1></mat-datepicker>
+            </div>
+        </div>
+        <div class="ym_form_group col-3">
+            <label class="md-lbl">Product In Use</label>
+            <input style="width: 70%;" placeholder="Product In Use" [readonly]="isProductInuseFieldsreadonly" formControlName="productInUse"
+                name="productInfo_productInUse">
+        </div>
+    </div>
+
+
+    <div class="row mt-1 pt-1">
+        <div class="ym_form_group col-3">
+            <label class="md-lbl">Back Premium Collection Period (days)</label>
+            <input style="width: 70%;" placeholder="Back Premium Collection Period" [readonly]="isFieldsreadonly"
+                formControlName="backPremiumCollectionPeriod"
+                name="backPremiumCollectionPeriod">
+        </div>
+        <div class="ym_form_group col-3">
+            <label class="md-lbl">Insurance Distribution Guide</label>
+            <input style="width: 70%;" placeholder="Insurance Distribution Guide" [readonly]="isFieldsreadonly"
+                formControlName="insuranceDistributorGuideReferenceNum"
+                name="insuranceDistributorGuideReferenceNum">
+        </div>
+        <div class="ym_form_group col-3">
+            <label class="md-lbl">Certificate Detail Administrator</label>
+            <div class="ym_form_select" style="width: 70%;">
+                <select formControlName="certificateDetailAdministrator">
+                    <option selected value="">Select Select a value</option>
+                    <option value="CUMIS">CUMIS</option>
+                    <option value="Financial Institution">Financial Institution</option>
+                </select>
+            </div>
+        </div>
+        <div class="ym_form_group col-3">
+            <label class="md-lbl">Free Look Period Refund (days)</label>
+            <input style="width: 70%;" placeholder="Free Look Period Refund" [readonly]="isFieldsreadonly"
+                formControlName="freeLookPeriodRefund" name="freeLookPeriodRefund">
+        </div>
+    </div>
+    <div class="row mt-1 pt-1">
+        <div class="ym_form_group col-3">
+            <label class="md-lbl">Member Initiated Termination Rule</label>
+            <div class="ym_form_select" style="width: 70%;">
+                <select formControlName="memberInitiatedTerminationRule">
+                    <option selected value="">Select Select a value</option>
+                    <option value="Immediate Termination">Immediate Termination</option>
+                    <option value="Pending Termination">Pending Termination</option>
+                </select>
+            </div>
+        </div>
+        <div class="ym_form_group col-9">
+            <label class="md-lbl">Notes</label>
+            <textarea class="form-control md-datafield" [readonly]="isFieldsreadonly" rows="3"
+                name="comment" formControlName="comment"></textarea>
+        </div>
+    </div>
+</div>
+    <div class="row mt-2">
+        <div class="ym_form_group mb-0 pb-0">
+            <button class="btn btn-primary float-right md-btn-width mr-3" (click)="onClickOfProductDetailSubmit()"><i class="fa fa-save mr-1"></i>Submit</button>
+            <button class="btn btn-primary float-right md-btn-width mr-2"><i class="fa fa-times"></i> Clear</button>
+        </div>
+    </div>
+</div>

@@ -17,7 +17,6 @@ import { AddRowDirective } from '../mond/directives/add-row.directive';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { ProductMaintenanceComponent } from '../mond/productMaintenance/productMaintenance';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { ProductDetailsComponent } from '../mond/productDetails/productDetails';
 import { ReportsComponent } from '../mond/reports/reports.component';
 import { NetpremiumreportComponent } from '../mond/reports/netpremiumreport/netpremiumreport.component';
 import { MatButtonModule } from '@angular/material/button';
@@ -60,6 +59,8 @@ import { CreditorSelfAdminDashboardComponent } from '../mond/creditorSelfAdminDa
 import { ChartsModule } from 'ng2-charts';
 import { CumisHomePageComponent } from '../mond/cumisHomePage/cumisHomePage.component';
 import { NgxMaskModule } from 'ngx-mask';
+import { ProductDetailsComponent } from '../mond/productMaintenance/productDetails/productDetails';
+import { ProductDetailFormBuilderModule } from '../form-builder/productMaintenance/productDetails/product-detail-form.module';
 
 @NgModule({
   declarations: [
@@ -121,7 +122,8 @@ import { NgxMaskModule } from 'ngx-mask';
     RateDetailFormBuilderModule,
     CreditorCertificateFormBuilderModule,
     ChartsModule,
-    NgxMaskModule
+    NgxMaskModule,
+    ProductDetailFormBuilderModule
 
 
   ],

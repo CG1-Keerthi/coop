@@ -1,128 +1,133 @@
 <div class="ym_content">
-    <div class="col-md-12 container">
+    <div class="p-1 m-1">
         <div class="row md-breadCrumbs">
             Product Maintenance
         </div>
-        <mat-card class="w-100 mt-2 md-border">
-            <div class="row">
-                <mat-tab-group class="col-md-12" [(selectedIndex)]="selectedTab">
-                    <mat-tab label="Product Search">
-                        <div class="row pt-2 m-0">
-                            <div class="col-md-2 p-2 md-refine-card md-refine-card-height">
-                                <h3 class="md-h3"><i class="fa fa-bars pr-2"></i>Refine your Search</h3>
-                                <!-- <div class="ym_form_group">
-                                <label class="md-lbl">Product Type</label> -->
-                                <!-- <div class="ym_form_select">
-                                    <select formControlName="reportClientName" class="p-1" (change)="onChangeOfReportClientName($event)">
-                                        <option selected value="">Select a client Name</option>
-                                        <option value="lais">LAIS</option>
-                                        <option value="lgm">LGM</option>
-                                    </select> -->
-                                <!-- </div> -->
-                                <div class="ym_form_group">
-                                    <label class="md-lbl">Product Type</label>
-                                    <input placeholder="Product Type" [(ngModel)]="productType"
-                                        (keyup)="getProductTypeDetails($event)" [matAutocomplete]="auto">
-                                    <mat-autocomplete #auto="matAutocomplete">
-                                        <mat-option *ngFor="let option of productTypeListData" [value]="option.value">
-                                            {{option.id}}
-                                        </mat-option>
-                                    </mat-autocomplete>
-                                </div>
-                                <div class="ym_form_group">
-                                    <label class="md-lbl">Product Business Model</label>
-                                    <div class="ym_form_select">
-                                        <select [(ngModel)]="productBusinessModel">
-                                            <option selected value="">Select Business Model</option>
-                                            <option value="Merchant">Merchant</option>
-                                            <option value="Location">Location</option>
-                                        </select>
+        <div class="row ml-0 mr-0 pr-0 pt-1 mt-1 pl-0 pb-0 mb-0">
+            <mat-card class="w-100 md-border md-mat-card">
+                <div class="row">
+                    <mat-tab-group class="col-md-12 p-0 m-0" [(selectedIndex)]="selectedTab">
+                        <mat-tab label="Product Search">
+                            <div class="row pt-1 pr-1 pb-1 mb-1 mt-1 mr-1 mb-1 md-mat-tab">
+                                <div class="col-md-2 p-2 md-refine-card md-refine-card-height">
+                                    <h3 class="md-h3"><i class="fa fa-bars pr-2"></i>Refine your Search</h3>
+                                    <div class="ym_form_group  row mb-0 pb-0">
+                                        <label class="md-lbl">Product Type</label>
+                                        <input placeholder="Product Type" [(ngModel)]="productType"
+                                            (keyup)="getProductTypeDetails($event)" [matAutocomplete]="auto">
+                                        <mat-autocomplete #auto="matAutocomplete">
+                                            <mat-option *ngFor="let option of productTypeListData"
+                                                [value]="option.value"
+                                                (onSelectionChange)="onSelectProductType($event)">
+                                                {{option.id}}
+                                            </mat-option>
+                                        </mat-autocomplete>
+                                    </div>
+                                    <div class="ym_form_group  row mb-0 pb-0">
+                                        <label class="md-lbl">Product Business Model</label>
+                                        <div class="ym_form_select">
+                                            <select [(ngModel)]="productBusinessModel">
+                                                <option selected value="">Please select a value</option>
+                                                <option value="Merchant">Merchant</option>
+                                                <option value="Location">Location</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="ym_form_group  row mb-0 pb-0">
+                                        <label class="md-lbl">Product Status</label>
+                                        <div class="ym_form_select">
+                                            <select [(ngModel)]="productStatus">
+                                                <option selected value="">Please select a value</option>
+                                                <option value="Active">Active</option>
+                                                <option value="Terminated">Terminated</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="ym_form_group_mat_btn  row">
+                                        <button (click)="onClickOfReset()" class="btn btn-primary"
+                                            style="margin-right: 10px;"><i class="fa fa-undo"></i> Reset</button>
+                                        <button (click)="getProductMaintenanceList()" class="btn btn-primary"><i
+                                                class="fa fa-search"></i>
+                                            Search</button>
                                     </div>
                                 </div>
-
-                                <div class="ym_form_group">
-                                    <label class="md-lbl">Product Status</label>
-                                    <div class="ym_form_select">
-                                        <select [(ngModel)]="productStatus">
-                                            <option selected value="">Select Product Status</option>
-                                            <option value="Active">Active</option>
-                                            <option value="Terminated">Terminated</option>
-                                        </select>
+                                <div class="col-md-10 p-0 m-0">
+                                    <div class="row ml-2 mb-0 mr-0 mt-0 pt-2 pb-2" style="background-color: #ebebf1;">
+                                        <div class="col-md-6 m-0 p-0">
+                                            <h2 class="md-lbl ml-2 mb-1">Product Maintenance</h2>
+                                        </div>
+                                        <div class="col-md-6 pt-0 pb-0 pr-2 pl-0">
+                                            <button (click)="onClickOfAddProduct()" class="btn btn-primary float-right">
+                                                <i class="fa fa-plus-square"></i> Add Product</button>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="ym_form_group" style="margin-left: 13%;">
-                                    <button (click)="onClickOfReset()" class="ym_button" style="margin-right: 10px;"><i
-                                            class="fa fa-undo"></i> Reset</button>
-                                    <button (click)="getProductMaintenanceList()" class="ym_button"><i
-                                            class="fa fa-search"></i>
-                                        Search</button>
+                                    <div class="row ml-2 mb-0 mr-0 mt-2 pt-0 pb-0 md-bgClr">
+                                        <div class="col-md-6 pl-2 pt-3 pb-2">
+                                            <h3>Product List</h3>
+                                        </div>
+                                    </div>
+                                    <mat-spinner class="md-spinner" *ngIf="isSpinnerShow"></mat-spinner>
+                                    <div id="prodPtableId" class="ml-2 mb-0 mr-0 mt-0 pt-0 pb-0">
+                                        <p-table [value]="productMaintenanceListData" selectionMode="single"
+                                            [scrollable]="true" [responsive]="true" scrollHeight="379px"
+                                            [autoLayout]="true" (onRowSelect)="onProductListRowSelect($event)">
+                                            <ng-template pTemplate="header">
+                                                <tr class="ptableHeader">
+                                                    <th style="width: 8rem;">Product Type</th>
+                                                    <th style="width: 15rem;">Product Name</th>
+                                                    <th style="width: 12rem;">Product Business Model</th>
+                                                    <th style="width: 9rem;">Product Status</th>
+                                                    <th style="width: 147px;">Last Update Date</th>
+                                                    <th style="width: 20rem;">Updated By</th>
+                                                </tr>
+                                            </ng-template>
+                                            <ng-template pTemplate="body" let-responseData>
+                                                <tr [pSelectableRow]="responseData" *ngIf="isShowTblRow">
+                                                    <td style="width: 8rem;">
+                                                        <div class="md-overFlow" title="{{responseData.productType}}">
+                                                            {{responseData.productType}}</div>
+                                                    </td>
+                                                    <td style="width: 15rem;">
+                                                        <div class="md-overFlow" title="{{responseData.productName}}">
+                                                            {{responseData.productName}}</div>
+                                                    </td>
+                                                    <td style="width: 12rem;">
+                                                        <div class="md-overFlow"
+                                                            title="{{responseData.productBusinessModel}}">
+                                                            {{responseData.productBusinessModel}}
+                                                        </div>
+                                                    </td>
+                                                    <td style="width: 9rem;">
+                                                        <div class="md-overFlow" title="{{responseData.productStatus}}">
+                                                            {{responseData.productStatus}}
+                                                        </div>
+                                                    </td>
+                                                    <td style="width: 147px;">
+                                                        <div class="md-overFlow"
+                                                            title="{{responseData.lastUpdateDate}}">
+                                                            {{responseData.lastUpdateDate.split('T')[0]}}
+                                                        </div>
+                                                    </td>
+                                                    <td style="width: 20rem;">
+                                                        <div class="md-overFlow" title="{{responseData.updatedBy}}">
+                                                            {{responseData.updatedBy}}
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </ng-template>
+                                        </p-table>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-md-9">
-                                <div class="m-0 pt-2 pb-2 row" style="background-color: #ebebf1;">
-                                    <div class="col-md-6">
-                                        <h2 class="md-lbl">Product Maintenance</h2>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <button (click)="onClickOfAddProduct()" class="ym_button float-right">
-                                            <i class="fa fa-plus-square"></i> Add Product</button>
-                                    </div>
-                                </div>
-                                <div class="m-0 p-2 row mt-3 md-bgClr">
-                                    <div class="col-md-6 pl-2 pt-2">
-                                        <h3>Product List</h3>
-                                    </div>
-                                </div>
-                                <mat-spinner class="md-spinner" *ngIf="isSpinnerShow"></mat-spinner>
-                                <div id="prodPtableId">
-                                    <p-table [value]="productMaintenanceListData" selectionMode="single"
-                                        [scrollable]="true" [responsive]="true" scrollHeight="200px" [autoLayout]="true"
-                                        [resizableColumns]="isResizeTrue" columnResizeMode="expand"
-                                        (onRowSelect)="onProductListRowSelect($event)">
-                                        <ng-template pTemplate="header">
-                                            <tr class="ptableHeader">
-                                                <th pResizableColumn>Product Type</th>
-                                                <th>Product Name</th>
-                                                <th>Product Business Model</th>
-                                                <th>Product Status</th>
-                                                <th>Last Update Date</th>
-                                                <th>Updated By</th>
-                                            </tr>
-                                        </ng-template>
-                                        <ng-template pTemplate="body" let-responseData>
-                                            <tr [pSelectableRow]="responseData" *ngIf="isShowTblRow">
-                                                <td class="ui-resizable-column">
-                                                    {{responseData.productType}}</td>
-                                                <td><div class="md-overFlow" title="{{responseData.productName}}">{{responseData.productName}}</div></td>
-                                                <td>{{responseData.productBusinessModel}}</td>
-                                                <td>{{responseData.productStatus}}</td>
-                                                <td>{{responseData.lastUpdateDate}}</td>
-                                                <td>
-                                                    <div class="md-overFlow" title="{{responseData.updatedBy}}">
-                                                        {{responseData.updatedBy}}
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </ng-template>
-                                    </p-table>
-                                </div>
-
-
-
-
-                            </div>
-                        </div>
-                    </mat-tab>
-
-                    <mat-tab label="Product Details">
-                        <app-product-details-tab [productDetails]="planDetailsData"></app-product-details-tab>
-                    </mat-tab>
-
-                    <mat-tab label="Validation CheckList">
-
-                    </mat-tab>
-                </mat-tab-group>
-            </div>
-        </mat-card>
+                        </mat-tab>
+                        <mat-tab label="Product Details">
+                            <app-product-details-tab [productDetails]="planDetailsData"></app-product-details-tab>
+                        </mat-tab>
+                        <mat-tab label="Validation CheckList">
+                        </mat-tab>
+                    </mat-tab-group>
+                </div>
+            </mat-card>
+        </div>
     </div>
 </div>

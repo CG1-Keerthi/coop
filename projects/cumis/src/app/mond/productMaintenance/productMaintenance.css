@@ -4,7 +4,7 @@
     background-color: #c41230;
 } */
 .md-refine-card-height{
-    height: 23rem;
+    height: 531px !important;
 }
 
 .md-spinner{
@@ -20,5 +20,6 @@
     white-space: nowrap;
     overflow: hidden;
  }
+ 
 
 

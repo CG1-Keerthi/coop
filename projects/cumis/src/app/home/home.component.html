@@ -9,7 +9,7 @@
                         </div>
                         <div class="col-sm-2">
                             <div class="ym_header_logo">
-                                <a href="https://www.cumis.com/" target="_blank"><img src="assets/images/CUMIS-logo-white.png" style="margin-left: -3rem;"></a>
+                                <a href="/" target="_blank"><img src="assets/images/coop-logo.svg" style="margin-left: -3rem;"></a>
                             </div>
                         </div>
                      
@@ -39,7 +39,7 @@
                                         <a style="cursor: pointer;">{{authCompleteObject?.userName}}<i
                                                 class="fas fa-angle-down ml-2"></i></a>
                                         <ul class="ym_submenu">
-                                            <li><a (click)="logOut()" style="cursor:pointer;color:#008acc !important"><i
+                                            <li><a (click)="logOut()" style="cursor:pointer;color:#00456A !important"><i
                                                         class="fas fa-sign-out-alt"></i> Log Out</a>
                                             </li>
                                         </ul>
@@ -92,12 +92,12 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button #cancelBtn type="button" class="btn btn-danger md-Btn" data-dismiss="modal" autofocus
+                    <button #cancelBtn type="button" class="btn btn-primary md-Btn" data-dismiss="modal" autofocus
                         (click)="onClickOfCancelBtn()">Cancel
                         <i class="fa fa-times bigger-110"></i>
                     </button>
 
-                    <button type="button" class="btn btn-danger md-Btn" data-dismiss="modal"
+                    <button type="button" class="btn btn-primary md-Btn" data-dismiss="modal"
                         (click)="onClickOfLogoutBtn()">Logout
                         <i class="fa fa-check" aria-hidden="true"></i>
                     </button>

@@ -7,3 +7,6 @@ mat-expansion-panel-header{
     background-color: #008acc !important; */
     color: white;
 }
+.md-btn-width{
+    width: 33%;;
+}

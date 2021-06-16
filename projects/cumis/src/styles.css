@@ -76,7 +76,7 @@
 .mat-tab-label {
     font-weight: bold;
     /* background-color: #c41230; */
-    color: #008acc;
+    color: #00456A;
     font-size: 14px;
 }
 
@@ -93,7 +93,7 @@
 .ym_button {
     padding: 0.5rem 0.5rem;
     /* background: #0071b3; */
-    background: #008acc;
+    background: #00456A;
 }
 
 .ym_button.whiteBtn {
@@ -104,7 +104,7 @@
 }
 
 .ym_button.whiteBtn:hover:enabled {
-    background: #00456a;
+    background: #008acc;
     color: #fff;
 }
 
@@ -138,7 +138,7 @@
 }
 
 .loginPageText {
-    background-color: #008acc;
+    background-color: #00456A;
     /* background-color: #C41230; */
     color: white;
     text-align: center;
@@ -148,7 +148,7 @@
 
 .ym_title_bar_overlay {
     background: #fff !important;
-    border: 1px solid #008acc !important;  
+    border: 1px solid #00456A !important;  
 }
 
 .ym_title_bar_overlay>.container>img {
@@ -183,17 +183,17 @@ h5 {
 
 .ym_button:hover:enabled {
     /* background: #00456a; */
-    background: #00456a;
+    background: #008acc;
     border: 1px solid white !important;
 }
 .mat-button:hover{
-    background-color: #00456a !important;
+    background-color: #008acc !important;
     /* border: 1px solid white !important; */
 }
 
 .ym_header_nav li a {
     /* color: #0071b3; */
-    color: #008acc;
+    color: #00456A;
 }
 .md-refine-card{
     /* background-color: #ebebf1; */
@@ -201,15 +201,15 @@ h5 {
     border-style: solid;
     border-width: 1px;
     height: 17rem;
-    border-color: #008acc;
+    border-color: #00456A;
 }
 
 .ym_header_nav li a:hover {
-    color: #00456a;
+    color: #008acc;
 }
 
 .ym_header::after {
-    background: #008acc;
+    background: #00456A;
 }
 
 .ui-dropdown {
@@ -246,7 +246,7 @@ input[type="text"] {
 }
 
 .ym_check .ym_checkmark:after {
-    background: #008acc;
+    background: #00456A;
 }
 
 .body .ui-widget {
@@ -261,16 +261,16 @@ input[type="text"] {
 
 .p-table-caption-container {
     border: 1px solid #c8c8c8;
-    background-color: #008acc;
+    background-color: #00456A;
     border-bottom: 0px;
 }
 
 .modalHeaderClr{
     /* color: #00539c!important; */
-    color: #008acc !important;
+    color: #00456A !important;
 }
 .md-Btn{
-    background-color: #008acc !important;
+    background-color: #00456A !important;
     /* background-color: #C41230; */
 }
 
@@ -292,14 +292,14 @@ z-index:1100;
     margin-top: 120px;
 }
 .btn-primary:hover {
-    background-color: #00456a !important;
+    background-color: #0071b3 !important;
     /* border: 1px solid white !important; */
 }
 .btn-primary{
     font-family: Roboto, "Helvetica Neue", sans-serif;
     font-size: 14px;
     font-weight: 500;
-    background: #0071b3 !important;
+    background: #00456A !important;
     box-sizing: border-box;
     position: relative;
     -webkit-user-select: none;
@@ -329,7 +329,7 @@ z-index:1100;
     background: rgb(114, 117, 119) !important;
 }
 .md-address{
-    color: #0071b3 !important;
+    color: #00456A !important;
     font-size: x-large;
 }
 .mat-tab-body-content{
@@ -339,7 +339,7 @@ z-index:1100;
 .md-border{
     /* border: 1px solid #C41230; */
     /* border: 2px solid #C5D0DC; */
-    border: 2px solid #008acc;
+    border: 2px solid #00456A;
 }
 
 .md-breadCrumbs{
@@ -348,21 +348,21 @@ z-index:1100;
     padding: 10px;
     margin-top: -10px;
     border-style: solid;
-    border-color: #008acc;
+    border-color: #00456A;
     border-width: 1px;
-    color: #008acc;
+    color: #00456A;
     font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: medium;
 }
 .md-h3{
-    background-color: #008acc;
+    background-color: #00456A;
     padding: 8px;
     font-size: 14px !important;
     font-weight: normal;
     font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 .md-lbl{
-    color: #008acc !important;
+    color: #00456A !important;
 }
 .md-group-Btn{
     margin-left: 14%;
@@ -382,7 +382,7 @@ mat-panel-title{
 .widget-body{
     border-style: solid;
     border-width: 1px;
-    border-color: #008acc
+    border-color: #00456A;
 }
 
 /* .ui-table .ui-table-thead > tr > th{
@@ -417,26 +417,26 @@ text-align: center;
   }
 .md-clr{
     /* color: #008acc; */
-    color: #008acc !important;
+    color: #00456A !important;
 }
 .md-bgClr{
-    background: #008acc !important;
+    background: #00456A !important;
 }
-.ui-table .ui-table-tfoot > tr > td{
+/* .ui-table .ui-table-tfoot > tr > td{
     border: 1px solid #008acc !important;
 }
 .ui-table .ui-table-tbody > tr.ui-state-highlight{
     background-color:#008acc !important;
-}
+} */
 .md-btn-group{
     margin-left: 11%;
 }
 
 .mat-calendar-body-selected{
-    background-color:#008acc;
+    background-color:#00456A;
 }
 .mat-datepicker-toggle-active{
-    color: #008acc;
+    color: #00456A;
 }
 /* #clientPtable > p-table > div > div > div > div.ui-table-scrollable-body{
     overflow-y: auto;

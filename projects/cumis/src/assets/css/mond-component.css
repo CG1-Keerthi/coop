@@ -351,7 +351,7 @@ p strong {
 
 hr {
     margin: 0.5rem 0 1rem;
-    border-top: 2px solid #008acc;
+    border-top: 2px solid #00456A;
 }
 
 .ym_button_right {
@@ -736,7 +736,7 @@ hr {
     left: 3px;
     right: 3px;
     bottom: 3px;
-    background: #008acc;
+    background: #00456A;
 }
 
 .ym_form_group .row {
@@ -755,7 +755,7 @@ hr {
     width: 100%;
     position: fixed;
     /* background: white; */
-    background-color:#008acc;
+    background-color:#00456A;
     color: white;
     z-index: 1000;
     top: 0;
@@ -796,7 +796,7 @@ hr {
 .ym_header_nav li a {
     display: block;
     padding: 1.125rem 1rem;
-    color: #008acc;
+    color: #00456A;
 }
 
 .ym_header_nav li a:hover {
@@ -841,13 +841,13 @@ hr {
     width: 100%;
     height: 2px;
     display: block;
-    background: #008acc;
+    background: #00456A;
     /* Old browsers */
     background: -moz-linear-gradient(left, rgba(84, 46, 145, 1) 0%, rgba(169, 33, 121, 1) 100%);
     /* FF3.6-15 */
     background: -webkit-linear-gradient(left, rgba(84, 46, 145, 1) 0%, rgba(169, 33, 121, 1) 100%);
     /* Chrome10-25,Safari5.1-6 */
-    background: #008acc;
+    background: #00456A;
     /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#c41230', endColorstr='#a92179', GradientType=1);
     /* IE6-9 */
@@ -865,7 +865,7 @@ hr {
 
 .ym_alert_bar {
     width: 100%;
-    background: #008acc;
+    background: #00456A;
     color: white;
     padding: 0.75rem 0;
 }
@@ -1229,7 +1229,7 @@ hr {
     width: 100%;
     height: 4px;
     display: block;
-    background: #008acc;
+    background: #00456A;
     /* background: rgb(84, 46, 145);
     /* Old browsers */
     /* background: -moz-linear-gradient(left, rgba(84, 46, 145, 1) 0%, rgba(169, 33, 121, 1) 100%); */
@@ -1264,12 +1264,12 @@ hr {
 
 .ym_footer_links li a {
     /* color: #c41230; */
-    color: #008acc;
+    color: #00456A;
 }
 
 .ym_footer_links li a:hover {
     /* color: #a92179; */
-    color: #00456a;
+    color: #008acc;
 }
 
 
@@ -1647,7 +1647,7 @@ hr {
     content: '';
     width: 2px;
     height: 70%;
-    background: #008acc;
+    background: #00456A;
     position: absolute;
     left: 15%;
     top: 15%;
@@ -1864,7 +1864,7 @@ hr {
 }
 
 .ym_quote_search {
-    background: #008acc;
+    background: #00456A;
     padding: 0.5rem;
     margin: 0 0 2rem;
 }
@@ -2062,7 +2062,7 @@ hr {
     .ym_header,
     .ym_header .container {
         /* background: #fff; */
-        background: #008acc;
+        background: #00456A;
     }
 }
 

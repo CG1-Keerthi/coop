@@ -5,13 +5,13 @@ import { Router } from '@angular/router';
 import { MDMondServiceDS } from '../../_services/ds';
 
 @Component({
-    selector: 'app-cumisHomePage-designer',
-    templateUrl: './cumisHomePage.component.html',
-    styleUrls: ['./cumisHomePage.component.css'],
+    selector: 'app-coopHomePage-designer',
+    templateUrl: './coopHomePage.component.html',
+    styleUrls: ['./coopHomePage.component.css'],
 
 })
 
-export class CumisHomePageComponent implements OnInit {
+export class CoopHomePageComponent implements OnInit {
     menuListData: any;
     newMenuListArray: any;
     constructor(private mdApplicationDetailDS: MDApplicationDetailsDS,

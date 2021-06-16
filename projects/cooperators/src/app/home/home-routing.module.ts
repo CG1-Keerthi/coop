@@ -12,14 +12,14 @@ import { creditorCertificateComponent } from '../mond/creditorCertificateMainten
 import { CreditorDataAdminViewComponent } from '../mond/creditorDataAdminView/creditorDataAdminView.component';
 import { CreditorDataProcessingOverviewComponent } from '../mond/creditorDataAdminView/creditorDataProcessingOverview/creditorDataProcessingOverview.component';
 import { CreditorSelfAdminDashboardComponent } from '../mond/creditorSelfAdminDashboard/creditorSelfAdminDashboard.component';
-import { CumisHomePageComponent } from '../mond/cumisHomePage/cumisHomePage.component';
+import { CoopHomePageComponent } from '../mond/coopHomePage/coopHomePage.component';
 
 
 const homeRoutes: Routes = [
   {
     path: 'home', component: HomeComponent,
     children: [
-      { path: 'userHome', component: CumisHomePageComponent },
+      { path: 'userHome', component: CoopHomePageComponent },
       { path: 'financialReconciliation', component: FinancialReconciliationComponent },
       { path: 'productMaintenance', component: ProductMaintenanceComponent },
       { path: 'reportsComponent', component: ReportsComponent },

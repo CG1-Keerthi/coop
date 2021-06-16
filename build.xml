@@ -2,7 +2,7 @@
 <project name="coop" default="war" basedir=".">
     <property name="jboss.deploy.dir" value="D:/wildfly-8.2.1.Final/standalone/deployments" />   
     <target name="war" description="Create a war file">
-        <zip destfile="cooperators.war" basedir="dist/cumis"/>
+        <zip destfile="cooperators.war" basedir="dist/cooperators"/>
         <copy todir="${jboss.deploy.dir}">
             <fileset dir="." includes="cooperators.war"/>
         </copy>

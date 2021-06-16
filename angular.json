@@ -2,29 +2,29 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "newProjectRoot": "projects",
-  "projects": {
-    "cumis": {
+  "projects": {  
+    "cooperators": {
       "projectType": "application",
       "schematics": {},
-      "root": "projects/cumis",
-      "sourceRoot": "projects/cumis/src",
+      "root": "projects/cooperators",
+      "sourceRoot": "projects/cooperators/src",
       "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/cumis",
-            "index": "projects/cumis/src/index.html",
-            "main": "projects/cumis/src/main.ts",
-            "polyfills": "projects/cumis/src/polyfills.ts",
-            "tsConfig": "projects/cumis/tsconfig.app.json",
+            "outputPath": "dist/cooperators",
+            "index": "projects/cooperators/src/index.html",
+            "main": "projects/cooperators/src/main.ts",
+            "polyfills": "projects/cooperators/src/polyfills.ts",
+            "tsConfig": "projects/cooperators/tsconfig.app.json",
             "aot": true,
             "assets": [
-              "projects/cumis/src/favicon.ico",
-              "projects/cumis/src/assets"
+              "projects/cooperators/src/favicon.ico",
+              "projects/cooperators/src/assets"
             ],
             "styles": [
-              "projects/cumis/src/styles.css"
+              "projects/cooperators/src/styles.css"
             ],
             "scripts": []
           },
@@ -32,8 +32,8 @@
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "projects/cumis/src/environments/environment.ts",
-                  "with": "projects/cumis/src/environments/environment.prod.ts"
+                  "replace": "projects/cooperators/src/environments/environment.ts",
+                  "with": "projects/cooperators/src/environments/environment.prod.ts"
                 }
               ],
               "optimization": true,
@@ -62,33 +62,33 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "cumis:build"
+            "browserTarget": "cooperators:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "cumis:build:production"
+              "browserTarget": "cooperators:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "cumis:build"
+            "browserTarget": "cooperators:build"
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/cumis/src/test.ts",
-            "polyfills": "projects/cumis/src/polyfills.ts",
-            "tsConfig": "projects/cumis/tsconfig.spec.json",
-            "karmaConfig": "projects/cumis/karma.conf.js",
+            "main": "projects/cooperators/src/test.ts",
+            "polyfills": "projects/cooperators/src/polyfills.ts",
+            "tsConfig": "projects/cooperators/tsconfig.spec.json",
+            "karmaConfig": "projects/cooperators/karma.conf.js",
             "assets": [
-              "projects/cumis/src/favicon.ico",
-              "projects/cumis/src/assets"
+              "projects/cooperators/src/favicon.ico",
+              "projects/cooperators/src/assets"
             ],
             "styles": [
-              "projects/cumis/src/styles.css"
+              "projects/cooperators/src/styles.css"
             ],
             "scripts": []
           }
@@ -97,9 +97,9 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "projects/cumis/tsconfig.app.json",
-              "projects/cumis/tsconfig.spec.json",
-              "projects/cumis/e2e/tsconfig.json"
+              "projects/cooperators/tsconfig.app.json",
+              "projects/cooperators/tsconfig.spec.json",
+              "projects/cooperators/e2e/tsconfig.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -109,19 +109,19 @@
         "e2e": {
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
-            "protractorConfig": "projects/cumis/e2e/protractor.conf.js",
-            "devServerTarget": "cumis:serve"
+            "protractorConfig": "projects/cooperators/e2e/protractor.conf.js",
+            "devServerTarget": "cooperators:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "cumis:serve:production"
+              "devServerTarget": "cooperators:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "cumis",
+  "defaultProject": "cooperators",
   "cli": {
     "analytics": false
   }

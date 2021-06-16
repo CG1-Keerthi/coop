@@ -57,7 +57,7 @@ import { LAISComponent } from '../mond/creditorDataAdminView/creditorDataProcess
 import { LGMComponent } from '../mond/creditorDataAdminView/creditorDataProcessingOverview/LGM/lgm.component';
 import { CreditorSelfAdminDashboardComponent } from '../mond/creditorSelfAdminDashboard/creditorSelfAdminDashboard.component';
 import { ChartsModule } from 'ng2-charts';
-import { CumisHomePageComponent } from '../mond/cumisHomePage/cumisHomePage.component';
+import { CoopHomePageComponent } from '../mond/coopHomePage/coopHomePage.component';
 import { NgxMaskModule } from 'ngx-mask';
 import { ProductDetailsComponent } from '../mond/productMaintenance/productDetails/productDetails';
 import { ProductDetailFormBuilderModule } from '../form-builder/productMaintenance/productDetails/product-detail-form.module';
@@ -90,7 +90,7 @@ import { ProductDetailFormBuilderModule } from '../form-builder/productMaintenan
     LAISComponent,
     LGMComponent,
     CreditorSelfAdminDashboardComponent,
-    CumisHomePageComponent
+    CoopHomePageComponent
   ],
   imports: [
     CommonModule,

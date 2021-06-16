@@ -8,7 +8,7 @@ import { DomSanitizer, SafeUrl, SafeResourceUrl } from '@angular/platform-browse
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
-  title = 'cumis';
+  title = 'cooperators';
 
   public currRoute: string;
   public currStyleUrl: SafeResourceUrl;

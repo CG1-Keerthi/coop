@@ -8,8 +8,8 @@
         "test": "ng test",
         "lint": "ng lint",
         "e2e": "ng e2e",
-        "cumisLint": "tslint -p projects/cumis/tsconfig.app.json -o tslint/cumis.txt",
-        "prerender": "ng run projects/cumis:prerender"
+        "cooperatorsLint": "tslint -p projects/cooperators/tsconfig.app.json -o tslint/cooperators.txt",
+        "prerender": "ng run projects/cooperators:prerender"
     },
     "private": true,
     "dependencies": {

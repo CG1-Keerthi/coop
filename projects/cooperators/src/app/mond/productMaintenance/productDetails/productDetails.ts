@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { MDCodeListHeaderDS, MDMondServiceDS } from '../../../_services/ds'
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ProductDetailFormBuilderService } from '../../../form-builder/productMaintenance/productDetails/product-detail-form-builder.service';
@@ -15,10 +15,16 @@ export class ProductDetailsComponent implements OnInit {
   @Input() set productDetails(data) {
     if (Object.keys(data).length > 0){
       this.productDetailsData = data;
-      this.isFieldsreadonly = true
+      this.isFieldsreadonly = true;
+      this.isProductInuseFieldsreadonly = true;
+      this.isTerminationDateFieldreadonly = true;
+      this.isUpdateDateFieldReadonly = false;
       this.productDetailsForm.patchValue(data);
     }else{
       this.isProductInuseFieldsreadonly = true;
+      this.isTerminationDateFieldreadonly = true;
+      this.isUpdateDateFieldReadonly = true;
+      this.renderer.setAttribute(this.productStatusList.nativeElement, 'disabled', 'true');
     }
   }
   productDetailsForm: FormGroup;
@@ -26,10 +32,15 @@ export class ProductDetailsComponent implements OnInit {
   public csfrToken: any;
   public productDetailsData: any;
   public isProductInuseFieldsreadonly: boolean = false;
+  public isTerminationDateFieldreadonly: boolean = false;
+  public isUpdateDateFieldReadonly: boolean = false;
+
+  @ViewChild('productStatusList') productStatusList: ElementRef;
 
   constructor(private mdMondServiceDS: MDMondServiceDS,
     private mdCommonGetterAndSetter: MDCommonGetterSetter,
-    private productDetailService: ProductDetailFormBuilderService) { }
+    private productDetailService: ProductDetailFormBuilderService,
+    private renderer: Renderer2) { }
 
   ngOnInit() {
     this.mdCommonGetterAndSetter.getCsfrToken().subscribe(data => {
@@ -87,7 +98,11 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   onClickOfUpdatePlan() {
-    this.isFieldsreadonly = false
+    debugger;
+    this.isFieldsreadonly = false;
+    this.isProductInuseFieldsreadonly = false;
+    this.isTerminationDateFieldreadonly = false;
+    this.renderer.setProperty(this.productStatusList.nativeElement, 'disabled', false);
   }
 
 }

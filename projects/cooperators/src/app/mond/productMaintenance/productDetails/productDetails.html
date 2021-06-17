@@ -3,9 +3,9 @@
         <div class="col-md-6">
         </div>
         <div class="col-md-6">
-            <button class="btn btn-primary float-right ml-2" (click)="onClickOfUpdatePlan()"> Update Product</button>
-            <button class="btn btn-primary float-right ml-2"> View Plan <i class="fa fa-arrow-right"></i></button>
-            <button class="btn btn-primary float-right ml-2"> Add Plan <i class="fa fa-plus"></i></button>
+            <button class="btn btn-primary float-right ml-2" [disabled]="isUpdateDateFieldReadonly" (click)="onClickOfUpdatePlan()"> Update Product</button>
+            <button class="btn btn-primary float-right ml-2" [disabled]="isUpdateDateFieldReadonly"> View Plan <i class="fa fa-arrow-right"></i></button>
+            <button class="btn btn-primary float-right ml-2" [disabled]="isUpdateDateFieldReadonly"> Add Plan <i class="fa fa-plus"></i></button>
         </div>
     </div>
 <div formGroupName="productInfo">
@@ -43,7 +43,7 @@
             <div class="row pl-1">
                 <input style="width: 70%;" class="col-md-9" matInput data-name="dateFormat"
                     formControlName="productEffectiveDate" name="productEffectiveDate"
-                    [matDatepicker]="picker" placeholder="Choose a date">
+                    [matDatepicker]="picker" placeholder="Product Effective Date">
                 <mat-datepicker-toggle matSuffix [for]="picker">
                 </mat-datepicker-toggle>
                 <mat-datepicker class="col-md-3" #picker></mat-datepicker>
@@ -64,8 +64,8 @@
             <div class="row pl-1">
                 <input style="width: 70%;" class="col-md-9" matInput data-name="dateFormat"
                     formControlName="productTerminationDate" name="productTerminationDate"
-                    [matDatepicker]="picker1" placeholder="Choose a date">
-                <mat-datepicker-toggle matSuffix [for]="picker1">
+                    [matDatepicker]="picker1" placeholder="Product Termination Date" [readonly]="isTerminationDateFieldreadonly">
+                <mat-datepicker-toggle matSuffix [for]="picker1"  [disabled]="isTerminationDateFieldreadonly">
                 </mat-datepicker-toggle>
                 <mat-datepicker class="col-md-3" #picker1></mat-datepicker>
             </div>

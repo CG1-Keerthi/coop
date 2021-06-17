@@ -41,7 +41,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   constructor(private formBuilder: FormBuilder, private mdLoginDS: MDLoginDS,
     private mdApplicationDetailDS: MDApplicationDetailsDS, private router: Router,
     private mdCommonGetterAndSetter: MDCommonGetterSetter, private mDMondService: MDMondServiceDS,
-    private toastService: ToastrService, private countDownTimer: MDCountdownTimer, 
+    private toastService: ToastrService, private countDownTimer: MDCountdownTimer,
     private mdSessionDS: MDSessionDS
     //  private appRoutingServices:AppRoutingServices
   ) {
@@ -71,8 +71,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     this.isB2CFl = this.mdCommonGetterAndSetter.isB2CFl;
     if (!this.isB2CFl) {
-      this.getAuthorizationInfo();
-      this.router.navigate(['/home/userHome'], { skipLocationChange: true });
+      this.getAuthorizationInfo();      
     }
     this.homeForm = this.formBuilder.group({
     });
@@ -95,7 +94,13 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.mdLoginDS.auth(authParam).pipe(first()).subscribe(
       data => {
         // console.log("data.companyIdentifier " + data.companyIdentifier);
-
+        if (data.companyIdentifier != "24000") {
+          this.toastService.error("Please change the company to Cooperators", "Error", {
+            disableTimeOut: true
+          });
+          this.router.navigate([''], { skipLocationChange: true });
+          return;
+        }
         this.setAuthorizationInfo(data);
         console.log("csfrToken ", data.csfrToken);
         this.mdCommonGetterAndSetter.setCsfrToken(data.csfrToken);
@@ -127,7 +132,7 @@ export class HomeComponent implements OnInit, OnDestroy {
           // console.log("%c SESSION CHECK.","background: orange; color: white; font-size: 14px;");
           this.countDownTimer.getSessionExpiryNotification();
         }, 60000);
-
+        this.router.navigate(['/home/userHome'], { skipLocationChange: true });
         //this.tabsComponent.openTab("Dashboard", this.dashboardTemplate, {}, true);
       },
       error => {
@@ -170,7 +175,16 @@ export class HomeComponent implements OnInit, OnDestroy {
         //     }
         //   }
         // }  
-      
+        // debugger;
+        // let data = {"applicationMenuViewAllowed":false,"applicationViewAllowed":true,"bpmAdminViewAllowed":true,"bpmDesignerViewAllowed":true,"bpmERDiagramViewAllowed":true,"bpmKPIDefinitionViewAllowed":true,"bpmKPIViewAllowed":true,"bpmProcessAdminViewAllowed":true,"bpmProcessLaunchViewAllowed":true,"bpmRuleSetViewAllowed":true,"bpmUMLDiagramViewAllowed":true,"bpmUserViewAllowed":true,"bpmViewAllowed":true,"classDiagramViewAllowed":true,"dataFormDesignerViewAllowed":true,"formDesignerViewAllowed":true,"decisionTableViewAllowed":true,"reportDesignerViewAllowed":true,"decisionTreeViewAllowed":true,"searchFormDesignerViewAllowed":true,"objectSearchViewAllowed":true,"reportViewAllowed":true,"companyHomePageName":"CompHomePage_6881.html","orgChartViewAllowed":true,"processTypeViewAllowed":true,"bpmPageFlowViewAllowed":false,"bpmFormTemplateViewAllowed":false,"userId":1044,"companyId":6881,"userName":"Soumya K M","loginName":"soumya.km@mondcloud.com","email":"soumya.km@mondcloud.com","sessionTimeOut":18000,"rowsPerPage":200,"companyIdentifier":"24000","companyName":"The Cooperators","userValidFrom":"Jun 11, 2019 6:30:00 PM","userValidTill":"Dec 28, 2099 6:30:00 PM","isTFAEnabled":false,"authType":1,"companyLogo":"Cooperators.png","partnerCompLogo":"","userGroupCd":6,"changePWOnNextLogin":false,"csfrToken":"672618aa-62c1-45ea-8c89-d8bbf999bdd4"}
+        //         if (data.companyIdentifier != "24000") {
+        //           this.toastService.error("Please change the company to Cooperators", "Error", {
+        //             disableTimeOut: true
+        //           });
+        //           this.router.navigate([''], { skipLocationChange: true });
+        //           return;
+        //         }
+        //         this.router.navigate(['/home/userHome'], { skipLocationChange: true });
       });
 
   }
@@ -239,13 +253,13 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.authCompleteObject = authObject;
     this.mdApplicationDetailDS.getListOfApplicationDetailsWithMenuAndAccessRights().pipe(first()).subscribe(
       data => {
-       this.menuList = data;        
+        this.menuList = data;
       },
       error => {
         debugger;
         console.log(error);
-        let data = [{"applicationDetailsId":"59eea95c2cdcf771b041c30f","applicationDetailsIdLong":2,"companyId":6881,"applicationName":"Creditors Insurance","bpmEngineVersion":1,"menuList":[{"menuId":"59eeaa192cdcf771b041c310","menuIdLong":3,"applicationDetailsId":"59eea95c2cdcf771b041c30f","companyId":6881,"menuName":"Creditor Data - Admin View","menuLink":"form_155489","menuProcessLink":"-1","toolTip":"View policy data files submitted by Creditors \u0026 their processing status","parentMenuId":""},{"menuId":"5a1e7a952cdc3d5494434c93","menuIdLong":5,"applicationDetailsId":"59eea95c2cdcf771b041c30f","companyId":6881,"menuName":"Creditor Certificate Maintenance","menuLink":"form_157744","menuProcessLink":"-1","toolTip":"Search and maintain creditor certificate","parentMenuId":""},{"menuId":"5a3345a32cdc7238f41c0bfc","menuIdLong":8,"applicationDetailsId":"59eea95c2cdcf771b041c30f","companyId":6881,"menuName":"Client Maintenance","menuLink":"form_159112","menuProcessLink":"-1","toolTip":"Search and maintain Client","parentMenuId":""},{"menuId":"5a4179022cdcded8a5a7d1df","menuIdLong":10,"applicationDetailsId":"59eea95c2cdcf771b041c30f","companyId":6881,"menuName":"Product Maintenance","menuLink":"form_159889","menuProcessLink":"-1","toolTip":"Search and maintain Product ","parentMenuId":""},{"menuId":"5aa75d5164deef848ec83094","menuIdLong":11,"applicationDetailsId":"59eea95c2cdcf771b041c30f","companyId":6881,"menuName":"Reports","menuLink":"form_165662","menuProcessLink":"-1","toolTip":"Reports","parentMenuId":""},{"menuId":"5bcffef92cdcd46a03039b96","menuIdLong":12,"applicationDetailsId":"59eea95c2cdcf771b041c30f","companyId":6881,"menuName":"Creditor Self Admin Dashboard","menuLink":"form_178306","menuProcessLink":"-1","toolTip":"Creditor Self Admin Dashboard","parentMenuId":""},{"menuId":"5e4bb5a32cdc3f44ae386bda","menuIdLong":16,"applicationDetailsId":"59eea95c2cdcf771b041c30f","companyId":6881,"menuName":"Rate Structure configuration","menuLink":"form_244694","menuProcessLink":"-1","toolTip":"Rate Structure configuration","parentMenuId":""},{"menuId":"5e4e4fc32cdcf18e366e2328","menuIdLong":17,"applicationDetailsId":"59eea95c2cdcf771b041c30f","companyId":6881,"menuName":"Financial Reconciliation","menuLink":"form_245289","menuProcessLink":"-1","toolTip":"Financial Reconciliation","parentMenuId":""}],"homePagePresent":false}]
-        this.menuList = data;       
+        let data = [{ "applicationDetailsId": "59eea95c2cdcf771b041c30f", "applicationDetailsIdLong": 2, "companyId": 6881, "applicationName": "Creditors Insurance", "bpmEngineVersion": 1, "menuList": [{ "menuId": "59eeaa192cdcf771b041c310", "menuIdLong": 3, "applicationDetailsId": "59eea95c2cdcf771b041c30f", "companyId": 6881, "menuName": "Creditor Data - Admin View", "menuLink": "form_155489", "menuProcessLink": "-1", "toolTip": "View policy data files submitted by Creditors \u0026 their processing status", "parentMenuId": "" }, { "menuId": "5a1e7a952cdc3d5494434c93", "menuIdLong": 5, "applicationDetailsId": "59eea95c2cdcf771b041c30f", "companyId": 6881, "menuName": "Creditor Certificate Maintenance", "menuLink": "form_157744", "menuProcessLink": "-1", "toolTip": "Search and maintain creditor certificate", "parentMenuId": "" }, { "menuId": "5a3345a32cdc7238f41c0bfc", "menuIdLong": 8, "applicationDetailsId": "59eea95c2cdcf771b041c30f", "companyId": 6881, "menuName": "Client Maintenance", "menuLink": "form_159112", "menuProcessLink": "-1", "toolTip": "Search and maintain Client", "parentMenuId": "" }, { "menuId": "5a4179022cdcded8a5a7d1df", "menuIdLong": 10, "applicationDetailsId": "59eea95c2cdcf771b041c30f", "companyId": 6881, "menuName": "Product Maintenance", "menuLink": "form_159889", "menuProcessLink": "-1", "toolTip": "Search and maintain Product ", "parentMenuId": "" }, { "menuId": "5aa75d5164deef848ec83094", "menuIdLong": 11, "applicationDetailsId": "59eea95c2cdcf771b041c30f", "companyId": 6881, "menuName": "Reports", "menuLink": "form_165662", "menuProcessLink": "-1", "toolTip": "Reports", "parentMenuId": "" }, { "menuId": "5bcffef92cdcd46a03039b96", "menuIdLong": 12, "applicationDetailsId": "59eea95c2cdcf771b041c30f", "companyId": 6881, "menuName": "Creditor Self Admin Dashboard", "menuLink": "form_178306", "menuProcessLink": "-1", "toolTip": "Creditor Self Admin Dashboard", "parentMenuId": "" }, { "menuId": "5e4bb5a32cdc3f44ae386bda", "menuIdLong": 16, "applicationDetailsId": "59eea95c2cdcf771b041c30f", "companyId": 6881, "menuName": "Rate Structure configuration", "menuLink": "form_244694", "menuProcessLink": "-1", "toolTip": "Rate Structure configuration", "parentMenuId": "" }, { "menuId": "5e4e4fc32cdcf18e366e2328", "menuIdLong": 17, "applicationDetailsId": "59eea95c2cdcf771b041c30f", "companyId": 6881, "menuName": "Financial Reconciliation", "menuLink": "form_245289", "menuProcessLink": "-1", "toolTip": "Financial Reconciliation", "parentMenuId": "" }], "homePagePresent": false }]
+        this.menuList = data;
       });
   }
 

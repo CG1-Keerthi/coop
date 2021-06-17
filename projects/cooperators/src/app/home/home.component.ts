@@ -71,7 +71,8 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     this.isB2CFl = this.mdCommonGetterAndSetter.isB2CFl;
     if (!this.isB2CFl) {
-      this.getAuthorizationInfo();      
+      this.getAuthorizationInfo();   
+      this.router.navigate(['/home/userHome'], { skipLocationChange: true });   
     }
     this.homeForm = this.formBuilder.group({
     });
@@ -93,14 +94,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     var authParam = '';
     this.mdLoginDS.auth(authParam).pipe(first()).subscribe(
       data => {
-        // console.log("data.companyIdentifier " + data.companyIdentifier);
-        if (data.companyIdentifier != "24000") {
-          this.toastService.error("Please change the company to Cooperators", "Error", {
-            disableTimeOut: true
-          });
-          this.router.navigate([''], { skipLocationChange: true });
-          return;
-        }
+        // console.log("data.companyIdentifier " + data.companyIdentifier);       
         this.setAuthorizationInfo(data);
         console.log("csfrToken ", data.csfrToken);
         this.mdCommonGetterAndSetter.setCsfrToken(data.csfrToken);
@@ -132,7 +126,7 @@ export class HomeComponent implements OnInit, OnDestroy {
           // console.log("%c SESSION CHECK.","background: orange; color: white; font-size: 14px;");
           this.countDownTimer.getSessionExpiryNotification();
         }, 60000);
-        this.router.navigate(['/home/userHome'], { skipLocationChange: true });
+        
         //this.tabsComponent.openTab("Dashboard", this.dashboardTemplate, {}, true);
       },
       error => {
@@ -175,16 +169,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         //     }
         //   }
         // }  
-        // debugger;
-        // let data = {"applicationMenuViewAllowed":false,"applicationViewAllowed":true,"bpmAdminViewAllowed":true,"bpmDesignerViewAllowed":true,"bpmERDiagramViewAllowed":true,"bpmKPIDefinitionViewAllowed":true,"bpmKPIViewAllowed":true,"bpmProcessAdminViewAllowed":true,"bpmProcessLaunchViewAllowed":true,"bpmRuleSetViewAllowed":true,"bpmUMLDiagramViewAllowed":true,"bpmUserViewAllowed":true,"bpmViewAllowed":true,"classDiagramViewAllowed":true,"dataFormDesignerViewAllowed":true,"formDesignerViewAllowed":true,"decisionTableViewAllowed":true,"reportDesignerViewAllowed":true,"decisionTreeViewAllowed":true,"searchFormDesignerViewAllowed":true,"objectSearchViewAllowed":true,"reportViewAllowed":true,"companyHomePageName":"CompHomePage_6881.html","orgChartViewAllowed":true,"processTypeViewAllowed":true,"bpmPageFlowViewAllowed":false,"bpmFormTemplateViewAllowed":false,"userId":1044,"companyId":6881,"userName":"Soumya K M","loginName":"soumya.km@mondcloud.com","email":"soumya.km@mondcloud.com","sessionTimeOut":18000,"rowsPerPage":200,"companyIdentifier":"24000","companyName":"The Cooperators","userValidFrom":"Jun 11, 2019 6:30:00 PM","userValidTill":"Dec 28, 2099 6:30:00 PM","isTFAEnabled":false,"authType":1,"companyLogo":"Cooperators.png","partnerCompLogo":"","userGroupCd":6,"changePWOnNextLogin":false,"csfrToken":"672618aa-62c1-45ea-8c89-d8bbf999bdd4"}
-        //         if (data.companyIdentifier != "24000") {
-        //           this.toastService.error("Please change the company to Cooperators", "Error", {
-        //             disableTimeOut: true
-        //           });
-        //           this.router.navigate([''], { skipLocationChange: true });
-        //           return;
-        //         }
-        //         this.router.navigate(['/home/userHome'], { skipLocationChange: true });
+     
       });
 
   }

@@ -48,7 +48,8 @@ export class AuthComponent extends HomeComponent implements OnInit {
         private mdMondService: MDMondServiceDS,
         private toasterService: ToastrService,
         private countdownTimer: MDCountdownTimer,
-        private sessionDS: MDSessionDS,
+        private sessionDS: MDSessionDS
+
     ) {
         super(loginFormBuilder, loginMdDS, loginMdApplicationDetailDS, loginRouter, mdCommonGetterSetter, mdMondService, toasterService, countdownTimer, sessionDS
         )
@@ -164,16 +165,29 @@ export class AuthComponent extends HomeComponent implements OnInit {
         var dataToSend = 'userName=' + this.accessFormFields.username.value + '&password=' + Base64.encode(this.accessFormFields.password.value) + '&bOffset=' + bOffset + '&tfaAuthCode=' + "" + '&module=mondis' + '&enc=true';
         this.loginMdDS.login(dataToSend).pipe(first()).subscribe(
             data => {
-                this.loginRouter.navigate(['/home'], { skipLocationChange: true });
+                this.loginMdDS.auth('').pipe(first()).subscribe(
+                    data => {
+                        if (data.companyIdentifier != "24000") {
+                            this.toasterService.error("Please change the company to Cooperators", "Error", {
+                                disableTimeOut: true
+                            });
+                            this.loginRouter.navigate([''], { skipLocationChange: true });
+                            return;
+                        }
+
+                        this.loginRouter.navigate(['/home'], { skipLocationChange: true });
+                    },
+                    error => {
+                        console.log('loginMdDS Auth Error: ', error);                        
+                    }
+                )
             },
             error => {
+                debugger;
                 this.toasterService.error("Authentication Failed", "Error", {
                     disableTimeOut: true
                 });
                 this.loading = false;
-
-                // // soumya code to redirect home page in local
-                // this.loginRouter.navigate(['/home'], { skipLocationChange: true });
             });
     }
 

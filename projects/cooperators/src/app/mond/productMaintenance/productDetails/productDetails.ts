@@ -3,6 +3,7 @@ import { MDCodeListHeaderDS, MDMondServiceDS } from '../../../_services/ds'
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ProductDetailFormBuilderService } from '../../../form-builder/productMaintenance/productDetails/product-detail-form-builder.service';
 import { MDCommonGetterSetter } from '../../../_services/common';
+import { ReturnStatement } from '@angular/compiler';
 
 @Component({
   selector: 'app-product-details-tab',
@@ -16,15 +17,26 @@ export class ProductDetailsComponent implements OnInit {
     if (Object.keys(data).length > 0){
       this.productDetailsData = data;
       this.isFieldsreadonly = true;
+      this.isSubmitBtnDisabled = true;
       this.isProductInuseFieldsreadonly = true;
       this.isTerminationDateFieldreadonly = true;
       this.isUpdateDateFieldReadonly = false;
+      this.renderer.setAttribute(this.productBusinessModelList.nativeElement, 'disabled', 'true');
+      this.renderer.setAttribute(this.productStatusList.nativeElement, 'disabled', 'true');
+      this.renderer.setAttribute(this.CertificateDetailList.nativeElement, 'disabled', "true");
+      this.renderer.setAttribute(this.memberInitiatedList.nativeElement, 'disabled', "true");
+      this.productDetailsForm.reset();
       this.productDetailsForm.patchValue(data);
     }else{
+      this.productDetailsForm.reset();
+      this.isSubmitBtnDisabled = false;
       this.isProductInuseFieldsreadonly = true;
       this.isTerminationDateFieldreadonly = true;
       this.isUpdateDateFieldReadonly = true;
       this.renderer.setAttribute(this.productStatusList.nativeElement, 'disabled', 'true');
+      this.renderer.setProperty(this.productBusinessModelList.nativeElement, 'disabled', false);
+      this.renderer.setProperty(this.CertificateDetailList.nativeElement, 'disabled', false);
+      this.renderer.setProperty(this.memberInitiatedList.nativeElement, 'disabled', false);
     }
   }
   productDetailsForm: FormGroup;
@@ -34,8 +46,12 @@ export class ProductDetailsComponent implements OnInit {
   public isProductInuseFieldsreadonly: boolean = false;
   public isTerminationDateFieldreadonly: boolean = false;
   public isUpdateDateFieldReadonly: boolean = false;
+  public isSubmitBtnDisabled:boolean = false;
 
   @ViewChild('productStatusList') productStatusList: ElementRef;
+  @ViewChild('productBusinessModelList') productBusinessModelList: ElementRef;
+  @ViewChild('CertificateDetailList') CertificateDetailList: ElementRef;
+  @ViewChild('memberInitiatedList') memberInitiatedList: ElementRef;
 
   constructor(private mdMondServiceDS: MDMondServiceDS,
     private mdCommonGetterAndSetter: MDCommonGetterSetter,
@@ -77,13 +93,19 @@ export class ProductDetailsComponent implements OnInit {
 
   onClickOfProductDetailSubmit(){
     debugger;
+
+    if(this.productDetailsForm.invalid){
+      this.mdMondServiceDS.showErrorMessage("please fill out the field");
+      ReturnStatement;
+    }
+
     if(this.productDetailsData == undefined){
       this.productDetailsForm.value.productInfo.productCurrentRecordFlag = 'N';
     }else{
       this.productDetailsForm.value.productInfo.productCurrentRecordFlag = 'Y';
-      this.productDetailsForm.value.productInfo.productId = this.productDetailsData.productInfo_productId;
-      this.productDetailsForm.value.productInfo.productStatusEndDate = this.productDetailsData.productInfo_productStatusEndDate;
-      this.productDetailsForm.value.productInfo.lastUpdateDate = this.productDetailsData.productInfo_lastUpdateDate;
+      this.productDetailsForm.value.productInfo.productId = this.productDetailsData.productInfo.productId;
+      this.productDetailsForm.value.productInfo.productStatusEndDate = this.productDetailsData.productInfo.productStatusEndDate;
+      this.productDetailsForm.value.productInfo.lastUpdateDate = this.productDetailsData.productInfo.lastUpdateDate;
       this.productDetailsForm.value.productInfo.mondFormDateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSX";
     }
     let formData = btoa(JSON.stringify(this.productDetailsForm.value));
@@ -100,9 +122,13 @@ export class ProductDetailsComponent implements OnInit {
   onClickOfUpdatePlan() {
     debugger;
     this.isFieldsreadonly = false;
-    this.isProductInuseFieldsreadonly = false;
+    this.isSubmitBtnDisabled = false;
+    // this.isProductInuseFieldsreadonly = false;
     this.isTerminationDateFieldreadonly = false;
     this.renderer.setProperty(this.productStatusList.nativeElement, 'disabled', false);
+    this.renderer.setProperty(this.productBusinessModelList.nativeElement, 'disabled', false);
+    this.renderer.setProperty(this.CertificateDetailList.nativeElement, 'disabled', false);
+    this.renderer.setProperty(this.memberInitiatedList.nativeElement, 'disabled', false);
   }
 
 }

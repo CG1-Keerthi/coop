@@ -5,6 +5,8 @@ import { ProductDetailFormBuilderService } from '../../../form-builder/productMa
 import { MDCommonGetterSetter } from '../../../_services/common';
 import { ReturnStatement } from '@angular/compiler';
 
+
+
 @Component({
   selector: 'app-product-details-tab',
   templateUrl: './productDetails.html',
@@ -29,10 +31,21 @@ export class ProductDetailsComponent implements OnInit {
       this.productDetailsForm.patchValue(data);
     }else{
       this.productDetailsForm.reset();
+      this.isSubmitted = false;
+      this.isFieldsreadonly = false;
       this.isSubmitBtnDisabled = false;
       this.isProductInuseFieldsreadonly = true;
       this.isTerminationDateFieldreadonly = true;
       this.isUpdateDateFieldReadonly = true;
+      let selectedProductDetailDropdownVal = {
+        "productInfo": {
+          "productBusinessModel": "",
+          "productStatus":"",
+          "certificateDetailAdministrator":"",
+          "memberInitiatedTerminationRule":"" 
+        }
+      }
+      this.productDetailsForm.patchValue(selectedProductDetailDropdownVal);
       this.renderer.setAttribute(this.productStatusList.nativeElement, 'disabled', 'true');
       this.renderer.setProperty(this.productBusinessModelList.nativeElement, 'disabled', false);
       this.renderer.setProperty(this.CertificateDetailList.nativeElement, 'disabled', false);
@@ -47,6 +60,9 @@ export class ProductDetailsComponent implements OnInit {
   public isTerminationDateFieldreadonly: boolean = false;
   public isUpdateDateFieldReadonly: boolean = false;
   public isSubmitBtnDisabled:boolean = false;
+  public isSubmitted: boolean = false;
+  public isTooltip: boolean = false;
+  public isRefundTooltip: boolean = false;
 
   @ViewChild('productStatusList') productStatusList: ElementRef;
   @ViewChild('productBusinessModelList') productBusinessModelList: ElementRef;
@@ -95,8 +111,9 @@ export class ProductDetailsComponent implements OnInit {
     debugger;
 
     if(this.productDetailsForm.invalid){
-      this.mdMondServiceDS.showErrorMessage("please fill out the field");
-      ReturnStatement;
+      this.mdMondServiceDS.showErrorMessage("please enter the value for mandatory fields");
+      this.isSubmitted = true
+      return;
     }
 
     if(this.productDetailsData == undefined){
@@ -119,6 +136,33 @@ export class ProductDetailsComponent implements OnInit {
         });
   }
 
+
+  onKeyUpPremiumPeriod(event){
+    debugger;
+   if(event.target.value == ""){
+    this.isTooltip = true;
+   setTimeout(()=>{
+    this.isTooltip = false;
+   },2000)
+    
+   }else{
+    this.isTooltip = false;
+   }
+  
+  }
+
+  onKeyUpRefund(event){
+    if(event.target.value == ""){
+      this.isRefundTooltip = true;
+     setTimeout(()=>{
+      this.isRefundTooltip = false;
+     },2000)
+      
+     }else{
+      this.isRefundTooltip = false;
+     }
+  }
+
   onClickOfUpdatePlan() {
     debugger;
     this.isFieldsreadonly = false;
@@ -129,6 +173,21 @@ export class ProductDetailsComponent implements OnInit {
     this.renderer.setProperty(this.productBusinessModelList.nativeElement, 'disabled', false);
     this.renderer.setProperty(this.CertificateDetailList.nativeElement, 'disabled', false);
     this.renderer.setProperty(this.memberInitiatedList.nativeElement, 'disabled', false);
+  }
+
+
+  onClikOfClear(){
+    debugger;
+    this.productDetailsForm.reset();
+    let selectedProductDetailDropdownVal = {
+      "productInfo": {
+        "productBusinessModel": "",
+        "productStatus":"",
+        "certificateDetailAdministrator":"",
+        "memberInitiatedTerminationRule":"" 
+      }
+    }
+    this.productDetailsForm.patchValue(selectedProductDetailDropdownVal);
   }
 
 }

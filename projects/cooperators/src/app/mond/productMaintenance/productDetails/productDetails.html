@@ -17,7 +17,7 @@
                 <label class="md-lbl">Product Type</label>
                 <input style="width: 70%;" placeholder="Product Type" [readonly]="isFieldsreadonly"
                     formControlName="productType" name="productType">
-                <div *ngIf="productDetailsForm.get('productInfo.productType').invalid">
+                <div *ngIf="isSubmitted && productDetailsForm.get('productInfo.productType').invalid">
                     <p class="text-danger">Please enter the product Type</p>
                 </div>
             </div>
@@ -25,7 +25,7 @@
                 <label class="md-lbl">Product Name</label>
                 <input style="width: 70%;" placeholder="Product Name" [readonly]="isFieldsreadonly"
                     formControlName="productName" name="productName">
-                <div *ngIf="productDetailsForm.get('productInfo.productName').invalid">
+                <div *ngIf="isSubmitted && productDetailsForm.get('productInfo.productName').invalid">
                     <p class="text-danger">Please enter the product Name</p>
                 </div>
             </div>
@@ -33,7 +33,7 @@
                 <label class="md-lbl">Product Number</label>
                 <input style="width: 70%;" placeholder="Product Number" [readonly]="isFieldsreadonly"
                     formControlName="productNumber" name="productNumber">
-                <div *ngIf="productDetailsForm.get('productInfo.productNumber').invalid">
+                <div *ngIf="isSubmitted && productDetailsForm.get('productInfo.productNumber').invalid">
                     <p class="text-danger">Please enter the product Number</p>
                 </div>
             </div>
@@ -46,7 +46,7 @@
                         <option value="Location">Location</option>
                     </select>
                 </div>
-                <div *ngIf="productDetailsForm.get('productInfo.productBusinessModel').invalid">
+                <div *ngIf="isSubmitted && productDetailsForm.get('productInfo.productBusinessModel').invalid">
                     <p class="text-danger">Please select the Product Business Model</p>
                 </div>
             </div>
@@ -63,7 +63,7 @@
                     </mat-datepicker-toggle>
                     <mat-datepicker class="col-md-3" #picker></mat-datepicker>
                 </div>
-                <div *ngIf="productDetailsForm.get('productInfo.productEffectiveDate').invalid">
+                <div *ngIf="isSubmitted && productDetailsForm.get('productInfo.productEffectiveDate').invalid">
                     <p class="text-danger">Please enter the Product Effective Date</p>
                 </div>
             </div>
@@ -100,7 +100,8 @@
             <div class="ym_form_group col-3">
                 <label class="md-lbl">Back Premium Collection Period (days)</label>
                 <input style="width: 80%;" placeholder="Back Premium Collection Period" [readonly]="isFieldsreadonly"
-                    formControlName="backPremiumCollectionPeriod" name="backPremiumCollectionPeriod">
+                    formControlName="backPremiumCollectionPeriod" name="backPremiumCollectionPeriod" (keyup)="onKeyUpPremiumPeriod($event)" onlyNumber>                  
+                        <span *ngIf="isTooltip" class="tooltiptext">Enter number in this field</span>                   
             </div>
             <div class="ym_form_group col-3">
                 <label class="md-lbl">Insurance Distribution Guide</label>
@@ -121,7 +122,8 @@
             <div class="ym_form_group col-3">
                 <label class="md-lbl">Free Look Period Refund (days)</label>
                 <input style="width: 70%;" placeholder="Free Look Period Refund" [readonly]="isFieldsreadonly"
-                    formControlName="freeLookPeriodRefund" name="freeLookPeriodRefund">
+                    formControlName="freeLookPeriodRefund" name="freeLookPeriodRefund" onlyNumber (keyup)="onKeyUpRefund($event)">
+                    <span *ngIf="isRefundTooltip" class="tooltiptext">Enter number in this field</span> 
             </div>
         </div>
         <div class="row mt-1 pt-1">
@@ -146,7 +148,7 @@
         <div class="ym_form_group mb-0 pb-0">
             <button class="btn btn-primary float-right md-btn-width mr-3" (click)="onClickOfProductDetailSubmit()"
                 [disabled]="isSubmitBtnDisabled"><i class="fa fa-save mr-1"></i>Submit</button>
-            <button class="btn btn-primary float-right md-btn-width mr-2"><i class="fa fa-times"></i> Clear</button>
+            <button class="btn btn-primary float-right md-btn-width mr-2" (click)="onClikOfClear()"><i class="fa fa-times"></i> Clear</button>
         </div>
     </div>
 </div>

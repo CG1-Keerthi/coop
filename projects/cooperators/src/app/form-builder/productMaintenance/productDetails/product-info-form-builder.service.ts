@@ -25,9 +25,9 @@ export class ProductInfoFormBuilderService {
         return this.fb.group({
             productType: ['', Validators.required],
             productName: ['', Validators.required],
-            productNumber: [''],
-            productBusinessModel: [''],
-            productEffectiveDate: [''],
+            productNumber: ['',Validators.required],
+            productBusinessModel: ['',Validators.required],
+            productEffectiveDate: ['',Validators.required],
             productStatus: [''],
             productTerminationDate: [''],
             productInUse: [''],

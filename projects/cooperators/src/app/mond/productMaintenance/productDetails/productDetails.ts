@@ -17,6 +17,7 @@ export class ProductDetailsComponent implements OnInit {
 
   @Input() set productDetails(data) {
     if (Object.keys(data).length > 0){
+      debugger;
       this.productDetailsData = data;
       this.isFieldsreadonly = true;
       this.isSubmitBtnDisabled = true;
@@ -28,7 +29,7 @@ export class ProductDetailsComponent implements OnInit {
       this.renderer.setAttribute(this.CertificateDetailList.nativeElement, 'disabled', "true");
       this.renderer.setAttribute(this.memberInitiatedList.nativeElement, 'disabled', "true");
       this.productDetailsForm.reset();
-      this.productDetailsForm.patchValue(data);
+      this.productDetailsForm.patchValue(data);    
     }else{
       this.productDetailsForm.reset();
       this.isSubmitted = false;
@@ -116,7 +117,7 @@ export class ProductDetailsComponent implements OnInit {
       return;
     }
 
-    if(this.productDetailsData == undefined){
+    if(this.productDetailsForm.value.productInfo.productStatus == ""){
       this.productDetailsForm.value.productInfo.productCurrentRecordFlag = 'N';
     }else{
       this.productDetailsForm.value.productInfo.productCurrentRecordFlag = 'Y';

@@ -1,0 +1,488 @@
+<div [formGroup]="planDetailsForm" class="m-1 p-1">
+    <div class="row">
+        <div class="col-md-6">
+        </div>
+        <div class="col-md-6">
+            <button class="btn btn-primary float-right ml-2"  [disabled]="isBtnDisabled">Update Plan</button>
+            <button class="btn btn-primary float-right ml-2"  [disabled]="isBtnDisabled">Plan Coverage Bundle<i
+                    class="fa fa-arrow-right ml-2"></i></button>
+            <button class="btn btn-primary float-right ml-2"  [disabled]="isBtnDisabled">View Coverage<i
+                    class="fa fa-arrow-right ml-2"></i></button>
+            <button class="btn btn-primary float-right ml-2"  [disabled]="isBtnDisabled">Add Coverage<i class="fa fa-plus ml-2"></i></button>
+        </div>
+    </div>
+
+    <div formGroupName="productInfo" class="row">
+        <div class="col-4 col-lg-4 col-md-4 col-xs-4 mb-0 ml-1 mr-1 mr-1 p-1">
+            <mat-card class="w-100 m-1 p-1 md-border">
+                <mat-card-header>
+                    <mat-card-title class="md-clr md-font"><b>Product Info</b></mat-card-title>
+                </mat-card-header>
+                <mat-divider></mat-divider>
+                <mat-card-content class="mt-3">
+                    <div class="row">
+                        <div class="ym_form_group col-6">
+                            <label class="md-lbl">Product Type</label>
+                            <input style="width: 70%;" formControlName="productType" [readonly]="isProductInfoFieldreadonly">
+                        </div>
+                        <div class="ym_form_group col-6" style="margin-top: 30px;">
+                            <!-- <label class="md-lbl">Product Type</label> -->
+                            <input formControlName="productName" [readonly]="isProductInfoFieldreadonly">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="ym_form_group  col-6">
+                            <label class="md-lbl">Product Business Model</label>
+                            <div class="ym_form_select">
+                                <select formControlName="productBusinessModel" #businessList>
+                                    <option selected value="">Please Select a value</option>
+                                    <option value="Merchant">Merchant</option>
+                                    <option value="Location">Location</option>
+                                </select>
+                            </div>
+
+                        </div>
+                        <div class="ym_form_group col-6">
+                            <label class="md-lbl">Product Effective Date</label>
+                            <div class="row pl-1">
+                                <input style="width: 80%;" matInput data-name="dateFormat" [matDatepicker]="picker"
+                                    placeholder="Product Effective Date" formControlName="productEffectiveDate" [readonly]="isProductInfoFieldreadonly">
+                                <mat-datepicker-toggle matSuffix [for]="picker">
+                                </mat-datepicker-toggle>
+                                <mat-datepicker class="col-md-3" #picker></mat-datepicker>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="ym_form_group col-6 m-0">
+                            <label class="md-lbl">Product Status</label>
+                            <div class="ym_form_select">
+                                <select formControlName="productStatus" #productStatusList>
+                                    <option selected value="">Please Select a value</option>
+                                    <option value="Active">Active</option>
+                                    <option value="Terminated">Terminated</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </mat-card-content>
+
+            </mat-card>
+        </div>
+    </div>
+    <hr class="m-0 p-0">
+    <div formGroupName="planProductInfo">
+        <div class="mt-1 pt-1">
+            <mat-accordion>
+                <mat-expansion-panel [expanded]="true">
+                    <mat-expansion-panel-header class="md-bgClr">
+                        <mat-panel-title style="color: white;">
+                            Plan Admin
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+
+                    <div class="row">
+                        <div class="ym_form_group required col-3">
+                            <label class="md-lbl">Plan Number</label>
+                            <input placeholder="Plan Number" formControlName="planNumber">
+                            <div *ngIf="isSubmitted && planDetailsForm.get('planProductInfo.planNumber').invalid">
+                                <p class="text-danger">Please enter the Plan Number</p>
+                            </div>
+                        </div>
+                        <div class="ym_form_group required col-3">
+                            <label class="md-lbl">Plan Name</label>
+                            <input placeholder="Plan Name" formControlName="planName">
+                            <div *ngIf="isSubmitted && planDetailsForm.get('planProductInfo.planName').invalid">
+                                <p class="text-danger">Please enter the Plan Name</p>
+                            </div>
+                        </div>
+                        <div class="ym_form_group required  col-3">
+                            <label class="md-lbl">Plan Description</label>
+                            <input placeholder="Plan Description" formControlName="planDescription">
+                            <div *ngIf="isSubmitted && planDetailsForm.get('planProductInfo.planDescription').invalid">
+                                <p class="text-danger">Please enter the Plan Description</p>
+                            </div>
+                        </div>
+                        <!-- <div class="ym_form_group  col-3">
+                        <label class="md-lbl">Client Name </label>
+                        <input placeholder="Client Name">
+                    </div> -->
+                        <div class="ym_form_group required col-3">
+                            <label class="md-lbl">Client Name</label>
+                            <input type="text" placeholder="Pick one" aria-label="Number" matInput
+                                (keyup)="clientNameKeyup($event)" [matAutocomplete]="auto" formControlName="clientName">
+                            <mat-autocomplete #auto="matAutocomplete">
+                                <mat-option *ngFor="let list of clientNameVal" [value]="list.companyName">
+                                    {{list.companyName}}
+                                </mat-option>
+                            </mat-autocomplete>
+                            <div *ngIf="isSubmitted && planDetailsForm.get('planProductInfo.clientName').invalid">
+                                <p class="text-danger">Please select the Client Name</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="ym_form_group required col-3">
+                            <label class="md-lbl">Language</label>
+                            <div class="ym_form_select" style="width: 70%;">
+                                <select #clientLanguageList formControlName="languageCode">
+                                    <!-- <option selected value="">Please select a value</option>  -->
+                                    <option let *ngFor="let list of clientLanguage" value="{{list.description}}">
+                                        {{list.description}}</option>
+                                </select>
+                            </div>
+                            <div *ngIf="isSubmitted && planDetailsForm.get('planProductInfo.languageCode').invalid">
+                                <p class="text-danger">Please select the Language</p>
+                            </div>
+                        </div>
+                        <div class="ym_form_group required col-3">
+                            <label class="md-lbl">Default Billing Type</label>
+                            <div class="ym_form_select" style="width: 70%;">
+                                <select #clientLanguageList formControlName="defaultBillingType">
+                                    <!-- <option selected value="">Please select a value</option> -->
+                                    <option let *ngFor="let list of defaultBillingTypeList"
+                                        value="{{list.description}}">
+                                        {{list.description}}</option>
+                                </select>
+                            </div>
+                            <div *ngIf="isSubmitted && planDetailsForm.get('planProductInfo.defaultBillingType').invalid">
+                                <p class="text-danger">Please select the Default Billing Type</p>
+                            </div>
+                        </div>
+                        <div class="ym_form_group required col-3">
+                            <div class="row" style="margin-left: 1px;">
+                                <label class="md-lbl">Plan Effective Date</label>
+                                <input style="width: 70%;" matInput [matDatepicker]="picker1" #tillDate formControlName="planEffectiveDate">
+                                <mat-datepicker-toggle matSuffix [for]="picker1">
+                                </mat-datepicker-toggle>
+                                <mat-datepicker class="col-md-3" #picker1></mat-datepicker>
+                            </div>
+                            <div *ngIf="isSubmitted && planDetailsForm.get('planProductInfo.planEffectiveDate').invalid">
+                                <p class="text-danger">Please enter the Product Effective Date</p>
+                            </div>
+                        </div>
+                        <div class="ym_form_group  col-3">
+                            <label class="md-lbl">Plan Status</label>
+                            <div class="ym_form_select" style="width: 70%;">
+                                <select formControlName="planStatus" #planStatusList>
+                                    <option value="">Please select a value</option>
+                                    <option value="Active">Active</option>
+                                    <option value="Terminated">Terminated</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="ym_form_group  col-3">
+                            <div class="row" style="margin-left: 1px;">
+                                <label class="md-lbl">Plan Termination Date</label>
+                                <input style="width: 70%;" matInput [matDatepicker]="picker2" #tillDate 
+                                formControlName="planTerminationDate" [readonly]="isplanProductInforeadonly">
+                                <mat-datepicker-toggle matSuffix [for]="picker2">
+                                </mat-datepicker-toggle>
+                                <mat-datepicker class="col-md-3" #picker2></mat-datepicker>
+                            </div>
+                        </div>
+                        <div class="ym_form_group  col-3">
+                            <div class="row" style="margin-left: 1px;">
+                                <label class="md-lbl">Plan In Use</label>
+                                <input style="width: 70%;" formControlName="planInUse" [readonly]="isplanProductInforeadonly">
+
+                            </div>
+                        </div>
+                        <div class="ym_form_group  col-3">
+                            <label class="md-lbl">Permit Certificate Changes Post Issuance</label>
+
+                            <!-- <mat-slide-toggle [(ngModel)]="isChecked">Slide Toggle Checked: {{isChecked}}</mat-slide-toggle> -->
+                            <mat-slide-toggle formControlName="permitCertificateChangesPostIssuance">
+                            </mat-slide-toggle>
+                        </div>
+                        <div class="ym_form_group  col-3">
+                            <label class="md-lbl">Proportional Insurance Threshold Amount</label>
+                            <input style="width: 70%;" formControlName="properInsuranceThresholdAmount">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="ym_form_group  col-9">
+                            <label class="md-lbl">Notes</label>
+                            <textarea class="md-text-area-width" rows="3" placeholder="Plan Description" formControlName="comment"></textarea>
+                        </div>
+                        <div class="ym_form_group  col-3">
+                            <label class="md-lbl">Bundled Plan</label>
+
+                            <!-- <mat-slide-toggle [(ngModel)]="isChecked">Slide Toggle Checked: {{isChecked}}</mat-slide-toggle> -->
+                            <mat-slide-toggle formControlName="isBundledPlan">
+                            </mat-slide-toggle>
+                        </div>
+                    </div>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </div>
+
+        <hr class="m-0 p-0">
+        <div class="mt-1 pt-1">
+            <mat-accordion>
+                <mat-expansion-panel [expanded]="true">
+                    <mat-expansion-panel-header class="md-bgClr">
+                        <mat-panel-title style="color: white;">
+                            Plan Features
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+
+                    <div class="row">
+                        <div class="ym_form_group  col-3">
+                            <label class="md-lbl">Permit Loan Extension</label>
+                            <mat-slide-toggle formControlName="loanExtension">
+                            </mat-slide-toggle>
+                        </div>
+                        <div class="ym_form_group  col-3">
+                            <label class="md-lbl">Termination Of Risk</label>
+                            <div class="ym_form_select" style="width: 70%;">
+                                <select #clientLanguageList formControlName="terminationOfRisk">
+                                    <!-- <option selected value="">Please select a value</option> -->
+                                    <option let *ngFor="let list of riskExposureCodeList" value="{{list.description}}">
+                                        {{list.description}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="ym_form_group  col-3">
+                            <label class="md-lbl">Permit Coverage Amount Changes Post Issuance</label>
+                            <div class="ym_form_select" style="width: 70%;">
+                                <select #clientLanguageList formControlName="permitCoverageAmountChangesPostIssuance">
+                                    <!-- <option selected value="">Please select a value</option> -->
+                                    <option let *ngFor="let list of permitCoverageList" value="{{list.description}}">
+                                        {{list.description}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="ym_form_group  col-3">
+                            <label class="md-lbl">Permit Premium Refunds</label>
+                            <mat-slide-toggle formControlName="refundAllowed">
+                            </mat-slide-toggle>
+                        </div>
+                    </div>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </div>
+
+        <hr class="m-0 p-0">
+        <div class="mt-1 pt-1">
+            <mat-accordion>
+                <mat-expansion-panel [expanded]="true">
+                    <mat-expansion-panel-header class="md-bgClr">
+                        <mat-panel-title style="color: white;">
+                            Plan Limits
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <div class="row">
+                        <div class="ym_form_group  col-3">
+                            <label class="md-lbl">Minimum Coverage Period (months)</label>
+                            <input  formControlName="minimumTermQuantity" onlyNumber (keyup)="onKeyUpMinField($event)">
+                            <span *ngIf="isTooltip" class="tooltiptext">Enter number in this field</span>
+                        </div>
+                        <div class="ym_form_group  col-3">
+                            <label class="md-lbl">Maximum Aggregate Exposure Amount</label>
+                            <input formControlName="aggregateExposureAmount" onlyNumber (keyup)="onKeyUpMaxField($event)">
+                            <span *ngIf="isMaxTooltip" class="tooltiptext">Enter number in this field</span>
+                        </div>
+                        <div class="ym_form_group  col-3">
+                            <label class="md-lbl">Reinstatement Period (months)</label>
+                            <input formControlName="reinstatementPeriodQuantity"  onlyNumber (keyup)="onKeyUpReinstatement($event)">
+                            <span *ngIf="isReinstatementTooltip" class="tooltiptext">Enter number in this field</span>
+                        </div>
+                        <div class="ym_form_group  col-3">
+                            <label class="md-lbl">Maximum Effective Date Back Date Period (days)</label>
+                            <input formControlName="maximumPeriodToBackDateQuantity" onlyNumber (keyup)="onKeyUpEffectiveDate($event)">
+                            <span *ngIf="isEffectiveDateTooltip" class="tooltiptext">Enter number in this field</span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="ym_form_group  col-3">
+                            <label class="md-lbl">Maximum Effective Date Future Date Period (days)</label>
+                            <input formControlName="maximumPeriodToFutureDateQuantity" onlyNumber (keyup)="onKeyUpMaxEffectiveDate($event)">
+                            <span *ngIf="isMaxEffectiveDateTooltip" class="tooltiptext">Enter number in this
+                                field</span>
+                        </div>
+                        <div class="ym_form_group  col-3">
+                            <label class="md-lbl">Back Refund Payment Period (days)</label>
+                            <input formControlName="refundMaximumPeriodQuantity" onlyNumber (keyup)="onKeyUpBackRefund($event)">
+                            <span *ngIf="isBackRefundTooltip" class="tooltiptext">Enter number in this field</span>
+                        </div>
+                        <div class="ym_form_group  col-3">
+                            <label class="md-lbl">Minimum Amortization Period (months)</label>
+                            <input formControlName="minimumAmortizationPeriodQuantity" onlyNumber (keyup)="onKeyUpMinAmortization($event)">
+                            <span *ngIf="isMinAmortizationTooltip" class="tooltiptext">Enter number in this field</span>
+                        </div>
+                        <div class="ym_form_group  col-3">
+                            <label class="md-lbl">Maximum Amortization Period (months)</label>
+                            <input formControlName="maximumAmortizationPeriodQuantity" onlyNumber (keyup)="onKeyUpMaxAmortization($event)">
+                            <span *ngIf="isMaxAmortizationTooltip" class="tooltiptext">Enter number in this field</span>
+                        </div>
+                    </div>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </div>
+
+        <hr class="m-0 p-0">
+        <div class="mt-1 pt-1">
+            <mat-accordion>
+                <mat-expansion-panel [expanded]="true">
+                    <mat-expansion-panel-header class="md-bgClr">
+                        <mat-panel-title style="color: white;">
+                            Plan Premium Calc
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <div class="row">
+                        <div class="ym_form_group  col-3">
+                            <label class="md-lbl">Maximum Number of Applicants</label>
+                            <div class="ym_form_select" style="width: 70%;">
+                                <select #clientLanguageList formControlName="maximumApplicantAllowedQuantity">
+                                    <!-- <option selected value="">Please select a value</option> -->
+                                    <option let *ngFor="let list of maxApplicantAllowed" value="{{list.description}}">
+                                        {{list.description}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="ym_form_group  col-3">
+                            <label class="md-lbl">Premium Calculation Algorithm</label>
+                            <div class="ym_form_select" style="width: 70%;">
+                                <select #clientLanguageList formControlName="premiumCalculationAlgorithm">
+                                    <!-- <option selected value="">Please select a value</option> -->
+                                    <option let *ngFor="let list of premCalcAlgorithmList" value="{{list.description}}">
+                                        {{list.description}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="ym_form_group  col-3">
+                            <label class="md-lbl">Premium Calculation Method</label>
+                            <div class="ym_form_select" style="width: 70%;">
+                                <select #clientLanguageList formControlName="premiumCalculationMethod">
+                                    <!-- <option selected value="">Please select a value</option> -->
+                                    <option let *ngFor="let list of premiumCalculationMethodList"
+                                        value="{{list.description}}">
+                                        {{list.description}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="ym_form_group  col-3">
+                            <label class="md-lbl">Premium Paid By</label>
+                            <div class="ym_form_select" style="width: 70%;">
+                                <select #clientLanguageList formControlName="premiumPaidBy">
+                                    <!-- <option selected value="">Please select a value</option> -->
+                                    <option let *ngFor="let list of premiumPaidByList" value="{{list.description}}">
+                                        {{list.description}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="ym_form_group  col-3">
+                            <label class="md-lbl">Loan Balance Method</label>
+                            <div class="ym_form_select" style="width: 70%;">
+                                <select #clientLanguageList formControlName="loanBalanceMethod">
+                                    <!-- <option selected value="">Please select a value</option> -->
+                                    <option let *ngFor="let list of loanBalanceMethodList" value="{{list.description}}">
+                                        {{list.description}}</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="ym_form_group  col-3">
+                            <label class="md-lbl">Age Method</label>
+                            <div class="ym_form_select" style="width: 70%;">
+                                <select #clientLanguageList formControlName="ageMethod">
+                                    <!-- <option selected value="">Please select a value</option> -->
+                                    <option let *ngFor="let list of ageMethodList" value="{{list.description}}">
+                                        {{list.description}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="ym_form_group  col-3">
+                            <label class="md-lbl">Insurance Payment Method</label>
+                            <div class="ym_form_select" style="width: 70%;">
+                                <select #clientLanguageList formControlName="insurancePaymentMethod">
+                                    <!-- <option selected value="">Please select a value</option> -->
+                                    <option let *ngFor="let list of insurancePaymentMethodList"
+                                        value="{{list.description}}">
+                                        {{list.description}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="ym_form_group  col-3">
+                            <label class="md-lbl">Loan Type</label>
+                            <div class="ym_form_select" style="width: 70%;">
+                                <select #clientLanguageList formControlName="loanType">
+                                    <!-- <option selected value="">Please select a value</option> -->
+                                    <option let *ngFor="let list of loanTypeList" value="{{list.description}}">
+                                        {{list.description}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="ym_form_group  col-3">
+                            <label class="md-lbl">Loan Type Category</label>
+                            <div class="ym_form_select" style="width: 70%;">
+                                <select #clientLanguageList formControlName="loanTypeCategory">
+                                    <!-- <option selected value="">Please select a value</option> -->
+                                    <option let *ngFor="let list of loanTypeCategoryList" value="{{list.description}}">
+                                        {{list.description}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="ym_form_group  col-3">
+                            <label class="md-lbl">Fixed Term Loan Pay Once - Interest Only Gross Up Factor</label>
+                            <mat-slide-toggle formControlName="grossUpInterestOnly">
+                            </mat-slide-toggle>
+                        </div>
+                        <div class="ym_form_group  col-3">
+                            <label class="md-lbl">Fixed Term Loan Pay Once - Lump Sum & Residual Value Gross Up
+                                Factor</label>
+                            <mat-slide-toggle formControlName="grossUpLumpsumCode">
+                            </mat-slide-toggle>
+                        </div>
+
+                    </div>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </div>
+
+        <hr class="m-0 p-0">
+        <div class="mt-1 pt-1">
+            <mat-accordion>
+                <mat-expansion-panel [expanded]="true">
+                    <mat-expansion-panel-header class="md-bgClr">
+                        <mat-panel-title style="color: white;">
+                            Rate Plan Association
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <div class="row">
+                        <div class="ym_form_group  col-3">
+                            <label class="md-lbl">Rate Structure List</label>
+                            <div class="ym_form_select" style="width: 70%;">
+                                <select #clientLanguageList>
+                                    <!-- <option selected value="">Please select a value</option> -->
+                                    <!-- <option let *ngFor="let list of premiumCalculationMethodList" value="{{list.description}}">
+                                    {{list.description}}</option> -->
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </div>
+    </div>
+    <hr class="mt-1">
+    <div class="row">
+        <div class="col-md-6">
+        </div>
+        <div class="col-md-6">
+            <button class="btn btn-primary float-right ml-2" (click)="onClickOfPlanDetailSubmit()"><i class="fa fa-save mr-1"></i>Submit</button>
+            <button class="btn btn-primary float-right ml-2"><i class="fa fa-times mr-1"></i>Clear</button>
+        </div>
+    </div>
+</div>

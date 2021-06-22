@@ -1,9 +1,9 @@
-import { Component, ElementRef, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component,QueryList, ElementRef, Input, OnInit, Renderer2, ViewChild, ViewChildren, Output, EventEmitter } from '@angular/core';
 import { MDCodeListHeaderDS, MDMondServiceDS } from '../../../_services/ds'
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ProductDetailFormBuilderService } from '../../../form-builder/productMaintenance/productDetails/product-detail-form-builder.service';
 import { MDCommonGetterSetter } from '../../../_services/common';
-import { ReturnStatement } from '@angular/compiler';
+
 
 
 
@@ -51,8 +51,13 @@ export class ProductDetailsComponent implements OnInit {
       this.renderer.setProperty(this.productBusinessModelList.nativeElement, 'disabled', false);
       this.renderer.setProperty(this.CertificateDetailList.nativeElement, 'disabled', false);
       this.renderer.setProperty(this.memberInitiatedList.nativeElement, 'disabled', false);
+    
     }
   }
+
+  @Output() addPlan = new EventEmitter();
+  @Output() viewPlan = new EventEmitter();
+
   productDetailsForm: FormGroup;
   isFieldsreadonly: boolean = false;
   public csfrToken: any;
@@ -64,6 +69,7 @@ export class ProductDetailsComponent implements OnInit {
   public isSubmitted: boolean = false;
   public isTooltip: boolean = false;
   public isRefundTooltip: boolean = false;
+ 
 
   @ViewChild('productStatusList') productStatusList: ElementRef;
   @ViewChild('productBusinessModelList') productBusinessModelList: ElementRef;
@@ -83,29 +89,6 @@ export class ProductDetailsComponent implements OnInit {
   });
 
     this.productDetailsForm =  this.productDetailService.form;
-
-    // this.productDetailsForm = this.fb.group({
-    //   "productInfo_productType": "",
-    //   "productInfo_productName": "",
-    //   "productInfo_productNumber": "",
-    //   "productInfo_productBusinessModel": "",
-    //   "productInfo_productEffectiveDate": "",
-    //   "productInfo_productStatus": "",
-    //   "productInfo_productTerminationDate": "",
-    //   "productInfo_productInUse": "",
-    //   "productInfo_backPremiumCollectionPeriod": '',
-    //   "productInfo_insuranceDistributorGuideReferenceNum": "",
-    //   "productInfo_certificateDetailAdministrator": "",
-    //   "productInfo_freeLookPeriodRefund": '',
-    //   "productInfo_memberInitiatedTerminationRule": "",
-    //   "productInfo_comment": "",
-
-    //   "productInfo_lastUpdateDate": "",
-    //   "productInfo_productCurrentRecordFlag": "",
-    //   "productInfo_productId": "",
-    //   "productInfo_productStatusEndDate": "",
-    // })
-
   }
 
   onClickOfProductDetailSubmit(){
@@ -191,4 +174,18 @@ export class ProductDetailsComponent implements OnInit {
     this.productDetailsForm.patchValue(selectedProductDetailDropdownVal);
   }
 
+  onClickOfAddPlan(item){
+    debugger
+    this.addPlan.emit(item);
+  }
+
+  onClickOfViewPlan(item){
+    debugger;
+    this.viewPlan.emit(item);
+  }
+
+  
+
 }
+
+

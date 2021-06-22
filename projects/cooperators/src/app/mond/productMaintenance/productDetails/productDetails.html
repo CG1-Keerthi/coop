@@ -5,9 +5,9 @@
         <div class="col-md-6">
             <button class="btn btn-primary float-right ml-2" [disabled]="isUpdateDateFieldReadonly"
                 (click)="onClickOfUpdatePlan()"> Update Product</button>
-            <button class="btn btn-primary float-right ml-2" [disabled]="isUpdateDateFieldReadonly"> View Plan <i
+            <button class="btn btn-primary float-right ml-2" [disabled]="isUpdateDateFieldReadonly" (click)="onClickOfViewPlan(productDetailsData)"> View Plan <i
                     class="fa fa-arrow-right"></i></button>
-            <button class="btn btn-primary float-right ml-2" [disabled]="isUpdateDateFieldReadonly"> Add Plan <i
+            <button class="btn btn-primary float-right ml-2" [disabled]="isUpdateDateFieldReadonly" (click)="onClickOfAddPlan(productDetailsData)"> Add Plan <i
                     class="fa fa-plus"></i></button>
         </div>
     </div>
@@ -148,7 +148,7 @@
         <div class="ym_form_group mb-0 pb-0">
             <button class="btn btn-primary float-right md-btn-width mr-3" (click)="onClickOfProductDetailSubmit()"
                 [disabled]="isSubmitBtnDisabled"><i class="fa fa-save mr-1"></i>Submit</button>
-            <button class="btn btn-primary float-right md-btn-width mr-2" (click)="onClikOfClear()"><i class="fa fa-times"></i> Clear</button>
+            <button class="btn btn-primary float-right md-btn-width mr-2" (click)="onClikOfClear()"><i class="fa fa-times"></i>Clear</button>
         </div>
     </div>
 </div>

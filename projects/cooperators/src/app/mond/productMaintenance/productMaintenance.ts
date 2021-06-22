@@ -25,6 +25,9 @@ export class ProductMaintenanceComponent implements OnInit {
   public productTypeSelect: any;
   public selectProductType: any;
   public csfrToken: any;
+  public isAddPlan: boolean;
+  public productPlanDetailData: any;
+  public isViewPlan: boolean;
 
   constructor(private mdMondService: MDMondServiceDS,
     private codeListFetch: MDCodeListHeaderDS,
@@ -124,7 +127,26 @@ export class ProductMaintenanceComponent implements OnInit {
     this.selectedTab = 1
   }
 
+  onClickOfAddPlan(event) {
+    debugger;
+    this.productPlanDetailData = event;
+    this.selectedTab = 3;
+    this.isAddPlan = true;
+  }
 
+  onClickOfViewPlan(event){
+    debugger;
+    this.selectedTab = 4;
+    this.isViewPlan = true;
+  }
+
+  @HostListener('click', ['$event.target'])
+  onClick(element) {
+    // debugger;
+    if (element.textContent == "Product Details" || element.textContent == "Product Search" || element.textContent == "Validation CheckList") {
+      this.isAddPlan = false;
+    }
+  }
 
 
 }

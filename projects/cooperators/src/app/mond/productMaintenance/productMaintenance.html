@@ -121,12 +121,18 @@
                             </div>
                         </mat-tab>
                         <mat-tab label="Product Details">
-                            <app-product-details-tab [productDetails]="planDetailsData"></app-product-details-tab>
+                            <app-product-details-tab [productDetails]="planDetailsData" (addPlan)=onClickOfAddPlan($event) (viewPlan)="onClickOfViewPlan($event)"></app-product-details-tab>
                         </mat-tab>
                         <mat-tab label="Validation CheckList">
                         </mat-tab>
+                        <mat-tab label="Product AddPlan" *ngIf="isAddPlan">
+                            <app-product-add-plan-designer [planDetails]="productPlanDetailData"></app-product-add-plan-designer>
+                        </mat-tab>                       
+                        <mat-tab label="Plan Search" *ngIf="isViewPlan">
+                            <!-- <app-product-add-plan-designer [planDetails]="productPlanDetailData"></app-product-add-plan-designer> -->
+                        </mat-tab>                      
                     </mat-tab-group>
-                </div>
+                </div>               
             </mat-card>
         </div>
     </div>

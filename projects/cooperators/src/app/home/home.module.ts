@@ -61,6 +61,8 @@ import { CoopHomePageComponent } from '../mond/coopHomePage/coopHomePage.compone
 import { NgxMaskModule } from 'ngx-mask';
 import { ProductDetailsComponent } from '../mond/productMaintenance/productDetails/productDetails';
 import { ProductDetailFormBuilderModule } from '../form-builder/productMaintenance/productDetails/product-detail-form.module';
+import { ProductAddPlanComponent } from '../mond/productMaintenance/productDetails/productAddPlan/productAddPlan.component';
+import { PlanDetailFormBuilderModule } from '../form-builder/productMaintenance/planDetails/plan-detail-form.module';
 
 @NgModule({
   declarations: [
@@ -90,7 +92,8 @@ import { ProductDetailFormBuilderModule } from '../form-builder/productMaintenan
     LAISComponent,
     LGMComponent,
     CreditorSelfAdminDashboardComponent,
-    CoopHomePageComponent
+    CoopHomePageComponent,
+    ProductAddPlanComponent
   ],
   imports: [
     CommonModule,
@@ -123,7 +126,8 @@ import { ProductDetailFormBuilderModule } from '../form-builder/productMaintenan
     CreditorCertificateFormBuilderModule,
     ChartsModule,
     NgxMaskModule,
-    ProductDetailFormBuilderModule
+    ProductDetailFormBuilderModule,
+    PlanDetailFormBuilderModule
 
 
   ],

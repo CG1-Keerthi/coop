@@ -124,13 +124,13 @@
                             <app-product-details-tab [productDetails]="planDetailsData" (addPlan)=onClickOfAddPlan($event) (viewPlan)="onClickOfViewPlan($event)"></app-product-details-tab>
                         </mat-tab>
                         <mat-tab label="Validation CheckList">
-                        </mat-tab>
-                        <mat-tab label="Product AddPlan" *ngIf="isAddPlan">
-                            <app-product-add-plan-designer [planDetails]="productPlanDetailData"></app-product-add-plan-designer>
-                        </mat-tab>                       
+                        </mat-tab>                                          
                         <mat-tab label="Plan Search" *ngIf="isViewPlan">
-                            <!-- <app-product-add-plan-designer [planDetails]="productPlanDetailData"></app-product-add-plan-designer> -->
-                        </mat-tab>                      
+                            <app-product-plan-search-designer  (rowSelect)="onSelectOfPlanRow($event)"></app-product-plan-search-designer>
+                        </mat-tab>  
+                        <mat-tab label="{{addPlanTabName}}" *ngIf="isAddPlan">
+                            <app-product-add-plan-designer [planDetails]="productPlanDetailData" [tabName]="addPlanTabName"></app-product-add-plan-designer>
+                        </mat-tab>                     
                     </mat-tab-group>
                 </div>               
             </mat-card>

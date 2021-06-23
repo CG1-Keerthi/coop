@@ -63,6 +63,7 @@ import { ProductDetailsComponent } from '../mond/productMaintenance/productDetai
 import { ProductDetailFormBuilderModule } from '../form-builder/productMaintenance/productDetails/product-detail-form.module';
 import { ProductAddPlanComponent } from '../mond/productMaintenance/productDetails/productAddPlan/productAddPlan.component';
 import { PlanDetailFormBuilderModule } from '../form-builder/productMaintenance/planDetails/plan-detail-form.module';
+import { ProductPlanSearchComponent } from '../mond/productMaintenance/productDetails/productPlanSearch/productPlanSearch.component';
 
 @NgModule({
   declarations: [
@@ -93,7 +94,8 @@ import { PlanDetailFormBuilderModule } from '../form-builder/productMaintenance/
     LGMComponent,
     CreditorSelfAdminDashboardComponent,
     CoopHomePageComponent,
-    ProductAddPlanComponent
+    ProductAddPlanComponent,
+    ProductPlanSearchComponent
   ],
   imports: [
     CommonModule,

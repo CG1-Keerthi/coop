@@ -28,6 +28,7 @@ export class ProductMaintenanceComponent implements OnInit {
   public isAddPlan: boolean;
   public productPlanDetailData: any;
   public isViewPlan: boolean;
+  public addPlanTabName: string;
 
   constructor(private mdMondService: MDMondServiceDS,
     private codeListFetch: MDCodeListHeaderDS,
@@ -101,16 +102,6 @@ export class ProductMaintenanceComponent implements OnInit {
   onProductListRowSelect(event) {
     debugger;
     this.selectedTab = 1
-    // this.mdMondService.getFormDataFromMondService("Creditor Self Admin", "FetchProductDetails", JSON.stringify({ "productId": event.data.productPlanId }), "").subscribe(
-    //   data => {
-    //     // this.responseData = JSON.parse(Base64.decode(data.value));
-    //     this.planDetailsData = JSON.parse(Base64.decode(data.value))
-    //   },
-    //   error => {
-    //     let data = {"key":"key","value":"ewogICJwcm9kdWN0SW5mbyI6IHsKICAgICJwcm9kdWN0TmFtZSI6ICJUZXN0MSIsCiAgICAibGFzdFVwZGF0ZURhdGUiOiAiMjAyMS0wNi0xNVQxMTo0MjoxOC4wMDBaIiwKICAgICJwcm9kdWN0TnVtYmVyIjogIjEiLAogICAgInByb2R1Y3RUZXJtaW5hdGlvbkRhdGUiOiAiOTk5OS0xMi0zMVQwMDowMDowMC4wMDBaIiwKICAgICJwcm9kdWN0U3RhdHVzIjogIkFjdGl2ZSIsCiAgICAicHJvZHVjdEN1cnJlbnRSZWNvcmRGbGFnIjogIlkiLAogICAgIm1lbWJlckluaXRpYXRlZFRlcm1pbmF0aW9uUnVsZSI6ICJJbW1lZGlhdGUgVGVybWluYXRpb24iLAogICAgImZyZWVMb29rUGVyaW9kUmVmdW5kIjogNDAsCiAgICAicHJvZHVjdElkIjogIjExMiIsCiAgICAicHJvZHVjdEVmZmVjdGl2ZURhdGUiOiAiMjAyMS0wNi0xNFQwMDowMDowMC4wMDBaIiwKICAgICJwcm9kdWN0VHlwZSI6ICJUZXN0VHlwZSIsCiAgICAicHJvZHVjdFN0YXR1c0VuZERhdGUiOiAiOTk5OS0xMi0zMVQwMDowMDowMC4wMDBaIiwKICAgICJjZXJ0aWZpY2F0ZURldGFpbEFkbWluaXN0cmF0b3IiOiAiQ1VNSVMiLAogICAgImJhY2tQcmVtaXVtQ29sbGVjdGlvblBlcmlvZCI6IDEsCiAgICAicHJvZHVjdEluVXNlIjogIlllcyIsCiAgICAiaW5zZXJ0RGF0ZSI6ICIyMDIxLTA2LTE1VDEwOjA0OjMwLjAwMFoiLAogICAgInByb2R1Y3RCdXNpbmVzc01vZGVsIjogIk1lcmNoYW50IiwKICAgICJjb21tZW50IjogIk5vdGVzIgogIH0KfQ=="};
-    //     this.planDetailsData = JSON.parse(Base64.decode(data.value))
-    //   });
-    this.selectedTab = 1;
     this.mdMondService.invokeMondServiceGET("Creditor Self Admin", "FetchProductDetails", "1.00", btoa(JSON.stringify({ "productId": event.data.productPlanId })), this.csfrToken, true, true, true, true).subscribe(
       data => {
         this.planDetailsData = JSON.parse(atob(data))
@@ -129,15 +120,32 @@ export class ProductMaintenanceComponent implements OnInit {
 
   onClickOfAddPlan(event) {
     debugger;
+    this.addPlanTabName = "Product AddPlan"; 
     this.productPlanDetailData = event;
-    this.selectedTab = 3;
+    this.selectedTab = 4;
     this.isAddPlan = true;
   }
 
   onClickOfViewPlan(event){
     debugger;
-    this.selectedTab = 4;
+    this.selectedTab = 3;
     this.isViewPlan = true;
+  }
+
+  onSelectOfPlanRow(event){
+    debugger; 
+    this.addPlanTabName = "Plan Details";   
+    this.mdMondService.invokeMondServiceGET("Creditor Self Admin", "FetchPlanProductInfoDetails", "1.00", btoa(JSON.stringify({"planProductInfoId": event.data.planProductInfoId })), this.csfrToken, true, true, true, true).subscribe(
+      data => {
+        this.productPlanDetailData = JSON.parse(atob(data))
+      },
+      error => {
+        this.mdMondService.MDError(error);
+        let data = "eyJwbGFuUHJvZHVjdEluZm8iOnsibG9hblR5cGUiOiJGaXhlZCIsImNsaWVudE5hbWUiOiJDcmVsb2dpeCIsInByZW1pdW1QYWlkQnkiOiJQYXJ0bmVyIHBheSIsImxhc3RVcGRhdGVEYXRlIjoiMjAyMS0wNi0yMlQxMTo1NDoyNC4wMDBaIiwiYWdlTWV0aG9kIjoiTm90IEFwcGxpY2FibGUiLCJwbGFuTmFtZSI6IlRlc3QyX25hbWVfQ29weSIsInBsYW5TdGF0dXMiOiJBY3RpdmUiLCJwcm9wZXJJbnN1cmFuY2VUaHJlc2hvbGRBbW91bnQiOjEsImxvYW5UeXBlQ2F0ZWdvcnkiOiJSZXRhaWwiLCJtYXhpbXVtQXBwbGljYW50QWxsb3dlZFF1YW50aXR5IjoxLCJwcmVtaXVtQ2FsY3VsYXRpb25NZXRob2QiOiIxIGxpZmUiLCJyZWluc3RhdGVtZW50UGVyaW9kUXVhbnRpdHkiOjMsImluc3VyYW5jZVBheW1lbnRNZXRob2QiOiJQYXkgT25jZSIsInByZW1pdW1DYWxjdWxhdGlvbkFsZ29yaXRobSI6IlNQIiwicGVybWl0Q2VydGlmaWNhdGVDaGFuZ2VzUG9zdElzc3VhbmNlIjoiWSIsInBlcm1pdENvdmVyYWdlQW1vdW50Q2hhbmdlc1Bvc3RJc3N1YW5jZSI6IkluY3JlYXNlIG9ubHkiLCJkZWZhdWx0QmlsbGluZ1R5cGUiOiJTZWxmIEFkbWluaXN0ZXJlZCIsIm1pbmltdW1BbW9ydGl6YXRpb25QZXJpb2RRdWFudGl0eSI6NywiZ3Jvc3NVcEludGVyZXN0T25seSI6IlkiLCJwbGFuVGVybWluYXRpb25EYXRlIjoiOTk5OS0xMi0zMVQwOTowODoyNi4wMDBaIiwibG9hbkV4dGVuc2lvbiI6IlkiLCJwcm9kdWN0VHlwZSI6IlRlc3RUeXBlIiwicmVmdW5kTWF4aW11bVBlcmlvZFF1YW50aXR5Ijo2LCJwbGFuUHJvZHVjdEluZm9JZCI6IjE5NCIsInBsYW5JblVzZSI6IlllcyIsIm1pbmltdW1UZXJtUXVhbnRpdHkiOjEsIm1heGltdW1QZXJpb2RUb0Z1dHVyZURhdGVRdWFudGl0eSI6NSwiY3VycmVudFJlY29yZEZsYWciOiJZIiwicHJvZHVjdElkIjoxMTMsImNsaWVudElkZW50aWZpZXIiOjIsImFnZ3JlZ2F0ZUV4cG9zdXJlQW1vdW50IjoyLCJwbGFuU3RhdHVzRW5kRGF0ZSI6Ijk5OTktMTItMzFUMDk6MDg6MjYuMDAwWiIsImxhbmd1YWdlQ29kZSI6IkVuZ2xpc2giLCJwbGFuTnVtYmVyIjoiVGVzdDJfQ29weSIsImlzQnVuZGxlZFBsYW4iOiJZIiwicGxhbkNyZWF0aW9uRGF0ZSI6IjIwMjEtMDYtMjJUMTE6NTQ6MjQuMDAwWiIsInJlZnVuZEFsbG93ZWQiOiJZIiwidGVybWluYXRpb25PZlJpc2siOiJOb3QgQXBwbGljYWJsZSIsImxvYW5CYWxhbmNlTWV0aG9kIjoiSW5pdGlhbCBCYWxhbmNlIiwicGxhbkVmZmVjdGl2ZURhdGUiOiIyMDIxLTA2LTIyVDAwOjAwOjAwLjAwMFoiLCJwbGFuRGVzY3JpcHRpb24iOiJUZXN0MSBEZXNjcmlwdGlvbiIsImNvbW1lbnQiOiJOb3RlcyIsIm1heGltdW1BbW9ydGl6YXRpb25QZXJpb2RRdWFudGl0eSI6OCwibWF4aW11bVBlcmlvZFRvQmFja0RhdGVRdWFudGl0eSI6NCwiZ3Jvc3NVcEx1bXBzdW1Db2RlIjoiWSJ9LCJwcm9kdWN0SW5mbyI6eyJwcm9kdWN0QnVzaW5lc3NNb2RlbCI6Ik1lcmNoYW50IiwicHJvZHVjdEVmZmVjdGl2ZURhdGUiOiIyMDE3LTAyLTAxVDE4OjMwOjAwLjAwMFoiLCJwcm9kdWN0SWQiOiIxMTMiLCJwcm9kdWN0U3RhdHVzIjoiQWN0aXZlIiwicHJvZHVjdFR5cGUiOiJUZXN0VHlwZTIiLCJwcm9kdWN0TmFtZSI6IlRlc3QyIn19";
+        this.productPlanDetailData = JSON.parse(atob(data));
+        this.selectedTab = 4;
+        this.isAddPlan = true;
+      });
   }
 
   @HostListener('click', ['$event.target'])

@@ -18,14 +18,23 @@ import { MDCodeListHeaderDS, MDMondServiceDS } from '../../../../_services/ds'
 })
 
 export class ProductAddPlanComponent implements OnInit {
-
+@Input() set tabName(name){
+  debugger;
+  this.tabNameval = name;
+} 
   @Input() set planDetails(data) {
     debugger;
     if (Object.keys(data).length > 0) {
       this.list = data;
+      if(this.tabNameval == "Product AddPlan"){
+        this.isBtnDisabled = true;
+      }
+      if(this.tabNameval == "Plan Details"){
+        this.isBtnDisabled = false;
+      }
       this.isProductInfoFieldreadonly = true;
       this.isplanProductInforeadonly = true;
-      this.isBtnDisabled = true;
+    
      
     }
   }
@@ -58,6 +67,7 @@ export class ProductAddPlanComponent implements OnInit {
   public isplanProductInforeadonly: boolean;
   public isSubmitted: boolean;
   public isBtnDisabled: boolean;
+  public tabNameval: string;
 
   @ViewChild('businessList') businessList: ElementRef;
   @ViewChild('productStatusList') productStatusList: ElementRef;

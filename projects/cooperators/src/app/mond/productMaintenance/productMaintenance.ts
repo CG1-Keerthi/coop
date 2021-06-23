@@ -29,6 +29,7 @@ export class ProductMaintenanceComponent implements OnInit {
   public productPlanDetailData: any;
   public isViewPlan: boolean;
   public addPlanTabName: string;
+  public planMaintenanceList: any;
 
   constructor(private mdMondService: MDMondServiceDS,
     private codeListFetch: MDCodeListHeaderDS,
@@ -121,7 +122,31 @@ export class ProductMaintenanceComponent implements OnInit {
   onClickOfAddPlan(event) {
     debugger;
     this.addPlanTabName = "Product AddPlan"; 
-    this.productPlanDetailData = event;
+    let planProductInfo = {
+      "languageCode": "Please select a value",
+      "defaultBillingType": "Please select a value",
+      "planStatus": "Please select a value",
+      "terminationOfRisk": "Please select a value",
+      "permitCoverageAmountChangesPostIssuance": "Please select a value",
+      "maximumApplicantAllowedQuantity": "Please select a value",
+      "premiumCalculationAlgorithm": "Please select a value",
+      "premiumCalculationMethod": "Please select a value",
+      "premiumPaidBy": "Please select a value",
+      "loanBalanceMethod": "Please select a value",
+      "ageMethod": "Please select a value",
+      "insurancePaymentMethod": "Please select a value",
+      "loanType": "Please select a value",
+      "loanTypeCategory": "Please select a value",
+    
+    }
+    let addplanDetailArray = [];
+    let addPlanDetailsObj = {};
+    let productInfo = event.productInfo;
+    addPlanDetailsObj["productInfo"] = productInfo;
+    addPlanDetailsObj["planProductInfo"] = planProductInfo;
+    addplanDetailArray.push(addPlanDetailsObj);
+    // this.productPlanDetailData = event;
+    this.productPlanDetailData = addplanDetailArray[0];
     this.selectedTab = 4;
     this.isAddPlan = true;
   }
@@ -130,14 +155,27 @@ export class ProductMaintenanceComponent implements OnInit {
     debugger;
     this.selectedTab = 3;
     this.isViewPlan = true;
+    this.mdMondService.getFormDataFromMondService('Creditor Self Admin', 'FetchPlanProductInfoList', JSON.stringify({"productId":event.productInfo.productId}), null).subscribe(
+      data => {
+        this.planMaintenanceList = JSON.parse(atob(data.value)).planProductList_planProductSummary;
+      },
+      error => {
+        this.mdMondService.MDError(error);
+        let data = { "key": "key", "value": "ewogICJwbGFuUHJvZHVjdExpc3RfcGxhblByb2R1Y3RTdW1tYXJ5IjogWwogICAgewogICAgICAicGxhblByb2R1Y3RJbmZvSWQiOiAiMTkxIiwKICAgICAgInByb2R1Y3RJZCI6IDExMiwKICAgICAgImNsaWVudE5hbWUiOiAiQ3JlbG9naXgiLAogICAgICAicGxhbk5hbWUiOiAiVGVzdDEgbmFtZSIsCiAgICAgICJwbGFuU3RhdHVzIjogIkFjdGl2ZSIsCiAgICAgICJwcm9kdWN0VHlwZSI6ICJUZXN0VHlwZSIsCiAgICAgICJwbGFuTnVtYmVyIjogIlRlc3QxIgogICAgfQogIF0KfQ==" }
+        this.planMaintenanceList = JSON.parse(atob(data.value)).planProductList_planProductSummary;
+      }
+    )
   }
 
   onSelectOfPlanRow(event){
     debugger; 
+    this.isAddPlan = false;
     this.addPlanTabName = "Plan Details";   
     this.mdMondService.invokeMondServiceGET("Creditor Self Admin", "FetchPlanProductInfoDetails", "1.00", btoa(JSON.stringify({"planProductInfoId": event.data.planProductInfoId })), this.csfrToken, true, true, true, true).subscribe(
       data => {
-        this.productPlanDetailData = JSON.parse(atob(data))
+        this.productPlanDetailData = JSON.parse(atob(data));
+        this.selectedTab = 4;
+        this.isAddPlan = true;
       },
       error => {
         this.mdMondService.MDError(error);

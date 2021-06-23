@@ -126,7 +126,7 @@
                         <mat-tab label="Validation CheckList">
                         </mat-tab>                                          
                         <mat-tab label="Plan Search" *ngIf="isViewPlan">
-                            <app-product-plan-search-designer  (rowSelect)="onSelectOfPlanRow($event)"></app-product-plan-search-designer>
+                            <app-product-plan-search-designer  [planList]="planMaintenanceList" (rowSelect)="onSelectOfPlanRow($event)"></app-product-plan-search-designer>
                         </mat-tab>  
                         <mat-tab label="{{addPlanTabName}}" *ngIf="isAddPlan">
                             <app-product-add-plan-designer [planDetails]="productPlanDetailData" [tabName]="addPlanTabName"></app-product-add-plan-designer>

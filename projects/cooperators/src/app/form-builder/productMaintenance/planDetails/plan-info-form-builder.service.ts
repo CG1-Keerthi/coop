@@ -26,6 +26,7 @@ export class PlanInfoFormBuilderService {
             planName:['',Validators.required],
             planDescription:['',Validators.required],
             clientName:['',Validators.required],
+            clientIdentifier:[''],
             languageCode:['',Validators.required],
             defaultBillingType:['',Validators.required],
             planEffectiveDate:['',Validators.required],
@@ -35,8 +36,7 @@ export class PlanInfoFormBuilderService {
             permitCertificateChangesPostIssuance:[''],
             properInsuranceThresholdAmount:[''],
             comment:[''],
-            isBundledPlan:[''],
-            isBundleExists:[''],//extra field
+            isBundledPlan:[''],         
             loanExtension:[''],
             terminationOfRisk:[''],
             permitCoverageAmountChangesPostIssuance:[''],
@@ -65,7 +65,8 @@ export class PlanInfoFormBuilderService {
             currentRecordFlag:[''],
             planStatusEndDate:[''],
             planCreationDate:[''],
-            mondFormDateFormat:['']
+            mondFormDateFormat:[''],
+            rateStructureHeaderId:['']
 
         });
     }

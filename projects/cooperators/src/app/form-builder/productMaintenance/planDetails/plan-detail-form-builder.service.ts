@@ -28,6 +28,7 @@ export class PlanDetailFormBuilderService {
 
     getProductDetailForm() {
         this.planDetailForm = this.fb.group({
+            isBundleExists:[''],//extra field
             productInfo: this.productInfoForm.getProductInfoForm(),
             planProductInfo: this.planProductInfoForm.getPlanInfoForm()       
         });

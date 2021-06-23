@@ -14,6 +14,10 @@ declare var $: any;
 
 export class ProductPlanSearchComponent implements OnInit {
 
+  @Input() set planList(data) {
+    this.planMaintenanceList = data;
+  }
+
   @Output() rowSelect = new EventEmitter();
   public productTypeListData: any;
   public productType: string = "";
@@ -119,54 +123,54 @@ export class ProductPlanSearchComponent implements OnInit {
     )
   }
 
-  onSelectClientName(event){
+  onSelectClientName(event) {
     this.selectedClientName = undefined
     this.selectedClientName = event.source.value;
   }
 
-  onSelectProductType(event){
+  onSelectProductType(event) {
     this.selectedProductType = undefined
     this.selectedProductType = event.source.value;
   }
 
-  onSelectPlanNumber(event){
-   this.selectedProductNumber = undefined;
-   this.selectedProductNumber = event.source.value;
+  onSelectPlanNumber(event) {
+    this.selectedProductNumber = undefined;
+    this.selectedProductNumber = event.source.value;
   }
 
-  onSelectPlanName(event){
+  onSelectPlanName(event) {
     this.selectedPlanName = undefined;
-   this.selectedPlanName = event.source.value;
+    this.selectedPlanName = event.source.value;
   }
 
   onClickOfPlanSearch() {
     debugger;
-    if(this.clientName != ""){
-      if( this.clientSelect == "clientSelect"){
+    if (this.clientName != "") {
+      if (this.clientSelect == "clientSelect") {
         if (this.selectedClientName == undefined) {
           this.mdMondService.showErrorMessage("Please select the Client Name.");
           return;
         }
       }
     }
-    if(this.productType != ""){
-      if( this.productSelect == "productSelect"){
+    if (this.productType != "") {
+      if (this.productSelect == "productSelect") {
         if (this.selectedProductType == undefined) {
           this.mdMondService.showErrorMessage("Please select the Product Type.");
           return;
         }
       }
     }
-    if(this.productNumber != ""){
-      if( this.planSelect == "productNumberSelect"){
+    if (this.productNumber != "") {
+      if (this.planSelect == "productNumberSelect") {
         if (this.selectedProductNumber == undefined) {
           this.mdMondService.showErrorMessage("Please select the Product Type.");
           return;
         }
       }
     }
-    if(this.planName != ""){
-      if( this.planNameSelect == "planNameSelect"){
+    if (this.planName != "") {
+      if (this.planNameSelect == "planNameSelect") {
         if (this.selectedPlanName == undefined) {
           this.mdMondService.showErrorMessage("Please select the Product Type.");
           return;
@@ -192,7 +196,7 @@ export class ProductPlanSearchComponent implements OnInit {
         this.planMaintenanceList = JSON.parse(atob(data.value)).planProductList_planProductSummary;
       }
     )
- 
+
   }
 
   onChangeOfCopyPlanName(rowData, event) {
@@ -312,11 +316,11 @@ export class ProductPlanSearchComponent implements OnInit {
   }
 
   onPlanListRowSelect(item) {
-debugger;
-  this.rowSelect.emit(item);
+    debugger;
+    this.rowSelect.emit(item);
   }
 
-  onClikOfReset(){
+  onClikOfReset() {
     this.clientName = "";
     this.productType = "";
     this.productNumber = "";

@@ -64,6 +64,8 @@ import { ProductDetailFormBuilderModule } from '../form-builder/productMaintenan
 import { ProductAddPlanComponent } from '../mond/productMaintenance/productDetails/productAddPlan/productAddPlan.component';
 import { PlanDetailFormBuilderModule } from '../form-builder/productMaintenance/planDetails/plan-detail-form.module';
 import { ProductPlanSearchComponent } from '../mond/productMaintenance/productDetails/productPlanSearch/productPlanSearch.component';
+import { ProductAddCoverageComponent } from '../mond/productMaintenance/productDetails/productAddPlan/productAddCoverage/productAddCoverage.component';
+import { CoverageDetailFormBuilderModule } from '../form-builder/productMaintenance/coverageDetails/coverage-detail-form.module';
 
 @NgModule({
   declarations: [
@@ -95,7 +97,8 @@ import { ProductPlanSearchComponent } from '../mond/productMaintenance/productDe
     CreditorSelfAdminDashboardComponent,
     CoopHomePageComponent,
     ProductAddPlanComponent,
-    ProductPlanSearchComponent
+    ProductPlanSearchComponent,
+    ProductAddCoverageComponent
   ],
   imports: [
     CommonModule,
@@ -129,7 +132,8 @@ import { ProductPlanSearchComponent } from '../mond/productMaintenance/productDe
     ChartsModule,
     NgxMaskModule,
     ProductDetailFormBuilderModule,
-    PlanDetailFormBuilderModule
+    PlanDetailFormBuilderModule,
+    CoverageDetailFormBuilderModule
 
 
   ],

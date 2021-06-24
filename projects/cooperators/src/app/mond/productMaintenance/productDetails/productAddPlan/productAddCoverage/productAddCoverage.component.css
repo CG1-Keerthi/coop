@@ -1,0 +1,54 @@
+.md-clr{
+    color: white !important;
+}
+.md-card-hdr{
+    background: #00456A;
+    margin: 0.5px;
+}
+mat-expansion-panel-header{
+    height: 39px !important;
+}
+.tooltiptext {
+    display: inline-block;
+    position: relative;
+    background-color: #00456a;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    padding: 4px;
+}
+.tooltiptext:before {
+    content: '';
+    display: block;  
+    position: absolute;
+    left: 62px;
+    bottom: 100%;
+    width: 0;
+    height: 0;
+    border: 5px solid transparent;
+    border-bottom-color: #00456a;
+}
+
+.tooltiptext:after {
+    content: '';
+    display: block;  
+    position: absolute;
+    left: 141px;
+    bottom: 100%;
+    width: 0;
+    height: 0;
+    border: 5px solid transparent;
+    border-bottom-color: white;
+}
+.md-circle{
+    font-size: 25px;
+    margin-top: 34%;
+}
+.md-hover-tooltip{
+    width: 11rem !important;
+    margin-left: -4rem;
+    padding: 30%;
+}
+ 
+
+

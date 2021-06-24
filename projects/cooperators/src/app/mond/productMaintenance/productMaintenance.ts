@@ -30,7 +30,8 @@ export class ProductMaintenanceComponent implements OnInit {
   public isViewPlan: boolean;
   public addPlanTabName: string;
   public planMaintenanceList: any;
-
+  public isAddCoverage: boolean;
+  public coverageList: any;
   constructor(private mdMondService: MDMondServiceDS,
     private codeListFetch: MDCodeListHeaderDS,
     private mdCommonGetterAndSetter: MDCommonGetterSetter,) { }
@@ -121,7 +122,7 @@ export class ProductMaintenanceComponent implements OnInit {
 
   onClickOfAddPlan(event) {
     debugger;
-    this.addPlanTabName = "Product AddPlan"; 
+    this.addPlanTabName = "Product AddPlan";
     let planProductInfo = {
       "languageCode": "Please select a value",
       "defaultBillingType": "Please select a value",
@@ -137,7 +138,7 @@ export class ProductMaintenanceComponent implements OnInit {
       "insurancePaymentMethod": "Please select a value",
       "loanType": "Please select a value",
       "loanTypeCategory": "Please select a value",
-    
+
     }
     let addplanDetailArray = [];
     let addPlanDetailsObj = {};
@@ -151,11 +152,11 @@ export class ProductMaintenanceComponent implements OnInit {
     this.isAddPlan = true;
   }
 
-  onClickOfViewPlan(event){
+  onClickOfViewPlan(event) {
     debugger;
     this.selectedTab = 3;
     this.isViewPlan = true;
-    this.mdMondService.getFormDataFromMondService('Creditor Self Admin', 'FetchPlanProductInfoList', JSON.stringify({"productId":event.productInfo.productId}), null).subscribe(
+    this.mdMondService.getFormDataFromMondService('Creditor Self Admin', 'FetchPlanProductInfoList', JSON.stringify({ "productId": event.productInfo.productId }), null).subscribe(
       data => {
         this.planMaintenanceList = JSON.parse(atob(data.value)).planProductList_planProductSummary;
       },
@@ -167,11 +168,11 @@ export class ProductMaintenanceComponent implements OnInit {
     )
   }
 
-  onSelectOfPlanRow(event){
-    debugger; 
+  onSelectOfPlanRow(event) {
+    debugger;
     this.isAddPlan = false;
-    this.addPlanTabName = "Plan Details";   
-    this.mdMondService.invokeMondServiceGET("Creditor Self Admin", "FetchPlanProductInfoDetails", "1.00", btoa(JSON.stringify({"planProductInfoId": event.data.planProductInfoId })), this.csfrToken, true, true, true, true).subscribe(
+    this.addPlanTabName = "Plan Details";
+    this.mdMondService.invokeMondServiceGET("Creditor Self Admin", "FetchPlanProductInfoDetails", "1.00", btoa(JSON.stringify({ "planProductInfoId": event.data.planProductInfoId })), this.csfrToken, true, true, true, true).subscribe(
       data => {
         this.productPlanDetailData = JSON.parse(atob(data));
         this.selectedTab = 4;
@@ -183,7 +184,15 @@ export class ProductMaintenanceComponent implements OnInit {
         this.productPlanDetailData = JSON.parse(atob(data));
         this.selectedTab = 4;
         this.isAddPlan = true;
+
       });
+  }
+
+  onClickOfAddCoverage(event) {
+    debugger;
+    this.coverageList = event;
+    this.selectedTab = 5;
+    this.isAddCoverage = true;
   }
 
   @HostListener('click', ['$event.target'])

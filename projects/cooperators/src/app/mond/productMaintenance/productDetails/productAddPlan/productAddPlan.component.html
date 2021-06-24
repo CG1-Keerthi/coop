@@ -8,7 +8,7 @@
                     class="fa fa-arrow-right ml-2"></i></button>
             <button class="btn btn-primary float-right ml-2"  [disabled]="isBtnDisabled">View Coverage<i
                     class="fa fa-arrow-right ml-2"></i></button>
-            <button class="btn btn-primary float-right ml-2"  [disabled]="isBtnDisabled">Add Coverage<i class="fa fa-plus ml-2"></i></button>
+            <button class="btn btn-primary float-right ml-2"  [disabled]="isBtnDisabled" (click)="onClickOfAddCoverage(list)">Add Coverage<i class="fa fa-plus ml-2"></i></button>
         </div>
     </div>
 
@@ -198,7 +198,8 @@
                         </div>
                         <div class="ym_form_group  col-3">
                             <label class="md-lbl">Proportional Insurance Threshold Amount</label>
-                            <input style="width: 70%;" formControlName="properInsuranceThresholdAmount">
+                            <input style="width: 70%;" formControlName="properInsuranceThresholdAmount" onlyNumber [readonly]="isFieldreadonly" (keyup)="onKeyUpAmount($event)">
+                            <span *ngIf="isAmountTooltip" class="tooltiptext">Enter number in this field</span>
                         </div>
                     </div>
                     <div class="row">

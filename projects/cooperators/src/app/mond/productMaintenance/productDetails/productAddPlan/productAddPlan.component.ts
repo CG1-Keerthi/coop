@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, Output,EventEmitter, Renderer2, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { PlanDetailFormBuilderService } from 'projects/cooperators/src/app/form-builder/productMaintenance/planDetails/plan-detail-form-builder.service';
 import { MDCommonGetterSetter } from 'projects/cooperators/src/app/_services/common/MDCommonGetterSetter';
@@ -24,6 +24,9 @@ export class ProductAddPlanComponent implements OnInit {
       this.isplanProductInforeadonly = true;
     }
   }
+
+  @Output() AddCoverage = new EventEmitter();
+
   public planDetailsForm: FormGroup;
   public clientLanguage: any;
   public defaultBillingTypeList: any;
@@ -60,6 +63,7 @@ export class ProductAddPlanComponent implements OnInit {
   public planRateStrList: any;
   public isBillingSubmitted: boolean;
   public isLanguageSubmitted: boolean;
+  public isAmountTooltip: boolean;
 
   @ViewChild('businessList') businessList: ElementRef;
   @ViewChild('productStatusList') productStatusList: ElementRef;
@@ -414,8 +418,6 @@ export class ProductAddPlanComponent implements OnInit {
       }
     )
 
-
-
     debugger;
 
     this.planDetailsForm = this.planDetailService.form;
@@ -561,6 +563,17 @@ export class ProductAddPlanComponent implements OnInit {
     }
   }
 
+  onKeyUpAmount(event){
+    if (event.target.value == "") {
+      this.isAmountTooltip = true;
+      setTimeout(() => {
+        this.isAmountTooltip = false;
+      }, 2000)
+    } else {
+      this.isAmountTooltip = false;
+    } 
+  }
+
   onClickOfPlanDetailSubmit() {
     debugger;
     if ((this.planDetailsForm.value.planProductInfo.planNumber == null || this.planDetailsForm.value.planProductInfo.planNumber == "")
@@ -703,6 +716,11 @@ export class ProductAddPlanComponent implements OnInit {
 
   onChangeOfLanguage() {
     this.isLanguageSubmitted = false;
+  }
+
+  onClickOfAddCoverage(item){
+    debugger;
+    this.AddCoverage.emit(item);
   }
 
 }

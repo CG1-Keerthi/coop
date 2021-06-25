@@ -74,7 +74,7 @@
                     <h3>Plan List</h3>
                 </div>
             </div>
-            <!-- <mat-spinner class="md-spinner" *ngIf="isSpinnerShow"></mat-spinner> -->
+            <mat-spinner class="md-spinner" *ngIf="isSpinnerShow"></mat-spinner>
             <div id="prodPtableId" class="ml-2 mb-0 mr-0 mt-0 pt-0 pb-0">
                 <p-table [value]="planMaintenanceList" selectionMode="single" [scrollable]="true" [responsive]="true"
                     scrollHeight="379px" [autoLayout]="true" (onRowSelect)="onPlanListRowSelect($event)">

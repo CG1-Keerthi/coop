@@ -47,6 +47,7 @@ export class ProductPlanSearchComponent implements OnInit {
   public planSelect: string;
   public planNameSelect: string;
   public selectedPlanName: any;
+  public isSpinnerShow: boolean;
 
   @ViewChild('copyDate') copyDate: ElementRef;
 
@@ -164,7 +165,7 @@ export class ProductPlanSearchComponent implements OnInit {
     if (this.productNumber != "") {
       if (this.planSelect == "productNumberSelect") {
         if (this.selectedProductNumber == undefined) {
-          this.mdMondService.showErrorMessage("Please select the Product Type.");
+          this.mdMondService.showErrorMessage("Please select the Plan Number.");
           return;
         }
       }
@@ -172,7 +173,7 @@ export class ProductPlanSearchComponent implements OnInit {
     if (this.planName != "") {
       if (this.planNameSelect == "planNameSelect") {
         if (this.selectedPlanName == undefined) {
-          this.mdMondService.showErrorMessage("Please select the Product Type.");
+          this.mdMondService.showErrorMessage("Please select the Plan Name.");
           return;
         }
       }
@@ -186,14 +187,17 @@ export class ProductPlanSearchComponent implements OnInit {
       "planStatus": this.planStatus,
       "planProductList_planProductSummary": []
     }
+    this.isSpinnerShow = true;
     this.mdMondService.getFormDataFromMondService('Creditor Self Admin', 'FetchPlanProductInfoList', JSON.stringify(formVariable), null).subscribe(
       data => {
         this.planMaintenanceList = JSON.parse(atob(data.value)).planProductList_planProductSummary;
+        this.isSpinnerShow = false;
       },
       error => {
         this.mdMondService.MDError(error);
         let data = { "key": "key", "value": "ewogICJwbGFuUHJvZHVjdExpc3RfcGxhblByb2R1Y3RTdW1tYXJ5IjogWwogICAgewogICAgICAicGxhblByb2R1Y3RJbmZvSWQiOiAiMTkxIiwKICAgICAgInByb2R1Y3RJZCI6IDExMiwKICAgICAgImNsaWVudE5hbWUiOiAiQ3JlbG9naXgiLAogICAgICAicGxhbk5hbWUiOiAiVGVzdDEgbmFtZSIsCiAgICAgICJwbGFuU3RhdHVzIjogIkFjdGl2ZSIsCiAgICAgICJwcm9kdWN0VHlwZSI6ICJUZXN0VHlwZSIsCiAgICAgICJwbGFuTnVtYmVyIjogIlRlc3QxIgogICAgfSwKICAgIHsKICAgICAgInBsYW5Qcm9kdWN0SW5mb0lkIjogIjE0MCIsCiAgICAgICJwcm9kdWN0SWQiOiA4LAogICAgICAiY2xpZW50TmFtZSI6ICJMR00iLAogICAgICAicGxhbk5hbWUiOiAiRk9SRCAtIFNpbmdsZSBQcmVtaXVtIC0gRXNzZW50aWFsIiwKICAgICAgInBsYW5TdGF0dXMiOiAiQWN0aXZlIiwKICAgICAgInByb2R1Y3RUeXBlIjogIlNQIiwKICAgICAgInBsYW5OdW1iZXIiOiAiMDU3MjIiCiAgICB9LAogICAgewogICAgICAicGxhblByb2R1Y3RJbmZvSWQiOiAiMTM5IiwKICAgICAgInByb2R1Y3RJZCI6IDgsCiAgICAgICJjbGllbnROYW1lIjogIkxHTSIsCiAgICAgICJwbGFuTmFtZSI6ICJGT1JEIC0gU2luZ2xlIFByZW1pdW0gLSBFc3NlbnRpYWwiLAogICAgICAicGxhblN0YXR1cyI6ICJBY3RpdmUiLAogICAgICAicHJvZHVjdFR5cGUiOiAiU1AiLAogICAgICAicGxhbk51bWJlciI6ICIwNTcyMCIKICAgIH0sCiAgICB7CiAgICAgICJwbGFuUHJvZHVjdEluZm9JZCI6ICIxMzgiLAogICAgICAicHJvZHVjdElkIjogOCwKICAgICAgImNsaWVudE5hbWUiOiAiTEdNIiwKICAgICAgInBsYW5OYW1lIjogIkZPUkQgLSBTaW5nbGUgUHJlbWl1bSAtIEVzc2VudGlhbCIsCiAgICAgICJwbGFuU3RhdHVzIjogIkFjdGl2ZSIsCiAgICAgICJwcm9kdWN0VHlwZSI6ICJTUCIsCiAgICAgICJwbGFuTnVtYmVyIjogIjA1NzE5IgogICAgfSwKCXsKICAgICAgInBsYW5Qcm9kdWN0SW5mb0lkIjogIjE5MiIsCiAgICAgICJwcm9kdWN0SWQiOiAxMTIsCiAgICAgICJjbGllbnROYW1lIjogIkNyZWxvZ2l4IiwKICAgICAgInBsYW5OYW1lIjogIlRlc3QxIG5hbWUiLAogICAgICAicGxhblN0YXR1cyI6ICJBY3RpdmUiLAogICAgICAicHJvZHVjdFR5cGUiOiAiVGVzdFR5cGUiLAogICAgICAicGxhbk51bWJlciI6ICJUZXN0MSIKICAgIH0sCiAgICB7CiAgICAgICJwbGFuUHJvZHVjdEluZm9JZCI6ICIxNDEiLAogICAgICAicHJvZHVjdElkIjogOCwKICAgICAgImNsaWVudE5hbWUiOiAiTEdNIiwKICAgICAgInBsYW5OYW1lIjogIkZPUkQgLSBTaW5nbGUgUHJlbWl1bSAtIEVzc2VudGlhbCIsCiAgICAgICJwbGFuU3RhdHVzIjogIkFjdGl2ZSIsCiAgICAgICJwcm9kdWN0VHlwZSI6ICJTUCIsCiAgICAgICJwbGFuTnVtYmVyIjogIjA1NzIyIgogICAgfSwKICAgIHsKICAgICAgInBsYW5Qcm9kdWN0SW5mb0lkIjogIjE0MCIsCiAgICAgICJwcm9kdWN0SWQiOiA4LAogICAgICAiY2xpZW50TmFtZSI6ICJMR00iLAogICAgICAicGxhbk5hbWUiOiAiRk9SRCAtIFNpbmdsZSBQcmVtaXVtIC0gRXNzZW50aWFsIiwKICAgICAgInBsYW5TdGF0dXMiOiAiQWN0aXZlIiwKICAgICAgInByb2R1Y3RUeXBlIjogIlNQIiwKICAgICAgInBsYW5OdW1iZXIiOiAiMDU3MjAiCiAgICB9LAogICAgewogICAgICAicGxhblByb2R1Y3RJbmZvSWQiOiAiMTM5IiwKICAgICAgInByb2R1Y3RJZCI6IDgsCiAgICAgICJjbGllbnROYW1lIjogIkxHTSIsCiAgICAgICJwbGFuTmFtZSI6ICJGT1JEIC0gU2luZ2xlIFByZW1pdW0gLSBFc3NlbnRpYWwiLAogICAgICAicGxhblN0YXR1cyI6ICJBY3RpdmUiLAogICAgICAicHJvZHVjdFR5cGUiOiAiU1AiLAogICAgICAicGxhbk51bWJlciI6ICIwNTcxOSIKICAgIH0sCgl7CiAgICAgICJwbGFuUHJvZHVjdEluZm9JZCI6ICIxOTMiLAogICAgICAicHJvZHVjdElkIjogMTEyLAogICAgICAiY2xpZW50TmFtZSI6ICJDcmVsb2dpeCIsCiAgICAgICJwbGFuTmFtZSI6ICJUZXN0MSBuYW1lIiwKICAgICAgInBsYW5TdGF0dXMiOiAiQWN0aXZlIiwKICAgICAgInByb2R1Y3RUeXBlIjogIlRlc3RUeXBlIiwKICAgICAgInBsYW5OdW1iZXIiOiAiVGVzdDEiCiAgICB9LAogICAgewogICAgICAicGxhblByb2R1Y3RJbmZvSWQiOiAiMTQzIiwKICAgICAgInByb2R1Y3RJZCI6IDgsCiAgICAgICJjbGllbnROYW1lIjogIkxHTSIsCiAgICAgICJwbGFuTmFtZSI6ICJGT1JEIC0gU2luZ2xlIFByZW1pdW0gLSBFc3NlbnRpYWwiLAogICAgICAicGxhblN0YXR1cyI6ICJBY3RpdmUiLAogICAgICAicHJvZHVjdFR5cGUiOiAiU1AiLAogICAgICAicGxhbk51bWJlciI6ICIwNTcyMiIKICAgIH0sCiAgICB7CiAgICAgICJwbGFuUHJvZHVjdEluZm9JZCI6ICIxNDQiLAogICAgICAicHJvZHVjdElkIjogOCwKICAgICAgImNsaWVudE5hbWUiOiAiTEdNIiwKICAgICAgInBsYW5OYW1lIjogIkZPUkQgLSBTaW5nbGUgUHJlbWl1bSAtIEVzc2VudGlhbCIsCiAgICAgICJwbGFuU3RhdHVzIjogIkFjdGl2ZSIsCiAgICAgICJwcm9kdWN0VHlwZSI6ICJTUCIsCiAgICAgICJwbGFuTnVtYmVyIjogIjA1NzIwIgogICAgfSwKICAgIHsKICAgICAgInBsYW5Qcm9kdWN0SW5mb0lkIjogIjE0NSIsCiAgICAgICJwcm9kdWN0SWQiOiA4LAogICAgICAiY2xpZW50TmFtZSI6ICJMR00iLAogICAgICAicGxhbk5hbWUiOiAiRk9SRCAtIFNpbmdsZSBQcmVtaXVtIC0gRXNzZW50aWFsIiwKICAgICAgInBsYW5TdGF0dXMiOiAiQWN0aXZlIiwKICAgICAgInByb2R1Y3RUeXBlIjogIlNQIiwKICAgICAgInBsYW5OdW1iZXIiOiAiMDU3MTkiCiAgICB9CiAgXQp9" }
         this.planMaintenanceList = JSON.parse(atob(data.value)).planProductList_planProductSummary;
+        this.isSpinnerShow = false;
       }
     )
 

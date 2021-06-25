@@ -96,7 +96,7 @@ export class ProductSearchCoverageComponent implements OnInit {
     if (this.planNumber != "") {
       if (this.planSelect == "planNumberSelect") {
         if (this.selectedPlanNumber == undefined) {
-          this.mdMondService.showErrorMessage("Please select the Product Type.");
+          this.mdMondService.showErrorMessage("Please select the Plan Number.");
           return;
         }
       }

@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, Output,EventEmitter, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, Output, EventEmitter, Renderer2, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { PlanDetailFormBuilderService } from 'projects/cooperators/src/app/form-builder/productMaintenance/planDetails/plan-detail-form-builder.service';
 import { MDCommonGetterSetter } from 'projects/cooperators/src/app/_services/common/MDCommonGetterSetter';
@@ -19,7 +19,7 @@ export class ProductAddPlanComponent implements OnInit {
   @Input() set planDetails(data) {
     // debugger;
     if (Object.keys(data).length > 0) {
-      this.list = data;    
+      this.list = data;
       this.isProductInfoFieldreadonly = true;
       this.isplanProductInforeadonly = true;
     }
@@ -65,6 +65,8 @@ export class ProductAddPlanComponent implements OnInit {
   public isBillingSubmitted: boolean;
   public isLanguageSubmitted: boolean;
   public isAmountTooltip: boolean;
+  public selectedClientName: any;
+  public clientSelect: any;
 
   @ViewChild('businessList') businessList: ElementRef;
   @ViewChild('productStatusList') productStatusList: ElementRef;
@@ -220,7 +222,7 @@ export class ProductAddPlanComponent implements OnInit {
 
     this.mdCodeListHeaderDS.getListOfCodeLists('Coop-PremCalcAlgorithm').subscribe(
       data => {
-       
+
         let premCalcAlgorithmArray = [];
         let premCalcAlgorithmObj = {};
         premCalcAlgorithmObj["description"] = "Please select a value";
@@ -416,8 +418,8 @@ export class ProductAddPlanComponent implements OnInit {
         this.mdMondServiceDS.MDError(error);
         let data = { "key": "key", "value": "eyJwbGFuUmF0aW5nU3RydWN0dXJlSGVhZGVyTGlzdF9QbGFuUmF0aW5nU3RydWN0dXJlSGVhZGVyIjpbeyJyYXRlVHlwZSI6IkhpZ2giLCJyYXRlTmFtZSI6IkVzc2VudGlhbFBsdXMtU2luZ2xlUmF0ZXMtSGlnbiBDb21wIiwiam9pbnRMaWZlTXVsdGlwbGllciI6MC45MjUsInRvbGVyYW5jZUxldmVsIjowLjAyLCJQbGFuUmF0aW5nU3RydWN0dXJlRGV0YWlscyI6W10sInJhdGVTdHJ1Y3R1cmVIZWFkZXJJZCI6ODd9LHsicmF0ZVR5cGUiOiJIaWdoIiwicmF0ZU5hbWUiOiJDYXJlZnJlZSBIaWdoIiwiam9pbnRMaWZlTXVsdGlwbGllciI6MC45MjUsInRvbGVyYW5jZUxldmVsIjowLjAyLCJQbGFuUmF0aW5nU3RydWN0dXJlRGV0YWlscyI6W10sInJhdGVTdHJ1Y3R1cmVIZWFkZXJJZCI6ODh9XX0\u003d" };
         this.planRateStrList = JSON.parse(atob(data.value)).planRatingStructureHeaderList_PlanRatingStructureHeader;
-     
-     
+
+
       }
     )
 
@@ -467,8 +469,8 @@ export class ProductAddPlanComponent implements OnInit {
 
   clientNameKeyup(event) {
     // debugger;
-    // this.selectedClientName = undefined;
-    // this.clientSelect = "clientSelect";
+    this.selectedClientName = undefined;
+    this.clientSelect = "clientSelect";
     this.mdConnectedPartnersDS.getListOfPartnerCompaniesTypeAhead(event.target.value).subscribe(
       data => {
         this.clientNameVal = data;
@@ -566,7 +568,7 @@ export class ProductAddPlanComponent implements OnInit {
     }
   }
 
-  onKeyUpAmount(event){
+  onKeyUpAmount(event) {
     if (event.target.value == "") {
       this.isAmountTooltip = true;
       setTimeout(() => {
@@ -574,7 +576,13 @@ export class ProductAddPlanComponent implements OnInit {
       }, 2000)
     } else {
       this.isAmountTooltip = false;
-    } 
+    }
+  }
+
+  onSelectClientName(event) {
+    debugger;
+    // this.selectedClientName = undefined
+    this.selectedClientName = event.source.value;
   }
 
   onClickOfPlanDetailSubmit() {
@@ -604,10 +612,19 @@ export class ProductAddPlanComponent implements OnInit {
       this.mdMondServiceDS.showErrorMessage("please enter the value for mandatory fields");
       return;
     }
-    if (this.planDetailsForm.value.planProductInfo.defaultBillingType == "Please select a value") {   
+    if (this.planDetailsForm.value.planProductInfo.defaultBillingType == "Please select a value") {
       this.isBillingSubmitted = true;
       this.mdMondServiceDS.showErrorMessage("please enter the value for mandatory fields");
       return;
+    }
+
+    if (this.planDetailsForm.value.planProductInfo != "") {
+      if (this.clientSelect == "clientSelect") {
+        if (this.selectedClientName == undefined) {
+          this.mdMondServiceDS.showErrorMessage("Please select the Client Name.");
+          return;
+        }
+      }
     }
 
     this.isBillingSubmitted = false;
@@ -678,6 +695,45 @@ export class ProductAddPlanComponent implements OnInit {
     this.planDetailsForm.value.productInfo.lastUpdateDate = undefined;
     this.planDetailsForm.value.productInfo.mondFormDateFormat = undefined;
 
+    if (this.planDetailsForm.value.planProductInfo.planStatus == "Please select a value") {
+      this.planDetailsForm.value.planProductInfo.planStatus = "";
+    }
+
+    if (this.planDetailsForm.value.planProductInfo.terminationOfRisk == "Please select a value") {
+      this.planDetailsForm.value.planProductInfo.terminationOfRisk = "";
+    }
+    if (this.planDetailsForm.value.planProductInfo.permitCoverageAmountChangesPostIssuance == "Please select a value") {
+      this.planDetailsForm.value.planProductInfo.permitCoverageAmountChangesPostIssuance = "";
+    }
+    if (this.planDetailsForm.value.planProductInfo.maximumApplicantAllowedQuantity == "Please select a value") {
+      this.planDetailsForm.value.planProductInfo.maximumApplicantAllowedQuantity = "";
+    }
+    if (this.planDetailsForm.value.planProductInfo.premiumCalculationAlgorithm == "Please select a value") {
+      this.planDetailsForm.value.planProductInfo.premiumCalculationAlgorithm = "";
+    }
+    if (this.planDetailsForm.value.planProductInfo.premiumCalculationMethod == "Please select a value") {
+      this.planDetailsForm.value.planProductInfo.premiumCalculationMethod = "";
+    }
+    if (this.planDetailsForm.value.planProductInfo.premiumPaidBy == "Please select a value") {
+      this.planDetailsForm.value.planProductInfo.premiumPaidBy = "";
+    }
+    if (this.planDetailsForm.value.planProductInfo.loanBalanceMethod == "Please select a value") {
+      this.planDetailsForm.value.planProductInfo.loanBalanceMethod = "";
+    }
+    if (this.planDetailsForm.value.planProductInfo.ageMethod == "Please select a value") {
+      this.planDetailsForm.value.planProductInfo.ageMethod = "";
+    }
+    if (this.planDetailsForm.value.planProductInfo.insurancePaymentMethod == "Please select a value") {
+      this.planDetailsForm.value.planProductInfo.insurancePaymentMethod = "";
+    }
+    if (this.planDetailsForm.value.planProductInfo.loanType == "Please select a value") {
+      this.planDetailsForm.value.planProductInfo.loanType = "";
+    }
+    if (this.planDetailsForm.value.planProductInfo.loanTypeCategory == "Please select a value") {
+      this.planDetailsForm.value.planProductInfo.loanTypeCategory = "";
+    }
+
+
     let formData = btoa(JSON.stringify(this.planDetailsForm.value));
     this.mdMondServiceDS.invokeMondService("Creditor Self Admin", "SavePlanProductData", "1.00", formData, this.csfrToken, true, true, true, true).subscribe(
       data => {
@@ -721,12 +777,12 @@ export class ProductAddPlanComponent implements OnInit {
     this.isLanguageSubmitted = false;
   }
 
-  onClickOfAddCoverage(item){
+  onClickOfAddCoverage(item) {
     debugger;
     this.AddCoverage.emit(item);
   }
 
-  onClickOfViewCoverage(item){
+  onClickOfViewCoverage(item) {
     this.viewCoverage.emit(item);
   }
 

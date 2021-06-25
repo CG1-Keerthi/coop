@@ -108,7 +108,7 @@
                             <input type="text" placeholder="Pick one" aria-label="Number" matInput
                                 (keyup)="clientNameKeyup($event)" [matAutocomplete]="auto" formControlName="clientName" [readonly]="isFieldreadonly">
                             <mat-autocomplete #auto="matAutocomplete">
-                                <mat-option *ngFor="let list of clientNameVal" [value]="list.companyName">
+                                <mat-option *ngFor="let list of clientNameVal" [value]="list.companyName" (onSelectionChange)="onSelectClientName($event)">
                                     {{list.companyName}}
                                 </mat-option>
                             </mat-autocomplete>

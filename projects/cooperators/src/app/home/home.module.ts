@@ -66,6 +66,7 @@ import { PlanDetailFormBuilderModule } from '../form-builder/productMaintenance/
 import { ProductPlanSearchComponent } from '../mond/productMaintenance/productDetails/productPlanSearch/productPlanSearch.component';
 import { ProductAddCoverageComponent } from '../mond/productMaintenance/productDetails/productAddPlan/productAddCoverage/productAddCoverage.component';
 import { CoverageDetailFormBuilderModule } from '../form-builder/productMaintenance/coverageDetails/coverage-detail-form.module';
+import { ProductSearchCoverageComponent } from '../mond/productMaintenance/productDetails/productAddPlan/productSearchCoverage/productSearchCoverage.component';
 
 @NgModule({
   declarations: [
@@ -98,7 +99,8 @@ import { CoverageDetailFormBuilderModule } from '../form-builder/productMaintena
     CoopHomePageComponent,
     ProductAddPlanComponent,
     ProductPlanSearchComponent,
-    ProductAddCoverageComponent
+    ProductAddCoverageComponent,
+    ProductSearchCoverageComponent
   ],
   imports: [
     CommonModule,

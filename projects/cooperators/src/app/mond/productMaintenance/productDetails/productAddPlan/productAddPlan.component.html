@@ -6,7 +6,7 @@
             <button class="btn btn-primary float-right ml-2" (click)="onClickOfUpdatePlan()" [disabled]="isBtnDisabled">Update Plan</button>
             <button class="btn btn-primary float-right ml-2"  [disabled]="isBtnDisabled">Plan Coverage Bundle<i
                     class="fa fa-arrow-right ml-2"></i></button>
-            <button class="btn btn-primary float-right ml-2"  [disabled]="isBtnDisabled">View Coverage<i
+            <button class="btn btn-primary float-right ml-2" [disabled]="isBtnDisabled" (click)="onClickOfViewCoverage(list)">View Coverage<i
                     class="fa fa-arrow-right ml-2"></i></button>
             <button class="btn btn-primary float-right ml-2"  [disabled]="isBtnDisabled" (click)="onClickOfAddCoverage(list)">Add Coverage<i class="fa fa-plus ml-2"></i></button>
         </div>

@@ -478,6 +478,16 @@ text-align: center;
 .md-mat-tab{
     margin-left: 6px;
 }
+.md-overFlow{
+    white-space: nowrap;
+    overflow: hidden;
+}
+.tooltip-inner {
+    background-color: #00456a;
+}
+.tooltip.bs-tooltip-right .arrow:before {
+    border-right-color: #00456a !important;
+}
 
 
 

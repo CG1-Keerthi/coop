@@ -32,6 +32,9 @@ export class ProductMaintenanceComponent implements OnInit {
   public planMaintenanceList: any;
   public isAddCoverage: boolean;
   public coverageList: any;
+  public isViewCoverage: boolean;
+  public ViewCoverageClientId: string;
+  public coverageMaintenanceList: any;
   constructor(private mdMondService: MDMondServiceDS,
     private codeListFetch: MDCodeListHeaderDS,
     private mdCommonGetterAndSetter: MDCommonGetterSetter,) { }
@@ -191,8 +194,27 @@ export class ProductMaintenanceComponent implements OnInit {
   onClickOfAddCoverage(event) {
     debugger;
     this.coverageList = event;
-    this.selectedTab = 5;
+    this.selectedTab = 6;
     this.isAddCoverage = true;
+  }
+
+  onClickOfViewCoverage(event) {
+    debugger
+    this.isViewCoverage = true;
+    this.selectedTab = 5;
+    this.ViewCoverageClientId = event.planProductInfo.clientIdentifier;
+    let formVariable = { "planProductInfoId": event.planProductInfo.planProductInfoId }
+    this.mdMondService.getFormDataFromMondService('Creditor Self Admin', 'FetchPlanCoverageList', JSON.stringify(formVariable), null).subscribe(
+      data => {
+        this.coverageMaintenanceList = JSON.parse(atob(data.value)).planCoverageList_coverageSummary
+      },
+      error => {
+        debugger;
+        this.mdMondService.MDError(error);
+        let data = { "key": "key", "value": "eyJwbGFuQ292ZXJhZ2VMaXN0X2NvdmVyYWdlU3VtbWFyeSI6W3sibGluZU9mQnVzaW5lc3MiOiI5MDEiLCJjb3ZlcmFnZVR5cGUiOiJDUkVMSSIsInBsYW5Db3ZlcmFnZUluZm9JZCI6IjU4MyIsImNvdmVyYWdlQ29kZSI6IkxJIiwicGxhbk51bWJlciI6IlBsYW4gTnVtYmVyXzgiLCJjb3ZlcmFnZVN0YXR1cyI6IkFjdGl2ZSJ9XX0\u003d" }
+        this.coverageMaintenanceList = JSON.parse(atob(data.value)).planCoverageList_coverageSummary
+      }
+    )
   }
 
   @HostListener('click', ['$event.target'])

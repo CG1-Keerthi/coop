@@ -88,10 +88,15 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="ym_form_group  col-6">
+                        <div class="ym_form_group  col-6 mb-0 pb-0">
                             <label class="md-lbl">Client Name</label>
-                            <input formControlName="clientName">
-
+                            <input placeholder="Client Name" formControlName="clientName"
+                            (keyup)="getClientNameDetails($event)" [matAutocomplete]="auto1">
+                            <mat-autocomplete #auto1="matAutocomplete">
+                                <mat-option *ngFor="let option of clientNameListData" [value]="option.value">
+                                    {{option.value}}
+                                </mat-option>
+                            </mat-autocomplete>
                         </div>
                         <div class="ym_form_group col-6">
                             <label class="md-lbl">Plan Effective Date</label>
@@ -147,11 +152,12 @@
                             <div class="ym_form_select" style="width: 100%;">
                                 <select formControlName="coverageType" #languageElement (change)="onChangeOfCoverageType($event)">
                                     <!-- <option selected value="">Please select a value</option> -->
-                                    <option let *ngFor="let list of coverageTypeList" value="{{list.coverageCode}}">
+                                    <option let *ngFor="let list of coverageTypeList" value="{{list.coverageType}}">
                                         {{list.coverageType}}</option>
                                 </select>
                             </div>
                         </div>
+                       
                         <div class="col-1"> 
                             <i (mouseover)="onMouseover()" class="fa fa-question-circle md-circle" aria-hidden="true"></i>
                             <span *ngIf="isTooltip" class="tooltiptext md-hover-tooltip">Please select 'Line Of Business' to view the corresponding coverage type."</span>

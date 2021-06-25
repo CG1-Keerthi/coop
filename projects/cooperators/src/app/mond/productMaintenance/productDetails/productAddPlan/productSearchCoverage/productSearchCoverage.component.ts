@@ -19,6 +19,7 @@ export class ProductSearchCoverageComponent implements OnInit {
   @Input() set coverageList(data) {
     this.coverageMaintenanceList = data;
   }
+  @Output() coverageRowSelect = new EventEmitter();
 
   public clientNumberListData: any;
   public planNumber: string = "";
@@ -134,6 +135,11 @@ export class ProductSearchCoverageComponent implements OnInit {
     this.coverageType = "";
     this.coverageStatus = "";
     this.coverageMaintenanceList = [];
+  }
+
+  onCoverageListRowSelect(item){
+    debugger;
+    this.coverageRowSelect.emit(item);
   }
 
 }

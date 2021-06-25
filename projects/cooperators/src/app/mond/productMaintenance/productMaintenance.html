@@ -132,10 +132,10 @@
                             <app-product-add-plan-designer [planDetails]="productPlanDetailData" [tabName]="addPlanTabName" (AddCoverage)="onClickOfAddCoverage($event)" (viewCoverage)="onClickOfViewCoverage($event)"></app-product-add-plan-designer>
                         </mat-tab>  
                         <mat-tab label="Coverage Search" *ngIf="isViewCoverage">
-                            <app-product-search-coverage-designer [clientIdentifier]="ViewCoverageClientId" [coverageList]="coverageMaintenanceList"></app-product-search-coverage-designer>
+                            <app-product-search-coverage-designer [clientIdentifier]="ViewCoverageClientId" [coverageList]="coverageMaintenanceList" (coverageRowSelect)="onSelectOfCoverageRow($event)"></app-product-search-coverage-designer>
                         </mat-tab>  
-                        <mat-tab label="Add Coverage" *ngIf="isAddCoverage">
-                            <app-product-add-coverage-designer [coverageData]="coverageList"></app-product-add-coverage-designer>
+                        <mat-tab label="{{addCoverageTabName}}" *ngIf="isAddCoverage">
+                            <app-product-add-coverage-designer  [coverageData]="coverageList" [coverageTypeData]="coverageTypeList" [tabName]="addCoverageTabName"></app-product-add-coverage-designer>
                         </mat-tab>                   
                     </mat-tab-group>
                 </div>               

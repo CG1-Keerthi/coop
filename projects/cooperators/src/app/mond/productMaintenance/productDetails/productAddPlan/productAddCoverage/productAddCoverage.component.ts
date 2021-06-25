@@ -1,5 +1,6 @@
 import { Component, ElementRef, Input, OnInit, Output, EventEmitter, Renderer2, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { Base64 } from 'js-base64';
 import { CoverageDetailFormBuilderService } from 'projects/cooperators/src/app/form-builder/productMaintenance/coverageDetails/coverage-detail-form-builder.service';
 import { MDCommonGetterSetter } from 'projects/cooperators/src/app/_services/common';
 import { MDCodeListHeaderDS, MDMondServiceDS } from 'projects/cooperators/src/app/_services/ds';
@@ -12,6 +13,13 @@ import { MDCodeListHeaderDS, MDMondServiceDS } from 'projects/cooperators/src/ap
 })
 
 export class ProductAddCoverageComponent implements OnInit {
+
+  @Input() set tabName(name) {
+    this.coverageTabName = name;
+  }
+  @Input() set coverageTypeData(list) {
+    this.coverageTypeList = list;
+  }
   @Input() set coverageData(data) {
     this.coverageDetailList = data;
   }
@@ -43,9 +51,11 @@ export class ProductAddCoverageComponent implements OnInit {
   public isMinimumPremiumTooltip: boolean;
   public isTooltip: boolean = false;
   public csfrToken: any;
-  public coverageCode: string;
-  public coverageType: string;
+  public coverageTabName: string;
 
+  public coverageCode: string;
+  // public coverageType: string;
+  public clientNameListData: any;
   constructor(private mdCodeListHeaderDS: MDCodeListHeaderDS,
     private mdMondServiceDS: MDMondServiceDS,
     private coverageDetailService: CoverageDetailFormBuilderService,
@@ -134,11 +144,28 @@ export class ProductAddCoverageComponent implements OnInit {
         this.terminationDueToClaimList = terminationDueToClaimArray;
       })
 
+
+
+
     this.coverageDetailsForm = this.coverageDetailService.form;
+    this.coverageDetailsForm.reset();
     this.coverageDetailsForm.patchValue(this.coverageDetailList);
   }
 
   ngAfterViewInit() {
+  }
+
+  getClientNameDetails(event) {
+
+    this.mdMondServiceDS.getFormDataFromMondService("Creditor Self Admin", "FetchListOfClientNames", JSON.stringify({ "clientName": event.target.value.trim() }), "").subscribe(
+      data => {
+        this.clientNameListData = JSON.parse(Base64.decode(data.value)).response_response;
+      }, error => {
+        this.mdMondServiceDS.MDError(error);
+        let data = { "key": "key", "value": "eyJyZXNwb25zZV9yZXNwb25zZSI6W3siaWQiOiI1IiwidmFsdWUiOiJDb2xsYWJyaWEgRmluYW5jaWFsIFNlcnZpY2VzIEluYy4ifSx7ImlkIjoiMiIsInZhbHVlIjoiQ3JlbG9naXgifV19" }
+        this.clientNameListData = JSON.parse(Base64.decode(data.value)).response_response;
+      }
+    )
   }
 
   onChangeOfLOB(event) {
@@ -160,6 +187,7 @@ export class ProductAddCoverageComponent implements OnInit {
         }
         this.coverageTypeList = coverageTypeArray;
 
+
       }, error => {
         this.mdMondServiceDS.MDError(error);
         let data = { "key": "key", "value": "ewogICJjb3ZlcmFnZVR5cGVMaXN0X2NvdmVyYWdlTG9va1VwIjogWwogICAgewogICAgICAiY292ZXJhZ2VUeXBlIjogIkNSRUxJIiwKICAgICAgImNvdmVyYWdlQ29kZSI6ICJMSSIKICAgIH0sCgl7CiAgICAgICJjb3ZlcmFnZVR5cGUiOiAiQ1JFREkiLAogICAgICAiY292ZXJhZ2VDb2RlIjogIkRJIgogICAgfQogIF0KfQ==" };
@@ -173,8 +201,8 @@ export class ProductAddCoverageComponent implements OnInit {
         }
         this.coverageTypeList = coverageTypeArray;
 
-      }
-    )
+
+      })
   }
 
   onKeyUpMaxClaim(event) {
@@ -396,8 +424,15 @@ export class ProductAddCoverageComponent implements OnInit {
 
   onChangeOfCoverageType(event) {
     debugger;
-    this.coverageCode = event.currentTarget.value;
-    this.coverageType = event.target.options[event.target.options.selectedIndex].text;
+    // this.coverageCode = event.currentTarget.value;
+    // this.coverageType = event.target.options[event.target.options.selectedIndex].text;
+    this.coverageTypeList
+        for (let j = 0; j < this.coverageTypeList.length; j++) {
+          if (this.coverageTypeList[j].coverageType == event.currentTarget.value) {
+          this.coverageCode = this.coverageTypeList[j].coverageCode;
+          }
+        }
+
   }
 
   onclickOfCoverageSubmit() {
@@ -414,9 +449,14 @@ export class ProductAddCoverageComponent implements OnInit {
     } else {
       this.coverageDetailsForm.value.coverageInfo.riderBenefit = "N";
     }
-    this.coverageDetailsForm.value.coverageInfo.currentRecordFlag = "N";
+    if (this.coverageTabName == "Add Coverage") {
+      this.coverageDetailsForm.value.coverageInfo.currentRecordFlag = "N";
+    } else {
+      this.coverageDetailsForm.value.coverageInfo.currentRecordFlag = "Y";
+    }
+
     this.coverageDetailsForm.value.coverageInfo.coverageCode = this.coverageCode;
-    this.coverageDetailsForm.value.coverageInfo.coverageType = this.coverageType;
+    // this.coverageDetailsForm.value.coverageInfo.coverageType = this.coverageType;
     let coverageArray = [];
     let coverageObj = {};
     let productInfo = {

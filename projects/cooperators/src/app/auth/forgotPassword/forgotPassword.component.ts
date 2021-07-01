@@ -5,6 +5,7 @@ import { MDUserDS, MDMondServiceDS } from '../../_services/ds'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Base64 } from 'js-base64';
 
+declare var $: any;
 
 @Component({
   selector: 'app-forgotpassword-designer',
@@ -65,6 +66,18 @@ debugger;
     }   
 }
 
+onKeyUpOfEmail(){
+  this.emailAddressValue = this.el.nativeElement.value;
+  if (this.emailAddressValue == undefined || this.emailAddressValue == "" || this.emailAddressValue.length <= 0) {
+    this.el.nativeElement.style.borderColor = "#E34234";
+    this.emailMessage.nativeElement.style.display = 'block';
+    return;
+  }else{
+    this.el.nativeElement.style.borderColor = "lightgrey";
+    this.emailMessage.nativeElement.style.display = 'none';
+  }
+}
+
   emailSubmit() {
     
     this.loginURLEnc = Base64.encode(window.location.origin + window.location.pathname);
@@ -106,7 +119,8 @@ debugger;
 
         this.mdMondService.MDError(error);
         this.emailFailedMsg.nativeElement.style.display = 'block';
-       
+       $(".ym_footerv1").show();
+       $(".ym_footer").hide();
         // this.router.navigate(['/mondValidateOtp'], { queryParams: { em: this.trimEmailAddressValue}});
 
       });

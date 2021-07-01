@@ -28,7 +28,7 @@
                                 </div>
                                 <div class="ym_form_group">
                                     <label for="password">Password</label>
-                                    <input type="password" formControlName="password" placeholder="****" class="form-control alteredForm-control" [ngClass]="{ 'is-invalid': submitted && accessFormFields.password.errors }" style="border-radius: 0px !important;">
+                                    <input type="password" formControlName="password" placeholder="****" class="form-control alteredForm-control" [ngClass]="{ 'is-invalid': submitted && accessFormFields.password.errors }">
                                     <div *ngIf="submitted && accessFormFields.password.errors" class="invalid-feedback">
                                         <div *ngIf="accessFormFields.password.errors.required">Password is required
                                         </div>

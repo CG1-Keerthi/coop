@@ -3,7 +3,7 @@ import { first } from 'rxjs/operators';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MDUserDS, MDMondServiceDS } from '../../_services/ds';
 import { Base64 } from 'js-base64';
-
+declare var $: any;
 
 
 @Component({
@@ -47,6 +47,59 @@ export class MondCreatePasswordComponent implements OnInit {
       });
   }
 
+  onkeyUpOfNewPassword() {
+    debugger;
+    this.newPassword = this.createNewPassword.nativeElement.value;
+    this.Passwordagain = this.conformNewPassword.nativeElement.value;
+
+    this.newPasswordTrimValue = this.newPassword.replace(/ +/g, "");
+    this.conformNewPasswordTrimValue = this.Passwordagain.replace(/ +/g, "");
+
+    this.createNewPassword.nativeElement.style.borderColor = "lightgrey";
+    this.passwordenterMsg.nativeElement.style.display = 'none';
+
+    if (this.newPasswordTrimValue.length < 10) {
+      this.createNewPassword.nativeElement.style.borderColor = "#E34234";
+      this.passwordenterMsg.nativeElement.innerHTML = "!Passwords must be at least 10 characters";
+      this.passwordenterMsg.nativeElement.style.display = "inline";
+      return;
+    } else {
+      this.createNewPassword.nativeElement.style.borderColor = "lightgrey";
+      this.passwordenterMsg.nativeElement.innerHTML = "";
+    }
+
+    if (this.newPasswordTrimValue != this.conformNewPasswordTrimValue) {
+      this.createNewPassword.nativeElement.style.borderColor = "#E34234";
+      this.conformNewPassword.nativeElement.style.borderColor = "#E34234";
+      this.passwordFaildMsg.nativeElement.style.display = 'block';
+      return;
+    } else {
+      this.createNewPassword.nativeElement.style.borderColor = "lightgrey";
+      this.conformNewPassword.nativeElement.style.borderColor = "lightgrey";
+      this.passwordFaildMsg.nativeElement.style.display = 'none';
+    }
+  }
+
+  onkeyUpOfPasswordAgain() {
+    debugger;
+    this.newPassword = this.createNewPassword.nativeElement.value;
+    this.Passwordagain = this.conformNewPassword.nativeElement.value;
+
+    this.newPasswordTrimValue = this.newPassword.replace(/ +/g, "");
+    this.conformNewPasswordTrimValue = this.Passwordagain.replace(/ +/g, "");
+
+    if (this.newPasswordTrimValue != this.conformNewPasswordTrimValue) {
+      this.createNewPassword.nativeElement.style.borderColor = "#E34234";
+      this.conformNewPassword.nativeElement.style.borderColor = "#E34234";
+      this.passwordFaildMsg.nativeElement.style.display = 'block';
+      return;
+    } else {
+      this.createNewPassword.nativeElement.style.borderColor = "lightgrey";
+      this.conformNewPassword.nativeElement.style.borderColor = "lightgrey";
+      this.passwordFaildMsg.nativeElement.style.display = 'none';
+    }
+  }
+
   createPasswordSubmit() {
     this.email;
     this.otp;
@@ -69,11 +122,15 @@ export class MondCreatePasswordComponent implements OnInit {
 
     }
 
-    if (this.newPasswordTrimValue.length < 8) {
+    if (this.newPasswordTrimValue.length < 10) {
       this.createNewPassword.nativeElement.style.borderColor = "#E34234";
-      this.passwordenterMsg.nativeElement.innerHTML = "!Passwords must be at least 8 characters";
+      this.passwordenterMsg.nativeElement.innerHTML = "!Passwords must be at least 10 characters";
       this.passwordenterMsg.nativeElement.style.display = "inline";
       return;
+    } else {
+      this.createNewPassword.nativeElement.style.borderColor = "lightgrey";
+      this.passwordenterMsg.nativeElement.innerHTML = "";
+      this.passwordenterMsg.nativeElement.style.display = "inline";
     }
 
 
@@ -81,7 +138,11 @@ export class MondCreatePasswordComponent implements OnInit {
       this.createNewPassword.nativeElement.style.borderColor = "#E34234";
       this.conformNewPassword.nativeElement.style.borderColor = "#E34234";
       this.passwordFaildMsg.nativeElement.style.display = 'block';
-   return;
+      return;
+    }else{
+      this.createNewPassword.nativeElement.style.borderColor = "lightgrey";
+      this.conformNewPassword.nativeElement.style.borderColor = "lightgrey";
+      this.passwordFaildMsg.nativeElement.style.display = 'none';
     }
 
     this.encodedNewPassword = Base64.encode(this.newPasswordTrimValue);
@@ -90,16 +151,18 @@ export class MondCreatePasswordComponent implements OnInit {
 
     this.MDUserDS.saveUserDetails(Base64.encode(this.email), this.otp, this.encodedconformNewPassword).pipe(first()).subscribe(
       data => {
-        
+
         this.saveUserDetailsdata = data;
-        this.router.navigate([''], { queryParams: { p: this.passwordChanged }, skipLocationChange:true });
+        this.router.navigate([''], { queryParams: { p: this.passwordChanged }, skipLocationChange: true });
       },
       error => {
-       
+
         this.mdMondService.MDError(error);
         // this.router.navigate(['/'], { queryParams: { p: this.passwordChanged } });
         this.createPasswordFailedMsg.nativeElement.style.display = 'block';
-        this.createPassworderrorMsg.nativeElement.innerText = error.data.userMessage;
+        this.createPassworderrorMsg.nativeElement.innerText = error.error.userMessage;
+        $(".ym_footer").hide();
+        $(".ym_footerv1").show();
       });
 
 

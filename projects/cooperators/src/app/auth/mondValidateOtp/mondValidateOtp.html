@@ -82,60 +82,81 @@
 
 <!-- <body class="md-body ym_password_body" ng-app="monddesigner" ng-controller="mainController"> -->
 
-    <style>
-        @media(max-width: 768px) {
-            #validateOtpBoxFullDiv {
-                width: 100% !important;
-                margin-bottom: 3 !important;
-                margin-top: 0% !important;
-            }
-            #validateOtpHeading {
-                width: 100% !important;
-                font-size: 20px !important;
-            }
-            #validateOtpPasswordCardbody {
-                padding: 5px 6px !important;
-            }
-            #tarmikaLogo {
-                height: 38px !important;
-                margin-bottom: 2% !important;
-                margin-left: auto;
-                margin-right: auto;
-            }
+<style>
+    @media(max-width: 768px) {
+        #validateOtpBoxFullDiv {
+            width: 100% !important;
+            margin-bottom: 3 !important;
+            margin-top: 0% !important;
         }
-        
-        /* .ym_forgot_password_container {
+
+        #validateOtpHeading {
+            width: 100% !important;
+            font-size: 20px !important;
+        }
+
+        #validateOtpPasswordCardbody {
+            padding: 5px 6px !important;
+        }
+
+        #tarmikaLogo {
+            height: 38px !important;
+            margin-bottom: 2% !important;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+
+    /* .ym_forgot_password_container {
             background: linear-gradient(to right, rgba(169, 33, 121, 1) 0%, rgba(84, 46, 145, 1) 100%);
             font-family: benton-sans, sans-serif;
         } */
-        
-        .ym_forgot_password_content {
-            margin: 12vh auto !important;
-        }
-        
-        .ym_forgot_password_content input {
-            border-radius: 0;
-            padding: 8px 5px;
-            border: 1px solid lightgrey;
-            margin: 0 0 0.5rem;
-            font-size: 15px;
-        }
-        
-        .ym_forgot_password_label {
-            font-family: benton-sans, sans-serif;
-            font-weight: 100;
-            font-size: 15px;
-        }
-        
-        #tarmikaLogo {
-            width: 160px;
-        }
-        
-        #forgotPasswordHeading {
-            margin: 0 0 2rem;
-            font-size: 24px;
-        }
-    </style>
+
+    .ym_forgot_password_content {
+        margin: 12vh auto !important;
+    }
+
+    .ym_forgot_password_content input {
+        border-radius: 5px;
+        padding: 8px 5px;
+        border: 1px solid lightgrey;
+        margin: 0 0 0.5rem;
+        font-size: 15px;
+    }
+
+    .ym_forgot_password_label {
+        font-family: benton-sans, sans-serif;
+        font-weight: 100;
+        font-size: 15px;
+    }
+
+    #tarmikaLogo {
+        width: 160px;
+    }
+
+    #forgotPasswordHeading {
+        margin: 0 0 2rem;
+        font-size: 24px;
+    }
+</style>
+<style>
+    #tarmikaLogo {
+        width: 250px !important;
+        height: 50px !important;
+    }
+
+    .ym_footer {
+        position: fixed;
+        z-index: 1000;
+        background: #00456a;
+        color: white;
+        text-align: center;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 25%;
+    }
+</style>
 <div class="ym_password_body">
     <div class="row m-0 p-0 ym_forgot_password_container">
 
@@ -145,21 +166,21 @@
 
         <div class="col-12 col-md-4 col-lg-4 m-0 p-0 row d-flex justify-content-center ym_forgot_password_content">
 
-            <img src="assets/images/tarmika-logo-white.png" alt="Tarmika" class="md-center pb-0 mt-2"
-                id="tarmikaLogo">
+            <img src="assets/images/coop-logo.svg" alt="Tarmika" class="md-center pb-0 mt-2" id="tarmikaLogo">
 
 
             <div class="col-12 m-0 p-0 d-flex justify-content-center">
-                <div class="card-deck mr-1 ml-1 mb-3" style="width:79%;" id="validateOtpBoxFullDiv">
+                <div class="card-deck mr-1 ml-1 mb-3 mt-3" style="width:79%;" id="validateOtpBoxFullDiv">
 
                     <div class="card">
                         <div class="card-body text-left" style="padding: 20px 26px;" id="validateOtpPasswordCardbody">
-                            <h2 class="card-text" style="font-size: 28px; font-weight: 400; line-height: 1.2;"
+                            <h2 class="card-text" style="font-size: 28px; color: #00456a !important; line-height: 1.2;"
                                 id="validateOtpHeading"> Verifying that it's you </h2>
 
                             <p class="md-p md-line-height-1x text-justify m-0" style="font-size: 13px;">
                                 For your security, we need to authenticate your request. We've sent a One Time Password
-                                (OTP) to the email <span id="email">{{em}}</span> for help restoring access. Please enter it
+                                (OTP) to the email <span id="email">{{em}}</span> for help restoring access. Please
+                                enter it
                                 below.
                             </p>
 
@@ -175,7 +196,7 @@
                                 ! Please enter otp number.
 
                             </div>
-                            <button type="button" name="button" id="button" class="ym_button"
+                            <button type="button" name="button" id="button" class="btn btn-primary"
                                 (click)="validateOtpSubmit()" style="width:100%">Continue</button>
                             <label class="float-left mt-4 mb-0" style="font-size: 13px;">
                                 <a (click)="resendEmailSubmit('validateotp')" style="color:blue">Resend OTP</a>
@@ -190,8 +211,8 @@
         </div>
         <div class="col-4 m-0 p-0"></div>
 
-        <div class="row m-0 p-0 md-divider-inner ym_password_footer">
-            <p class="text-center md-size-mini">Copyright &copy; 2018-19 Tarmika All rights reserved</p>
+        <div class="ym_footer">
+            <p class="text-center md-size-mini">Copyright &copy; 2020-21 Cooperators All rights reserved</p>
         </div>
     </div>
 </div>

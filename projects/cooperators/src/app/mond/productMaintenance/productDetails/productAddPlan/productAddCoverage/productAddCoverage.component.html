@@ -1,14 +1,16 @@
 <!-- <div>product Coverage works!</div> -->
 
-<div  [formGroup]="coverageDetailsForm" class="m-1 p-1">
+<div [formGroup]="coverageDetailsForm" class="m-1 p-1">
     <div class="row">
         <div class="col-md-6">
         </div>
         <div class="col-md-6">
-            <button class="btn btn-primary float-right ml-2">Update Coverage</button>
-            <button class="btn btn-primary float-right ml-2">View Rating Factor<i
+            <button class="btn btn-primary float-right ml-2" (click)="onClickOfupdateCoverage()"
+                [disabled]="isRatingBtn">Update Coverage</button>
+            <button class="btn btn-primary float-right ml-2" [disabled]="isRatingBtn">View Rating Factor<i
                     class="fa fa-arrow-right ml-2"></i></button>
-            <button class="btn btn-primary float-right ml-2">Add Rating Factor<i class="fa fa-plus ml-2"></i></button>
+            <button class="btn btn-primary float-right ml-2" [disabled]="isRatingBtn">Add Rating Factor<i
+                    class="fa fa-plus ml-2"></i></button>
         </div>
     </div>
 
@@ -23,18 +25,18 @@
                     <div class="row">
                         <div class="ym_form_group col-6">
                             <label class="md-lbl">Product</label>
-                            <input style="width: 70%;" formControlName="productType">
+                            <input style="width: 70%;" formControlName="productType" [readonly]="isProdFieldreadonly">
                         </div>
                         <div class="ym_form_group col-6" style="margin-top: 30px;">
                             <!-- <label class="md-lbl">Product Type</label> -->
-                            <input formControlName="productName" >
+                            <input formControlName="productName" [readonly]="isProdFieldreadonly">
                         </div>
                     </div>
                     <div class="row">
                         <div class="ym_form_group  col-6">
                             <label class="md-lbl">Product Business Model</label>
                             <div class="ym_form_select">
-                                <select  formControlName="productBusinessModel" #businessList>
+                                <select formControlName="productBusinessModel" #businessList>
                                     <option selected value="">Please Select a value</option>
                                     <option value="Merchant">Merchant</option>
                                     <option value="Location">Location</option>
@@ -46,7 +48,8 @@
                             <label class="md-lbl">Product Effective Date</label>
                             <div class="row pl-1">
                                 <input style="width: 80%;" matInput data-name="dateFormat" [matDatepicker]="picker1"
-                                    placeholder="Product Effective Date" formControlName="productEffectiveDate">
+                                    placeholder="Product Effective Date" formControlName="productEffectiveDate"
+                                    [readonly]="isProdFieldreadonly">
                                 <mat-datepicker-toggle matSuffix [for]="picker1">
                                 </mat-datepicker-toggle>
                                 <mat-datepicker class="col-md-3" #picker1></mat-datepicker>
@@ -80,18 +83,19 @@
                     <div class="row">
                         <div class="ym_form_group col-6">
                             <label class="md-lbl">Plan</label>
-                            <input style="width: 70%;" formControlName="planNumber">
+                            <input style="width: 70%;" formControlName="planNumber" [readonly]="isProdFieldreadonly">
                         </div>
                         <div class="ym_form_group col-6" style="margin-top: 30px;">
                             <!-- <label class="md-lbl">Product Type</label> -->
-                            <input formControlName="planName">
+                            <input formControlName="planName" [readonly]="isProdFieldreadonly">
                         </div>
                     </div>
                     <div class="row">
                         <div class="ym_form_group  col-6 mb-0 pb-0">
                             <label class="md-lbl">Client Name</label>
                             <input placeholder="Client Name" formControlName="clientName"
-                            (keyup)="getClientNameDetails($event)" [matAutocomplete]="auto1">
+                                (keyup)="getClientNameDetails($event)" [matAutocomplete]="auto1"
+                                [readonly]="isProdFieldreadonly">
                             <mat-autocomplete #auto1="matAutocomplete">
                                 <mat-option *ngFor="let option of clientNameListData" [value]="option.value">
                                     {{option.value}}
@@ -102,7 +106,8 @@
                             <label class="md-lbl">Plan Effective Date</label>
                             <div class="row pl-1">
                                 <input style="width: 80%;" matInput data-name="dateFormat" [matDatepicker]="picker2"
-                                    placeholder="Product Effective Date" formControlName="planEffectiveDate" >
+                                    placeholder="Product Effective Date" formControlName="planEffectiveDate"
+                                    [readonly]="isProdFieldreadonly">
                                 <mat-datepicker-toggle matSuffix [for]="picker2">
                                 </mat-datepicker-toggle>
                                 <mat-datepicker class="col-md-3" #picker2></mat-datepicker>
@@ -113,7 +118,7 @@
                         <div class="ym_form_group col-6 m-0">
                             <label class="md-lbl">Plan Status</label>
                             <div class="ym_form_select m-0">
-                                <select formControlName="planStatus" #productStatusList>
+                                <select formControlName="planStatus" #planStatusList>
                                     <option selected value="">Please Select a value</option>
                                     <option value="Active">Active</option>
                                     <option value="Terminated">Terminated</option>
@@ -140,32 +145,43 @@
                         <div class="ym_form_group required col-3">
                             <label class="md-lbl">Line Of Business</label>
                             <div class="ym_form_select" style="width: 70%;">
-                                <select formControlName="lineOfBusiness" #languageElement (change)="onChangeOfLOB($event)">
+                                <select formControlName="lineOfBusiness" #lobElement (change)="onChangeOfLOB($event)">
                                     <!-- <option selected value="">Please select a value</option> -->
                                     <option let *ngFor="let list of lineOfBusinessList" value="{{list.description}}">
                                         {{list.description}}</option>
                                 </select>
                             </div>
-                        </div>
-                        <div class="ym_form_group required col-2">
-                            <label class="md-lbl">Coverage Type</label>
-                            <div class="ym_form_select" style="width: 100%;">
-                                <select formControlName="coverageType" #languageElement (change)="onChangeOfCoverageType($event)">
-                                    <!-- <option selected value="">Please select a value</option> -->
-                                    <option let *ngFor="let list of coverageTypeList" value="{{list.coverageType}}">
-                                        {{list.coverageType}}</option>
-                                </select>
+                            <div *ngIf="isLOBSubmitted">
+                                <p class="text-danger">Please enter the Line Of Business</p>
                             </div>
                         </div>
-                       
-                        <div class="col-1"> 
-                            <i (mouseover)="onMouseover()" class="fa fa-question-circle md-circle" aria-hidden="true"></i>
-                            <span *ngIf="isTooltip" class="tooltiptext md-hover-tooltip">Please select 'Line Of Business' to view the corresponding coverage type."</span>
+                        <div class="ym_form_group required col-2">                         
+                                    <label class="md-lbl">Coverage Type</label>
+                                    <div class="ym_form_select" style="width: 100%;">
+                                        <select formControlName="coverageType" #coverageTypeElement
+                                            (change)="onChangeOfCoverageType($event)">
+                                            <!-- <option selected value="">Please select a value</option> -->
+                                            <option let *ngFor="let list of coverageTypeList"
+                                                value="{{list.coverageType}}">
+                                                {{list.coverageType}}</option>
+                                        </select>
+                                    </div>                              
+                            <div *ngIf="isCoverageTypeSubmitted">
+                                <p class="text-danger">Please enter the Coverage Type</p>
+                            </div>
+                        </div>
+
+                        <div class="col-1">
+                            <i (mouseover)="onMouseOver()" aria-hidden="true" 
+                            class="coverageHelp btn rounded-pill fa fa-question-circle md-circle"
+                           data-toggle="tooltip" data-placement="right"
+                            title="Please select 'Line Of Business' to view the corresponding coverage type."></i>
+                            
                         </div>
                         <div class="ym_form_group col-3">
                             <label class="md-lbl">General Ledger Account Number</label>
                             <div class="ym_form_select" style="width: 70%;">
-                                <select formControlName="generalLedgerAccountNumber" #languageElement>
+                                <select formControlName="generalLedgerAccountNumber" #generalLedgerElement>
                                     <!-- <option selected value="">Please select a value</option> -->
                                     <option let *ngFor="let list of GLAccountNumberList" value="{{list.description}}">
                                         {{list.description}}</option>
@@ -176,58 +192,84 @@
                             <label class="md-lbl">Coverage Effective Date</label>
                             <div class="row pl-1">
                                 <input style="width: 80%;" matInput data-name="dateFormat" [matDatepicker]="picker3"
-                                    placeholder="Product Effective Date" formControlName="coverageEffectiveDate">
+                                    placeholder="Product Effective Date" formControlName="coverageEffectiveDate"
+                                    [readonly]="isFieldreadonly">
                                 <mat-datepicker-toggle matSuffix [for]="picker3">
                                 </mat-datepicker-toggle>
                                 <mat-datepicker class="col-md-3" #picker3></mat-datepicker>
                             </div>
+                            <div
+                                *ngIf="isCEDSubmitted && coverageDetailsForm.get('coverageInfo.coverageEffectiveDate').invalid">
+                                <p class="text-danger">Please enter the Coverage Effective Date</p>
+                            </div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="ym_form_group col-3">
+                        <div id="coverageField" class="ym_form_group col-3">
                             <label class="md-lbl">Coverage Status</label>
                             <div class="ym_form_select" style="width: 70%;">
-                                <select formControlName="coverageStatus" #languageElement>
-                                    <option selected value="">Please select a value</option>
+                                <select formControlName="coverageStatus" #coverageStatusElement>
+                                    <option selected value="Please select a value">Please select a value</option>
                                     <option value="Active">Active</option>
                                     <option value="Terminated">Terminated</option>
                                 </select>
+                            </div>
+                        </div>
+                        <div id="coverageMandatoryField" class="ym_form_group required col-3" style="display: none;">
+                            <label class="md-lbl">Coverage Status</label>
+                            <div class="ym_form_select" style="width: 70%;">
+                                <select formControlName="coverageStatus" #coverageStatusElement
+                                    (change)="onChangeOfCoverageMandatoryField($event)">
+                                    <option selected value="Please select a value">Please select a value</option>
+                                    <option value="Active">Active</option>
+                                    <option value="Terminated">Terminated</option>
+                                </select>
+                            </div>
+                            <div *ngIf="isCoverageStatusSubmitted">
+                                <p class="text-danger">Please select the Coverage Status</p>
                             </div>
                         </div>
                         <div class="ym_form_group col-3">
                             <label class="md-lbl">Coverage Termination Date</label>
                             <div class="row pl-1">
                                 <input style="width: 80%;" matInput data-name="dateFormat" [matDatepicker]="picker4"
-                                    placeholder="Product Effective Date" formControlName="coverageTerminationDate">
+                                    placeholder="Product Effective Date" formControlName="coverageTerminationDate"
+                                    [readonly]="iscoverageTerminationDateFieldreadonly">
                                 <mat-datepicker-toggle matSuffix [for]="picker4">
                                 </mat-datepicker-toggle>
-                                <mat-datepicker class="col-md-3" #picker4></mat-datepicker>
+                                <mat-datepicker class="col-md-3" #picker4
+                                    [disabled]="iscoverageTerminationDateFieldreadonly"></mat-datepicker>
                             </div>
                         </div>
                         <div class="ym_form_group col-3">
                             <label class="md-lbl">Coverage In Use</label>
-                            <input style="width: 80%;" formControlName="coverageInUse">
+                            <input style="width: 80%;" formControlName="coverageInUse"
+                                [readonly]="isCoverageInUseFieldreadonly">
                         </div>
                         <div class="ym_form_group col-3">
                             <label class="md-lbl">Maximum Claim Benefit Amount</label>
-                            <input style="width: 80%;" onlyNumber (keyup)="onKeyUpMaxClaim($event)"  formControlName="maximumBenefitAmount">
+                            <input style="width: 80%;" onlyNumber (keyup)="onKeyUpMaxClaim($event)"
+                                formControlName="maximumBenefitAmount" [readonly]="isFieldreadonly">
                             <span *ngIf="isMaxClaimTooltip" class="tooltiptext">Enter number in this field</span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="ym_form_group col-3">
                             <label class="md-lbl">Maximum Claim Benefit Term (months)</label>
-                            <input style="width: 80%;" onlyNumber (keyup)="onKeyUpMaxNum($event)" formControlName="maximumClaimBenefitTerm">
+                            <input style="width: 80%;" onlyNumber (keyup)="onKeyUpMaxNum($event)"
+                                formControlName="maximumClaimBenefitTerm" [readonly]="isFieldreadonly">
                             <span *ngIf="isMaxNumClaimTooltip" class="tooltiptext">Enter number in this field</span>
                         </div>
                         <div class="ym_form_group col-3">
                             <label class="md-lbl">Maximum Monthly Claim Benefit Amount</label>
-                            <input style="width: 80%;" onlyNumber (keyup)="onKeyUpMaxMonth($event)" formControlName="maximumMonthlyClaimBenefitAmount">
+                            <input style="width: 80%;" onlyNumber (keyup)="onKeyUpMaxMonth($event)"
+                                formControlName="maximumMonthlyClaimBenefitAmount" [readonly]="isFieldreadonly">
                             <span *ngIf="isMaxMonthClaimTooltip" class="tooltiptext">Enter number in this field</span>
                         </div>
                         <div class="ym_form_group col-6">
                             <label class="md-lbl">Notes</label>
-                            <textarea rows="4" style="width: 97%;" formControlName="comment"></textarea>
+                            <textarea rows="4" style="width: 97%;" formControlName="comment"
+                                [readonly]="isFieldreadonly"></textarea>
                         </div>
                     </div>
 
@@ -248,7 +290,7 @@
                         <div class="ym_form_group col-4">
                             <label class="md-lbl">Termination Due To Claim</label>
                             <div class="ym_form_select" style="width: 70%;">
-                                <select formControlName="terminationDueToClaim" #languageElement>
+                                <select formControlName="terminationDueToClaim" #terminationDueElement>
                                     <!-- <option selected value="">Please select a value</option> -->
                                     <option let *ngFor="let list of terminationDueToClaimList"
                                         value="{{list.description}}">
@@ -258,12 +300,12 @@
                         </div>
                         <div class="ym_form_group  col-4">
                             <label class="md-lbl">Lower Maximum Coverage Amount</label>
-                            <mat-slide-toggle formControlName="lowerMaximumCoverageAmount">
+                            <mat-slide-toggle formControlName="lowerMaximumCoverageAmount" [disabled]="isFieldreadonly">
                             </mat-slide-toggle>
                         </div>
                         <div class="ym_form_group col-4">
                             <label class="md-lbl">Rider Benefit</label>
-                            <mat-slide-toggle formControlName="riderBenefit">
+                            <mat-slide-toggle formControlName="riderBenefit" [disabled]="isFieldreadonly">
                             </mat-slide-toggle>
                         </div>
                     </div>
@@ -283,18 +325,21 @@
                     <div class="row">
                         <div class="ym_form_group col-4">
                             <label class="md-lbl">Minimum Issue Age (years)</label>
-                            <input onlyNumber (keyup)="onKeyUpMinIssue($event)" formControlName="minimumIssueAge">
+                            <input onlyNumber (keyup)="onKeyUpMinIssue($event)" formControlName="minimumIssueAge"
+                                [readonly]="isFieldreadonly">
                             <span *ngIf="isMinIssueTooltip" class="tooltiptext">Enter number in this field</span>
                         </div>
                         <div class="ym_form_group  col-4">
                             <label class="md-lbl">Maximum Issue Age (years)
                             </label>
-                            <input onlyNumber (keyup)="onKeyUpMaxIssue($event)" formControlName="maximumIssueAge">
+                            <input onlyNumber (keyup)="onKeyUpMaxIssue($event)" formControlName="maximumIssueAge"
+                                [readonly]="isFieldreadonly">
                             <span *ngIf="isMaxIssueTooltip" class="tooltiptext">Enter number in this field</span>
                         </div>
                         <div class="ym_form_group col-4">
                             <label class="md-lbl">Lower Maximum Coverage Amount Based Age</label>
-                            <input onlyNumber (keyup)="onKeyUpMaxCoverage($event)" formControlName="lowerMaximumCoverageAmountBasedAge">
+                            <input onlyNumber (keyup)="onKeyUpMaxCoverage($event)"
+                                formControlName="lowerMaximumCoverageAmountBasedAge" [readonly]="isFieldreadonly">
                             <span *ngIf="isMaxCoverageTooltip" class="tooltiptext">Enter number in this field</span>
                         </div>
 
@@ -302,19 +347,22 @@
                     <div class="row">
                         <div class="ym_form_group col-4">
                             <label class="md-lbl">Maximum Coverage Amount</label>
-                            <input onlyNumber (keyup)="onKeyUpMaxCoverageAmount($event)" formControlName="maximumCoverageAmount">
+                            <input onlyNumber (keyup)="onKeyUpMaxCoverageAmount($event)"
+                                formControlName="maximumCoverageAmount" [readonly]="isFieldreadonly">
                             <span *ngIf="isMaxCoverageAmountTooltip" class="tooltiptext">Enter number in this
                                 field</span>
                         </div>
                         <div class="ym_form_group col-4">
                             <label class="md-lbl">Minimum Coverage Amount</label>
-                            <input onlyNumber (keyup)="onKeyUpMinCoverageAmount($event)" formControlName="minimumCoverageAmt">
+                            <input onlyNumber (keyup)="onKeyUpMinCoverageAmount($event)"
+                                formControlName="minimumCoverageAmt" [readonly]="isFieldreadonly">
                             <span *ngIf="isMinCoverageAmountTooltip" class="tooltiptext">Enter number in this
                                 field</span>
                         </div>
                         <div class="ym_form_group  col-4">
                             <label class="md-lbl">Minimum Issue Age for Lower Coverage Amount</label>
-                            <input onlyNumber (keyup)="onKeyUpMinIssueAmount($event)" formControlName="minimumAgeLowerCoverageAmount">
+                            <input onlyNumber (keyup)="onKeyUpMinIssueAmount($event)"
+                                formControlName="minimumAgeLowerCoverageAmount" [readonly]="isFieldreadonly">
                             <span *ngIf="isMinIssueAmountTooltip" class="tooltiptext">Enter number in this field</span>
                         </div>
 
@@ -322,17 +370,20 @@
                     <div class="row">
                         <div class="ym_form_group col-4">
                             <label class="md-lbl">Maximum Insurable Loan Period Regular (months)</label>
-                            <input onlyNumber (keyup)="onKeyUpMinInsurable($event)" formControlName="maximumInsurableLoanPeriodRegular">
+                            <input onlyNumber (keyup)="onKeyUpMinInsurable($event)"
+                                formControlName="maximumInsurableLoanPeriodRegular" [readonly]="isFieldreadonly">
                             <span *ngIf="isMinInsurableTooltip" class="tooltiptext">Enter number in this field</span>
                         </div>
                         <div class="ym_form_group col-4">
                             <label class="md-lbl">Maximum Insurable Loan Period Residual Value (months)</label>
-                            <input onlyNumber (keyup)="onKeyUpMaxInsurable($event)" formControlName="maximumInsurableLoanPeriodResidualValue">
+                            <input onlyNumber (keyup)="onKeyUpMaxInsurable($event)"
+                                formControlName="maximumInsurableLoanPeriodResidualValue" [readonly]="isFieldreadonly">
                             <span *ngIf="isMaxInsurableTooltip" class="tooltiptext">Enter number in this field</span>
                         </div>
                         <div class="ym_form_group col-4">
                             <label class="md-lbl">Working Eligibility Period (hours)</label>
-                            <input onlyNumber (keyup)="onKeyUpWorkingPeriod($event)" formControlName="eligibilityHoursAmount">
+                            <input onlyNumber (keyup)="onKeyUpWorkingPeriod($event)"
+                                formControlName="eligibilityHoursAmount" [readonly]="isFieldreadonly">
                             <span *ngIf="isWorkingPeriodTooltip" class="tooltiptext">Enter number in this field</span>
                         </div>
 
@@ -340,18 +391,21 @@
                     <div class="row">
                         <div class="ym_form_group  col-4">
                             <label class="md-lbl">Guaranteed Maximum Insured Amount</label>
-                            <input onlyNumber (keyup)="onKeyUpGuaranteedAmount($event)" formControlName="nonEvidenceMaximumAmount">
+                            <input onlyNumber (keyup)="onKeyUpGuaranteedAmount($event)"
+                                formControlName="nonEvidenceMaximumAmount" [readonly]="isFieldreadonly">
                             <span *ngIf="isGuaranteedAmountTooltip" class="tooltiptext">Enter number in this
                                 field</span>
                         </div>
                         <div class="ym_form_group col-4">
                             <label class="md-lbl">Maximum Monthly Benefit Amount</label>
-                            <input onlyNumber (keyup)="onKeyUpMaxMonthAmt($event)" formControlName="maximumMonthlyBenefitAmount">
+                            <input onlyNumber (keyup)="onKeyUpMaxMonthAmt($event)"
+                                formControlName="maximumMonthlyBenefitAmount" [readonly]="isFieldreadonly">
                             <span *ngIf="isMaxMonthAmtTooltip" class="tooltiptext">Enter number in this field</span>
                         </div>
                         <div class="ym_form_group col-4">
                             <label class="md-lbl">Loss Of Employment Continuous Work Period (months)</label>
-                            <input onlyNumber (keyup)="onKeyUpLossOfEmp($event)" formControlName="lossOfEmploymentContinuousWorkPeriod">
+                            <input onlyNumber (keyup)="onKeyUpLossOfEmp($event)"
+                                formControlName="lossOfEmploymentContinuousWorkPeriod" [readonly]="isFieldreadonly">
                             <span *ngIf="isLossOfEmpTooltip" class="tooltiptext">Enter number in this field</span>
                         </div>
 
@@ -359,7 +413,8 @@
                     <div class="row">
                         <div class="ym_form_group col-4">
                             <label class="md-lbl">Coverage Termination Age (years)</label>
-                            <input onlyNumber (keyup)="onKeyUpCoverageTermination($event)" formControlName="coverageTerminationAge">
+                            <input onlyNumber (keyup)="onKeyUpCoverageTermination($event)"
+                                formControlName="coverageTerminationAge" [readonly]="isFieldreadonly">
                             <span *ngIf="isCoverageTerminationTooltip" class="tooltiptext">Enter number in this
                                 field</span>
                         </div>
@@ -380,17 +435,20 @@
                     <div class="row">
                         <div class="ym_form_group col-4">
                             <label class="md-lbl">Certificate Fee</label>
-                            <input onlyNumber (keyup)="onKeyUpCertificateFee($event)" formControlName="certificateFee">
+                            <input onlyNumber (keyup)="onKeyUpCertificateFee($event)" formControlName="certificateFee"
+                                [readonly]="isFieldreadonly">
                             <span *ngIf="isCertificateFeeTooltip" class="tooltiptext">Enter number in this field</span>
                         </div>
                         <div class="ym_form_group col-4">
                             <label class="md-lbl">CURP</label>
-                            <input onlyNumber (keyup)="onKeyUpCURP($event)" formControlName="curp">
+                            <input onlyNumber (keyup)="onKeyUpCURP($event)" formControlName="curp"
+                                [readonly]="isFieldreadonly">
                             <span *ngIf="isCURPTooltip" class="tooltiptext">Enter number in this field</span>
                         </div>
                         <div class="ym_form_group col-4">
                             <label class="md-lbl">Minimum Premium</label>
-                            <input onlyNumber (keyup)="onKeyUpMinPremium($event)" formControlName="minimumPremium">
+                            <input onlyNumber (keyup)="onKeyUpMinPremium($event)" formControlName="minimumPremium"
+                                [readonly]="isFieldreadonly">
                             <span *ngIf="isMinimumPremiumTooltip" class="tooltiptext">Enter number in this field</span>
                         </div>
                     </div>
@@ -403,8 +461,10 @@
         <div class="col-md-6">
         </div>
         <div class="col-md-6">
-            <button class="btn btn-primary float-right ml-2" (click)="onclickOfCoverageSubmit()"><i class="fa fa-save mr-1"></i>Submit</button>
-            <button class="btn btn-primary float-right ml-2"><i class="fa fa-times mr-1"></i>Clear</button>
+            <button class="btn btn-primary float-right ml-2" (click)="onclickOfCoverageSubmit()"
+                [disabled]="isCoverageDetailBtn"><i class="fa fa-save mr-1"></i>Submit</button>
+            <button class="btn btn-primary float-right ml-2" (click)="onClickOfCoverageClear()"><i
+                    class="fa fa-times mr-1"></i>Clear</button>
         </div>
     </div>
 </div>

@@ -5,6 +5,7 @@ import { CoverageDetailFormBuilderService } from 'projects/cooperators/src/app/f
 import { MDCommonGetterSetter } from 'projects/cooperators/src/app/_services/common';
 import { MDCodeListHeaderDS, MDMondServiceDS } from 'projects/cooperators/src/app/_services/ds';
 
+declare var $: any;
 
 @Component({
   selector: 'app-product-add-coverage-designer',
@@ -18,9 +19,11 @@ export class ProductAddCoverageComponent implements OnInit {
     this.coverageTabName = name;
   }
   @Input() set coverageTypeData(list) {
+    debugger;
     this.coverageTypeList = list;
   }
   @Input() set coverageData(data) {
+    // debugger;
     this.coverageDetailList = data;
   }
 
@@ -52,14 +55,40 @@ export class ProductAddCoverageComponent implements OnInit {
   public isTooltip: boolean = false;
   public csfrToken: any;
   public coverageTabName: string;
-
+  public isFieldreadonly: boolean;
+  public isProdFieldreadonly: boolean
   public coverageCode: string;
   // public coverageType: string;
   public clientNameListData: any;
+  public iscoverageTerminationDateFieldreadonly: boolean;
+  public isCoverageInUseFieldreadonly: boolean;
+  public isRatingBtn: boolean;
+  public isCoverageDetailBtn: boolean;
+  public isLOBSubmitted: boolean;
+  public isCoverageTypeSubmitted: boolean;
+  public isCEDSubmitted: boolean;
+  public isCoverageStatusSubmitted: boolean;
+
+
+  @ViewChild('businessList') businessList: ElementRef;
+  @ViewChild('productStatusList') productStatusList: ElementRef;
+  @ViewChild('planStatusList') planStatusList: ElementRef;
+  @ViewChild('lobElement') lobElement: ElementRef;
+  @ViewChild('coverageTypeElement') coverageTypeElement: ElementRef;
+  @ViewChild('generalLedgerElement') generalLedgerElement: ElementRef;
+  @ViewChild('coverageStatusElement') coverageStatusElement: ElementRef;
+  @ViewChild('terminationDueElement') terminationDueElement: ElementRef;
+
+
+
+
+
+
   constructor(private mdCodeListHeaderDS: MDCodeListHeaderDS,
     private mdMondServiceDS: MDMondServiceDS,
     private coverageDetailService: CoverageDetailFormBuilderService,
     private mdCommonGetterAndSetter: MDCommonGetterSetter,
+    private render: Renderer2
   ) { }
 
   ngOnInit() {
@@ -145,7 +174,7 @@ export class ProductAddCoverageComponent implements OnInit {
       })
 
 
-
+    debugger;
 
     this.coverageDetailsForm = this.coverageDetailService.form;
     this.coverageDetailsForm.reset();
@@ -153,6 +182,36 @@ export class ProductAddCoverageComponent implements OnInit {
   }
 
   ngAfterViewInit() {
+    if (this.coverageTabName == "Add Coverage") {
+      this.isFieldreadonly = false;
+      this.render.setAttribute(this.coverageStatusElement.nativeElement, 'disabled', 'true');
+      this.iscoverageTerminationDateFieldreadonly = true;
+      this.isRatingBtn = true;
+
+    }
+    if (this.coverageTabName == "Coverage Details") {
+      this.isCoverageDetailBtn = true;
+      this.isRatingBtn = false;
+      this.isFieldreadonly = true;
+      this.iscoverageTerminationDateFieldreadonly = true;
+      this.render.setAttribute(this.lobElement.nativeElement, 'disabled', 'true');
+      this.render.setAttribute(this.coverageTypeElement.nativeElement, 'disabled', 'true');
+      this.render.setAttribute(this.generalLedgerElement.nativeElement, 'disabled', 'true');
+      this.render.setAttribute(this.coverageStatusElement.nativeElement, 'disabled', 'true');
+      this.render.setAttribute(this.terminationDueElement.nativeElement, 'disabled', 'true');
+
+
+
+
+    }
+
+    this.isProdFieldreadonly = true;
+    this.isCoverageInUseFieldreadonly = true;
+    this.render.setAttribute(this.businessList.nativeElement, 'disabled', 'true');
+    this.render.setAttribute(this.productStatusList.nativeElement, 'disabled', 'true');
+    this.render.setAttribute(this.planStatusList.nativeElement, 'disabled', 'true');
+
+
   }
 
   getClientNameDetails(event) {
@@ -170,6 +229,7 @@ export class ProductAddCoverageComponent implements OnInit {
 
   onChangeOfLOB(event) {
     debugger;
+    this.isLOBSubmitted = false;
     let formVariable = {
       "clientId": this.coverageDetailList.planProductInfo.clientIdentifier,
       "lineOfBusiness": event.currentTarget.value
@@ -182,12 +242,11 @@ export class ProductAddCoverageComponent implements OnInit {
         let coverageTypeObj = {};
         coverageTypeObj["coverageType"] = "Please select a value";
         coverageTypeArray.push(coverageTypeObj);
+        coverageTypeArray[0]["coverageCode"]="Please select a value";
         for (let i = 0; i < parsedData.length; i++) {
           coverageTypeArray.push(parsedData[i]);
         }
         this.coverageTypeList = coverageTypeArray;
-
-
       }, error => {
         this.mdMondServiceDS.MDError(error);
         let data = { "key": "key", "value": "ewogICJjb3ZlcmFnZVR5cGVMaXN0X2NvdmVyYWdlTG9va1VwIjogWwogICAgewogICAgICAiY292ZXJhZ2VUeXBlIjogIkNSRUxJIiwKICAgICAgImNvdmVyYWdlQ29kZSI6ICJMSSIKICAgIH0sCgl7CiAgICAgICJjb3ZlcmFnZVR5cGUiOiAiQ1JFREkiLAogICAgICAiY292ZXJhZ2VDb2RlIjogIkRJIgogICAgfQogIF0KfQ==" };
@@ -196,13 +255,17 @@ export class ProductAddCoverageComponent implements OnInit {
         let coverageTypeObj = {};
         coverageTypeObj["coverageType"] = "Please select a value";
         coverageTypeArray.push(coverageTypeObj);
+        coverageTypeArray[0]["coverageCode"]="Please select a value";
         for (let i = 0; i < parsedData.length; i++) {
           coverageTypeArray.push(parsedData[i]);
         }
         this.coverageTypeList = coverageTypeArray;
-
-
       })
+
+  }
+
+  onChangeOfCoverageMandatoryField(event){
+    this.isCoverageStatusSubmitted = false;
   }
 
   onKeyUpMaxClaim(event) {
@@ -414,37 +477,72 @@ export class ProductAddCoverageComponent implements OnInit {
     }
   }
 
-  onMouseover() {
+  onMouseOver() {
     debugger;
-    this.isTooltip = true;
-    setTimeout(() => {
-      this.isTooltip = false;
-    }, 2000)
+    $(".coverageHelp").tooltip('show');
+    // this.isTooltip = true;
+    // setTimeout(() => {
+    //   this.isTooltip = false;
+    // }, 2000)
   }
 
   onChangeOfCoverageType(event) {
     debugger;
+    this.isCoverageTypeSubmitted = false;
     // this.coverageCode = event.currentTarget.value;
     // this.coverageType = event.target.options[event.target.options.selectedIndex].text;
     this.coverageTypeList
-        for (let j = 0; j < this.coverageTypeList.length; j++) {
-          if (this.coverageTypeList[j].coverageType == event.currentTarget.value) {
-          this.coverageCode = this.coverageTypeList[j].coverageCode;
-          }
-        }
+    for (let j = 0; j < this.coverageTypeList.length; j++) {
+      if (this.coverageTypeList[j].coverageType == event.currentTarget.value) {
+        this.coverageCode = this.coverageTypeList[j].coverageCode;
+      }
+    }
 
   }
 
   onclickOfCoverageSubmit() {
     debugger;
 
-    if (this.coverageDetailsForm.value.coverageInfo.lowerMaximumCoverageAmount == true) {
+    if ((this.coverageDetailsForm.value.coverageInfo.lineOfBusiness == "Please select a value") ||
+      (this.coverageDetailsForm.value.coverageInfo.coverageType == "Please select a value") ||
+      (this.coverageDetailsForm.get('coverageInfo.coverageEffectiveDate').invalid)
+    ) {
+
+      if (this.coverageDetailsForm.value.coverageInfo.lineOfBusiness == "Please select a value") {
+        this.isLOBSubmitted = true;
+      }
+      if (this.coverageDetailsForm.value.coverageInfo.coverageType == "Please select a value") {
+        this.isCoverageTypeSubmitted = true;
+      }
+      this.isCEDSubmitted = true;
+      if (this.coverageTabName == "Coverage Details") {
+        if (this.coverageDetailsForm.value.coverageInfo.coverageStatus == "Please select a value") {
+          this.isCoverageStatusSubmitted = true;
+        }
+      }
+
+      this.mdMondServiceDS.showErrorMessage("Please fill the mandatory fields.");
+      return
+    }
+
+    if (this.coverageTabName == "Coverage Details") {
+      if (this.coverageDetailsForm.value.coverageInfo.coverageStatus == "Please select a value") {
+        this.isCoverageStatusSubmitted = true;
+        this.mdMondServiceDS.showErrorMessage("Please fill the mandatory fields.");
+        return
+      }
+    }
+
+   
+
+
+    if (this.coverageDetailsForm.value.coverageInfo.lowerMaximumCoverageAmount == true || this.coverageDetailsForm.value.coverageInfo.lowerMaximumCoverageAmount == "Y") {
       this.coverageDetailsForm.value.coverageInfo.lowerMaximumCoverageAmount = "Y";
     } else {
       this.coverageDetailsForm.value.coverageInfo.lowerMaximumCoverageAmount = "N";
     }
 
-    if (this.coverageDetailsForm.value.coverageInfo.riderBenefit == true) {
+    if (this.coverageDetailsForm.value.coverageInfo.riderBenefit == true || this.coverageDetailsForm.value.coverageInfo.riderBenefit == "Y") {
       this.coverageDetailsForm.value.coverageInfo.riderBenefit = "Y";
     } else {
       this.coverageDetailsForm.value.coverageInfo.riderBenefit = "N";
@@ -455,7 +553,23 @@ export class ProductAddCoverageComponent implements OnInit {
       this.coverageDetailsForm.value.coverageInfo.currentRecordFlag = "Y";
     }
 
-    this.coverageDetailsForm.value.coverageInfo.coverageCode = this.coverageCode;
+    if (this.coverageCode != undefined) {
+      this.coverageDetailsForm.value.coverageInfo.coverageCode = this.coverageCode;
+    } else {
+      this.coverageDetailsForm.value.coverageInfo.coverageCode = this.coverageDetailList.coverageInfo.coverageCode;
+    }
+
+    if (this.coverageDetailsForm.value.coverageInfo.generalLedgerAccountNumber == "Please select a value") {
+      this.coverageDetailsForm.value.coverageInfo.generalLedgerAccountNumber = "";
+    }
+    if (this.coverageDetailsForm.value.coverageInfo.coverageStatus == "Please select a value") {
+      this.coverageDetailsForm.value.coverageInfo.coverageStatus = "";
+    }
+    if (this.coverageDetailsForm.value.coverageInfo.terminationDueToClaim == "Please select a value") {
+      this.coverageDetailsForm.value.coverageInfo.terminationDueToClaim = "";
+    }
+
+
     // this.coverageDetailsForm.value.coverageInfo.coverageType = this.coverageType;
     let coverageArray = [];
     let coverageObj = {};
@@ -495,6 +609,24 @@ export class ProductAddCoverageComponent implements OnInit {
       }, error => {
         this.mdMondServiceDS.MDError(error);
       });
+  }
+
+  onClickOfupdateCoverage() {
+    debugger;
+    this.isCoverageDetailBtn = false;
+    this.isFieldreadonly = false;
+    this.iscoverageTerminationDateFieldreadonly = false;
+    this.render.setProperty(this.lobElement.nativeElement, 'disabled', false);
+    this.render.setProperty(this.coverageTypeElement.nativeElement, 'disabled', false);
+    this.render.setProperty(this.generalLedgerElement.nativeElement, 'disabled', false);
+    this.render.setProperty(this.coverageStatusElement.nativeElement, 'disabled', false);
+    this.render.setProperty(this.terminationDueElement.nativeElement, 'disabled', false);
+    $("#coverageField").hide();
+    $("#coverageMandatoryField").show();
+  }
+
+  onClickOfCoverageClear(){
+    this.coverageDetailsForm.get('coverageInfo').reset()
   }
 
 }

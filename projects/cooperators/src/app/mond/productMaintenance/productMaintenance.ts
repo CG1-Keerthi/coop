@@ -196,8 +196,23 @@ export class ProductMaintenanceComponent implements OnInit {
 
   onClickOfAddCoverage(event) {
     debugger;
+    let coverageInfo ={
+      "lineOfBusiness":"Please select a value",
+      "coverageType":"Please select a value",
+      "generalLedgerAccountNumber":"Please select a value",
+      "coverageStatus":"Please select a value",
+      "terminationDueToClaim":"Please select a value"
+    }
+    let addCovergaeDetailArray = [];
+    let addCoverageDetailsObj = {};
+    // let productInfo = event.productInfo;
+    addCoverageDetailsObj["productInfo"] = event.productInfo;
+    addCoverageDetailsObj["planProductInfo"] = event.planProductInfo;
+    addCoverageDetailsObj["coverageInfo"] =  coverageInfo;
+    addCovergaeDetailArray.push(addCoverageDetailsObj);
     this.addCoverageTabName = "Add Coverage";
-    this.coverageList = event;
+    this.coverageTypeList = [];
+    this.coverageList = addCovergaeDetailArray[0];
     this.selectedTab = 6;
     this.isAddCoverage = true;
   }
@@ -291,6 +306,9 @@ export class ProductMaintenanceComponent implements OnInit {
     // debugger;
     if (element.textContent == "Product Details" || element.textContent == "Product Search" || element.textContent == "Validation CheckList") {
       this.isAddPlan = false;
+    }
+    if(element.textContent == "Plan Details"){
+      this.isAddCoverage = false;
     }
   }
 

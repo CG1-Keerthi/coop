@@ -27,6 +27,7 @@ export class ProductAddPlanComponent implements OnInit {
 
   @Output() AddCoverage = new EventEmitter();
   @Output() viewCoverage = new EventEmitter();
+  @Output() coverageBundle = new EventEmitter();
 
   public planDetailsForm: FormGroup;
   public clientLanguage: any;
@@ -782,6 +783,11 @@ export class ProductAddPlanComponent implements OnInit {
   onClickOfAddCoverage(item) {
     debugger;
     this.AddCoverage.emit(item);
+  }
+
+  onClickOfPlanCoverageBundle(item){
+    debugger
+this.coverageBundle.emit(item);
   }
 
   onClickOfViewCoverage(item) {

@@ -8,7 +8,8 @@
                 <input placeholder="Product Name" [(ngModel)]="clientName" (keyup)="getClientNameDetails($event)"
                     [matAutocomplete]="auto1">
                 <mat-autocomplete #auto1="matAutocomplete">
-                    <mat-option *ngFor="let option of clientNameListData" [value]="option.value"  (onSelectionChange)="onSelectClientName($event)">
+                    <mat-option *ngFor="let option of clientNameListData" [value]="option.value"
+                        (onSelectionChange)="onSelectClientName($event)">
                         {{option.value}}
                     </mat-option>
                 </mat-autocomplete>
@@ -18,7 +19,8 @@
                 <input placeholder="Product Type" [(ngModel)]="productType" (keyup)="getProductTypeDetails($event)"
                     [matAutocomplete]="auto2">
                 <mat-autocomplete #auto2="matAutocomplete">
-                    <mat-option *ngFor="let option of productTypeListData" [value]="option.value" (onSelectionChange)="onSelectProductType($event)">
+                    <mat-option *ngFor="let option of productTypeListData" [value]="option.value"
+                        (onSelectionChange)="onSelectProductType($event)">
                         {{option.id}}
                     </mat-option>
                 </mat-autocomplete>
@@ -28,7 +30,8 @@
                 <input placeholder="Product Number" [(ngModel)]="productNumber" (keyup)="getPlanNumberDetails($event)"
                     [matAutocomplete]="auto3">
                 <mat-autocomplete #auto3="matAutocomplete">
-                    <mat-option *ngFor="let option of clientNumberListData" [value]="option.value" (onSelectionChange)="onSelectPlanNumber($event)">
+                    <mat-option *ngFor="let option of clientNumberListData" [value]="option.value"
+                        (onSelectionChange)="onSelectPlanNumber($event)">
                         {{option.id}}
                     </mat-option>
                 </mat-autocomplete>
@@ -38,7 +41,8 @@
                 <input placeholder="Plan Name" [(ngModel)]="planName" (keyup)="getPlanNameDetails($event)"
                     [matAutocomplete]="auto4">
                 <mat-autocomplete #auto4="matAutocomplete">
-                    <mat-option *ngFor="let option of planNameListData" [value]="option.value" (onSelectionChange)="onSelectPlanName($event)">
+                    <mat-option *ngFor="let option of planNameListData" [value]="option.value"
+                        (onSelectionChange)="onSelectPlanName($event)">
                         {{option.id}}
                     </mat-option>
                 </mat-autocomplete>
@@ -54,7 +58,8 @@
                 </div>
             </div>
             <div class="ym_form_group_mat_btn  row">
-                <button class="btn btn-primary" style="margin-right: 10px;" (click)="onClikOfReset()"><i class="fa fa-undo"></i> Reset</button>
+                <button class="btn btn-primary" style="margin-right: 10px;" (click)="onClikOfReset()"><i
+                        class="fa fa-undo"></i> Reset</button>
                 <button class="btn btn-primary" (click)="onClickOfPlanSearch()"><i class="fa fa-search"></i>
                     Search</button>
             </div>
@@ -122,9 +127,8 @@
                                 </div>
                             </td>
                             <td style="width: 173px;">
-                                <div class="md-overFlow"
-                                    title="  {{responseData?.insertDate.split('T')[0]}} {{responseData.insertDate.split('T')[1].split('Z')[0]}}">
-                                    {{responseData?.insertDate.split('T')[0]}} {{responseData.insertDate.split('T')[1].split('Z')[0]}}
+                                <div class="md-overFlow" title="{{responseData?.insertDate}}">
+                                    {{responseData?.insertDate}}
                                 </div>
                             </td>
                             <td style="width: 18rem;">
@@ -175,7 +179,8 @@
                     <div class="ym_form_select">
                         <select [(ngModel)]="copyPlanStatus">
                             <option selected value="">Please select a value</option>
-                            <option *ngFor="let option of prodList" value="{{option.productName}}">{{option.productName}}</option>                           
+                            <option *ngFor="let option of prodList" value="{{option.productName}}">
+                                {{option.productName}}</option>
                         </select>
                     </div>
                 </div>
@@ -193,7 +198,8 @@
 
                     <div class="row" style="margin-left: 1px;">
                         <label class="md-lbl">Effective Date</label>
-                        <input style="width: 94%;" matInput [matDatepicker]="picker" [(ngModel)]="copyEffectiveDate" #copyDate>
+                        <input style="width: 94%;" matInput [matDatepicker]="picker" [(ngModel)]="copyEffectiveDate"
+                            #copyDate>
                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                         <mat-datepicker class="col-md-3" #picker></mat-datepicker>
                     </div>

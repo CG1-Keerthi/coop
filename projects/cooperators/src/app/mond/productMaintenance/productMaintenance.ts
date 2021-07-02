@@ -164,12 +164,24 @@ export class ProductMaintenanceComponent implements OnInit {
     this.isViewPlan = true;
     this.mdMondService.getFormDataFromMondService('Creditor Self Admin', 'FetchPlanProductInfoList', JSON.stringify({ "productId": event.productInfo.productId }), null).subscribe(
       data => {
-        this.planMaintenanceList = JSON.parse(atob(data.value)).planProductList_planProductSummary;
+        let planMaintenanceParsedData = JSON.parse(atob(data.value)).planProductList_planProductSummary;
+        for (let i = 0; i < planMaintenanceParsedData.length; i++) {
+          if (planMaintenanceParsedData[i].insertDate != undefined) {
+            planMaintenanceParsedData[i].insertDate = planMaintenanceParsedData[i].insertDate.split('T')[0] + ' ' + planMaintenanceParsedData[i].insertDate.split('T')[1].split('Z')[0]
+          }
+        }
+        this.planMaintenanceList  = planMaintenanceParsedData;
       },
       error => {
         this.mdMondService.MDError(error);
         let data = { "key": "key", "value": "ewogICJwbGFuUHJvZHVjdExpc3RfcGxhblByb2R1Y3RTdW1tYXJ5IjogWwogICAgewogICAgICAicGxhblByb2R1Y3RJbmZvSWQiOiAiMTkxIiwKICAgICAgInByb2R1Y3RJZCI6IDExMiwKICAgICAgImNsaWVudE5hbWUiOiAiQ3JlbG9naXgiLAogICAgICAicGxhbk5hbWUiOiAiVGVzdDEgbmFtZSIsCiAgICAgICJwbGFuU3RhdHVzIjogIkFjdGl2ZSIsCiAgICAgICJwcm9kdWN0VHlwZSI6ICJUZXN0VHlwZSIsCiAgICAgICJwbGFuTnVtYmVyIjogIlRlc3QxIgogICAgfQogIF0KfQ==" }
-        this.planMaintenanceList = JSON.parse(atob(data.value)).planProductList_planProductSummary;
+       let planMaintenanceParsedData = JSON.parse(atob(data.value)).planProductList_planProductSummary;
+        for (let i = 0; i < planMaintenanceParsedData.length; i++) {
+          if (planMaintenanceParsedData[i].insertDate != undefined) {
+            planMaintenanceParsedData[i].insertDate = planMaintenanceParsedData[i].insertDate.split('T')[0] + ' ' + planMaintenanceParsedData[i].insertDate.split('T')[1].split('Z')[0]
+          }
+        }
+        this.planMaintenanceList  = planMaintenanceParsedData;
       }
     )
   }
@@ -234,6 +246,10 @@ export class ProductMaintenanceComponent implements OnInit {
         this.coverageMaintenanceList = JSON.parse(atob(data.value)).planCoverageList_coverageSummary
       }
     )
+  }
+
+  onClickOfCoverageBundle(event){
+    debugger;
   }
 
   onSelectOfCoverageRow(event) {

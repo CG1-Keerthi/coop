@@ -30,7 +30,7 @@
                             <input formControlName="productName" [readonly]="isProductInfoFieldreadonly">
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row md-row-mt">
                         <div class="ym_form_group  col-6">
                             <label class="md-lbl">Product Business Model</label>
                             <div class="ym_form_select">
@@ -54,7 +54,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row md-row-mt">
                         <div class="ym_form_group col-6 m-0">
                             <label class="md-lbl">Product Status</label>
                             <div class="ym_form_select m-0">
@@ -127,7 +127,7 @@
                         </div>
                     </div>
 
-                    <div class="row">
+                    <div class="row md-row-mt">
                         <div class="ym_form_group required col-3">
                             <label class="md-lbl">Language</label>
                             <div class="ym_form_select" style="width: 70%;">
@@ -159,7 +159,7 @@
                                 <label class="md-lbl">Plan Effective Date</label>
                                 <input style="width: 70%;" matInput [matDatepicker]="picker1" #tillDate 
                                 formControlName="planEffectiveDate" [readonly]="isFieldreadonly">
-                                <mat-datepicker-toggle matSuffix [for]="picker1">
+                                <mat-datepicker-toggle matSuffix [for]="picker1" [disabled]="isFieldreadonly">
                                 </mat-datepicker-toggle>
                                 <mat-datepicker class="col-md-3" #picker1></mat-datepicker>
                             </div>
@@ -178,7 +178,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row md-row-mt">
 
                         <div class="ym_form_group  col-3">
                             <div class="row" style="margin-left: 1px;">
@@ -211,13 +211,13 @@
                             <span *ngIf="isAmountTooltip" class="tooltiptext">Enter number in this field</span>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="ym_form_group  col-9">
+                    <div class="row md-row-mt">
+                        <div class="ym_form_group  col-9 m-0">
                             <label class="md-lbl">Notes</label>
                             <textarea class="md-text-area-width" rows="3" placeholder="Plan Description" 
                             formControlName="comment" [readonly]="isFieldreadonly"></textarea>
                         </div>
-                        <div class="ym_form_group  col-3">
+                        <div class="ym_form_group  col-3 m-0">
                             <label class="md-lbl">Bundled Plan</label>
 
                             <!-- <mat-slide-toggle [(ngModel)]="isChecked">Slide Toggle Checked: {{isChecked}}</mat-slide-toggle> -->
@@ -240,12 +240,12 @@
                     </mat-expansion-panel-header>
 
                     <div class="row">
-                        <div class="ym_form_group  col-3">
+                        <div class="ym_form_group  col-3 m-0">
                             <label class="md-lbl">Permit Loan Extension</label>
                             <mat-slide-toggle formControlName="loanExtension" [disabled]="isFieldreadonly">
                             </mat-slide-toggle>
                         </div>
-                        <div class="ym_form_group  col-3">
+                        <div class="ym_form_group  col-3 m-0">
                             <label class="md-lbl">Termination Of Risk</label>
                             <div class="ym_form_select" style="width: 70%;">
                                 <select #TerminationElement formControlName="terminationOfRisk">
@@ -255,7 +255,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="ym_form_group  col-3">
+                        <div class="ym_form_group  col-3 m-0">
                             <label class="md-lbl">Permit Coverage Amount Changes Post Issuance</label>
                             <div class="ym_form_select" style="width: 70%;">
                                 <select #permitElement formControlName="permitCoverageAmountChangesPostIssuance">
@@ -265,7 +265,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="ym_form_group  col-3">
+                        <div class="ym_form_group  col-3 m-0">
                             <label class="md-lbl">Permit Premium Refunds</label>
                             <mat-slide-toggle formControlName="refundAllowed" [disabled]="isFieldreadonly">
                             </mat-slide-toggle>
@@ -307,24 +307,24 @@
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="ym_form_group  col-3">
+                    <div class="row md-row-mt">
+                        <div class="ym_form_group  col-3 m-0">
                             <label class="md-lbl">Maximum Effective Date Future Date Period (days)</label>
                             <input formControlName="maximumPeriodToFutureDateQuantity" onlyNumber (keyup)="onKeyUpMaxEffectiveDate($event)" [readonly]="isFieldreadonly">
                             <span *ngIf="isMaxEffectiveDateTooltip" class="tooltiptext">Enter number in this
                                 field</span>
                         </div>
-                        <div class="ym_form_group  col-3">
+                        <div class="ym_form_group  col-3 m-0">
                             <label class="md-lbl">Back Refund Payment Period (days)</label>
                             <input formControlName="refundMaximumPeriodQuantity" onlyNumber (keyup)="onKeyUpBackRefund($event)" [readonly]="isFieldreadonly">
                             <span *ngIf="isBackRefundTooltip" class="tooltiptext">Enter number in this field</span>
                         </div>
-                        <div class="ym_form_group  col-3">
+                        <div class="ym_form_group  col-3 m-0">
                             <label class="md-lbl">Minimum Amortization Period (months)</label>
                             <input formControlName="minimumAmortizationPeriodQuantity" onlyNumber (keyup)="onKeyUpMinAmortization($event)" [readonly]="isFieldreadonly">
                             <span *ngIf="isMinAmortizationTooltip" class="tooltiptext">Enter number in this field</span>
                         </div>
-                        <div class="ym_form_group  col-3">
+                        <div class="ym_form_group  col-3 m-0">
                             <label class="md-lbl">Maximum Amortization Period (months)</label>
                             <input formControlName="maximumAmortizationPeriodQuantity" onlyNumber (keyup)="onKeyUpMaxAmortization($event)" [readonly]="isFieldreadonly">
                             <span *ngIf="isMaxAmortizationTooltip" class="tooltiptext">Enter number in this field</span>
@@ -387,7 +387,7 @@
                         </div>
                     </div>
 
-                    <div class="row">
+                    <div class="row md-row-mt">
                         <div class="ym_form_group  col-3">
                             <label class="md-lbl">Loan Balance Method</label>
                             <div class="ym_form_select" style="width: 70%;">
@@ -431,8 +431,8 @@
                             </div>
                         </div>                      
                     </div>
-                    <div class="row">
-                        <div class="ym_form_group  col-3">
+                    <div class="row md-row-mt">
+                        <div class="ym_form_group  col-3 m-0">
                             <label class="md-lbl">Loan Type Category</label>
                             <div class="ym_form_select" style="width: 70%;">
                                 <select #loanTypeCategoryElement formControlName="loanTypeCategory">
@@ -442,12 +442,12 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="ym_form_group  col-3">
+                        <div class="ym_form_group  col-3 m-0">
                             <label class="md-lbl">Fixed Term Loan Pay Once - Interest Only Gross Up Factor</label>
                             <mat-slide-toggle formControlName="grossUpInterestOnly" [disabled]="isFieldreadonly">
                             </mat-slide-toggle>
                         </div>
-                        <div class="ym_form_group  col-3">
+                        <div class="ym_form_group  col-3 m-0">
                             <label class="md-lbl">Fixed Term Loan Pay Once - Lump Sum & Residual Value Gross Up
                                 Factor</label>
                             <mat-slide-toggle formControlName="grossUpLumpsumCode" [disabled]="isFieldreadonly">
@@ -469,7 +469,7 @@
                         </mat-panel-title>
                     </mat-expansion-panel-header>
                     <div class="row">
-                        <div class="ym_form_group  col-3">
+                        <div class="ym_form_group  col-3 m-0">
                             <label class="md-lbl">Rate Structure List</label>
                             <div class="ym_form_select" style="width: 86%;">
                                 <select #rateStrElement formControlName="rateStructureHeaderId">
@@ -484,8 +484,8 @@
             </mat-accordion>
         </div>
     </div>
-    <hr class="mt-1">
-    <div class="row">
+    <hr class="m-0 p-0">
+    <div class="row mt-1 pt-1">
         <div class="col-md-6">
         </div>
         <div class="col-md-6">

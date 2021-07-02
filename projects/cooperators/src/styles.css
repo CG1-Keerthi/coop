@@ -70,7 +70,7 @@
 }
 
 .mat-expansion-panel-body {
-    padding: 5px 10px 16px !important;
+    padding: 5px 10px 3px !important;
 }
 
 .mat-tab-label {
@@ -489,6 +489,18 @@ color: white !important;
 }
 .tooltip.bs-tooltip-right .arrow:before {
     border-right-color: #00456a !important;
+}
+.mat-card-header-text{
+    margin: 0 0px !important;
+}
+.mat-expansion-panel-header{
+    padding: 0 12px !important;
+}
+mat-panel-title{
+    font-weight: bold !important;
+}
+.md-row-mt{
+    margin-top: -15px;
 }
 
 

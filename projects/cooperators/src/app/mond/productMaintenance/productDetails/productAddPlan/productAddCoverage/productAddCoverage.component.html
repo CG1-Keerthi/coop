@@ -15,7 +15,7 @@
     </div>
 
     <div class="row">
-        <div formGroupName="productInfo" class="col-4 col-lg-4 col-md-4 col-xs-4 m-2 p-1">
+        <div formGroupName="productInfo" class="col-4 col-lg-4 col-md-4 col-xs-4 mt-1 mr-0 mb-1 ml-2 p-1">
             <mat-card class="w-100 m-0 p-0 md-border">
                 <mat-card-header class="md-card-hdr">
                     <mat-card-title class="md-clr md-font mt-1 ml-1 mr-1 mb-2 p-1"><b>Product Info</b></mat-card-title>
@@ -32,7 +32,7 @@
                             <input formControlName="productName" [readonly]="isProdFieldreadonly">
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row md-row-mt">
                         <div class="ym_form_group  col-6">
                             <label class="md-lbl">Product Business Model</label>
                             <div class="ym_form_select">
@@ -50,13 +50,13 @@
                                 <input style="width: 80%;" matInput data-name="dateFormat" [matDatepicker]="picker1"
                                     placeholder="Product Effective Date" formControlName="productEffectiveDate"
                                     [readonly]="isProdFieldreadonly">
-                                <mat-datepicker-toggle matSuffix [for]="picker1">
+                                <mat-datepicker-toggle matSuffix [for]="picker1" [disabled]="isProdFieldreadonly">
                                 </mat-datepicker-toggle>
                                 <mat-datepicker class="col-md-3" #picker1></mat-datepicker>
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row md-row-mt">
                         <div class="ym_form_group col-6 m-0">
                             <label class="md-lbl">Product Status</label>
                             <div class="ym_form_select m-0">
@@ -73,7 +73,7 @@
         </div>
 
         <!-- Plan Info -->
-        <div formGroupName="planProductInfo" class="col-4 col-lg-4 col-md-4 col-xs-4 m-2 p-1">
+        <div formGroupName="planProductInfo" class="col-4 col-lg-4 col-md-4 col-xs-4 mt-1 mr-1 mb-1 ml-0 p-1">
             <mat-card class="w-100 m-0 p-0 md-border">
                 <mat-card-header class="md-card-hdr">
                     <mat-card-title class="md-clr md-font mt-1 ml-1 mr-1 mb-2 p-1"><b>Plan Info</b></mat-card-title>
@@ -90,7 +90,7 @@
                             <input formControlName="planName" [readonly]="isProdFieldreadonly">
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row md-row-mt">
                         <div class="ym_form_group  col-6 mb-0 pb-0">
                             <label class="md-lbl">Client Name</label>
                             <input placeholder="Client Name" formControlName="clientName"
@@ -108,13 +108,13 @@
                                 <input style="width: 80%;" matInput data-name="dateFormat" [matDatepicker]="picker2"
                                     placeholder="Product Effective Date" formControlName="planEffectiveDate"
                                     [readonly]="isProdFieldreadonly">
-                                <mat-datepicker-toggle matSuffix [for]="picker2">
+                                <mat-datepicker-toggle matSuffix [for]="picker2" [disabled]="isProdFieldreadonly">
                                 </mat-datepicker-toggle>
                                 <mat-datepicker class="col-md-3" #picker2></mat-datepicker>
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row md-row-mt">
                         <div class="ym_form_group col-6 m-0">
                             <label class="md-lbl">Plan Status</label>
                             <div class="ym_form_select m-0">
@@ -194,7 +194,7 @@
                                 <input style="width: 80%;" matInput data-name="dateFormat" [matDatepicker]="picker3"
                                     placeholder="Product Effective Date" formControlName="coverageEffectiveDate"
                                     [readonly]="isFieldreadonly">
-                                <mat-datepicker-toggle matSuffix [for]="picker3">
+                                <mat-datepicker-toggle matSuffix [for]="picker3" [disabled]="isFieldreadonly">
                                 </mat-datepicker-toggle>
                                 <mat-datepicker class="col-md-3" #picker3></mat-datepicker>
                             </div>
@@ -204,7 +204,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row md-row-mt">
                         <div id="coverageField" class="ym_form_group col-3">
                             <label class="md-lbl">Coverage Status</label>
                             <div class="ym_form_select" style="width: 70%;">
@@ -253,20 +253,20 @@
                             <span *ngIf="isMaxClaimTooltip" class="tooltiptext">Enter number in this field</span>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="ym_form_group col-3">
+                    <div class="row md-row-mt">
+                        <div class="ym_form_group col-3 m-0">
                             <label class="md-lbl">Maximum Claim Benefit Term (months)</label>
                             <input style="width: 80%;" onlyNumber (keyup)="onKeyUpMaxNum($event)"
                                 formControlName="maximumClaimBenefitTerm" [readonly]="isFieldreadonly">
                             <span *ngIf="isMaxNumClaimTooltip" class="tooltiptext">Enter number in this field</span>
                         </div>
-                        <div class="ym_form_group col-3">
+                        <div class="ym_form_group col-3 m-0">
                             <label class="md-lbl">Maximum Monthly Claim Benefit Amount</label>
                             <input style="width: 80%;" onlyNumber (keyup)="onKeyUpMaxMonth($event)"
                                 formControlName="maximumMonthlyClaimBenefitAmount" [readonly]="isFieldreadonly">
                             <span *ngIf="isMaxMonthClaimTooltip" class="tooltiptext">Enter number in this field</span>
                         </div>
-                        <div class="ym_form_group col-6">
+                        <div class="ym_form_group col-6 m-0">
                             <label class="md-lbl">Notes</label>
                             <textarea rows="4" style="width: 97%;" formControlName="comment"
                                 [readonly]="isFieldreadonly"></textarea>
@@ -287,7 +287,7 @@
                         </mat-panel-title>
                     </mat-expansion-panel-header>
                     <div class="row">
-                        <div class="ym_form_group col-4">
+                        <div class="ym_form_group col-4 m-0">
                             <label class="md-lbl">Termination Due To Claim</label>
                             <div class="ym_form_select" style="width: 70%;">
                                 <select formControlName="terminationDueToClaim" #terminationDueElement>
@@ -298,12 +298,12 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="ym_form_group  col-4">
+                        <div class="ym_form_group  col-4 m-0">
                             <label class="md-lbl">Lower Maximum Coverage Amount</label>
                             <mat-slide-toggle formControlName="lowerMaximumCoverageAmount" [disabled]="isFieldreadonly">
                             </mat-slide-toggle>
                         </div>
-                        <div class="ym_form_group col-4">
+                        <div class="ym_form_group col-4 m-0">
                             <label class="md-lbl">Rider Benefit</label>
                             <mat-slide-toggle formControlName="riderBenefit" [disabled]="isFieldreadonly">
                             </mat-slide-toggle>
@@ -344,7 +344,7 @@
                         </div>
 
                     </div>
-                    <div class="row">
+                    <div class="row md-row-mt">
                         <div class="ym_form_group col-4">
                             <label class="md-lbl">Maximum Coverage Amount</label>
                             <input onlyNumber (keyup)="onKeyUpMaxCoverageAmount($event)"
@@ -367,7 +367,7 @@
                         </div>
 
                     </div>
-                    <div class="row">
+                    <div class="row md-row-mt">
                         <div class="ym_form_group col-4">
                             <label class="md-lbl">Maximum Insurable Loan Period Regular (months)</label>
                             <input onlyNumber (keyup)="onKeyUpMinInsurable($event)"
@@ -388,7 +388,7 @@
                         </div>
 
                     </div>
-                    <div class="row">
+                    <div class="row md-row-mt">
                         <div class="ym_form_group  col-4">
                             <label class="md-lbl">Guaranteed Maximum Insured Amount</label>
                             <input onlyNumber (keyup)="onKeyUpGuaranteedAmount($event)"
@@ -410,8 +410,8 @@
                         </div>
 
                     </div>
-                    <div class="row">
-                        <div class="ym_form_group col-4">
+                    <div class="row md-row-mt">
+                        <div class="ym_form_group col-4 m-0">
                             <label class="md-lbl">Coverage Termination Age (years)</label>
                             <input onlyNumber (keyup)="onKeyUpCoverageTermination($event)"
                                 formControlName="coverageTerminationAge" [readonly]="isFieldreadonly">
@@ -433,19 +433,19 @@
                         </mat-panel-title>
                     </mat-expansion-panel-header>
                     <div class="row">
-                        <div class="ym_form_group col-4">
+                        <div class="ym_form_group col-4 m-0">
                             <label class="md-lbl">Certificate Fee</label>
                             <input onlyNumber (keyup)="onKeyUpCertificateFee($event)" formControlName="certificateFee"
                                 [readonly]="isFieldreadonly">
                             <span *ngIf="isCertificateFeeTooltip" class="tooltiptext">Enter number in this field</span>
                         </div>
-                        <div class="ym_form_group col-4">
+                        <div class="ym_form_group col-4 m-0">
                             <label class="md-lbl">CURP</label>
                             <input onlyNumber (keyup)="onKeyUpCURP($event)" formControlName="curp"
                                 [readonly]="isFieldreadonly">
                             <span *ngIf="isCURPTooltip" class="tooltiptext">Enter number in this field</span>
                         </div>
-                        <div class="ym_form_group col-4">
+                        <div class="ym_form_group col-4 m-0">
                             <label class="md-lbl">Minimum Premium</label>
                             <input onlyNumber (keyup)="onKeyUpMinPremium($event)" formControlName="minimumPremium"
                                 [readonly]="isFieldreadonly">
@@ -456,8 +456,8 @@
             </mat-accordion>
         </div>
     </div>
-    <hr class="mt-1">
-    <div class="row">
+    <hr class="m-0 p-0">
+    <div class="row mt-2">
         <div class="col-md-6">
         </div>
         <div class="col-md-6">

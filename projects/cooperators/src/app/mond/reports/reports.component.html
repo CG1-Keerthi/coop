@@ -69,8 +69,8 @@
                                         <input type="text" aria-label="Number" (keyup)="acturialKeyup($event)"
                                             [(ngModel)]="clientName" [matAutocomplete]="auto">
                                         <mat-autocomplete #auto="matAutocomplete">
-                                            <mat-option *ngFor="let list of clientNameVal" [value]="list.companyName" (onSelectionChange)="onSelectActuarialClientName($event)">
-                                                {{list.companyName}}
+                                            <mat-option *ngFor="let list of clientNameVal" [value]="list.value" (onSelectionChange)="onSelectActuarialClientName($event)">
+                                                {{list.value}}
                                             </mat-option>
                                         </mat-autocomplete>
                                     </div>
@@ -133,8 +133,8 @@
                                             [(ngModel)]="customerClientName" [matAutocomplete]="auto2">
                                         <mat-autocomplete #auto2="matAutocomplete">
                                             <mat-option *ngFor="let item of customerClientNameVal"
-                                                [value]="item.companyName" (onSelectionChange)="onSelectCustomerClientName($event)">
-                                                {{item.companyName}}
+                                                [value]="item.value" (onSelectionChange)="onSelectCustomerClientName($event)">
+                                                {{item.value}}
                                             </mat-option>
                                         </mat-autocomplete>
                                     </div>

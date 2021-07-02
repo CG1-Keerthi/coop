@@ -1,5 +1,5 @@
 <div [formGroup]="planDetailsForm" class="m-1 p-1">
-    <div class="row">
+    <!-- <div class="row">
         <div class="col-md-6">
         </div>
         <div class="col-md-6">
@@ -10,19 +10,19 @@
                     class="fa fa-arrow-right ml-2"></i></button>
             <button class="btn btn-primary float-right ml-2"  [disabled]="isBtnDisabled" (click)="onClickOfAddCoverage(list)">Add Coverage<i class="fa fa-plus ml-2"></i></button>
         </div>
-    </div>
+    </div> -->
 
-    <div formGroupName="productInfo" class="row">
-        <div class="col-4 col-lg-4 col-md-4 col-xs-4 mb-0 ml-1 mr-1 mr-1 p-1">
-            <mat-card class="w-100 m-1 p-1 md-border">
-                <mat-card-header>
-                    <mat-card-title class="md-clr md-font"><b>Product Info</b></mat-card-title>
+    <div  class="row">
+        <div formGroupName="productInfo" class="col-4 col-lg-4 col-md-4 col-xs-4 mb-1 ml-2 mr-1 mr-1 pt-0 pr-1 pb-1 pl-1">
+            <mat-card class="w-100 m-0 p-0 md-border">
+                <mat-card-header class="md-card-hdr">
+                    <mat-card-title class="md-clr md-font mt-1 ml-1 mr-1 mb-2 p-1"><b>Product Info</b></mat-card-title>
                 </mat-card-header>
                 <mat-divider></mat-divider>
-                <mat-card-content class="mt-3">
+                <mat-card-content class="m-1 p-1">
                     <div class="row">
                         <div class="ym_form_group col-6">
-                            <label class="md-lbl">Product Type</label>
+                            <label class="md-lbl">Product</label>
                             <input style="width: 70%;" formControlName="productType" [readonly]="isProductInfoFieldreadonly">
                         </div>
                         <div class="ym_form_group col-6" style="margin-top: 30px;">
@@ -46,8 +46,9 @@
                             <label class="md-lbl">Product Effective Date</label>
                             <div class="row pl-1">
                                 <input style="width: 80%;" matInput data-name="dateFormat" [matDatepicker]="picker"
-                                    placeholder="Product Effective Date" formControlName="productEffectiveDate" [readonly]="isProductInfoFieldreadonly">
-                                <mat-datepicker-toggle matSuffix [for]="picker">
+                                    placeholder="Product Effective Date" formControlName="productEffectiveDate"
+                                    [readonly]="isProductInfoFieldreadonly">
+                                <mat-datepicker-toggle matSuffix [for]="picker" [disabled]="isProductInfoFieldreadonly">
                                 </mat-datepicker-toggle>
                                 <mat-datepicker class="col-md-3" #picker></mat-datepicker>
                             </div>
@@ -56,8 +57,8 @@
                     <div class="row">
                         <div class="ym_form_group col-6 m-0">
                             <label class="md-lbl">Product Status</label>
-                            <div class="ym_form_select">
-                                <select formControlName="productStatus" #productStatusList>
+                            <div class="ym_form_select m-0">
+                                <select #productStatusList formControlName="productStatus">
                                     <option selected value="">Please Select a value</option>
                                     <option value="Active">Active</option>
                                     <option value="Terminated">Terminated</option>
@@ -66,8 +67,16 @@
                         </div>
                     </div>
                 </mat-card-content>
-
             </mat-card>
+        </div>
+        <!-- <div class="col-md-1"></div> -->
+        <div class="col-md-6 md-btn-alignement">
+            <button class="btn btn-primary float-right ml-2" (click)="onClickOfUpdatePlan()" [disabled]="isBtnDisabled">Update Plan</button>
+            <button class="btn btn-primary float-right ml-2"  [disabled]="isBtnDisabled">Plan Coverage Bundle<i
+                    class="fa fa-arrow-right ml-2"></i></button>
+            <button class="btn btn-primary float-right ml-2" [disabled]="isBtnDisabled" (click)="onClickOfViewCoverage(list)">View Coverage<i
+                    class="fa fa-arrow-right ml-2"></i></button>
+            <button class="btn btn-primary float-right ml-2"  [disabled]="isBtnDisabled" (click)="onClickOfAddCoverage(list)">Add Coverage<i class="fa fa-plus ml-2"></i></button>
         </div>
     </div>
     <hr class="m-0 p-0">
@@ -108,8 +117,8 @@
                             <input type="text" placeholder="Pick one" aria-label="Number" matInput
                                 (keyup)="clientNameKeyup($event)" [matAutocomplete]="auto" formControlName="clientName" [readonly]="isFieldreadonly">
                             <mat-autocomplete #auto="matAutocomplete">
-                                <mat-option *ngFor="let list of clientNameVal" [value]="list.companyName" (onSelectionChange)="onSelectClientName($event)">
-                                    {{list.companyName}}
+                                <mat-option *ngFor="let list of clientNameVal" [value]="list.value" (onSelectionChange)="onSelectClientName($event)">
+                                    {{list.value}}
                                 </mat-option>
                             </mat-autocomplete>
                             <div *ngIf="isSubmitted && planDetailsForm.get('planProductInfo.clientName').invalid">
@@ -176,7 +185,7 @@
                                 <label class="md-lbl">Plan Termination Date</label>
                                 <input style="width: 70%;" matInput [matDatepicker]="picker2" #tillDate 
                                 formControlName="planTerminationDate" [readonly]="isplanProductInforeadonly">
-                                <mat-datepicker-toggle matSuffix [for]="picker2">
+                                <mat-datepicker-toggle matSuffix [for]="picker2" [disabled]="isplanProductInforeadonly">
                                 </mat-datepicker-toggle>
                                 <mat-datepicker class="col-md-3" #picker2></mat-datepicker>
                             </div>

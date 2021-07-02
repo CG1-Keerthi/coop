@@ -77,7 +77,7 @@
                                                     <th style="width: 15rem;">Product Name</th>
                                                     <th style="width: 12rem;">Product Business Model</th>
                                                     <th style="width: 9rem;">Product Status</th>
-                                                    <th style="width: 147px;">Last Update Date</th>
+                                                    <th style="width: 182px;">Last Update Date</th>
                                                     <th style="width: 20rem;">Updated By</th>
                                                 </tr>
                                             </ng-template>
@@ -102,10 +102,10 @@
                                                             {{responseData.productStatus}}
                                                         </div>
                                                     </td>
-                                                    <td style="width: 147px;">
+                                                    <td style="width: 182px;">
                                                         <div class="md-overFlow"
                                                             title="{{responseData.lastUpdateDate}}">
-                                                            {{responseData.lastUpdateDate.split('T')[0]}}
+                                                            {{responseData.lastUpdateDate.split('T')[0]}} {{responseData.lastUpdateDate.split('T')[1].split('Z')[0]}}
                                                         </div>
                                                     </td>
                                                     <td style="width: 20rem;">

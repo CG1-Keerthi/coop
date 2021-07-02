@@ -396,6 +396,8 @@ mat-panel-title{
 
 .ui-table .ui-table-thead > tr > th{
 text-align: center;
+background:  #008acc!important;
+color: white !important;
 }
 
 .ym_header > div.container{

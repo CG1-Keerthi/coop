@@ -52,7 +52,7 @@
             </div>
         </div>
 
-        <div class="row mt-1 pt-1">
+        <div class="row md-mt">
             <div class="ym_form_group required col-3">
                 <label class="md-lbl">Product Effective Date</label>
                 <div class="row pl-1">
@@ -96,7 +96,7 @@
         </div>
 
 
-        <div class="row mt-1 pt-1">
+        <div class="row md-mt">
             <div class="ym_form_group col-3">
                 <label class="md-lbl">Back Premium Collection Period (days)</label>
                 <input style="width: 80%;" placeholder="Back Premium Collection Period" [readonly]="isFieldsreadonly"
@@ -126,7 +126,7 @@
                     <span *ngIf="isRefundTooltip" class="tooltiptext">Enter number in this field</span> 
             </div>
         </div>
-        <div class="row mt-1 pt-1">
+        <div class="row md-mt">
             <div class="ym_form_group col-3">
                 <label class="md-lbl">Member Initiated Termination Rule</label>
                 <div class="ym_form_select" style="width: 70%;">
@@ -144,7 +144,7 @@
             </div>
         </div>
     </div>
-    <div class="row mt-2">
+    <div class="row">
         <div class="ym_form_group mb-0 pb-0">
             <button class="btn btn-primary float-right md-btn-width mr-3" (click)="onClickOfProductDetailSubmit()"
                 [disabled]="isSubmitBtnDisabled"><i class="fa fa-save mr-1"></i>Submit</button>

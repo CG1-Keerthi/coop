@@ -80,43 +80,56 @@
                     scrollHeight="379px" [autoLayout]="true" (onRowSelect)="onPlanListRowSelect($event)">
                     <ng-template pTemplate="header">
                         <tr class="ptableHeader">
-                            <th style="width: 1rem;"></th>
-                            <th style="width:2rem">Client Name</th>
-                            <th style="width:3rem;">Product Type</th>
-                            <th style="width: 3rem;">Plan Number</th>
-                            <th style="width: 7rem;">Plan Name</th>
-                            <th style="width: 3rem;">Plan status</th>
+                            <th style="width: 2rem;"></th>
+                            <th style="width:106px">Client Name</th>
+                            <th style="width:7rem;">Product Type</th>
+                            <th style="width: 111px;">Plan Number</th>
+                            <th style="width: 13rem;">Plan Name</th>
+                            <th style="width: 6rem;">Plan status</th>
+                            <th style="width: 173px;">Last Update Date</th>
+                            <th style="width: 18rem;">Updated By</th>
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="body" let-responseData>
                         <tr [pSelectableRow]="responseData">
-                            <td style="width: 1rem;">
+                            <td style="width: 2rem;">
                                 <input type="checkbox" name='copyPlanName'
                                     (change)="onChangeOfCopyPlanName(responseData,$event)">
                             </td>
-                            <td style="width:2rem">
+                            <td style="width:106px">
                                 <div class="md-overFlow" title="{{responseData.clientName}}">
-                                    {{responseData.clientName}}
-                                </div>
-                            </td>
-                            <td style="width:3rem;">
-                                <div class="md-overFlow" title=" {{responseData.productType}}">
-                                    {{responseData.productType}}
-                                </div>
-                            </td>
-                            <td style="width:3rem;">
-                                <div class="md-overFlow" title=" {{responseData.planNumber}}">
-                                    {{responseData.planNumber}}
+                                    {{responseData?.clientName}}
                                 </div>
                             </td>
                             <td style="width:7rem;">
-                                <div class="md-overFlow" title="{{responseData.planName}}">
-                                    {{responseData.planName}}
+                                <div class="md-overFlow" title=" {{responseData.productType}}">
+                                    {{responseData?.productType}}
                                 </div>
                             </td>
-                            <td style="width:3rem;">
+                            <td style="width:111px;">
+                                <div class="md-overFlow" title=" {{responseData.planNumber}}">
+                                    {{responseData?.planNumber}}
+                                </div>
+                            </td>
+                            <td style="width:13rem;">
+                                <div class="md-overFlow" title="{{responseData.planName}}">
+                                    {{responseData?.planName}}
+                                </div>
+                            </td>
+                            <td style="width:6rem;">
                                 <div class="md-overFlow" title=" {{responseData.planStatus}}">
-                                    {{responseData.planStatus}}
+                                    {{responseData?.planStatus}}
+                                </div>
+                            </td>
+                            <td style="width: 173px;">
+                                <div class="md-overFlow"
+                                    title="{{responseData.lastUpdateDate}}">
+                                    {{responseData?.lastUpdateDate}}
+                                </div>
+                            </td>
+                            <td style="width: 18rem;">
+                                <div class="md-overFlow" title="{{responseData.updatedBy}}">
+                                    {{responseData?.updatedBy}}
                                 </div>
                             </td>
                         </tr>

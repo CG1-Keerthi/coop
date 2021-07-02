@@ -36,3 +36,18 @@ mat-expansion-panel-header{
     border: 5px solid transparent;
     border-bottom-color: white;
 }
+
+.md-btn-alignement{
+    flex: 1 0 54% !important;
+    max-width: 67% !important;
+}
+/* .md-mt{
+    margin-top: -3px;
+} */
+.md-card-hdr{
+    background: #00456A;
+    margin: 0.5px;
+}
+.md-clr{
+    color: white !important;
+}

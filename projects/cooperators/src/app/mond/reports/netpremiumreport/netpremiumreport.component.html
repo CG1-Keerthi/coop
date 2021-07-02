@@ -42,8 +42,8 @@
                                 (keyup)="netPremiumKeyup($event)" [(ngModel)]="clientName"
                                 [matAutocomplete]="auto">
                             <mat-autocomplete #auto="matAutocomplete">
-                                <mat-option *ngFor="let list of clientNameVal" (onSelectionChange)="onSelectClientName($event)" [value]="list.companyName">
-                                    {{list.companyName}}
+                                <mat-option *ngFor="let list of clientNameVal" (onSelectionChange)="onSelectClientName($event)" [value]="list.value">
+                                    {{list.value}}
                                 </mat-option>
                             </mat-autocomplete>
                             <div *ngIf="isClientNameSubmit">

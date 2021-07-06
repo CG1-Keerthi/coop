@@ -1,0 +1,41 @@
+.md-card-hdr{
+    background: #00456A;
+    margin: 0.5px;
+}
+.md-clr{
+    color: white !important;
+}
+.md-btn-set{
+    flex: 1 0 28%;
+    max-width: 33%
+}
+.style {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  .style td, .style th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  .style tr:hover 
+  {background-color: #ddd;}
+  
+  .style th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+    background-color: #0071b3;
+    /* background-color: #C41230; */
+    color: white;
+  }
+  
+  .md-input{
+    display: inline-block;
+    border: 0px solid #ccc;
+    border-radius: 4px; 
+     box-sizing: border-box;  
+  }

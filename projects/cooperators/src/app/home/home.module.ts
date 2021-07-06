@@ -67,6 +67,8 @@ import { ProductPlanSearchComponent } from '../mond/productMaintenance/productDe
 import { ProductAddCoverageComponent } from '../mond/productMaintenance/productDetails/productAddPlan/productAddCoverage/productAddCoverage.component';
 import { CoverageDetailFormBuilderModule } from '../form-builder/productMaintenance/coverageDetails/coverage-detail-form.module';
 import { ProductSearchCoverageComponent } from '../mond/productMaintenance/productDetails/productAddPlan/productSearchCoverage/productSearchCoverage.component';
+import { ProductPlanCoverageBundleComponent } from '../mond/productMaintenance/productDetails/productAddPlan/productPlanCoverageBundle/productPlanCoverageBundle.component';
+import { PlanCoverageBundleDetailsModule } from '../form-builder/productMaintenance/planCoverageBundleDetails/plan-coverage-bundle-detail-form.module';
 
 @NgModule({
   declarations: [
@@ -100,7 +102,8 @@ import { ProductSearchCoverageComponent } from '../mond/productMaintenance/produ
     ProductAddPlanComponent,
     ProductPlanSearchComponent,
     ProductAddCoverageComponent,
-    ProductSearchCoverageComponent
+    ProductSearchCoverageComponent,
+    ProductPlanCoverageBundleComponent
   ],
   imports: [
     CommonModule,
@@ -135,7 +138,8 @@ import { ProductSearchCoverageComponent } from '../mond/productMaintenance/produ
     NgxMaskModule,
     ProductDetailFormBuilderModule,
     PlanDetailFormBuilderModule,
-    CoverageDetailFormBuilderModule
+    CoverageDetailFormBuilderModule,
+    PlanCoverageBundleDetailsModule
 
 
   ],

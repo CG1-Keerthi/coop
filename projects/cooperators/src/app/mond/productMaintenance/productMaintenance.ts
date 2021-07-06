@@ -36,7 +36,10 @@ export class ProductMaintenanceComponent implements OnInit {
   public ViewCoverageClientId: string;
   public coverageMaintenanceList: any;
   public addCoverageTabName: string;
- public coverageTypeList:any;
+  public coverageTypeList: any;
+  public isAddCoverageBunlde: boolean;
+  public planCoverageBundleList: any;
+  public planCoverageBundleInformationList: any;
 
   constructor(private mdMondService: MDMondServiceDS,
     private codeListFetch: MDCodeListHeaderDS,
@@ -170,18 +173,18 @@ export class ProductMaintenanceComponent implements OnInit {
             planMaintenanceParsedData[i].insertDate = planMaintenanceParsedData[i].insertDate.split('T')[0] + ' ' + planMaintenanceParsedData[i].insertDate.split('T')[1].split('Z')[0]
           }
         }
-        this.planMaintenanceList  = planMaintenanceParsedData;
+        this.planMaintenanceList = planMaintenanceParsedData;
       },
       error => {
         this.mdMondService.MDError(error);
         let data = { "key": "key", "value": "ewogICJwbGFuUHJvZHVjdExpc3RfcGxhblByb2R1Y3RTdW1tYXJ5IjogWwogICAgewogICAgICAicGxhblByb2R1Y3RJbmZvSWQiOiAiMTkxIiwKICAgICAgInByb2R1Y3RJZCI6IDExMiwKICAgICAgImNsaWVudE5hbWUiOiAiQ3JlbG9naXgiLAogICAgICAicGxhbk5hbWUiOiAiVGVzdDEgbmFtZSIsCiAgICAgICJwbGFuU3RhdHVzIjogIkFjdGl2ZSIsCiAgICAgICJwcm9kdWN0VHlwZSI6ICJUZXN0VHlwZSIsCiAgICAgICJwbGFuTnVtYmVyIjogIlRlc3QxIgogICAgfQogIF0KfQ==" }
-       let planMaintenanceParsedData = JSON.parse(atob(data.value)).planProductList_planProductSummary;
+        let planMaintenanceParsedData = JSON.parse(atob(data.value)).planProductList_planProductSummary;
         for (let i = 0; i < planMaintenanceParsedData.length; i++) {
           if (planMaintenanceParsedData[i].insertDate != undefined) {
             planMaintenanceParsedData[i].insertDate = planMaintenanceParsedData[i].insertDate.split('T')[0] + ' ' + planMaintenanceParsedData[i].insertDate.split('T')[1].split('Z')[0]
           }
         }
-        this.planMaintenanceList  = planMaintenanceParsedData;
+        this.planMaintenanceList = planMaintenanceParsedData;
       }
     )
   }
@@ -208,19 +211,19 @@ export class ProductMaintenanceComponent implements OnInit {
 
   onClickOfAddCoverage(event) {
     debugger;
-    let coverageInfo ={
-      "lineOfBusiness":"Please select a value",
-      "coverageType":"Please select a value",
-      "generalLedgerAccountNumber":"Please select a value",
-      "coverageStatus":"Please select a value",
-      "terminationDueToClaim":"Please select a value"
+    let coverageInfo = {
+      "lineOfBusiness": "Please select a value",
+      "coverageType": "Please select a value",
+      "generalLedgerAccountNumber": "Please select a value",
+      "coverageStatus": "Please select a value",
+      "terminationDueToClaim": "Please select a value"
     }
     let addCovergaeDetailArray = [];
     let addCoverageDetailsObj = {};
     // let productInfo = event.productInfo;
     addCoverageDetailsObj["productInfo"] = event.productInfo;
     addCoverageDetailsObj["planProductInfo"] = event.planProductInfo;
-    addCoverageDetailsObj["coverageInfo"] =  coverageInfo;
+    addCoverageDetailsObj["coverageInfo"] = coverageInfo;
     addCovergaeDetailArray.push(addCoverageDetailsObj);
     this.addCoverageTabName = "Add Coverage";
     this.coverageTypeList = [];
@@ -248,73 +251,95 @@ export class ProductMaintenanceComponent implements OnInit {
     )
   }
 
-  onClickOfCoverageBundle(event){
-    debugger;
-  }
+
 
   onSelectOfCoverageRow(event) {
     debugger;
     this.isAddCoverage = false;
+    this.isAddCoverageBunlde = false;
     this.addCoverageTabName = "Coverage Details";
-    
+
     // this.coverageList = event;
-    this.mdMondService.invokeMondServiceGET("Creditor Self Admin", "FetchPlanCoverageDetails", "1.00", btoa(JSON.stringify({ "planCoverageInfoId":event.data.planCoverageInfoId })), this.csfrToken, true, true, true, true).subscribe(
+    this.mdMondService.invokeMondServiceGET("Creditor Self Admin", "FetchPlanCoverageDetails", "1.00", btoa(JSON.stringify({ "planCoverageInfoId": event.data.planCoverageInfoId })), this.csfrToken, true, true, true, true).subscribe(
       data => {
         this.coverageList = JSON.parse(atob(data));
-                // //to retrive Coverage Type
-    let formVariable = {
-      "clientId": this.coverageList.planProductInfo.clientIdentifier,
-      "lineOfBusiness": event.data.lineOfBusiness
-    }
-
-    this.mdMondService.getFormDataFromMondService('Creditor Self Admin', 'FetchCoverageTypeList', JSON.stringify(formVariable), null).subscribe(
-      data => {
-        let parsedData = JSON.parse(atob(data.value)).coverageTypeList_coverageLookUp;
-        let coverageTypeArray = [];
-        let coverageTypeObj = {};
-        coverageTypeObj["coverageType"] = "Please select a value";
-        coverageTypeArray.push(coverageTypeObj);
-        for (let i = 0; i < parsedData.length; i++) {
-          coverageTypeArray.push(parsedData[i]);
+        // //to retrive Coverage Type
+        let formVariable = {
+          "clientId": this.coverageList.planProductInfo.clientIdentifier,
+          "lineOfBusiness": event.data.lineOfBusiness
         }
-        this.coverageTypeList = coverageTypeArray;
 
-      }, error => {
-        this.mdMondService.MDError(error);       
-      })
-      this.selectedTab = 6;
-      this.isAddCoverage = true;
+        this.mdMondService.getFormDataFromMondService('Creditor Self Admin', 'FetchCoverageTypeList', JSON.stringify(formVariable), null).subscribe(
+          data => {
+            let parsedData = JSON.parse(atob(data.value)).coverageTypeList_coverageLookUp;
+            let coverageTypeArray = [];
+            let coverageTypeObj = {};
+            coverageTypeObj["coverageType"] = "Please select a value";
+            coverageTypeArray.push(coverageTypeObj);
+            for (let i = 0; i < parsedData.length; i++) {
+              coverageTypeArray.push(parsedData[i]);
+            }
+            this.coverageTypeList = coverageTypeArray;
+
+          }, error => {
+            this.mdMondService.MDError(error);
+          })
+        this.selectedTab = 6;
+        this.isAddCoverage = true;
       },
       error => {
         this.mdMondService.MDError(error);
-       let data = "ewogICJwbGFuUHJvZHVjdEluZm8iOiB7CiAgICAicGxhblByb2R1Y3RJbmZvSWQiOiAiMTkxIiwKICAgICJwcm9kdWN0SWQiOiAxMTIsCiAgICAiY2xpZW50SWRlbnRpZmllciI6IDIsCiAgICAicGxhbkVmZmVjdGl2ZURhdGUiOiAiMjAyMC0wOS0wM1QwMDowMDowMC4wMDBaIiwKICAgICJwbGFuTmFtZSI6ICJUZXN0MSBuYW1lIiwKICAgICJwbGFuU3RhdHVzIjogIkFjdGl2ZSIsCiAgICAicGxhbk51bWJlciI6ICJUZXN0MSIsCgkiY2xpZW50TmFtZSI6InJlbG9naXgiCiAgfSwKICAiY292ZXJhZ2VJbmZvIjogewogICAgImxpbmVPZkJ1c2luZXNzIjogIjkwMSIsCiAgICAiZ2VuZXJhbExlZGdlckFjY291bnROdW1iZXIiOiAiMTAwMDUwMCIsCiAgICAibGFzdFVwZGF0ZURhdGUiOiAiMjAyMS0wNi0yNFQxMDoyMDozNC4wMDBaIiwKICAgICJtYXhpbXVtQmVuZWZpdEFtb3VudCI6IDEsCiAgICAibG93ZXJNYXhpbXVtQ292ZXJhZ2VBbW91bnQiOiAiWSIsCiAgICAiY292ZXJhZ2VJblVzZSI6ICJZZXMiLAogICAgIm1heGltdW1Nb250aGx5QmVuZWZpdEFtb3VudCI6IDEsCiAgICAiY292ZXJhZ2VTdGF0dXMiOiAiQWN0aXZlIiwKICAgICJtaW5pbXVtUHJlbWl1bSI6IDEsCiAgICAibm9uRXZpZGVuY2VNYXhpbXVtQW1vdW50IjogMSwKICAgICJwbGFuQ292ZXJhZ2VJbmZvSWQiOiAiNTgyIiwKICAgICJjb3ZlcmFnZVN0YXR1c0VuZERhdGUiOiAiOTk5OS0xMi0zMVQwOTowODoyNi4wMDBaIiwKICAgICJsb3dlck1heGltdW1Db3ZlcmFnZUFtb3VudEJhc2VkQWdlIjogMSwKICAgICJtYXhpbXVtQ292ZXJhZ2VBbW91bnQiOiAxLAogICAgIm1pbmltdW1BZ2VMb3dlckNvdmVyYWdlQW1vdW50IjogMSwKICAgICJjb3ZlcmFnZUNvZGUiOiAiTEkiLAogICAgImN1cnAiOiAxLAogICAgInBsYW5Qcm9kdWN0SW5mb0lkIjogIjE5MSIsCiAgICAiY3VycmVudFJlY29yZEZsYWciOiAiWSIsCiAgICAibWF4aW11bUluc3VyYWJsZUxvYW5QZXJpb2RSZXNpZHVhbFZhbHVlIjogMSwKICAgICJsb3NzT2ZFbXBsb3ltZW50Q29udGludW91c1dvcmtQZXJpb2QiOiAxLAogICAgImNvdmVyYWdlVGVybWluYXRpb25BZ2UiOiAxLAogICAgImNvdmVyYWdlRWZmZWN0aXZlRGF0ZSI6ICIyMDIxLTA2LTI0VDAwOjAwOjAwLjAwMFoiLAogICAgInJpZGVyQmVuZWZpdCI6ICJZIiwKICAgICJjb3ZlcmFnZVRlcm1pbmF0aW9uRGF0ZSI6ICI5OTk5LTEyLTMxVDA5OjA4OjI2LjAwMFoiLAogICAgInBsYW5OdW1iZXIiOiAiVGVzdDEiLAogICAgIm1heGltdW1Nb250aGx5Q2xhaW1CZW5lZml0QW1vdW50IjogMSwKICAgICJlbGlnaWJpbGl0eUhvdXJzQW1vdW50IjogMSwKICAgICJjb3ZlcmFnZVR5cGUiOiAiQ1JFTEkiLAogICAgInRlcm1pbmF0aW9uRHVlVG9DbGFpbSI6ICJObyBUZXJtaW5hdGlvbiIsCiAgICAibWF4aW11bUNsYWltQmVuZWZpdFRlcm0iOiAxLAogICAgIm1pbmltdW1Jc3N1ZUFnZSI6IDEsCiAgICAibWF4aW11bUlzc3VlQWdlIjogMSwKICAgICJtaW5pbXVtQ292ZXJhZ2VBbXQiOiAxLAogICAgImNvbW1lbnQiOiAiVGVzdEFkZENvdmVyYWdlIiwKICAgICJtYXhpbXVtSW5zdXJhYmxlTG9hblBlcmlvZFJlZ3VsYXIiOiAxLAogICAgImNlcnRpZmljYXRlRmVlIjogMQogIH0sCiAgInByb2R1Y3RJbmZvIjogewogICAgInByb2R1Y3RCdXNpbmVzc01vZGVsIjogIk1lcmNoYW50IiwKICAgICJwcm9kdWN0RWZmZWN0aXZlRGF0ZSI6ICIyMDIxLTA2LTE0VDAwOjAwOjAwLjAwMFoiLAogICAgInByb2R1Y3RJZCI6ICIxMTIiLAogICAgInByb2R1Y3RTdGF0dXMiOiAiQWN0aXZlIiwKICAgICJwcm9kdWN0VHlwZSI6ICJUZXN0VHlwZSIsCiAgICAicHJvZHVjdE5hbWUiOiAiVGVzdDEiCiAgfQp9"
+        let data = "ewogICJwbGFuUHJvZHVjdEluZm8iOiB7CiAgICAicGxhblByb2R1Y3RJbmZvSWQiOiAiMTkxIiwKICAgICJwcm9kdWN0SWQiOiAxMTIsCiAgICAiY2xpZW50SWRlbnRpZmllciI6IDIsCiAgICAicGxhbkVmZmVjdGl2ZURhdGUiOiAiMjAyMC0wOS0wM1QwMDowMDowMC4wMDBaIiwKICAgICJwbGFuTmFtZSI6ICJUZXN0MSBuYW1lIiwKICAgICJwbGFuU3RhdHVzIjogIkFjdGl2ZSIsCiAgICAicGxhbk51bWJlciI6ICJUZXN0MSIsCgkiY2xpZW50TmFtZSI6InJlbG9naXgiCiAgfSwKICAiY292ZXJhZ2VJbmZvIjogewogICAgImxpbmVPZkJ1c2luZXNzIjogIjkwMSIsCiAgICAiZ2VuZXJhbExlZGdlckFjY291bnROdW1iZXIiOiAiMTAwMDUwMCIsCiAgICAibGFzdFVwZGF0ZURhdGUiOiAiMjAyMS0wNi0yNFQxMDoyMDozNC4wMDBaIiwKICAgICJtYXhpbXVtQmVuZWZpdEFtb3VudCI6IDEsCiAgICAibG93ZXJNYXhpbXVtQ292ZXJhZ2VBbW91bnQiOiAiWSIsCiAgICAiY292ZXJhZ2VJblVzZSI6ICJZZXMiLAogICAgIm1heGltdW1Nb250aGx5QmVuZWZpdEFtb3VudCI6IDEsCiAgICAiY292ZXJhZ2VTdGF0dXMiOiAiQWN0aXZlIiwKICAgICJtaW5pbXVtUHJlbWl1bSI6IDEsCiAgICAibm9uRXZpZGVuY2VNYXhpbXVtQW1vdW50IjogMSwKICAgICJwbGFuQ292ZXJhZ2VJbmZvSWQiOiAiNTgyIiwKICAgICJjb3ZlcmFnZVN0YXR1c0VuZERhdGUiOiAiOTk5OS0xMi0zMVQwOTowODoyNi4wMDBaIiwKICAgICJsb3dlck1heGltdW1Db3ZlcmFnZUFtb3VudEJhc2VkQWdlIjogMSwKICAgICJtYXhpbXVtQ292ZXJhZ2VBbW91bnQiOiAxLAogICAgIm1pbmltdW1BZ2VMb3dlckNvdmVyYWdlQW1vdW50IjogMSwKICAgICJjb3ZlcmFnZUNvZGUiOiAiTEkiLAogICAgImN1cnAiOiAxLAogICAgInBsYW5Qcm9kdWN0SW5mb0lkIjogIjE5MSIsCiAgICAiY3VycmVudFJlY29yZEZsYWciOiAiWSIsCiAgICAibWF4aW11bUluc3VyYWJsZUxvYW5QZXJpb2RSZXNpZHVhbFZhbHVlIjogMSwKICAgICJsb3NzT2ZFbXBsb3ltZW50Q29udGludW91c1dvcmtQZXJpb2QiOiAxLAogICAgImNvdmVyYWdlVGVybWluYXRpb25BZ2UiOiAxLAogICAgImNvdmVyYWdlRWZmZWN0aXZlRGF0ZSI6ICIyMDIxLTA2LTI0VDAwOjAwOjAwLjAwMFoiLAogICAgInJpZGVyQmVuZWZpdCI6ICJZIiwKICAgICJjb3ZlcmFnZVRlcm1pbmF0aW9uRGF0ZSI6ICI5OTk5LTEyLTMxVDA5OjA4OjI2LjAwMFoiLAogICAgInBsYW5OdW1iZXIiOiAiVGVzdDEiLAogICAgIm1heGltdW1Nb250aGx5Q2xhaW1CZW5lZml0QW1vdW50IjogMSwKICAgICJlbGlnaWJpbGl0eUhvdXJzQW1vdW50IjogMSwKICAgICJjb3ZlcmFnZVR5cGUiOiAiQ1JFTEkiLAogICAgInRlcm1pbmF0aW9uRHVlVG9DbGFpbSI6ICJObyBUZXJtaW5hdGlvbiIsCiAgICAibWF4aW11bUNsYWltQmVuZWZpdFRlcm0iOiAxLAogICAgIm1pbmltdW1Jc3N1ZUFnZSI6IDEsCiAgICAibWF4aW11bUlzc3VlQWdlIjogMSwKICAgICJtaW5pbXVtQ292ZXJhZ2VBbXQiOiAxLAogICAgImNvbW1lbnQiOiAiVGVzdEFkZENvdmVyYWdlIiwKICAgICJtYXhpbXVtSW5zdXJhYmxlTG9hblBlcmlvZFJlZ3VsYXIiOiAxLAogICAgImNlcnRpZmljYXRlRmVlIjogMQogIH0sCiAgInByb2R1Y3RJbmZvIjogewogICAgInByb2R1Y3RCdXNpbmVzc01vZGVsIjogIk1lcmNoYW50IiwKICAgICJwcm9kdWN0RWZmZWN0aXZlRGF0ZSI6ICIyMDIxLTA2LTE0VDAwOjAwOjAwLjAwMFoiLAogICAgInByb2R1Y3RJZCI6ICIxMTIiLAogICAgInByb2R1Y3RTdGF0dXMiOiAiQWN0aXZlIiwKICAgICJwcm9kdWN0VHlwZSI6ICJUZXN0VHlwZSIsCiAgICAicHJvZHVjdE5hbWUiOiAiVGVzdDEiCiAgfQp9"
         this.coverageList = JSON.parse(atob(data));
-        
-    // //to retrive Coverage Type
-    let formVariable = {
-      "clientId": this.coverageList.planProductInfo.clientIdentifier,
-      "lineOfBusiness": event.data.lineOfBusiness
-    }
 
-    this.mdMondService.getFormDataFromMondService('Creditor Self Admin', 'FetchCoverageTypeList', JSON.stringify(formVariable), null).subscribe(
-      data => {
-      }, error => {
-        this.mdMondService.MDError(error);
-        let data = { "key": "key", "value": "ewogICJjb3ZlcmFnZVR5cGVMaXN0X2NvdmVyYWdlTG9va1VwIjogWwogICAgewogICAgICAiY292ZXJhZ2VUeXBlIjogIkNSRUxJIiwKICAgICAgImNvdmVyYWdlQ29kZSI6ICJMSSIKICAgIH0sCgl7CiAgICAgICJjb3ZlcmFnZVR5cGUiOiAiQ1JFREkiLAogICAgICAiY292ZXJhZ2VDb2RlIjogIkRJIgogICAgfQogIF0KfQ==" };
-        let parsedData = JSON.parse(atob(data.value)).coverageTypeList_coverageLookUp;
-        let coverageTypeArray = [];
-        let coverageTypeObj = {};
-        coverageTypeObj["coverageType"] = "Please select a value";
-        coverageTypeArray.push(coverageTypeObj);
-        for (let i = 0; i < parsedData.length; i++) {
-          coverageTypeArray.push(parsedData[i]);
+        // //to retrive Coverage Type
+        let formVariable = {
+          "clientId": this.coverageList.planProductInfo.clientIdentifier,
+          "lineOfBusiness": event.data.lineOfBusiness
         }
-        this.coverageTypeList = coverageTypeArray;
-      })
+
+        this.mdMondService.getFormDataFromMondService('Creditor Self Admin', 'FetchCoverageTypeList', JSON.stringify(formVariable), null).subscribe(
+          data => {
+          }, error => {
+            this.mdMondService.MDError(error);
+            let data = { "key": "key", "value": "ewogICJjb3ZlcmFnZVR5cGVMaXN0X2NvdmVyYWdlTG9va1VwIjogWwogICAgewogICAgICAiY292ZXJhZ2VUeXBlIjogIkNSRUxJIiwKICAgICAgImNvdmVyYWdlQ29kZSI6ICJMSSIKICAgIH0sCgl7CiAgICAgICJjb3ZlcmFnZVR5cGUiOiAiQ1JFREkiLAogICAgICAiY292ZXJhZ2VDb2RlIjogIkRJIgogICAgfQogIF0KfQ==" };
+            let parsedData = JSON.parse(atob(data.value)).coverageTypeList_coverageLookUp;
+            let coverageTypeArray = [];
+            let coverageTypeObj = {};
+            coverageTypeObj["coverageType"] = "Please select a value";
+            coverageTypeArray.push(coverageTypeObj);
+            for (let i = 0; i < parsedData.length; i++) {
+              coverageTypeArray.push(parsedData[i]);
+            }
+            this.coverageTypeList = coverageTypeArray;
+          })
         this.selectedTab = 6;
         this.isAddCoverage = true;
 
       });
+  }
+
+  onClickOfCoverageBundle(event) {
+    debugger;
+    this.isAddCoverageBunlde = false;
+    this.planCoverageBundleList = event;
+    this.mdMondService.invokeMondServiceGET("Creditor Self Admin", "fetchPlanCoverageBundleInfo", "1.00", btoa(JSON.stringify({ "planProductInfoId": event.planProductInfo.planProductInfoId })), this.csfrToken, true, true, true, true).subscribe(
+      data => {
+        this.planCoverageBundleInformationList = JSON.parse(atob(data));
+        this.selectedTab = 7;
+        this.isAddCoverageBunlde = true;
+      },
+      error => {
+        this.mdMondService.MDError(error);
+        let data = "ewogICJwbGFuQ292ZXJhZ2VCdW5kbGVJbmZvIjogewogICAgInBsYW5Db3ZlcmFnZUJ1bmRsZUluZm8iOiBbCiAgICAgIHsKICAgICAgICAicGxhblByb2R1Y3RJbmZvSWQiOiAiMTkyIiwKICAgICAgICAicHJlbWl1bVNwbGl0UGVyY2VudGFnZSI6IDEwMCwKICAgICAgICAiY292ZXJhZ2VDb2RlIjogIkRJIgogICAgICB9LAoJICAgIHsKICAgICAgICAicGxhblByb2R1Y3RJbmZvSWQiOiAiMTkzIiwKICAgICAgICAicHJlbWl1bVNwbGl0UGVyY2VudGFnZSI6IDEwMCwKICAgICAgICAiY292ZXJhZ2VDb2RlIjogIkxJIgogICAgICB9LAoJICAgIHsKICAgICAgICAicGxhblByb2R1Y3RJbmZvSWQiOiAiMTk0IiwKICAgICAgICAicHJlbWl1bVNwbGl0UGVyY2VudGFnZSI6IDEwMCwKICAgICAgICAiY292ZXJhZ2VDb2RlIjogIkpJIgogICAgICB9CiAgICBdCiAgfQp9";
+        //  let data = "ewogICJwbGFuQ292ZXJhZ2VCdW5kbGVJbmZvIjogewogICAgInBsYW5Db3ZlcmFnZUJ1bmRsZUluZm8iOiBbCiAgICAgIHsKICAgICAgICAicGxhblByb2R1Y3RJbmZvSWQiOiAiMTkyIiwKICAgICAgICAicHJlbWl1bVNwbGl0UGVyY2VudGFnZSI6IDEwMCwKICAgICAgICAiY292ZXJhZ2VDb2RlIjogIkRJIgogICAgICB9LAoJICAgewogICAgICAgICJwbGFuUHJvZHVjdEluZm9JZCI6ICIxOTMiLAogICAgICAgICJwcmVtaXVtU3BsaXRQZXJjZW50YWdlIjogMTAwLAogICAgICAgICJjb3ZlcmFnZUNvZGUiOiAiTEkiCiAgICAgIH0sCgkgICB7CiAgICAgICAgInBsYW5Qcm9kdWN0SW5mb0lkIjogIjE5NCIsCiAgICAgICAgInByZW1pdW1TcGxpdFBlcmNlbnRhZ2UiOiAxMDAsCiAgICAgICAgImNvdmVyYWdlQ29kZSI6ICJKSSIKICAgICAgfQogICAgXQogIH0KfQ==";
+
+        this.planCoverageBundleInformationList = JSON.parse(atob(data));
+        this.selectedTab = 7;
+        this.isAddCoverageBunlde = true;
+      });
+
+
   }
 
   @HostListener('click', ['$event.target'])
@@ -323,7 +348,7 @@ export class ProductMaintenanceComponent implements OnInit {
     if (element.textContent == "Product Details" || element.textContent == "Product Search" || element.textContent == "Validation CheckList") {
       this.isAddPlan = false;
     }
-    if(element.textContent == "Plan Details"){
+    if (element.textContent == "Plan Details") {
       this.isAddCoverage = false;
     }
   }

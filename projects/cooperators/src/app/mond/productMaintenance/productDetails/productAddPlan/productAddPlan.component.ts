@@ -68,6 +68,7 @@ export class ProductAddPlanComponent implements OnInit {
   public isAmountTooltip: boolean;
   public selectedClientName: any;
   public clientSelect: any;
+  public isBundlecovergeBtnShow: boolean = false;
 
   @ViewChild('businessList') businessList: ElementRef;
   @ViewChild('productStatusList') productStatusList: ElementRef;
@@ -434,6 +435,11 @@ export class ProductAddPlanComponent implements OnInit {
   }
 
   ngAfterViewInit() {
+
+    if(this.list.planProductInfo.isBundledPlan == "Y"){
+      this.isBundlecovergeBtnShow = true;
+    }
+
     if (this.tabNameval == "Plan Details") {
       this.isPlanSubmitBtn = true;
       this.isBtnDisabled = false;
@@ -788,6 +794,8 @@ export class ProductAddPlanComponent implements OnInit {
   onClickOfPlanCoverageBundle(item){
     debugger
 this.coverageBundle.emit(item);
+
+
   }
 
   onClickOfViewCoverage(item) {

@@ -1,0 +1,176 @@
+<div class="m-1 p-1">
+    <!-- <div class="row">
+        <div class="col-md-6">
+        </div>
+        <div class="col-md-6">
+            <button class="btn btn-primary float-right"><i class="fa fa-plus mr-2"></i>Add/Reset Coverages of
+                Bundle</button>
+        </div>
+    </div> -->
+
+    <div class="row">
+        <div class="col-4 col-lg-4 col-md-4 col-xs-4 mt-0 mr-0 mb-1 ml-2 pt-0 pr-1 pb-1 pl-1">
+            <mat-card class="w-100 m-0 p-0 md-border">
+                <mat-card-header class="md-card-hdr">
+                    <mat-card-title class="md-clr md-font mt-1 ml-1 mr-1 mb-2 p-1"><b>Product Info</b></mat-card-title>
+                </mat-card-header>
+                <mat-divider></mat-divider>
+                <mat-card-content class="m-1 p-1">
+                    <div class="row">
+                        <div class="ym_form_group col-6">
+                            <label class="md-lbl">Product</label>
+                            <input style="width: 70%;" [(ngModel)]="productType" [readonly]="isProdFieldReadonly">
+                        </div>
+                        <div class="ym_form_group col-6" style="margin-top: 30px;">
+                            <!-- <label class="md-lbl">Product Type</label> -->
+                            <input [(ngModel)]="productName" [readonly]="isProdFieldReadonly">
+                        </div>
+                    </div>
+                    <div class="row md-row-mt">
+                        <div class="ym_form_group  col-6">
+                            <label class="md-lbl">Product Business Model</label>
+                            <div class="ym_form_select">
+                                <select #businessList [(ngModel)]="productBusinessModel">
+                                    <option selected value="">Please Select a value</option>
+                                    <option *ngFor="let list of productBusinessModelList" value="{{list.description}}">
+                                        {{list.description}}</option>
+
+                                </select>
+                            </div>
+
+                        </div>
+                        <div class="ym_form_group col-6">
+                            <label class="md-lbl">Product Effective Date</label>
+                            <div class="row pl-1">
+                                <input style="width: 80%;" matInput data-name="dateFormat" [matDatepicker]="picker1"
+                                    placeholder="Product Effective Date" [(ngModel)]="productEffectiveDate"
+                                    [readonly]="isProdFieldReadonly">
+                                <mat-datepicker-toggle matSuffix [for]="picker1" [disabled]="isProdFieldReadonly">
+                                </mat-datepicker-toggle>
+                                <mat-datepicker class="col-md-3" #picker1></mat-datepicker>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row md-row-mt">
+                        <div class="ym_form_group col-6 m-0">
+                            <label class="md-lbl">Product Status</label>
+                            <div class="ym_form_select m-0">
+                                <select #productStatusList [(ngModel)]="productStatus">
+                                    <option selected value="">Please Select a value</option>
+                                    <option value="Active">Active</option>
+                                    <option value="Terminated">Terminated</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+
+        <!-- Plan Info -->
+        <div class="col-4 col-lg-4 col-md-4 col-xs-4 mt-0 mr-1 mb-1 ml-0 pt-0 pr-1 pb-1 pl-1">
+            <mat-card class="w-100 m-0 p-0 md-border">
+                <mat-card-header class="md-card-hdr">
+                    <mat-card-title class="md-clr md-font mt-1 ml-1 mr-1 mb-2 p-1"><b>Plan Info</b></mat-card-title>
+                </mat-card-header>
+                <mat-divider></mat-divider>
+                <mat-card-content class="m-1 p-1">
+                    <div class="row">
+                        <div class="ym_form_group col-6">
+                            <label class="md-lbl">Plan</label>
+                            <input style="width: 70%;" [(ngModel)]="planNumber" [readonly]="isProdFieldReadonly">
+                        </div>
+                        <div class="ym_form_group col-6" style="margin-top: 30px;">
+                            <!-- <label class="md-lbl">Product Type</label> -->
+                            <input [(ngModel)]="planName" [readonly]="isProdFieldReadonly">
+                        </div>
+                    </div>
+                    <div class="row md-row-mt">
+                        <div class="ym_form_group  col-6 mb-0 pb-0">
+                            <label class="md-lbl">Client Name</label>
+                            <input placeholder="Client Name" (keyup)="getClientNameDetails($event)"
+                                [matAutocomplete]="auto1" [(ngModel)]="clientName" [readonly]="isProdFieldReadonly">
+                            <mat-autocomplete #auto1="matAutocomplete">
+                                <mat-option *ngFor="let option of clientNameListData" [value]="option.value">
+                                    {{option.value}}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </div>
+                        <div class="ym_form_group col-6">
+                            <label class="md-lbl">Plan Effective Date</label>
+                            <div class="row pl-1">
+                                <input style="width: 80%;" matInput data-name="dateFormat" [matDatepicker]="picker2"
+                                    placeholder="Plan Effective Date" [(ngModel)]="planEffectiveDate"
+                                    [readonly]="isProdFieldReadonly">
+                                <mat-datepicker-toggle matSuffix [for]="picker2" [disabled]="isProdFieldReadonly">
+                                </mat-datepicker-toggle>
+                                <mat-datepicker class="col-md-3" #picker2></mat-datepicker>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row md-row-mt">
+                        <div class="ym_form_group col-6 m-0">
+                            <label class="md-lbl">Plan Status</label>
+                            <div class="ym_form_select m-0">
+                                <select #planStatusList [(ngModel)]="planStatus">
+                                    <option selected value="">Please Select a value</option>
+                                    <option value="Active">Active</option>
+                                    <option value="Terminated">Terminated</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <div class="col-3 col-lg-3 col-md-3 col-xs-3 md-btn-set">
+            <button class="btn btn-primary float-right" (click)="onClickOfAddResetBtn()"><i
+                    class="fa fa-plus mr-2"></i>Add/Reset
+                Coverages of
+                Bundle</button>
+        </div>
+    </div>
+    <hr class="m-0 p-0">
+    <div class="row ml-0 mb-0 mr-0 mt-2 pt-0 pb-0 md-bgClr">
+        <div class="col-md-6 pl-2 pt-3 pb-2">
+            <h3>Plan Coverage Bundle Info</h3>
+        </div>
+    </div>
+    <div [formGroup]="planCoverageBundleForm">
+        <div formGroupName="planCoverageBundleInfo">
+            <div class="row ml-0 mb-2 mr-0 mt-2 pt-0 pb-0" formArrayName="planCoverageBundleInfo">
+                <table class="style">
+                    <thead>
+                        <tr>
+                            <th>Coverages included in the Bundle</th>
+                            <th>Premium Split Percentage</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="isGridShow">
+                        <tr [formGroupName]="i"
+                            *ngFor="let list of planCoverageBundleForm.get('planCoverageBundleInfo.planCoverageBundleInfo')['controls']; let i = index;">
+                            <td><input class="md-input" type="text" formControlName="coverageCode"
+                                    [readonly]="isProdFieldReadonly"></td>
+                            <td><input class="md-input" type="text" onlyNumber formControlName="premiumSplitPercentage" (keyup)="onkeyUpOfPremiumSplitField()">
+                            </td>
+                            <td> <button (click)="deleteRow(i)"><i class="fa fa-trash" style="color: red;"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <hr class="m-0 p-0">
+    <div class="row">
+        <div class="ym_form_group mb-0 pb-0 mt-2">
+            <button class="btn btn-primary float-right md-btn-width mr-3" [disabled]="isSubmitBtnDisabled" (click)="onClickOfCoveragebundleSubmit()"><i
+                    class="fa fa-save mr-1"></i>Submit</button>
+
+        </div>
+    </div>
+
+</div>

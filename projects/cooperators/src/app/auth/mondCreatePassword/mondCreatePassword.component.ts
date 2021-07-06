@@ -58,15 +58,15 @@ export class MondCreatePasswordComponent implements OnInit {
     this.createNewPassword.nativeElement.style.borderColor = "lightgrey";
     this.passwordenterMsg.nativeElement.style.display = 'none';
 
-    if (this.newPasswordTrimValue.length < 10) {
-      this.createNewPassword.nativeElement.style.borderColor = "#E34234";
-      this.passwordenterMsg.nativeElement.innerHTML = "!Passwords must be at least 10 characters";
-      this.passwordenterMsg.nativeElement.style.display = "inline";
-      return;
-    } else {
-      this.createNewPassword.nativeElement.style.borderColor = "lightgrey";
-      this.passwordenterMsg.nativeElement.innerHTML = "";
-    }
+    // if (this.newPasswordTrimValue.length < 10) {
+    //   this.createNewPassword.nativeElement.style.borderColor = "#E34234";
+    //   this.passwordenterMsg.nativeElement.innerHTML = "!Passwords must be at least 10 characters";
+    //   this.passwordenterMsg.nativeElement.style.display = "inline";
+    //   return;
+    // } else {
+    //   this.createNewPassword.nativeElement.style.borderColor = "lightgrey";
+    //   this.passwordenterMsg.nativeElement.innerHTML = "";
+    // }
 
     if (this.newPasswordTrimValue != this.conformNewPasswordTrimValue) {
       this.createNewPassword.nativeElement.style.borderColor = "#E34234";
@@ -122,16 +122,16 @@ export class MondCreatePasswordComponent implements OnInit {
 
     }
 
-    if (this.newPasswordTrimValue.length < 10) {
-      this.createNewPassword.nativeElement.style.borderColor = "#E34234";
-      this.passwordenterMsg.nativeElement.innerHTML = "!Passwords must be at least 10 characters";
-      this.passwordenterMsg.nativeElement.style.display = "inline";
-      return;
-    } else {
-      this.createNewPassword.nativeElement.style.borderColor = "lightgrey";
-      this.passwordenterMsg.nativeElement.innerHTML = "";
-      this.passwordenterMsg.nativeElement.style.display = "inline";
-    }
+    // if (this.newPasswordTrimValue.length < 10) {
+    //   this.createNewPassword.nativeElement.style.borderColor = "#E34234";
+    //   this.passwordenterMsg.nativeElement.innerHTML = "!Passwords must be at least 10 characters";
+    //   this.passwordenterMsg.nativeElement.style.display = "inline";
+    //   return;
+    // } else {
+    //   this.createNewPassword.nativeElement.style.borderColor = "lightgrey";
+    //   this.passwordenterMsg.nativeElement.innerHTML = "";
+    //   this.passwordenterMsg.nativeElement.style.display = "inline";
+    // }
 
 
     if (this.newPasswordTrimValue != this.conformNewPasswordTrimValue) {

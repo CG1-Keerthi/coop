@@ -136,7 +136,10 @@
                         </mat-tab>  
                         <mat-tab label="{{addCoverageTabName}}" *ngIf="isAddCoverage">
                             <app-product-add-coverage-designer  [coverageData]="coverageList" [coverageTypeData]="coverageTypeList" [tabName]="addCoverageTabName"></app-product-add-coverage-designer>
-                        </mat-tab>                   
+                        </mat-tab>
+                    <mat-tab label="Plan Coverage Bundle Details" *ngIf="isAddCoverageBunlde">
+                    <app-product-Plan-coverage-Bundle-designer [planCoverageBundleList]="planCoverageBundleList" [planCoverageBundleInformationList]="planCoverageBundleInformationList"></app-product-Plan-coverage-Bundle-designer>
+                </mat-tab>                   
                     </mat-tab-group>
                 </div>               
             </mat-card>

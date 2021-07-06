@@ -72,7 +72,7 @@
         <!-- <div class="col-md-1"></div> -->
         <div class="col-md-6 md-btn-alignement">
             <button class="btn btn-primary float-right ml-2" (click)="onClickOfUpdatePlan()" [disabled]="isBtnDisabled">Update Plan</button>
-            <button class="btn btn-primary float-right ml-2"  [disabled]="isBtnDisabled" (click)="onClickOfPlanCoverageBundle(list)">Plan Coverage Bundle<i
+            <button *ngIf="isBundlecovergeBtnShow" class="btn btn-primary float-right ml-2"  [disabled]="isBtnDisabled" (click)="onClickOfPlanCoverageBundle(list)">Plan Coverage Bundle<i
                     class="fa fa-arrow-right ml-2"></i></button>
             <button class="btn btn-primary float-right ml-2" [disabled]="isBtnDisabled" (click)="onClickOfViewCoverage(list)">View Coverage<i
                     class="fa fa-arrow-right ml-2"></i></button>

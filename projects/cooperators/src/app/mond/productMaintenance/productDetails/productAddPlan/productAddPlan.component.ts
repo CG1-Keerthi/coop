@@ -428,6 +428,11 @@ export class ProductAddPlanComponent implements OnInit {
     debugger;
 
     this.planDetailsForm = this.planDetailService.form;
+    if(this.list.planProductInfo.isBundledPlan == "Y"){
+      this.list.planProductInfo.isBundledPlan = true;
+    }else{
+      this.list.planProductInfo.isBundledPlan = false;
+    }
     this.planDetailsForm.reset();
     this.planDetailsForm.patchValue(this.list);
 
@@ -436,7 +441,7 @@ export class ProductAddPlanComponent implements OnInit {
 
   ngAfterViewInit() {
 
-    if(this.list.planProductInfo.isBundledPlan == "Y"){
+    if(this.list.planProductInfo.isBundledPlan == true){
       this.isBundlecovergeBtnShow = true;
     }
 

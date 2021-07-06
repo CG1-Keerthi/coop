@@ -105,7 +105,8 @@
                                                     <td style="width: 185px;">
                                                         <div class="md-overFlow"
                                                             title="{{responseData.lastUpdateDate.split('T')[0]}} {{responseData.lastUpdateDate.split('T')[1].split('Z')[0]}}">
-                                                            {{responseData.lastUpdateDate.split('T')[0]}} {{responseData.lastUpdateDate.split('T')[1].split('Z')[0]}}
+                                                            {{responseData.lastUpdateDate.split('T')[0]}}
+                                                            {{responseData.lastUpdateDate.split('T')[1].split('Z')[0]}}
                                                         </div>
                                                     </td>
                                                     <td style="width: 20rem;">
@@ -121,27 +122,40 @@
                             </div>
                         </mat-tab>
                         <mat-tab label="Product Details">
-                            <app-product-details-tab [productDetails]="planDetailsData" (addPlan)=onClickOfAddPlan($event) (viewPlan)="onClickOfViewPlan($event)"></app-product-details-tab>
+                            <app-product-details-tab [productDetails]="planDetailsData"
+                                (addPlan)=onClickOfAddPlan($event) (viewPlan)="onClickOfViewPlan($event)">
+                            </app-product-details-tab>
                         </mat-tab>
                         <mat-tab label="Validation CheckList">
-                        </mat-tab>                                          
-                        <mat-tab label="Plan Search" *ngIf="isViewPlan">
-                            <app-product-plan-search-designer  [planList]="planMaintenanceList" (rowSelect)="onSelectOfPlanRow($event)"></app-product-plan-search-designer>
-                        </mat-tab>  
-                        <mat-tab label="{{addPlanTabName}}" *ngIf="isAddPlan">
-                            <app-product-add-plan-designer [planDetails]="productPlanDetailData" [tabName]="addPlanTabName" (AddCoverage)="onClickOfAddCoverage($event)" (viewCoverage)="onClickOfViewCoverage($event)" (coverageBundle)="onClickOfCoverageBundle($event)"></app-product-add-plan-designer>
-                        </mat-tab>  
-                        <mat-tab label="Coverage Search" *ngIf="isViewCoverage">
-                            <app-product-search-coverage-designer [clientIdentifier]="ViewCoverageClientId" [coverageList]="coverageMaintenanceList" (coverageRowSelect)="onSelectOfCoverageRow($event)"></app-product-search-coverage-designer>
-                        </mat-tab>  
-                        <mat-tab label="{{addCoverageTabName}}" *ngIf="isAddCoverage">
-                            <app-product-add-coverage-designer  [coverageData]="coverageList" [coverageTypeData]="coverageTypeList" [tabName]="addCoverageTabName"></app-product-add-coverage-designer>
                         </mat-tab>
-                    <mat-tab label="Plan Coverage Bundle Details" *ngIf="isAddCoverageBunlde">
-                    <app-product-Plan-coverage-Bundle-designer [planCoverageBundleList]="planCoverageBundleList" [planCoverageBundleInformationList]="planCoverageBundleInformationList"></app-product-Plan-coverage-Bundle-designer>
-                </mat-tab>                   
+                        <mat-tab label="Plan Search" *ngIf="isViewPlan">
+                            <app-product-plan-search-designer [planList]="planMaintenanceList"
+                                (rowSelect)="onSelectOfPlanRow($event)"></app-product-plan-search-designer>
+                        </mat-tab>
+                        <mat-tab label="{{addPlanTabName}}" *ngIf="isAddPlan">
+                            <app-product-add-plan-designer [planDetails]="productPlanDetailData"
+                                [tabName]="addPlanTabName" (AddCoverage)="onClickOfAddCoverage($event)"
+                                (viewCoverage)="onClickOfViewCoverage($event)"
+                                (coverageBundle)="onClickOfCoverageBundle($event)"></app-product-add-plan-designer>
+                        </mat-tab>
+                        <mat-tab label="Coverage Search" *ngIf="isViewCoverage">
+                            <app-product-search-coverage-designer [clientIdentifier]="ViewCoverageClientId"
+                                [coverageList]="coverageMaintenanceList"
+                                (coverageRowSelect)="onSelectOfCoverageRow($event)">
+                            </app-product-search-coverage-designer>
+                        </mat-tab>
+                        <mat-tab label="{{addCoverageTabName}}" *ngIf="isAddCoverage">
+                            <app-product-add-coverage-designer [coverageData]="coverageList"
+                                [coverageTypeData]="coverageTypeList" [tabName]="addCoverageTabName" (addRatingFactor)="onClickOfAddRatingFactor($event)">
+                            </app-product-add-coverage-designer>
+                        </mat-tab>
+                        <mat-tab label="Plan Coverage Bundle Details" *ngIf="isAddCoverageBunlde">
+                            <app-product-Plan-coverage-Bundle-designer [planCoverageBundleList]="planCoverageBundleList"
+                                [planCoverageBundleInformationList]="planCoverageBundleInformationList">
+                            </app-product-Plan-coverage-Bundle-designer>
+                        </mat-tab>
                     </mat-tab-group>
-                </div>               
+                </div>
             </mat-card>
         </div>
     </div>

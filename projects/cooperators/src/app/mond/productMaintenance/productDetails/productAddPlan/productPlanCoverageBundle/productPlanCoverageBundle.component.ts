@@ -106,32 +106,33 @@ export class ProductPlanCoverageBundleComponent implements OnInit {
     this.render.setAttribute(this.productStatusList.nativeElement, 'disabled', 'true');
     console.log('this.planCoverageBundleForm.value', this.planCoverageBundleForm.value)
     console.log('this.planCoverageInfoList', this.planCoverageInfoList)
-    // planCoverageBundleInfoObj
-    this.planCoverageBundleGridData = this.planCoverageInfoList.planCoverageBundleInfo.planCoverageBundleInfo;
-    if (this.planCoverageBundleGridData != undefined) {
-      this.isGridShow = true;
-      // this.addRow = "";
-      for (let i = 0; i < this.planCoverageBundleGridData.length; i++) {
-        this.planCoverageBundleFormArray = (<FormArray>this.planCoverageBundleForm.get('planCoverageBundleInfo.planCoverageBundleInfo'));
-        if (this.planCoverageBundleFormArray.length == 0) {
-          this.createRow();
-        }
-        for (let j = 0; j < this.planCoverageBundleFormArray.length; j++) {
-          // if formcontrol have length greater than or less than from rategrid array
-          if (this.planCoverageBundleFormArray.length < this.planCoverageBundleGridData.length) {
+   
+    if (Object.keys(this.planCoverageInfoList).length > 0){
+      this.planCoverageBundleGridData = this.planCoverageInfoList.planCoverageBundleInfo.planCoverageBundleInfo;
+      if (this.planCoverageBundleGridData != undefined) {
+        this.isGridShow = true;
+        for (let i = 0; i < this.planCoverageBundleGridData.length; i++) {
+          this.planCoverageBundleFormArray = (<FormArray>this.planCoverageBundleForm.get('planCoverageBundleInfo.planCoverageBundleInfo'));
+          if (this.planCoverageBundleFormArray.length == 0) {
             this.createRow();
-          } else if (this.planCoverageBundleFormArray.length > this.planCoverageBundleGridData.length) {
-            if (this.planCoverageBundleFormArray.value[j].loanAmountStartValue == null) {
-              (<FormArray>this.planCoverageBundleForm.get('planCoverageBundleInfo.planCoverageBundleInfo')).removeAt(j);
-            } else {
-              (<FormArray>this.planCoverageBundleForm.get('planCoverageBundleInfo.planCoverageBundleInfo')).removeAt(j);
+          }
+          for (let j = 0; j < this.planCoverageBundleFormArray.length; j++) {
+            // if formcontrol have length greater than or less than from plangrid array
+            if (this.planCoverageBundleFormArray.length < this.planCoverageBundleGridData.length) {
+              this.createRow();
+            } else if (this.planCoverageBundleFormArray.length > this.planCoverageBundleGridData.length) {
+              if (this.planCoverageBundleFormArray.value[j].loanAmountStartValue == null) {
+                (<FormArray>this.planCoverageBundleForm.get('planCoverageBundleInfo.planCoverageBundleInfo')).removeAt(j);
+              } else {
+                (<FormArray>this.planCoverageBundleForm.get('planCoverageBundleInfo.planCoverageBundleInfo')).removeAt(j);
+              }
             }
           }
         }
       }
+      this.planCoverageBundleForm.reset();
+      this.planCoverageBundleForm.patchValue(this.planCoverageInfoList);
     }
-    this.planCoverageBundleForm.patchValue(this.planCoverageInfoList);
-
   }
 
 
@@ -167,19 +168,23 @@ export class ProductPlanCoverageBundleComponent implements OnInit {
     let planCoverageBundleInformationGridList;
     this.mdMondServiceDS.invokeMondServiceGET("Creditor Self Admin", "fetchPlanCoverageList", "1.00", btoa(JSON.stringify({ "planProductInfoId": this.ProductPlanList.planProductInfo.planProductInfoId })), this.csfrToken, true, true, true, true).subscribe(
       data => {
-        planCoverageBundleInformationGridList = JSON.parse(atob(data));
-
+        let newBundleObjOne = {};
+        let newBundleObjtwo = {};
+        let newBundleArray=[];
+        newBundleObjOne["planCoverageBundleInfo"] = JSON.parse(atob(data)).planCoverageList.coverageSummary;        
+        newBundleArray.push(newBundleObjOne);
+        newBundleObjtwo["planCoverageBundleInfo"] = newBundleArray[0];
+        planCoverageBundleInformationGridList = newBundleObjtwo;
         this.planCoverageBundleGridData = planCoverageBundleInformationGridList.planCoverageBundleInfo.planCoverageBundleInfo;
         if (this.planCoverageBundleGridData != undefined) {
           this.isGridShow = true;
-          // this.addRow = "";
           for (let i = 0; i < this.planCoverageBundleGridData.length; i++) {
             this.planCoverageBundleFormArray = (<FormArray>this.planCoverageBundleForm.get('planCoverageBundleInfo.planCoverageBundleInfo'));
             if (this.planCoverageBundleFormArray.length == 0) {
               this.createRow();
             }
             for (let j = 0; j < this.planCoverageBundleFormArray.length; j++) {
-              // if formcontrol have length greater than or less than from rategrid array
+              // if formcontrol have length greater than or less than from plangrid array
               if (this.planCoverageBundleFormArray.length < this.planCoverageBundleGridData.length) {
                 this.createRow();
               } else if (this.planCoverageBundleFormArray.length > this.planCoverageBundleGridData.length) {
@@ -199,20 +204,25 @@ export class ProductPlanCoverageBundleComponent implements OnInit {
       error => {
         this.mdMondServiceDS.MDError(error);
         // let data = "ewogICJwbGFuQ292ZXJhZ2VCdW5kbGVJbmZvIjogewogICAgInBsYW5Db3ZlcmFnZUJ1bmRsZUluZm8iOiBbCiAgICAgIHsKICAgICAgICAicGxhblByb2R1Y3RJbmZvSWQiOiAiMTkyIiwKICAgICAgICAicHJlbWl1bVNwbGl0UGVyY2VudGFnZSI6IDEwMCwKICAgICAgICAiY292ZXJhZ2VDb2RlIjogIkRJIgogICAgICB9LAoJICAgIHsKICAgICAgICAicGxhblByb2R1Y3RJbmZvSWQiOiAiMTkzIiwKICAgICAgICAicHJlbWl1bVNwbGl0UGVyY2VudGFnZSI6IDEwMCwKICAgICAgICAiY292ZXJhZ2VDb2RlIjogIkxJIgogICAgICB9LAoJICAgIHsKICAgICAgICAicGxhblByb2R1Y3RJbmZvSWQiOiAiMTk0IiwKICAgICAgICAicHJlbWl1bVNwbGl0UGVyY2VudGFnZSI6IDEwMCwKICAgICAgICAiY292ZXJhZ2VDb2RlIjogIkpJIgogICAgICB9CiAgICBdCiAgfQp9";
-        let data = "ewogICJwbGFuQ292ZXJhZ2VCdW5kbGVJbmZvIjogewogICAgInBsYW5Db3ZlcmFnZUJ1bmRsZUluZm8iOiBbCiAgICAgIHsKICAgICAgICAicGxhblByb2R1Y3RJbmZvSWQiOiAiMTkyIiwKICAgICAgICAicHJlbWl1bVNwbGl0UGVyY2VudGFnZSI6IDEwMCwKICAgICAgICAiY292ZXJhZ2VDb2RlIjogIkRJIgogICAgICB9CiAgICBdCiAgfQp9";
-        planCoverageBundleInformationGridList = JSON.parse(atob(data));
-
+        // let data = "ewogICJwbGFuQ292ZXJhZ2VCdW5kbGVJbmZvIjogewogICAgInBsYW5Db3ZlcmFnZUJ1bmRsZUluZm8iOiBbCiAgICAgIHsKICAgICAgICAicGxhblByb2R1Y3RJbmZvSWQiOiAiMTkyIiwKICAgICAgICAicHJlbWl1bVNwbGl0UGVyY2VudGFnZSI6IDEwMCwKICAgICAgICAiY292ZXJhZ2VDb2RlIjogIkRJIgogICAgICB9CiAgICBdCiAgfQp9";
+       let data = "eyJwbGFuQ292ZXJhZ2VMaXN0Ijp7ImNvdmVyYWdlU3VtbWFyeSI6W3sibGluZU9mQnVzaW5lc3MiOiI5MDIiLCJjb3ZlcmFnZVR5cGUiOiJDUkVKTCIsInBsYW5Db3ZlcmFnZUluZm9JZCI6IjU5MSIsImNvdmVyYWdlQ29kZSI6IkpMIiwicGxhbk51bWJlciI6IjAwMDA3IiwiY292ZXJhZ2VTdGF0dXMiOiJBY3RpdmUifSx7ImxpbmVPZkJ1c2luZXNzIjoiOTAyIiwiY292ZXJhZ2VUeXBlIjoiQ1JFREkiLCJwbGFuQ292ZXJhZ2VJbmZvSWQiOiI1OTAiLCJjb3ZlcmFnZUNvZGUiOiJESSIsInBsYW5OdW1iZXIiOiIwMDAwNyIsImNvdmVyYWdlU3RhdHVzIjoiQWN0aXZlIn0seyJsaW5lT2ZCdXNpbmVzcyI6IjkwMSIsImNvdmVyYWdlVHlwZSI6IkNSRUxJIiwicGxhbkNvdmVyYWdlSW5mb0lkIjoiNTg4IiwiY292ZXJhZ2VDb2RlIjoiTEkiLCJwbGFuTnVtYmVyIjoiMDAwMDciLCJjb3ZlcmFnZVN0YXR1cyI6IkFjdGl2ZSJ9XX19"
+        let newBundleObjOne = {};
+        let newBundleObjtwo = {};
+        let newBundleArray=[];
+        newBundleObjOne["planCoverageBundleInfo"] = JSON.parse(atob(data)).planCoverageList.coverageSummary;        
+        newBundleArray.push(newBundleObjOne);
+        newBundleObjtwo["planCoverageBundleInfo"] = newBundleArray[0];
+        planCoverageBundleInformationGridList = newBundleObjtwo;
         this.planCoverageBundleGridData = planCoverageBundleInformationGridList.planCoverageBundleInfo.planCoverageBundleInfo;
         if (this.planCoverageBundleGridData != undefined) {
           this.isGridShow = true;
-          // this.addRow = "";
           for (let i = 0; i < this.planCoverageBundleGridData.length; i++) {
             this.planCoverageBundleFormArray = (<FormArray>this.planCoverageBundleForm.get('planCoverageBundleInfo.planCoverageBundleInfo'));
             if (this.planCoverageBundleFormArray.length == 0) {
               this.createRow();
             }
             for (let j = 0; j < this.planCoverageBundleFormArray.length; j++) {
-              // if formcontrol have length greater than or less than from rategrid array
+              // if formcontrol have length greater than or less than from plangrid array
               if (this.planCoverageBundleFormArray.length < this.planCoverageBundleGridData.length) {
                 this.createRow();
               } else if (this.planCoverageBundleFormArray.length > this.planCoverageBundleGridData.length) {

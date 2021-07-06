@@ -27,6 +27,10 @@ export class ProductAddCoverageComponent implements OnInit {
     this.coverageDetailList = data;
   }
 
+  @Output() addRatingFactor = new EventEmitter();
+
+  // @Output() viewPlan = new EventEmitter();
+
   public coverageDetailsForm: FormGroup;
   public lineOfBusinessList: any;
   public GLAccountNumberList: any;
@@ -79,11 +83,6 @@ export class ProductAddCoverageComponent implements OnInit {
   @ViewChild('coverageStatusElement') coverageStatusElement: ElementRef;
   @ViewChild('terminationDueElement') terminationDueElement: ElementRef;
 
-
-
-
-
-
   constructor(private mdCodeListHeaderDS: MDCodeListHeaderDS,
     private mdMondServiceDS: MDMondServiceDS,
     private coverageDetailService: CoverageDetailFormBuilderService,
@@ -93,7 +92,6 @@ export class ProductAddCoverageComponent implements OnInit {
 
   ngOnInit() {
     debugger;
-
     this.mdCommonGetterAndSetter.getCsfrToken().subscribe(data => {
       if (data) {
         this.csfrToken = data;
@@ -199,10 +197,6 @@ export class ProductAddCoverageComponent implements OnInit {
       this.render.setAttribute(this.generalLedgerElement.nativeElement, 'disabled', 'true');
       this.render.setAttribute(this.coverageStatusElement.nativeElement, 'disabled', 'true');
       this.render.setAttribute(this.terminationDueElement.nativeElement, 'disabled', 'true');
-
-
-
-
     }
 
     this.isProdFieldreadonly = true;
@@ -210,8 +204,6 @@ export class ProductAddCoverageComponent implements OnInit {
     this.render.setAttribute(this.businessList.nativeElement, 'disabled', 'true');
     this.render.setAttribute(this.productStatusList.nativeElement, 'disabled', 'true');
     this.render.setAttribute(this.planStatusList.nativeElement, 'disabled', 'true');
-
-
   }
 
   getClientNameDetails(event) {
@@ -627,6 +619,11 @@ export class ProductAddCoverageComponent implements OnInit {
 
   onClickOfCoverageClear(){
     this.coverageDetailsForm.get('coverageInfo').reset()
+  }
+
+  onClickOfAddRatingFactor(item){
+    debugger;
+    this.addRatingFactor.emit(item);
   }
 
 }

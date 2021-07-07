@@ -1,0 +1,359 @@
+<div [formGroup]="coverageRatingFactorDetailsForm" class="m-1 p-1">
+    <div class="row">
+        <div class="col-md-6">
+        </div>
+        <div class="col-md-6">
+            <button class="btn btn-primary float-right ml-2">Update Rate Factor</button>
+        </div>
+    </div>
+
+    <div class="row">
+        <div formGroupName="productInfo" class="col-4 col-lg-4 col-md-4 col-xs-4 mt-1 mr-0 mb-1 ml-2 p-1">
+            <mat-card class="w-100 m-0 p-0 md-border">
+                <mat-card-header class="md-card-hdr">
+                    <mat-card-title class="md-clr md-font mt-1 ml-1 mr-1 mb-2 p-1"><b>Product Info</b></mat-card-title>
+                </mat-card-header>
+                <mat-divider></mat-divider>
+                <mat-card-content class="m-1 p-1">
+                    <div class="row">
+                        <div class="ym_form_group col-6">
+                            <label class="md-lbl">Product</label>
+                            <input formControlName="productType" style="width: 70%;" [readonly]="isFiledreadOnly">
+                        </div>
+                        <div class="ym_form_group col-6" style="margin-top: 30px;">
+                            <!-- <label class="md-lbl">Product Type</label> -->
+                            <input formControlName="productName" [readonly]="isFiledreadOnly">
+                        </div>
+                    </div>
+                    <div class="row md-row-mt">
+                        <div class="ym_form_group  col-6">
+                            <label class="md-lbl">Product Business Model</label>
+                            <div class="ym_form_select">
+                                <select formControlName="productBusinessModel" #businessList>
+                                    <option selected value="">Please Select a value</option>
+                                    <!-- <option value="Merchant">Merchant</option>
+                                    <option value="Location">Location</option> -->
+                                    <option *ngFor="let list of productBusinessModelList" value="{{list.description}}">
+                                        {{list.description}}</option>
+                                </select>
+                            </div>
+
+                        </div>
+                        <div class="ym_form_group col-6">
+                            <label class="md-lbl">Product Effective Date</label>
+                            <div class="row pl-1">
+                                <input style="width: 80%;" matInput data-name="dateFormat" [matDatepicker]="picker1"
+                                    placeholder="Product Effective Date" formControlName="productEffectiveDate" [readonly]="isFiledreadOnly">
+                                <mat-datepicker-toggle matSuffix [for]="picker1" [disabled]="isFiledreadOnly">
+                                </mat-datepicker-toggle>
+                                <mat-datepicker class="col-md-3" #picker1></mat-datepicker>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row md-row-mt">
+                        <div class="ym_form_group col-6 m-0">
+                            <label class="md-lbl">Product Status</label>
+                            <div class="ym_form_select m-0">
+                                <select formControlName="productStatus" #productStatusList>
+                                    <option selected value="">Please Select a value</option>
+                                    <option value="Active">Active</option>
+                                    <option value="Terminated">Terminated</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+
+        <!-- Plan Info -->
+        <div formGroupName="planProductInfo" class="col-4 col-lg-4 col-md-4 col-xs-4 mt-1 mr-1 mb-1 ml-0 p-1">
+            <mat-card class="w-100 m-0 p-0 md-border">
+                <mat-card-header class="md-card-hdr">
+                    <mat-card-title class="md-clr md-font mt-1 ml-1 mr-1 mb-2 p-1"><b>Plan Info</b></mat-card-title>
+                </mat-card-header>
+                <mat-divider></mat-divider>
+                <mat-card-content class="m-1 p-1">
+                    <div class="row">
+                        <div class="ym_form_group col-6">
+                            <label class="md-lbl">Plan</label>
+                            <input formControlName="planNumber" style="width: 70%;" [readonly]="isFiledreadOnly">
+                        </div>
+                        <div class="ym_form_group col-6" style="margin-top: 30px;" >
+                            <!-- <label class="md-lbl">Product Type</label> -->
+                            <input formControlName="planName" [readonly]="isFiledreadOnly">
+                        </div>
+                    </div>
+                    <div class="row md-row-mt">
+                        <div class="ym_form_group  col-6 mb-0 pb-0">
+                            <label class="md-lbl">Client Name</label>
+                            <input placeholder="Client Name" formControlName="clientName"
+                                (keyup)="getClientNameDetails($event)" [matAutocomplete]="auto1" [readonly]="isFiledreadOnly">
+                            <mat-autocomplete #auto1="matAutocomplete" >
+                                <mat-option *ngFor="let option of clientNameListData" [value]="option.value">
+                                    {{option.value}}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </div>
+                        <div class="ym_form_group col-6">
+                            <label class="md-lbl">Plan Effective Date</label>
+                            <div class="row pl-1">
+                                <input style="width: 80%;" matInput data-name="dateFormat" [matDatepicker]="picker2"
+                                    placeholder="Product Effective Date" formControlName="planEffectiveDate" [readonly]="isFiledreadOnly">
+                                <mat-datepicker-toggle matSuffix [for]="picker2" [disabled]="isFiledreadOnly">
+                                </mat-datepicker-toggle>
+                                <mat-datepicker class="col-md-3" #picker2></mat-datepicker>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row md-row-mt">
+                        <div class="ym_form_group col-6 m-0">
+                            <label class="md-lbl">Plan Status</label>
+                            <div class="ym_form_select m-0">
+                                <select formControlName="planStatus" #planStatusList>
+                                    <option selected value="">Please Select a value</option>
+                                    <option value="Active">Active</option>
+                                    <option value="Terminated">Terminated</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <!-- coverage Info -->
+        <div formGroupName="coverageInfo" class="col-3 col-lg-3 col-md-3 col-xs-3 pt-2 pl-0 md-coverage-width">
+            <mat-card class="w-100 m-0 p-0 md-border" style="height: 97%;">
+                <mat-card-header class="md-card-hdr">
+                    <mat-card-title class="md-clr md-font mt-1 ml-1 mr-1 mb-2 p-1"><b>Coverage Info</b></mat-card-title>
+                </mat-card-header>
+                <mat-divider></mat-divider>
+                <mat-card-content class="m-1 p-1">
+                    <div class="row">
+                        <div class="ym_form_group col-6">
+                            <label class="md-lbl">Line Of Business</label>
+                            <div class="ym_form_select m-0">
+                                <select formControlName="lineOfBusiness" #LOBElement (change)="onChangeOfLOB($event)">
+                                    <option selected value="">Please Select a value</option>
+                                    <!-- <option value="Active">Active</option>
+                                    <option value="Terminated">Terminated</option> -->
+                                    <option let *ngFor="let list of lineOfBusinessList" value="{{list.description}}">
+                                        {{list.description}}</option>
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row md-row-mt">
+                        <div class="ym_form_group  col-6 mb-0 pb-0">
+                            <label class="md-lbl">Coverage Type</label>
+                            <div class="ym_form_select m-0">
+                                <select #coverageTypeElement formControlName="coverageType">
+                                    <!-- <option selected value="">Please Select a value</option> -->
+                                    <!-- <option value="Active">Active</option>
+                                    <option value="Terminated">Terminated</option> -->
+                                    <option let *ngFor="let list of coverageTypeList" value="{{list.coverageType}}">
+                                        {{list.coverageType}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="ym_form_group col-6">
+                            <label class="md-lbl">Coverage Effective Date</label>
+                            <div class="row pl-1">
+                                <input style="width: 80%;" matInput data-name="dateFormat" [matDatepicker]="picker3"
+                                    placeholder="Product Effective Date" formControlName="coverageEffectiveDate" [readonly]="isFiledreadOnly">
+                                <mat-datepicker-toggle matSuffix [for]="picker3" [disabled]="isFiledreadOnly">
+                                </mat-datepicker-toggle>
+                                <mat-datepicker class="col-md-3" #picker3></mat-datepicker>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row md-row-mt">
+                        <div class="ym_form_group col-6 m-0">
+                            <label class="md-lbl">Coverage Status</label>
+                            <div class="ym_form_select m-0">
+                                <select #coverageStatusList formControlName="coverageStatus">
+                                    <option selected value="">Please Select a value</option>
+                                    <option value="Active">Active</option>
+                                    <option value="Terminated">Terminated</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+    <hr class="m-0 p-0">
+    <div class="mt-1 pt-1" formGroupName="coverageRatingFactorInfo">
+        <mat-accordion>
+            <mat-expansion-panel [expanded]="true">
+                <mat-expansion-panel-header class="md-bgClr">
+                    <mat-panel-title style="color: white;">
+                        Rate Factor
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="row">
+                    <div class="ym_form_group required col-3">
+                        <label class="md-lbl">Rating Factor Effective Date</label>
+                        <div class="row pl-1">
+                            <input #ratingFactorEffectiveDateElement style="width: 70%;" matInput data-name="dateFormat" [matDatepicker]="picker4"
+                                placeholder="Product Effective Date" formControlName="ratingFactorEffectiveDate">
+                            <mat-datepicker-toggle matSuffix [for]="picker4">
+                            </mat-datepicker-toggle>
+                            <mat-datepicker class="col-md-3" #picker4></mat-datepicker>
+                        </div>
+                        <div
+                        *ngIf="isSubmitted && coverageRatingFactorDetailsForm.get('coverageRatingFactorInfo.ratingFactorEffectiveDate').invalid">
+                        <p class="text-danger">Please enter the Rating Factor Effective Date</p>
+                    </div>
+                    </div>
+
+                    <div class="ym_form_group col-3">
+                        <label class="md-lbl">Rating Factor Status</label>
+                        <div class="ym_form_select" style="width: 70%;">
+                            <select #ratingFactorStatusElement formControlName="ratingFactorStatus">
+                                <option selected value="">Please select a value</option>
+                                <!-- <option value=""></option> -->
+                                <option value="Active">Active</option>
+                                <option value="Terminated">Terminated</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="ym_form_group col-3">
+                        <label class="md-lbl">Rating Factor Termination Date</label>
+                        <div class="row pl-1">
+                            <input style="width: 70%;" matInput data-name="dateFormat" [matDatepicker]="picker5"
+                                placeholder="Product Effective Date" formControlName="ratingFactorTerminationDate" [readonly]="isAddRatingFiledreadOnly">
+                            <mat-datepicker-toggle matSuffix [for]="picker5" [disabled]="isAddRatingFiledreadOnly">
+                            </mat-datepicker-toggle>
+                            <mat-datepicker class="col-md-3" #picker5></mat-datepicker>
+                        </div>
+                    </div>
+                    <div class="ym_form_group col-3">
+                        <label class="md-lbl">Rating Factor In Use</label>
+                        <input style="width: 70%;" formControlName="ratingFactorInUse" [readonly]="isAddRatingFiledreadOnly">
+                    </div>
+                </div>
+                <div class="row md-row-mt">
+                    <div class="ym_form_group required col-3">
+                        <label class="md-lbl">Loan Threshold Value</label>
+                        <input class="coverageHelp" style="width: 70%;" onlyNumber formControlName="loanThresholdValue" data-toggle="tooltip" data-placement="bottom"
+                        title="Enter number in this field" (keyup)="onKeyUpOfLoanThresholdVal($event)">
+                        <div
+                        *ngIf="isSubmitted && coverageRatingFactorDetailsForm.get('coverageRatingFactorInfo.loanThresholdValue').invalid">
+                        <p class="text-danger">Please enter the Loan Threshold Value</p>
+                    </div>
+                    </div>
+                    <div class="ym_form_group col-3">
+                        <label class="md-lbl">Age Table Qualifier</label>
+                        <div class="ym_form_select" style="width: 70%;">
+                            <select #coverageTypeElement formControlName="ageTableQualifier">
+                                <option selected value="">Please select a value</option>
+                                <option let *ngFor="let list of ageTableQualiFierList" value="{{list.description}}">
+                                    {{list.description}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="ym_form_group col-3">
+                        <label class="md-lbl">Disability Table Qualifier</label>
+                        <div class="ym_form_select" style="width: 70%;">
+                            <select #coverageTypeElement formControlName="disabilityTableQualifier">
+                                <option selected value="">Please select a value</option>
+                                <option let *ngFor="let list of disablityTableQuliFierList"
+                                    value="{{list.description}}">
+                                    {{list.description}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="ym_form_group col-3 m-0">
+                        <label class="md-lbl">Accelerated Death Benefit</label>
+                        <mat-slide-toggle formControlName="acceleratedDeathBenefitCode">
+                        </mat-slide-toggle>
+                    </div>
+                </div>
+                <div class="row md-row-mt">
+
+                    <div class="ym_form_group col-3">
+                        <label class="md-lbl">Elimination Period</label>
+                        <div class="ym_form_select" style="width: 70%;">
+                            <select #coverageTypeElement formControlName="eliminationPeriod">
+                                <option selected value="">Please select a value</option>
+                                <option let *ngFor="let list of elminationPeriodList" value="{{list.description}}">
+                                    {{list.description}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="ym_form_group col-3">
+                        <label class="md-lbl">Pre-Existing Condition Value - Pay Once</label>
+                        <div class="ym_form_select" style="width: 70%;">
+                            <select #coverageTypeElement formControlName="preExistingConditionValuePayOnce">
+                                <option selected value="">Please select a value</option>
+                                <option let *ngFor="let list of preExistingConditionList" value="{{list.description}}">
+                                    {{list.description}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="ym_form_group col-3">
+                        <label class="md-lbl">Compensation Rating Factor %</label>
+                        <input class="ratingHelp" style="width: 70%;" onlyNumber formControlName="compensationPayableFactorPercentage" data-toggle="tooltip" data-placement="bottom"
+                        title="Enter number in this field" (keyup)="onKeyUpOfCompensationRatingFactor($event)">
+                    </div>
+                    <div class="ym_form_group col-3">
+                        <label class="md-lbl">Compensation Payable</label>
+                        <div class="ym_form_select" style="width: 70%;">
+                            <select #coverageTypeElement formControlName="compensationPayableOption" (change)="onChangeOfPayable($event)">
+                                <option selected value="">Please select a value</option>
+                                <option value="amount">Amount</option>
+                                <option value="percentage">Percentage</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row md-row-mt" >
+                    <div class="ym_form_group col-3">
+                        <label class="md-lbl">{{payableFieldLabel}}</label>          
+                        <input class="payableHelp" style="width: 70%;" onlyNumber formControlName="compensationPayablePercentage" data-toggle="tooltip" data-placement="bottom"
+                        title="Enter number in this field" (keyup)="onKeyUpOfCompensationPayable($event)">
+                    </div>
+                    <div class="ym_form_group col-3 m-0">
+                        <label class="md-lbl">Compensation Refundable</label>
+                        <mat-slide-toggle (click)="onClickOfCompensationRefundable($event)" formControlName="compensationAmountRefundableFlag">
+                        </mat-slide-toggle>
+                    </div>
+                    <div *ngIf="isShowRefundableField" class="ym_form_group col-3">
+                        <label class="md-lbl">{{refundFieldLabel}}</label>
+                        <input class="refundableHelp" style="width: 70%;" onlyNumber formControlName="compensationRefundableAmount" data-toggle="tooltip" data-placement="bottom"
+                        title="Enter number in this field" (keyup)="onKeyUpOfCompensationRefundable($event)">
+                    </div>
+                  
+                    <div *ngIf="isShowNonrefundableField" class="ym_form_group col-3">
+                        <label class="md-lbl">{{nonRefundFieldLabel}}</label>
+                        <input class="nonRefundable" style="width: 70%;" onlyNumber formControlName="compensationNonRefundableAmount" data-toggle="tooltip" data-placement="bottom"
+                        title="Enter number in this field" (keyup)="onKeyUpOfCompensationNonRefundable($event)">
+                    </div>
+                    
+
+                </div>
+                <div class="row md-row-mt" style="margin-bottom: -1%;">
+                   
+                    <div class="ym_form_group col-6">
+                        <label class="md-lbl">Notes</label>
+                        <textarea style="width: 100%;" rows="3" formControlName="comment"></textarea>
+                    </div>
+                </div>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+    <hr class="m-0 p-0">
+    <div class="row mt-2">
+        <div class="col-md-6">
+        </div>
+        <div class="col-md-6">
+            <button class="btn btn-primary float-right ml-2" (click)="onClickOfCoverageRatingFactorSubmit()"><i
+                    class="fa fa-save mr-1"></i>Submit</button>
+            <button class="btn btn-primary float-right ml-2"><i class="fa fa-times mr-1"></i>Clear</button>
+        </div>
+    </div>
+
+</div>

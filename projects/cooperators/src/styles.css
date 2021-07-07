@@ -488,7 +488,10 @@ color: white !important;
     background-color: #00456a;
 }
 .tooltip.bs-tooltip-right .arrow:before {
-    border-right-color: #00456a !important;
+    border-right-color: #00456a !important;   
+}
+.tooltip.bs-tooltip-bottom .arrow:before {
+    border-bottom-color: #00456a !important;
 }
 .mat-card-header-text{
     margin: 0 0px !important;

@@ -154,6 +154,9 @@
                                 [planCoverageBundleInformationList]="planCoverageBundleInformationList">
                             </app-product-Plan-coverage-Bundle-designer>
                         </mat-tab>
+                        <mat-tab label="{{addRatingFactorTabName}}" *ngIf="isAddRatingFactor">
+                          <app-product-add-rating-factor-designer [rateFactorList]="rateFactorList" [coverageTypeData]="coverageTypeList"  [tabName]="addRatingFactorTabName"></app-product-add-rating-factor-designer>
+                        </mat-tab>
                     </mat-tab-group>
                 </div>
             </mat-card>

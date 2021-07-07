@@ -1,0 +1,14 @@
+.md-clr{
+    color: white !important;
+}
+.md-card-hdr{
+    background: #00456A;
+    margin: 0.5px;
+}
+.md-coverage-width{
+    flex: 1 0 25%;
+    max-width: 33%;
+}
+mat-expansion-panel-header{
+    height: 39px !important;
+}

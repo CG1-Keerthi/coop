@@ -1,3 +1,5 @@
+<!-- <div>View Rating Factor works!</div> -->
+
 <!-- <div>serach Coverage works</div> -->
 
 <div>
@@ -7,7 +9,7 @@
 
             <div class="ym_form_group  row mb-0 pb-0">
                 <label class="md-lbl">Plan Number</label>
-
+                <!-- <input> -->
                 <input placeholder="Plan Number" [(ngModel)]="planNumber" (keyup)="getPlanNumberDetails($event)"
                     [matAutocomplete]="auto3">
                 <mat-autocomplete #auto3="matAutocomplete">
@@ -39,7 +41,7 @@
                         </select>
                     </div>
                     <div class="m-0 p-0">
-                        <i (mouseover)="onMouseOver()" aria-hidden="true" 
+                        <i (mouseover)="onMouseOver()" aria-hidden="true"
                             class="m-0 p-1 coverageHelp btn rounded-pill fa fa-question-circle md-circle"
                             data-toggle="tooltip" data-placement="right"
                             title="Please select 'Line Of Business' to view the corresponding coverage type."></i>
@@ -48,9 +50,9 @@
             </div>
 
             <div class="ym_form_group  row mb-0 pb-0">
-                <label class="md-lbl">Coverage Status</label>
+                <label class="md-lbl">Rating Factor Status</label>
                 <div class="ym_form_select">
-                    <select [(ngModel)]="coverageStatus">
+                    <select [(ngModel)]="ratingFactorStatus">
                         <option selected value="">Please select a value</option>
                         <option value="Active">Active</option>
                         <option value="Terminated">Terminated</option>
@@ -58,32 +60,31 @@
                 </div>
             </div>
             <div class="ym_form_group_mat_btn  row">
-                <button class="btn btn-primary" style="margin-right: 10px;" (click)="onClickOfCoverageReset()"><i class="fa fa-undo"></i> Reset</button>
-                <button class="btn btn-primary" (click)="onClickOfCoverageSearch()"><i class="fa fa-search"></i>
+                <button class="btn btn-primary" style="margin-right: 10px;" (click)="onClickOfRatingFactorReset()"><i class="fa fa-undo"></i> Reset</button>
+                <button class="btn btn-primary" (click)="onClickOfRatingFactorSearch()"><i class="fa fa-search"></i>
                     Search</button>
             </div>
         </div>
         <div class="col-md-10 p-0 m-0">
             <div class="row ml-2 mb-0 mr-0 mt-0 pt-2 pb-2" style="background-color: #ebebf1;">
                 <div class="col-md-6 m-0 p-0">
-                    <h2 class="md-lbl ml-2 mb-1">Coverage Maintenance</h2>
+                    <h2 class="md-lbl ml-2 mb-1">Rating Factor Maintenance</h2>
                 </div>
             </div>
             <div class="row ml-2 mb-0 mr-0 mt-2 pt-0 pb-0 md-bgClr">
                 <div class="col-md-6 pl-2 pt-3 pb-2">
-                    <h3>Coverage List</h3>
+                    <h3>Rating Factor List</h3>
                 </div>
             </div>
             <mat-spinner class="md-spinner" *ngIf="isSpinnerShow"></mat-spinner>
             <div id="prodPtableId" class="ml-2 mb-0 mr-0 mt-0 pt-0 pb-0">
-                <p-table [value]="coverageMaintenanceList" selectionMode="single" [scrollable]="true"
-                    [responsive]="true" scrollHeight="379px" [autoLayout]="true" (onRowSelect)="onCoverageListRowSelect($event)">
+                <p-table [value]="ratingFactorMaintenanceList" selectionMode="single" [scrollable]="true"
+                    [responsive]="true" scrollHeight="379px" [autoLayout]="true" (onRowSelect)="onRatingFactorRowSelect($event)">
                     <ng-template pTemplate="header">
                         <tr class="ptableHeader">
                             <th>Plan Number</th>
-                            <th>Line of Business</th>
                             <th>Coverage Type</th>
-                            <th>Coverage Status</th>
+                            <th>Rating Factor Status</th>
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="body" let-responseData>
@@ -95,18 +96,13 @@
                                 </div>
                             </td>
                             <td>
-                                <div class="md-overFlow" title="{{responseData.lineOfBusiness}}">
-                                    {{responseData.lineOfBusiness}}
-                                </div>
-                            </td>
-                            <td>
                                 <div class="md-overFlow" title="{{responseData.coverageType}}">
                                     {{responseData.coverageType}}
                                 </div>
                             </td>
                             <td>
-                                <div class="md-overFlow" title="{{responseData.coverageStatus}}">
-                                    {{responseData.coverageStatus}}
+                                <div class="md-overFlow" title="{{responseData.ratingFactorStatus}}">
+                                    {{responseData.ratingFactorStatus}}
                                 </div>
                             </td>
                         </tr>

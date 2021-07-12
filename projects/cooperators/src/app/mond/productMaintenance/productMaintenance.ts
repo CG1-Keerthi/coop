@@ -43,6 +43,10 @@ export class ProductMaintenanceComponent implements OnInit {
   public isAddRatingFactor: boolean = false;
   public rateFactorList: any;
   public addRatingFactorTabName: any;
+  public isViewRatingFactor: boolean;
+  public viewRatingFactorId: string;
+  public ratingFactorMaintenanceList: string;
+  public ratingFactorRowSelectData: any;
 
   constructor(private mdMondService: MDMondServiceDS,
     private codeListFetch: MDCodeListHeaderDS,
@@ -338,7 +342,6 @@ export class ProductMaintenanceComponent implements OnInit {
         this.mdMondService.MDError(error);
         let data = "ewogICJwbGFuQ292ZXJhZ2VCdW5kbGVJbmZvIjogewogICAgInBsYW5Db3ZlcmFnZUJ1bmRsZUluZm8iOiBbCiAgICAgIHsKICAgICAgICAicGxhblByb2R1Y3RJbmZvSWQiOiAiMTkyIiwKICAgICAgICAicHJlbWl1bVNwbGl0UGVyY2VudGFnZSI6IDEwMCwKICAgICAgICAiY292ZXJhZ2VDb2RlIjogIkRJIgogICAgICB9LAoJICAgIHsKICAgICAgICAicGxhblByb2R1Y3RJbmZvSWQiOiAiMTkzIiwKICAgICAgICAicHJlbWl1bVNwbGl0UGVyY2VudGFnZSI6IDEwMCwKICAgICAgICAiY292ZXJhZ2VDb2RlIjogIkxJIgogICAgICB9LAoJICAgIHsKICAgICAgICAicGxhblByb2R1Y3RJbmZvSWQiOiAiMTk0IiwKICAgICAgICAicHJlbWl1bVNwbGl0UGVyY2VudGFnZSI6IDEwMCwKICAgICAgICAiY292ZXJhZ2VDb2RlIjogIkpJIgogICAgICB9CiAgICBdCiAgfQp9";
         //  let data = "ewogICJwbGFuQ292ZXJhZ2VCdW5kbGVJbmZvIjogewogICAgInBsYW5Db3ZlcmFnZUJ1bmRsZUluZm8iOiBbCiAgICAgIHsKICAgICAgICAicGxhblByb2R1Y3RJbmZvSWQiOiAiMTkyIiwKICAgICAgICAicHJlbWl1bVNwbGl0UGVyY2VudGFnZSI6IDEwMCwKICAgICAgICAiY292ZXJhZ2VDb2RlIjogIkRJIgogICAgICB9LAoJICAgewogICAgICAgICJwbGFuUHJvZHVjdEluZm9JZCI6ICIxOTMiLAogICAgICAgICJwcmVtaXVtU3BsaXRQZXJjZW50YWdlIjogMTAwLAogICAgICAgICJjb3ZlcmFnZUNvZGUiOiAiTEkiCiAgICAgIH0sCgkgICB7CiAgICAgICAgInBsYW5Qcm9kdWN0SW5mb0lkIjogIjE5NCIsCiAgICAgICAgInByZW1pdW1TcGxpdFBlcmNlbnRhZ2UiOiAxMDAsCiAgICAgICAgImNvdmVyYWdlQ29kZSI6ICJKSSIKICAgICAgfQogICAgXQogIH0KfQ==";
-
         this.planCoverageBundleInformationList = JSON.parse(atob(data));
         this.selectedTab = 7;
         this.isAddCoverageBunlde = true;
@@ -347,13 +350,14 @@ export class ProductMaintenanceComponent implements OnInit {
 
   onClickOfAddRatingFactor(event) {
     debugger;
+    this.isAddRatingFactor = false;
     let coverageRatingFactorInfo = {
       "ratingFactorStatus": "",
       "ageTableQualifier": "",
       "disabilityTableQualifier": "",
       "eliminationPeriod": "",
       "preExistingConditionValuePayOnce": "",
-      "compensationPayableOption":""
+      "compensationPayableOption": ""
     }
     let addCoverageFactorDetailArray = [];
     let addCoverageFactorDetailsObj = {};
@@ -363,7 +367,7 @@ export class ProductMaintenanceComponent implements OnInit {
     addCoverageFactorDetailsObj["coverageRatingFactorInfo"] = coverageRatingFactorInfo;
     addCoverageFactorDetailArray.push(addCoverageFactorDetailsObj);
     this.addRatingFactorTabName = "Add Rating Factor";
-    // this.coverageTypeList = [];
+    this.ratingFactorRowSelectData = {};
     this.rateFactorList = addCoverageFactorDetailArray[0];
     let formVariable = {
       "clientId": event.planProductInfo.clientIdentifier,
@@ -378,9 +382,55 @@ export class ProductMaintenanceComponent implements OnInit {
         let data = { "key": "key", "value": "ewogICJjb3ZlcmFnZVR5cGVMaXN0X2NvdmVyYWdlTG9va1VwIjogWwogICAgewogICAgICAiY292ZXJhZ2VUeXBlIjogIkNSRUxJIiwKICAgICAgImNvdmVyYWdlQ29kZSI6ICJMSSIKICAgIH0sCgl7CiAgICAgICJjb3ZlcmFnZVR5cGUiOiAiQ1JFREkiLAogICAgICAiY292ZXJhZ2VDb2RlIjogIkRJIgogICAgfQogIF0KfQ==" };
         this.coverageTypeList = JSON.parse(atob(data.value)).coverageTypeList_coverageLookUp;
       })
-    this.selectedTab = 8;
+    this.selectedTab = 9;
     this.isAddRatingFactor = true;
-    
+
+  }
+
+  onClickOfViewRatingFactor(event) {
+    debugger;
+    this.isViewRatingFactor = false;
+    this.viewRatingFactorId = event.planProductInfo.clientIdentifier;
+    let formVariable = { "planCoverageInfoId": event.coverageInfo.planCoverageInfoId }
+
+    this.mdMondService.getFormDataFromMondService('Creditor Self Admin', 'FetchCoverageRatingFactorList', JSON.stringify(formVariable), null).subscribe(
+      data => {
+        this.ratingFactorMaintenanceList = JSON.parse(atob(data.value)).coverageRatingFactorList_coverageRatingSummary
+        this.selectedTab = 8;
+        this.isViewRatingFactor = true;
+      },
+      error => {
+        debugger;
+        this.mdMondService.MDError(error);
+        let data = { "key": "key", "value": "ewogICJjb3ZlcmFnZVJhdGluZ0ZhY3Rvckxpc3RfY292ZXJhZ2VSYXRpbmdTdW1tYXJ5IjogWwogICAgewogICAgICAicmF0aW5nRmFjdG9yU3RhdHVzIjogIkFjdGl2ZSIsCiAgICAgICJjb3ZlcmFnZVR5cGUiOiAiQ1JFTEkiLAogICAgICAicHJvZHVjdENvdmVyYWdlRmFjdG9ySWQiOiAiNTgzIiwKICAgICAgInBsYW5OdW1iZXIiOiAiUGxhbiBOdW1iZXJfOCIKICAgIH0KICBdCn0=" }
+        this.ratingFactorMaintenanceList = JSON.parse(atob(data.value)).coverageRatingFactorList_coverageRatingSummary
+        this.selectedTab = 8;
+        this.isViewRatingFactor = true;
+      })
+  }
+
+  onRatingFactorRowSelect(event) {
+    debugger;
+    this.isAddRatingFactor = false;
+    this.addRatingFactorTabName = "Rating Factor Details";
+    this.rateFactorList = {};
+
+    // this.coverageList = event;
+    this.mdMondService.invokeMondServiceGET("Creditor Self Admin", "FetchCoverageRatingFactorDetails", "1.00", btoa(JSON.stringify({ "coverageRatingFactorId": event.data.productCoverageFactorId })), this.csfrToken, true, true, true, true).subscribe(
+      data => {
+        this.ratingFactorRowSelectData = JSON.parse(atob(data));
+        this.selectedTab = 9;
+        this.isAddRatingFactor = true;
+      },
+      error => {
+        debugger
+        this.mdMondService.MDError(error);
+        let data = "eyJwbGFuUHJvZHVjdEluZm8iOnsicGxhblByb2R1Y3RJbmZvSWQiOiIxOTUiLCJwcm9kdWN0SWQiOjExNywiY2xpZW50SWRlbnRpZmllciI6MiwicGxhbkVmZmVjdGl2ZURhdGUiOiIyMDIxLTA1LTEzVDAwOjAwOjAwLjAwMFoiLCJwbGFuTmFtZSI6InBsYW4gTmFtZV9UZXN0OF92OCIsInBsYW5TdGF0dXMiOiJBY3RpdmUiLCJwbGFuTnVtYmVyIjoiUGxhbiBOdW1iZXJfOCJ9LCJjb3ZlcmFnZUluZm8iOnsicGxhblByb2R1Y3RJbmZvSWQiOiIxOTUiLCJsaW5lT2ZCdXNpbmVzcyI6IjkwMSIsImNvdmVyYWdlVHlwZSI6IkNSRUxJIiwicGxhbkNvdmVyYWdlSW5mb0lkIjoiNTgzIiwiY292ZXJhZ2VFZmZlY3RpdmVEYXRlIjoiMjAyMS0wNi0xMVQwMDowMDowMC4wMDBaIiwiY292ZXJhZ2VTdGF0dXMiOiJBY3RpdmUifSwiY292ZXJhZ2VSYXRpbmdGYWN0b3JJbmZvIjp7ImVsaW1pbmF0aW9uUGVyaW9kIjoiMTROUiIsImNvbXBlbnNhdGlvblJlZnVuZGFibGVBbW91bnQiOjUsImxhc3RVcGRhdGVEYXRlIjoiMjAyMS0wNy0wN1QwNDoyMDo0Ni4wMDBaIiwiYWdlVGFibGVRdWFsaWZpZXIiOiJBZ2dyZWdhdGUiLCJyYXRpbmdGYWN0b3JUZXJtaW5hdGlvbkRhdGUiOiI5OTk5LTEyLTMxVDA5OjA4OjI2LjAwMFoiLCJjb3ZlcmFnZUlkZW50aWZpZXJJbkNvdmVyYWdlUmF0aW5nIjo1ODMsImFjY2VsZXJhdGVkRGVhdGhCZW5lZml0Q29kZSI6IlkiLCJjb21wZW5zYXRpb25QYXlhYmxlT3B0aW9uIjoiYW1vdW50IiwiY292ZXJhZ2VSYXRpbmdGYWN0b3JJZCI6NTc4LCJjb21wZW5zYXRpb25QYXlhYmxlRmFjdG9yUGVyY2VudGFnZSI6MSwiY29tcGVuc2F0aW9uUGF5YWJsZVBlcmNlbnRhZ2UiOjYsImNvdmVyYWdldHlwZUluQ292ZXJhZ2VSYXRpbmciOiJDUkVMSSIsInByZUV4aXN0aW5nQ29uZGl0aW9uVmFsdWVQYXlPbmNlIjoiMTIvMTIiLCJjb21wZW5zYXRpb25BbW91bnRSZWZ1bmRhYmxlRmxhZyI6IlkiLCJjdXJyZW50UmVjb3JkRmxhZyI6IlkiLCJsb2FuVGhyZXNob2xkVmFsdWUiOjEsInBsYW5OdW1iZXJJbkNvdmVyYWdlUmF0aW5nIjoiUGxhbiBOdW1iZXJfOCIsInJhdGluZ0ZhY3RvclN0YXR1c0VuZERhdGUiOiI5OTk5LTEyLTMxVDA5OjA4OjI2LjAwMFoiLCJwbGFuSWRlbnRpZmllckluQ292ZXJhZ2VSYXRpbmciOjE5NSwiZGlzYWJpbGl0eVRhYmxlUXVhbGlmaWVyIjoiTi9BIiwicmF0aW5nRmFjdG9yU3RhdHVzIjoiQWN0aXZlIiwicmF0aW5nRmFjdG9yRWZmZWN0aXZlRGF0ZSI6IjIwMjEtMDQtMTVUMDA6MDA6MDAuMDAwWiIsInJhdGluZ0ZhY3RvckluVXNlIjoiWWVzIiwiY29tcGVuc2F0aW9uTm9uUmVmdW5kYWJsZUFtb3VudCI6MSwiY29tbWVudCI6Ik5vdGVzIn0sInByb2R1Y3RJbmZvIjp7InByb2R1Y3RCdXNpbmVzc01vZGVsIjoiTWVyY2hhbnQiLCJwcm9kdWN0RWZmZWN0aXZlRGF0ZSI6IjIwMjEtMDQtMDFUMTg6MzA6MDAuMDAwWiIsInByb2R1Y3RJZCI6IjExNyIsInByb2R1Y3RTdGF0dXMiOiJBY3RpdmUiLCJwcm9kdWN0VHlwZSI6InByb2R1Y3RUeXBlOCIsInByb2R1Y3ROYW1lIjoiVHlwZTgifX0\u003d";
+        // let data = "ewogICJwbGFuUHJvZHVjdEluZm8iOiB7CiAgICAicGxhblByb2R1Y3RJbmZvSWQiOiAiMTk1IiwKICAgICJwcm9kdWN0SWQiOiAxMTcsCiAgICAiY2xpZW50SWRlbnRpZmllciI6IDIsCiAgICAicGxhbkVmZmVjdGl2ZURhdGUiOiAiMjAyMS0wNS0xM1QwMDowMDowMC4wMDBaIiwKICAgICJwbGFuTmFtZSI6ICJwbGFuIE5hbWVfVGVzdDhfdjgiLAogICAgInBsYW5TdGF0dXMiOiAiQWN0aXZlIiwKICAgICJwbGFuTnVtYmVyIjogIlBsYW4gTnVtYmVyXzgiCiAgfSwKICAiY292ZXJhZ2VJbmZvIjogewogICAgInBsYW5Qcm9kdWN0SW5mb0lkIjogIjE5NSIsCiAgICAibGluZU9mQnVzaW5lc3MiOiAiOTAxIiwKICAgICJjb3ZlcmFnZVR5cGUiOiAiQ1JFTEkiLAogICAgInBsYW5Db3ZlcmFnZUluZm9JZCI6ICI1ODMiLAogICAgImNvdmVyYWdlRWZmZWN0aXZlRGF0ZSI6ICIyMDIxLTA2LTExVDAwOjAwOjAwLjAwMFoiLAogICAgImNvdmVyYWdlU3RhdHVzIjogIkFjdGl2ZSIKICB9LAogICJjb3ZlcmFnZVJhdGluZ0ZhY3RvckluZm8iOiB7CiAgICAiZWxpbWluYXRpb25QZXJpb2QiOiAiMTROUiIsCiAgICAiY29tcGVuc2F0aW9uUmVmdW5kYWJsZUFtb3VudCI6IDUsCiAgICAibGFzdFVwZGF0ZURhdGUiOiAiMjAyMS0wNy0wN1QwNDoyMDo0Ni4wMDBaIiwKICAgICJhZ2VUYWJsZVF1YWxpZmllciI6ICJBZ2dyZWdhdGUiLAogICAgInJhdGluZ0ZhY3RvclRlcm1pbmF0aW9uRGF0ZSI6ICI5OTk5LTEyLTMxVDA5OjA4OjI2LjAwMFoiLAogICAgImNvdmVyYWdlSWRlbnRpZmllckluQ292ZXJhZ2VSYXRpbmciOiA1ODMsCiAgICAiYWNjZWxlcmF0ZWREZWF0aEJlbmVmaXRDb2RlIjogIk4iLAogICAgImNvbXBlbnNhdGlvblBheWFibGVPcHRpb24iOiAiYW1vdW50IiwKICAgICJjb3ZlcmFnZVJhdGluZ0ZhY3RvcklkIjogNTc4LAogICAgImNvbXBlbnNhdGlvblBheWFibGVGYWN0b3JQZXJjZW50YWdlIjogMSwKICAgICJjb21wZW5zYXRpb25QYXlhYmxlUGVyY2VudGFnZSI6IDYsCiAgICAiY292ZXJhZ2V0eXBlSW5Db3ZlcmFnZVJhdGluZyI6ICJDUkVMSSIsCiAgICAicHJlRXhpc3RpbmdDb25kaXRpb25WYWx1ZVBheU9uY2UiOiAiMTIvMTIiLAogICAgImNvbXBlbnNhdGlvbkFtb3VudFJlZnVuZGFibGVGbGFnIjogIk4iLAogICAgImN1cnJlbnRSZWNvcmRGbGFnIjogIlkiLAogICAgImxvYW5UaHJlc2hvbGRWYWx1ZSI6IDEsCiAgICAicGxhbk51bWJlckluQ292ZXJhZ2VSYXRpbmciOiAiUGxhbiBOdW1iZXJfOCIsCiAgICAicmF0aW5nRmFjdG9yU3RhdHVzRW5kRGF0ZSI6ICI5OTk5LTEyLTMxVDA5OjA4OjI2LjAwMFoiLAogICAgInBsYW5JZGVudGlmaWVySW5Db3ZlcmFnZVJhdGluZyI6IDE5NSwKICAgICJkaXNhYmlsaXR5VGFibGVRdWFsaWZpZXIiOiAiTi9BIiwKICAgICJyYXRpbmdGYWN0b3JTdGF0dXMiOiAiQWN0aXZlIiwKICAgICJyYXRpbmdGYWN0b3JFZmZlY3RpdmVEYXRlIjogIjIwMjEtMDQtMTVUMDA6MDA6MDAuMDAwWiIsCiAgICAicmF0aW5nRmFjdG9ySW5Vc2UiOiAiWWVzIiwKICAgICJjb21wZW5zYXRpb25Ob25SZWZ1bmRhYmxlQW1vdW50IjogMSwKICAgICJjb21tZW50IjogIk5vdGVzIgogIH0sCiAgInByb2R1Y3RJbmZvIjogewogICAgInByb2R1Y3RCdXNpbmVzc01vZGVsIjogIk1lcmNoYW50IiwKICAgICJwcm9kdWN0RWZmZWN0aXZlRGF0ZSI6ICIyMDIxLTA0LTAxVDE4OjMwOjAwLjAwMFoiLAogICAgInByb2R1Y3RJZCI6ICIxMTciLAogICAgInByb2R1Y3RTdGF0dXMiOiAiQWN0aXZlIiwKICAgICJwcm9kdWN0VHlwZSI6ICJwcm9kdWN0VHlwZTgiLAogICAgInByb2R1Y3ROYW1lIjogIlR5cGU4IgogIH0KfQ==";
+        this.ratingFactorRowSelectData = JSON.parse(atob(data));
+        this.selectedTab = 9;
+        this.isAddRatingFactor = true;
+      });
   }
 
   @HostListener('click', ['$event.target'])
@@ -391,6 +441,10 @@ export class ProductMaintenanceComponent implements OnInit {
     }
     if (element.textContent == "Plan Details") {
       this.isAddCoverage = false;
+    }
+
+    if (element.textContent == "Coverage Details") {
+      this.isAddRatingFactor = false;
     }
   }
 

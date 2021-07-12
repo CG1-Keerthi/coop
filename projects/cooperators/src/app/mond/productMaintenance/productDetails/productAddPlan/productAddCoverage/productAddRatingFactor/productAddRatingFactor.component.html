@@ -3,7 +3,7 @@
         <div class="col-md-6">
         </div>
         <div class="col-md-6">
-            <button class="btn btn-primary float-right ml-2">Update Rate Factor</button>
+            <button class="btn btn-primary float-right ml-2" (click)="onClickOfUpdateRateFactor()" [disabled]="isUpdateRatingFactor">Update Rating Factor</button>
         </div>
     </div>
 
@@ -198,8 +198,8 @@
                         <label class="md-lbl">Rating Factor Effective Date</label>
                         <div class="row pl-1">
                             <input #ratingFactorEffectiveDateElement style="width: 70%;" matInput data-name="dateFormat" [matDatepicker]="picker4"
-                                placeholder="Product Effective Date" formControlName="ratingFactorEffectiveDate">
-                            <mat-datepicker-toggle matSuffix [for]="picker4">
+                                placeholder="Product Effective Date" formControlName="ratingFactorEffectiveDate" [readonly]="isRatingFactorFiledreadOnly">
+                            <mat-datepicker-toggle matSuffix [for]="picker4" [disabled]="isRatingFactorFiledreadOnly">
                             </mat-datepicker-toggle>
                             <mat-datepicker class="col-md-3" #picker4></mat-datepicker>
                         </div>
@@ -232,14 +232,14 @@
                     </div>
                     <div class="ym_form_group col-3">
                         <label class="md-lbl">Rating Factor In Use</label>
-                        <input style="width: 70%;" formControlName="ratingFactorInUse" [readonly]="isAddRatingFiledreadOnly">
+                        <input style="width: 70%;" formControlName="ratingFactorInUse" [readonly]="isRatingFactorInUseFiledreadOnly">
                     </div>
                 </div>
                 <div class="row md-row-mt">
                     <div class="ym_form_group required col-3">
                         <label class="md-lbl">Loan Threshold Value</label>
                         <input class="coverageHelp" style="width: 70%;" onlyNumber formControlName="loanThresholdValue" data-toggle="tooltip" data-placement="bottom"
-                        title="Enter number in this field" (keyup)="onKeyUpOfLoanThresholdVal($event)">
+                        title="Enter number in this field" (keyup)="onKeyUpOfLoanThresholdVal($event)" [readonly]="isRatingFactorFiledreadOnly">
                         <div
                         *ngIf="isSubmitted && coverageRatingFactorDetailsForm.get('coverageRatingFactorInfo.loanThresholdValue').invalid">
                         <p class="text-danger">Please enter the Loan Threshold Value</p>
@@ -248,7 +248,7 @@
                     <div class="ym_form_group col-3">
                         <label class="md-lbl">Age Table Qualifier</label>
                         <div class="ym_form_select" style="width: 70%;">
-                            <select #coverageTypeElement formControlName="ageTableQualifier">
+                            <select #ageTblQulifierElement formControlName="ageTableQualifier">
                                 <option selected value="">Please select a value</option>
                                 <option let *ngFor="let list of ageTableQualiFierList" value="{{list.description}}">
                                     {{list.description}}</option>
@@ -258,7 +258,7 @@
                     <div class="ym_form_group col-3">
                         <label class="md-lbl">Disability Table Qualifier</label>
                         <div class="ym_form_select" style="width: 70%;">
-                            <select #coverageTypeElement formControlName="disabilityTableQualifier">
+                            <select #disablityTblQualifierElement formControlName="disabilityTableQualifier">
                                 <option selected value="">Please select a value</option>
                                 <option let *ngFor="let list of disablityTableQuliFierList"
                                     value="{{list.description}}">
@@ -268,7 +268,7 @@
                     </div>
                     <div class="ym_form_group col-3 m-0">
                         <label class="md-lbl">Accelerated Death Benefit</label>
-                        <mat-slide-toggle formControlName="acceleratedDeathBenefitCode">
+                        <mat-slide-toggle formControlName="acceleratedDeathBenefitCode" [disabled]="isRatingFactorFiledreadOnly">
                         </mat-slide-toggle>
                     </div>
                 </div>
@@ -277,7 +277,7 @@
                     <div class="ym_form_group col-3">
                         <label class="md-lbl">Elimination Period</label>
                         <div class="ym_form_select" style="width: 70%;">
-                            <select #coverageTypeElement formControlName="eliminationPeriod">
+                            <select #eliminationPeriodElement formControlName="eliminationPeriod">
                                 <option selected value="">Please select a value</option>
                                 <option let *ngFor="let list of elminationPeriodList" value="{{list.description}}">
                                     {{list.description}}</option>
@@ -287,7 +287,7 @@
                     <div class="ym_form_group col-3">
                         <label class="md-lbl">Pre-Existing Condition Value - Pay Once</label>
                         <div class="ym_form_select" style="width: 70%;">
-                            <select #coverageTypeElement formControlName="preExistingConditionValuePayOnce">
+                            <select #preExistingConditionValuePayOnceElement formControlName="preExistingConditionValuePayOnce">
                                 <option selected value="">Please select a value</option>
                                 <option let *ngFor="let list of preExistingConditionList" value="{{list.description}}">
                                     {{list.description}}</option>
@@ -297,12 +297,12 @@
                     <div class="ym_form_group col-3">
                         <label class="md-lbl">Compensation Rating Factor %</label>
                         <input class="ratingHelp" style="width: 70%;" onlyNumber formControlName="compensationPayableFactorPercentage" data-toggle="tooltip" data-placement="bottom"
-                        title="Enter number in this field" (keyup)="onKeyUpOfCompensationRatingFactor($event)">
+                        title="Enter number in this field" (keyup)="onKeyUpOfCompensationRatingFactor($event)" [readonly]="isRatingFactorFiledreadOnly">
                     </div>
                     <div class="ym_form_group col-3">
                         <label class="md-lbl">Compensation Payable</label>
                         <div class="ym_form_select" style="width: 70%;">
-                            <select #coverageTypeElement formControlName="compensationPayableOption" (change)="onChangeOfPayable($event)">
+                            <select #compensationPayableOptionElement formControlName="compensationPayableOption" (change)="onChangeOfPayable($event)">
                                 <option selected value="">Please select a value</option>
                                 <option value="amount">Amount</option>
                                 <option value="percentage">Percentage</option>
@@ -314,23 +314,23 @@
                     <div class="ym_form_group col-3">
                         <label class="md-lbl">{{payableFieldLabel}}</label>          
                         <input class="payableHelp" style="width: 70%;" onlyNumber formControlName="compensationPayablePercentage" data-toggle="tooltip" data-placement="bottom"
-                        title="Enter number in this field" (keyup)="onKeyUpOfCompensationPayable($event)">
+                        title="Enter number in this field" (keyup)="onKeyUpOfCompensationPayable($event)" [readonly]="isRatingFactorFiledreadOnly">
                     </div>
                     <div class="ym_form_group col-3 m-0">
                         <label class="md-lbl">Compensation Refundable</label>
-                        <mat-slide-toggle (click)="onClickOfCompensationRefundable($event)" formControlName="compensationAmountRefundableFlag">
+                        <mat-slide-toggle (click)="onClickOfCompensationRefundable($event)" formControlName="compensationAmountRefundableFlag" [disabled]="isRatingFactorFiledreadOnly">
                         </mat-slide-toggle>
                     </div>
                     <div *ngIf="isShowRefundableField" class="ym_form_group col-3">
                         <label class="md-lbl">{{refundFieldLabel}}</label>
                         <input class="refundableHelp" style="width: 70%;" onlyNumber formControlName="compensationRefundableAmount" data-toggle="tooltip" data-placement="bottom"
-                        title="Enter number in this field" (keyup)="onKeyUpOfCompensationRefundable($event)">
+                        title="Enter number in this field" (keyup)="onKeyUpOfCompensationRefundable($event)" [readonly]="isRatingFactorFiledreadOnly">
                     </div>
                   
                     <div *ngIf="isShowNonrefundableField" class="ym_form_group col-3">
                         <label class="md-lbl">{{nonRefundFieldLabel}}</label>
                         <input class="nonRefundable" style="width: 70%;" onlyNumber formControlName="compensationNonRefundableAmount" data-toggle="tooltip" data-placement="bottom"
-                        title="Enter number in this field" (keyup)="onKeyUpOfCompensationNonRefundable($event)">
+                        title="Enter number in this field" (keyup)="onKeyUpOfCompensationNonRefundable($event)" [readonly]="isRatingFactorFiledreadOnly">
                     </div>
                     
 
@@ -339,7 +339,7 @@
                    
                     <div class="ym_form_group col-6">
                         <label class="md-lbl">Notes</label>
-                        <textarea style="width: 100%;" rows="3" formControlName="comment"></textarea>
+                        <textarea style="width: 100%;" rows="3" formControlName="comment" [readonly]="isRatingFactorFiledreadOnly"></textarea>
                     </div>
                 </div>
             </mat-expansion-panel>
@@ -350,9 +350,9 @@
         <div class="col-md-6">
         </div>
         <div class="col-md-6">
-            <button class="btn btn-primary float-right ml-2" (click)="onClickOfCoverageRatingFactorSubmit()"><i
+            <button class="btn btn-primary float-right ml-2" (click)="onClickOfCoverageRatingFactorSubmit()" [disabled]="isRatingFactorSubmitBtn"><i
                     class="fa fa-save mr-1"></i>Submit</button>
-            <button class="btn btn-primary float-right ml-2"><i class="fa fa-times mr-1"></i>Clear</button>
+            <button class="btn btn-primary float-right ml-2" (click)="onClickOfRatingFactorClear()"><i class="fa fa-times mr-1"></i>Clear</button>
         </div>
     </div>
 

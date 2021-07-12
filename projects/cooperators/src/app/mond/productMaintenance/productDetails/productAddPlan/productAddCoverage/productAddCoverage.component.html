@@ -7,7 +7,7 @@
         <div class="col-md-6">
             <button class="btn btn-primary float-right ml-2" (click)="onClickOfupdateCoverage()"
                 [disabled]="isRatingBtn">Update Coverage</button>
-            <button class="btn btn-primary float-right ml-2" [disabled]="isRatingBtn">View Rating Factor<i
+            <button class="btn btn-primary float-right ml-2" (click)="onClickOfViewRatingFactor(coverageDetailList)" [disabled]="isRatingBtn">View Rating Factor<i
                     class="fa fa-arrow-right ml-2"></i></button>
             <button class="btn btn-primary float-right ml-2" (click)="onClickOfAddRatingFactor(coverageDetailList)" [disabled]="isRatingBtn">Add Rating Factor<i
                     class="fa fa-plus ml-2"></i></button>

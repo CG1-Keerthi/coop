@@ -28,6 +28,7 @@ export class ProductAddCoverageComponent implements OnInit {
   }
 
   @Output() addRatingFactor = new EventEmitter();
+  @Output() viewRatingFactor = new EventEmitter();
 
   // @Output() viewPlan = new EventEmitter();
 
@@ -624,6 +625,11 @@ export class ProductAddCoverageComponent implements OnInit {
   onClickOfAddRatingFactor(item){
     debugger;
     this.addRatingFactor.emit(item);
+  }
+
+  onClickOfViewRatingFactor(item){
+    debugger;
+    this.viewRatingFactor.emit(item);
   }
 
 }

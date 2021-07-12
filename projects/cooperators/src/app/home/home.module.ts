@@ -71,6 +71,7 @@ import { ProductPlanCoverageBundleComponent } from '../mond/productMaintenance/p
 import { PlanCoverageBundleDetailsModule } from '../form-builder/productMaintenance/planCoverageBundleDetails/plan-coverage-bundle-detail-form.module';
 import { ProductAddRatingFactorComponent } from '../mond/productMaintenance/productDetails/productAddPlan/productAddCoverage/productAddRatingFactor/productAddRatingFactor.component';
 import { CoverageRatingFactorDetailFormBuilderModule } from '../form-builder/productMaintenance/coverageRatingFactorDetails/coverage-rating-factor-detail-form.module';
+import { ProductViewRatingFactorComponent } from '../mond/productMaintenance/productDetails/productAddPlan/productAddCoverage/productViewRatingFactor/productViewRatingFactor.component';
 
 @NgModule({
   declarations: [
@@ -106,7 +107,8 @@ import { CoverageRatingFactorDetailFormBuilderModule } from '../form-builder/pro
     ProductAddCoverageComponent,
     ProductSearchCoverageComponent,
     ProductPlanCoverageBundleComponent,
-    ProductAddRatingFactorComponent
+    ProductAddRatingFactorComponent,
+    ProductViewRatingFactorComponent
   ],
   imports: [
     CommonModule,

@@ -21,15 +21,23 @@ export class ProductAddRatingFactorComponent implements OnInit {
   }
 
   @Input() set rateFactorList(data) {
-    this.rateFactorDetails = data;
+    // debugger;
+    if (Object.keys(data).length > 0) {
+      this.rateFactorDetails = data;
+    }
   }
 
   @Input() set coverageTypeData(list) {
-    debugger;
+    // debugger;
     this.coverageTypeList = list;
   }
 
-  //   @Output() addRatingFactor = new EventEmitter();
+  @Input() set ratingFactorRowSelectData(rowData) {
+    if (Object.keys(rowData).length > 0) {
+      this.rateFactorDetails = rowData;
+    }
+  }
+
   public coverageRatingFactorDetailsForm: FormGroup;
   public clientNameListData: any;
   isShowRefundableField: boolean = false;
@@ -47,9 +55,13 @@ export class ProductAddRatingFactorComponent implements OnInit {
   public isSubmitted: boolean = false;
   public isAddRatingFiledreadOnly: boolean = false;
   public payableFieldLabel: string = "Compensation Payable";
-  public refundFieldLabel: string ="Compensation Refundable";
+  public refundFieldLabel: string = "Compensation Refundable";
   public nonRefundFieldLabel: string = "Compensation Non-Refundable";
   public isFiledreadOnly: boolean = false;
+  public isRatingFactorFiledreadOnly: boolean = false;
+  public isRatingFactorInUseFiledreadOnly: boolean = false;
+  public isRatingFactorSubmitBtn: boolean;
+  public isUpdateRatingFactor: boolean;
 
   @ViewChild('ratingFactorStatusElement') ratingFactorStatusElement: ElementRef;
   @ViewChild('businessList') businessList: ElementRef;
@@ -59,6 +71,11 @@ export class ProductAddRatingFactorComponent implements OnInit {
   @ViewChild('coverageTypeElement') coverageTypeElement: ElementRef;
   @ViewChild('coverageStatusList') coverageStatusList: ElementRef;
   @ViewChild('ratingFactorEffectiveDateElement') ratingFactorEffectiveDateElement: ElementRef;
+  @ViewChild('ageTblQulifierElement') ageTblQulifierElement: ElementRef;
+  @ViewChild('disablityTblQualifierElement') disablityTblQualifierElement: ElementRef;
+  @ViewChild('eliminationPeriodElement') eliminationPeriodElement: ElementRef;
+  @ViewChild('preExistingConditionValuePayOnceElement') preExistingConditionValuePayOnceElement: ElementRef;
+  @ViewChild('compensationPayableOptionElement') compensationPayableOptionElement: ElementRef;
 
   constructor(private mdCodeListHeaderDS: MDCodeListHeaderDS,
     private mdMondServiceDS: MDMondServiceDS,
@@ -69,8 +86,7 @@ export class ProductAddRatingFactorComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    debugger;
-
+    // debugger;
     this.mdCommonGetterAndSetter.getCsfrToken().subscribe(data => {
       if (data) {
         this.csfrToken = data;
@@ -109,8 +125,7 @@ export class ProductAddRatingFactorComponent implements OnInit {
           lineOfBusinessArray.push(data[i]);
         }
         this.lineOfBusinessList = lineOfBusinessArray;
-      }
-    )
+      })
 
     this.mdCodeListHeaderDS.getListOfCodeLists('Coop-AgeTableQualifier').subscribe(
       data => {
@@ -152,11 +167,24 @@ export class ProductAddRatingFactorComponent implements OnInit {
 
     debugger;
     this.coverageRatingFactorDetailsForm = this.CoverageRatingFactorDetailService.form;
+    if (this.rateFactorDetails.coverageRatingFactorInfo.compensationAmountRefundableFlag == "Y") {
+      this.rateFactorDetails.coverageRatingFactorInfo.compensationAmountRefundableFlag = true;
+    }
+    if (this.rateFactorDetails.coverageRatingFactorInfo.compensationAmountRefundableFlag == "N") {
+      this.rateFactorDetails.coverageRatingFactorInfo.compensationAmountRefundableFlag = false;
+    }
+    if (this.rateFactorDetails.coverageRatingFactorInfo.acceleratedDeathBenefitCode == "Y") {
+      this.rateFactorDetails.coverageRatingFactorInfo.acceleratedDeathBenefitCode = true;
+    }
+    if (this.rateFactorDetails.coverageRatingFactorInfo.acceleratedDeathBenefitCode == "N") {
+      this.rateFactorDetails.coverageRatingFactorInfo.acceleratedDeathBenefitCode = false;
+    }
     this.coverageRatingFactorDetailsForm.reset();
     this.coverageRatingFactorDetailsForm.patchValue(this.rateFactorDetails);
   }
 
   ngAfterViewInit() {
+    this.isRatingFactorInUseFiledreadOnly = true;
     this.isAddRatingFiledreadOnly = true;
     this.isFiledreadOnly = true;
     this.render.setAttribute(this.ratingFactorStatusElement.nativeElement, 'disabled', 'true');
@@ -166,8 +194,29 @@ export class ProductAddRatingFactorComponent implements OnInit {
     this.render.setAttribute(this.LOBElement.nativeElement, 'disabled', 'true');
     this.render.setAttribute(this.coverageTypeElement.nativeElement, 'disabled', 'true');
     this.render.setAttribute(this.coverageStatusList.nativeElement, 'disabled', 'true');
-    
-    
+
+    if (this.coverageRatingFactorTabName == "Add Rating Factor") {
+      this.isRatingFactorFiledreadOnly = false;
+      this.isRatingFactorSubmitBtn = false;
+      this.isUpdateRatingFactor = true;
+    }
+    if (this.coverageRatingFactorTabName == "Rating Factor Details") {
+      this.isRatingFactorFiledreadOnly = true;
+      this.render.setAttribute(this.ageTblQulifierElement.nativeElement, 'disabled', 'true');
+      this.render.setAttribute(this.disablityTblQualifierElement.nativeElement, 'disabled', 'true');
+      this.render.setAttribute(this.eliminationPeriodElement.nativeElement, 'disabled', 'true');
+      this.render.setAttribute(this.preExistingConditionValuePayOnceElement.nativeElement, 'disabled', 'true');
+      this.render.setAttribute(this.compensationPayableOptionElement.nativeElement, 'disabled', 'true');
+      this.isRatingFactorSubmitBtn = true;
+      this.isUpdateRatingFactor = false;
+    }
+    if (this.coverageRatingFactorDetailsForm.value.coverageRatingFactorInfo.compensationAmountRefundableFlag == true) {
+      this.isShowRefundableField = true;
+      this.isShowNonrefundableField = true;
+    } else {
+      this.isShowRefundableField = false;
+      this.isShowNonrefundableField = false;
+    }
     console.log('this.coverageRatingFactorDetailsForm.value', this.coverageRatingFactorDetailsForm.value)
   }
 
@@ -216,7 +265,6 @@ export class ProductAddRatingFactorComponent implements OnInit {
     if (event.target.value == "") {
       $(".coverageHelp").tooltip('show');
     }
-
   }
 
   onKeyUpOfCompensationRatingFactor(event) {
@@ -257,7 +305,7 @@ export class ProductAddRatingFactorComponent implements OnInit {
       this.nonRefundFieldLabel = "Compensation Non-Refundable %";
     }
 
-    if(event.target.value == ""){
+    if (event.target.value == "") {
       this.payableFieldLabel = "Compensation Payable";
       this.refundFieldLabel = "Compensation Refundable";
       this.nonRefundFieldLabel = "Compensation Non-Refundable";
@@ -265,7 +313,7 @@ export class ProductAddRatingFactorComponent implements OnInit {
   }
 
   onClickOfCoverageRatingFactorSubmit() {
-    debugger;   
+    debugger;
     // this.coverageRatingFactorDetailsForm.value;
     if (this.coverageRatingFactorDetailsForm.get('coverageRatingFactorInfo').invalid) {
       this.isSubmitted = true;
@@ -290,7 +338,7 @@ export class ProductAddRatingFactorComponent implements OnInit {
       this.coverageRatingFactorDetailsForm.value.coverageRatingFactorInfo.acceleratedDeathBenefitCode = "N";
     }
 
-    this.coverageRatingFactorDetailsForm.value.coverageRatingFactorInfo.ratingFactorEffectiveDate =  this.ratingFactorEffectiveDateElement.nativeElement.value + 'T00:00:00.000Z';
+    this.coverageRatingFactorDetailsForm.value.coverageRatingFactorInfo.ratingFactorEffectiveDate = this.ratingFactorEffectiveDateElement.nativeElement.value + 'T00:00:00.000Z';
 
     let coverageRatingfactorArray = [];
     let coverageRatingFactorObj = {};
@@ -331,17 +379,32 @@ export class ProductAddRatingFactorComponent implements OnInit {
     console.log("coverageArray", coverageRatingfactorArray);
 
     console.log(" this.coverageRatingFactorDetailsForm", this.coverageRatingFactorDetailsForm);
-    // let formData = btoa(JSON.stringify(this.coverageDetailsForm.value));
     let formData = btoa(JSON.stringify(coverageRatingfactorArray[0]));
 
     this.mdMondServiceDS.invokeMondService("Creditor Self Admin", "SaveCoverageRatingFactorData", "1.00", formData, this.csfrToken, true, true, true, true).subscribe(
       data => {
-        // console.log("onClickOfClientSubmit data", data);
         this.mdMondServiceDS.showSuccessMessage(JSON.parse(atob(data)).message);
 
       }, error => {
         this.mdMondServiceDS.MDError(error);
       });
 
+  }
+
+  onClickOfUpdateRateFactor() {
+    debugger;
+    this.isAddRatingFiledreadOnly = false;
+    this.isRatingFactorFiledreadOnly = false;
+    this.isRatingFactorSubmitBtn = false;
+    this.render.setProperty(this.ratingFactorStatusElement.nativeElement, 'disabled', false);
+    this.render.setProperty(this.ageTblQulifierElement.nativeElement, 'disabled', false);
+    this.render.setProperty(this.disablityTblQualifierElement.nativeElement, 'disabled', false);
+    this.render.setProperty(this.eliminationPeriodElement.nativeElement, 'disabled', false);
+    this.render.setProperty(this.preExistingConditionValuePayOnceElement.nativeElement, 'disabled', false);
+    this.render.setProperty(this.compensationPayableOptionElement.nativeElement, 'disabled', false);
+  }
+
+  onClickOfRatingFactorClear() {
+    this.coverageRatingFactorDetailsForm.get('coverageRatingFactorInfo').reset()
   }
 }

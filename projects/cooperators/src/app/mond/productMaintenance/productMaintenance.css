@@ -20,6 +20,9 @@
     white-space: nowrap;
     overflow: hidden;
  }
+ .modal {
+    z-index: 56 !important;
+}
  
 
 

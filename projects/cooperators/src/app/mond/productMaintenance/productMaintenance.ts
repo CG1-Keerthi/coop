@@ -1,7 +1,10 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
+import { any } from 'codelyzer/util/function';
 import { Base64 } from 'js-base64';
 import { MDCommonGetterSetter } from '../../_services/common';
-import { MDCodeListHeaderDS, MDMondServiceDS } from '../../_services/ds'
+import { MDCodeListHeaderDS, MDMondServiceDS } from '../../_services/ds';
+
+declare var $: any;
 
 @Component({
   selector: "app-product-maintenance-designer",
@@ -47,7 +50,15 @@ export class ProductMaintenanceComponent implements OnInit {
   public viewRatingFactorId: string;
   public ratingFactorMaintenanceList: string;
   public ratingFactorRowSelectData: any;
+  public productPlanClientName: any;
+  public productRowData: any;
+  public copyEffectiveDate: any;
+  public copyProductNumber: any;
+  public copyProduct: any;
 
+  
+  @ViewChild('copyDate') copyDate: ElementRef;
+  
   constructor(private mdMondService: MDMondServiceDS,
     private codeListFetch: MDCodeListHeaderDS,
     private mdCommonGetterAndSetter: MDCommonGetterSetter,) { }
@@ -84,6 +95,66 @@ export class ProductMaintenanceComponent implements OnInit {
     this.selectedProductTypeName = event.source.value;
   }
 
+  onChangeOfCopyProduct(rowData,event){
+    debugger
+    this.productRowData = rowData;
+    $("input[type='checkbox'][name='copyProductName']").prop('checked', false);
+    if ($(event.currentTarget).is(":checked")) {
+      $(event.currentTarget).prop('checked', false);
+    } else {
+      $(event.currentTarget).prop('checked', true);
+    }
+    this.copyProduct = "copyProduct"; 
+  }
+
+  onClickOfCopyProduct(){
+    debugger;
+    if (this.copyProduct == "copyProduct"){
+      $("#copyProductModelId").click();
+      this.copyProductNumber = this.productRowData.productNumber
+      this.copyEffectiveDate = this.productRowData.lastUpdateDate
+      // this.productRowData.productPlanId
+    }else{
+      this.mdMondService.showErrorMessage("Please select the product to copy");
+      return;
+    }
+ 
+  }
+
+  onClickOfProductCopyOfSubmit(){
+    debugger;
+    if (this.copyProductNumber == "") {
+      this.mdMondService.showErrorMessage("Please enter the Plan Number");
+      return;
+    }
+
+    if (this.copyEffectiveDate == null) {
+      this.mdMondService.showErrorMessage("Please enter the Effective Date");
+      return;
+    }
+
+   let formVariables =  {
+     "newProductNumber":this.copyProductNumber,
+     "newEffectiveDate":this.copyDate.nativeElement.value + " 00:00:00.000",
+     "productId":this.productRowData.productPlanId
+    }
+    this.mdMondService.getFormDataFromMondService('Creditor Self Admin', 'CopyProduct', JSON.stringify(formVariables), null).subscribe(
+      data => {
+        this.mdMondService.showSuccessMessage(JSON.parse(atob(data.value)).message);
+        this.getProductMaintenanceList();
+        this.copyProduct = "";
+
+      }, error => {
+        this.mdMondService.MDError(error);
+        let data = { "key": "key", "value": "eyJtZXNzYWdlIjoiUmVjb3JkIENvcGllZCBTdWNjZXNzZnVsbHkiLCJzdGF0dXMiOiJTdWNjZXNzIn0\u003d" };
+        this.mdMondService.showSuccessMessage(JSON.parse(atob(data.value)).message);
+        this.getProductMaintenanceList();
+        this.copyProduct = "";
+     
+      }
+    )
+  }
+
   getProductMaintenanceList() {
     debugger;
     if (this.productType != "") {
@@ -94,8 +165,15 @@ export class ProductMaintenanceComponent implements OnInit {
         }
       }
     }
+    let formVariables = {
+      "productType":this.productType,
+      "":"1",
+      "productBusinessModel":this.productBusinessModel,
+      "productStatus":this.productStatus,
+      "productList_productSummary":[]
+    }
     this.isSpinnerShow = true;
-    this.mdMondService.getFormDataFromMondService("Creditor Self Admin", "FetchProductList", JSON.stringify({ "productType": this.productType, "productBusinessModel": this.productBusinessModel, "productStatus": this.productStatus }), "").subscribe(
+    this.mdMondService.getFormDataFromMondService("Creditor Self Admin", "FetchProductList", JSON.stringify(formVariables), "").subscribe(
       data => {
         this.isShowTblRow = true;
         this.productMaintenanceListData = JSON.parse(Base64.decode(data.value)).productList_productSummary;
@@ -234,6 +312,7 @@ export class ProductMaintenanceComponent implements OnInit {
     addCoverageDetailsObj["planProductInfo"] = event.planProductInfo;
     addCoverageDetailsObj["coverageInfo"] = coverageInfo;
     addCovergaeDetailArray.push(addCoverageDetailsObj);
+    // this.planClientName = event.planProductInfo.clientName;
     this.addCoverageTabName = "Add Coverage";
     this.coverageTypeList = [];
     this.coverageList = addCovergaeDetailArray[0];
@@ -243,6 +322,7 @@ export class ProductMaintenanceComponent implements OnInit {
 
   onClickOfViewCoverage(event) {
     debugger
+    this.productPlanClientName = event.planProductInfo.clientName;
     this.isViewCoverage = true;
     this.selectedTab = 5;
     this.ViewCoverageClientId = event.planProductInfo.clientIdentifier;
@@ -267,7 +347,7 @@ export class ProductMaintenanceComponent implements OnInit {
     this.isAddCoverage = false;
     this.isAddCoverageBunlde = false;
     this.addCoverageTabName = "Coverage Details";
-
+    this.productPlanClientName = this.productPlanClientName;
     // this.coverageList = event;
     this.mdMondService.invokeMondServiceGET("Creditor Self Admin", "FetchPlanCoverageDetails", "1.00", btoa(JSON.stringify({ "planCoverageInfoId": event.data.planCoverageInfoId })), this.csfrToken, true, true, true, true).subscribe(
       data => {
@@ -289,16 +369,18 @@ export class ProductMaintenanceComponent implements OnInit {
               coverageTypeArray.push(parsedData[i]);
             }
             this.coverageTypeList = coverageTypeArray;
+            this.selectedTab = 6;
+            this.isAddCoverage = true;
 
           }, error => {
             this.mdMondService.MDError(error);
           })
-        this.selectedTab = 6;
-        this.isAddCoverage = true;
+
       },
       error => {
         this.mdMondService.MDError(error);
-        let data = "ewogICJwbGFuUHJvZHVjdEluZm8iOiB7CiAgICAicGxhblByb2R1Y3RJbmZvSWQiOiAiMTkxIiwKICAgICJwcm9kdWN0SWQiOiAxMTIsCiAgICAiY2xpZW50SWRlbnRpZmllciI6IDIsCiAgICAicGxhbkVmZmVjdGl2ZURhdGUiOiAiMjAyMC0wOS0wM1QwMDowMDowMC4wMDBaIiwKICAgICJwbGFuTmFtZSI6ICJUZXN0MSBuYW1lIiwKICAgICJwbGFuU3RhdHVzIjogIkFjdGl2ZSIsCiAgICAicGxhbk51bWJlciI6ICJUZXN0MSIsCgkiY2xpZW50TmFtZSI6InJlbG9naXgiCiAgfSwKICAiY292ZXJhZ2VJbmZvIjogewogICAgImxpbmVPZkJ1c2luZXNzIjogIjkwMSIsCiAgICAiZ2VuZXJhbExlZGdlckFjY291bnROdW1iZXIiOiAiMTAwMDUwMCIsCiAgICAibGFzdFVwZGF0ZURhdGUiOiAiMjAyMS0wNi0yNFQxMDoyMDozNC4wMDBaIiwKICAgICJtYXhpbXVtQmVuZWZpdEFtb3VudCI6IDEsCiAgICAibG93ZXJNYXhpbXVtQ292ZXJhZ2VBbW91bnQiOiAiWSIsCiAgICAiY292ZXJhZ2VJblVzZSI6ICJZZXMiLAogICAgIm1heGltdW1Nb250aGx5QmVuZWZpdEFtb3VudCI6IDEsCiAgICAiY292ZXJhZ2VTdGF0dXMiOiAiQWN0aXZlIiwKICAgICJtaW5pbXVtUHJlbWl1bSI6IDEsCiAgICAibm9uRXZpZGVuY2VNYXhpbXVtQW1vdW50IjogMSwKICAgICJwbGFuQ292ZXJhZ2VJbmZvSWQiOiAiNTgyIiwKICAgICJjb3ZlcmFnZVN0YXR1c0VuZERhdGUiOiAiOTk5OS0xMi0zMVQwOTowODoyNi4wMDBaIiwKICAgICJsb3dlck1heGltdW1Db3ZlcmFnZUFtb3VudEJhc2VkQWdlIjogMSwKICAgICJtYXhpbXVtQ292ZXJhZ2VBbW91bnQiOiAxLAogICAgIm1pbmltdW1BZ2VMb3dlckNvdmVyYWdlQW1vdW50IjogMSwKICAgICJjb3ZlcmFnZUNvZGUiOiAiTEkiLAogICAgImN1cnAiOiAxLAogICAgInBsYW5Qcm9kdWN0SW5mb0lkIjogIjE5MSIsCiAgICAiY3VycmVudFJlY29yZEZsYWciOiAiWSIsCiAgICAibWF4aW11bUluc3VyYWJsZUxvYW5QZXJpb2RSZXNpZHVhbFZhbHVlIjogMSwKICAgICJsb3NzT2ZFbXBsb3ltZW50Q29udGludW91c1dvcmtQZXJpb2QiOiAxLAogICAgImNvdmVyYWdlVGVybWluYXRpb25BZ2UiOiAxLAogICAgImNvdmVyYWdlRWZmZWN0aXZlRGF0ZSI6ICIyMDIxLTA2LTI0VDAwOjAwOjAwLjAwMFoiLAogICAgInJpZGVyQmVuZWZpdCI6ICJZIiwKICAgICJjb3ZlcmFnZVRlcm1pbmF0aW9uRGF0ZSI6ICI5OTk5LTEyLTMxVDA5OjA4OjI2LjAwMFoiLAogICAgInBsYW5OdW1iZXIiOiAiVGVzdDEiLAogICAgIm1heGltdW1Nb250aGx5Q2xhaW1CZW5lZml0QW1vdW50IjogMSwKICAgICJlbGlnaWJpbGl0eUhvdXJzQW1vdW50IjogMSwKICAgICJjb3ZlcmFnZVR5cGUiOiAiQ1JFTEkiLAogICAgInRlcm1pbmF0aW9uRHVlVG9DbGFpbSI6ICJObyBUZXJtaW5hdGlvbiIsCiAgICAibWF4aW11bUNsYWltQmVuZWZpdFRlcm0iOiAxLAogICAgIm1pbmltdW1Jc3N1ZUFnZSI6IDEsCiAgICAibWF4aW11bUlzc3VlQWdlIjogMSwKICAgICJtaW5pbXVtQ292ZXJhZ2VBbXQiOiAxLAogICAgImNvbW1lbnQiOiAiVGVzdEFkZENvdmVyYWdlIiwKICAgICJtYXhpbXVtSW5zdXJhYmxlTG9hblBlcmlvZFJlZ3VsYXIiOiAxLAogICAgImNlcnRpZmljYXRlRmVlIjogMQogIH0sCiAgInByb2R1Y3RJbmZvIjogewogICAgInByb2R1Y3RCdXNpbmVzc01vZGVsIjogIk1lcmNoYW50IiwKICAgICJwcm9kdWN0RWZmZWN0aXZlRGF0ZSI6ICIyMDIxLTA2LTE0VDAwOjAwOjAwLjAwMFoiLAogICAgInByb2R1Y3RJZCI6ICIxMTIiLAogICAgInByb2R1Y3RTdGF0dXMiOiAiQWN0aXZlIiwKICAgICJwcm9kdWN0VHlwZSI6ICJUZXN0VHlwZSIsCiAgICAicHJvZHVjdE5hbWUiOiAiVGVzdDEiCiAgfQp9"
+        // let data = "ewogICJwbGFuUHJvZHVjdEluZm8iOiB7CiAgICAicGxhblByb2R1Y3RJbmZvSWQiOiAiMTkxIiwKICAgICJwcm9kdWN0SWQiOiAxMTIsCiAgICAiY2xpZW50SWRlbnRpZmllciI6IDIsCiAgICAicGxhbkVmZmVjdGl2ZURhdGUiOiAiMjAyMC0wOS0wM1QwMDowMDowMC4wMDBaIiwKICAgICJwbGFuTmFtZSI6ICJUZXN0MSBuYW1lIiwKICAgICJwbGFuU3RhdHVzIjogIkFjdGl2ZSIsCiAgICAicGxhbk51bWJlciI6ICJUZXN0MSIsCgkiY2xpZW50TmFtZSI6InJlbG9naXgiCiAgfSwKICAiY292ZXJhZ2VJbmZvIjogewogICAgImxpbmVPZkJ1c2luZXNzIjogIjkwMSIsCiAgICAiZ2VuZXJhbExlZGdlckFjY291bnROdW1iZXIiOiAiMTAwMDUwMCIsCiAgICAibGFzdFVwZGF0ZURhdGUiOiAiMjAyMS0wNi0yNFQxMDoyMDozNC4wMDBaIiwKICAgICJtYXhpbXVtQmVuZWZpdEFtb3VudCI6IDEsCiAgICAibG93ZXJNYXhpbXVtQ292ZXJhZ2VBbW91bnQiOiAiWSIsCiAgICAiY292ZXJhZ2VJblVzZSI6ICJZZXMiLAogICAgIm1heGltdW1Nb250aGx5QmVuZWZpdEFtb3VudCI6IDEsCiAgICAiY292ZXJhZ2VTdGF0dXMiOiAiQWN0aXZlIiwKICAgICJtaW5pbXVtUHJlbWl1bSI6IDEsCiAgICAibm9uRXZpZGVuY2VNYXhpbXVtQW1vdW50IjogMSwKICAgICJwbGFuQ292ZXJhZ2VJbmZvSWQiOiAiNTgyIiwKICAgICJjb3ZlcmFnZVN0YXR1c0VuZERhdGUiOiAiOTk5OS0xMi0zMVQwOTowODoyNi4wMDBaIiwKICAgICJsb3dlck1heGltdW1Db3ZlcmFnZUFtb3VudEJhc2VkQWdlIjogMSwKICAgICJtYXhpbXVtQ292ZXJhZ2VBbW91bnQiOiAxLAogICAgIm1pbmltdW1BZ2VMb3dlckNvdmVyYWdlQW1vdW50IjogMSwKICAgICJjb3ZlcmFnZUNvZGUiOiAiTEkiLAogICAgImN1cnAiOiAxLAogICAgInBsYW5Qcm9kdWN0SW5mb0lkIjogIjE5MSIsCiAgICAiY3VycmVudFJlY29yZEZsYWciOiAiWSIsCiAgICAibWF4aW11bUluc3VyYWJsZUxvYW5QZXJpb2RSZXNpZHVhbFZhbHVlIjogMSwKICAgICJsb3NzT2ZFbXBsb3ltZW50Q29udGludW91c1dvcmtQZXJpb2QiOiAxLAogICAgImNvdmVyYWdlVGVybWluYXRpb25BZ2UiOiAxLAogICAgImNvdmVyYWdlRWZmZWN0aXZlRGF0ZSI6ICIyMDIxLTA2LTI0VDAwOjAwOjAwLjAwMFoiLAogICAgInJpZGVyQmVuZWZpdCI6ICJZIiwKICAgICJjb3ZlcmFnZVRlcm1pbmF0aW9uRGF0ZSI6ICI5OTk5LTEyLTMxVDA5OjA4OjI2LjAwMFoiLAogICAgInBsYW5OdW1iZXIiOiAiVGVzdDEiLAogICAgIm1heGltdW1Nb250aGx5Q2xhaW1CZW5lZml0QW1vdW50IjogMSwKICAgICJlbGlnaWJpbGl0eUhvdXJzQW1vdW50IjogMSwKICAgICJjb3ZlcmFnZVR5cGUiOiAiQ1JFTEkiLAogICAgInRlcm1pbmF0aW9uRHVlVG9DbGFpbSI6ICJObyBUZXJtaW5hdGlvbiIsCiAgICAibWF4aW11bUNsYWltQmVuZWZpdFRlcm0iOiAxLAogICAgIm1pbmltdW1Jc3N1ZUFnZSI6IDEsCiAgICAibWF4aW11bUlzc3VlQWdlIjogMSwKICAgICJtaW5pbXVtQ292ZXJhZ2VBbXQiOiAxLAogICAgImNvbW1lbnQiOiAiVGVzdEFkZENvdmVyYWdlIiwKICAgICJtYXhpbXVtSW5zdXJhYmxlTG9hblBlcmlvZFJlZ3VsYXIiOiAxLAogICAgImNlcnRpZmljYXRlRmVlIjogMQogIH0sCiAgInByb2R1Y3RJbmZvIjogewogICAgInByb2R1Y3RCdXNpbmVzc01vZGVsIjogIk1lcmNoYW50IiwKICAgICJwcm9kdWN0RWZmZWN0aXZlRGF0ZSI6ICIyMDIxLTA2LTE0VDAwOjAwOjAwLjAwMFoiLAogICAgInByb2R1Y3RJZCI6ICIxMTIiLAogICAgInByb2R1Y3RTdGF0dXMiOiAiQWN0aXZlIiwKICAgICJwcm9kdWN0VHlwZSI6ICJUZXN0VHlwZSIsCiAgICAicHJvZHVjdE5hbWUiOiAiVGVzdDEiCiAgfQp9"
+        let data = "ewogICJwbGFuUHJvZHVjdEluZm8iOiB7CiAgICAicGxhblByb2R1Y3RJbmZvSWQiOiAiMTkxIiwKICAgICJwcm9kdWN0SWQiOiAxMTIsCiAgICAiY2xpZW50SWRlbnRpZmllciI6IDIsCiAgICAicGxhbkVmZmVjdGl2ZURhdGUiOiAiMjAyMC0wOS0wM1QwMDowMDowMC4wMDBaIiwKICAgICJwbGFuTmFtZSI6ICJUZXN0MSBuYW1lIiwKICAgICJwbGFuU3RhdHVzIjogIkFjdGl2ZSIsCiAgICAicGxhbk51bWJlciI6ICJUZXN0MSIKICB9LAogICJjb3ZlcmFnZUluZm8iOiB7CiAgICAibGluZU9mQnVzaW5lc3MiOiAiOTAxIiwKICAgICJsYXN0VXBkYXRlRGF0ZSI6ICIyMDIxLTA2LTI0VDEwOjIwOjM0LjAwMFoiLAogICAgIm1heGltdW1CZW5lZml0QW1vdW50IjogMSwKICAgICJsb3dlck1heGltdW1Db3ZlcmFnZUFtb3VudCI6ICJZIiwKICAgICJjb3ZlcmFnZUluVXNlIjogIlllcyIsCiAgICAibWF4aW11bU1vbnRobHlCZW5lZml0QW1vdW50IjogMSwKICAgICJjb3ZlcmFnZVN0YXR1cyI6ICJBY3RpdmUiLAogICAgIm1pbmltdW1QcmVtaXVtIjogMSwKICAgICJub25FdmlkZW5jZU1heGltdW1BbW91bnQiOiAxLAogICAgInBsYW5Db3ZlcmFnZUluZm9JZCI6ICI1ODIiLAogICAgImNvdmVyYWdlU3RhdHVzRW5kRGF0ZSI6ICI5OTk5LTEyLTMxVDA5OjA4OjI2LjAwMFoiLAogICAgImxvd2VyTWF4aW11bUNvdmVyYWdlQW1vdW50QmFzZWRBZ2UiOiAxLAogICAgIm1heGltdW1Db3ZlcmFnZUFtb3VudCI6IDEsCiAgICAibWluaW11bUFnZUxvd2VyQ292ZXJhZ2VBbW91bnQiOiAxLAogICAgImNvdmVyYWdlQ29kZSI6ICJMSSIsCiAgICAiY3VycCI6IDEsCiAgICAicGxhblByb2R1Y3RJbmZvSWQiOiAiMTkxIiwKICAgICJjdXJyZW50UmVjb3JkRmxhZyI6ICJZIiwKICAgICJtYXhpbXVtSW5zdXJhYmxlTG9hblBlcmlvZFJlc2lkdWFsVmFsdWUiOiAxLAogICAgImxvc3NPZkVtcGxveW1lbnRDb250aW51b3VzV29ya1BlcmlvZCI6IDEsCiAgICAiY292ZXJhZ2VUZXJtaW5hdGlvbkFnZSI6IDEsCiAgICAiY292ZXJhZ2VFZmZlY3RpdmVEYXRlIjogIjIwMjEtMDYtMjRUMDA6MDA6MDAuMDAwWiIsCiAgICAicmlkZXJCZW5lZml0IjogIlkiLAogICAgImNvdmVyYWdlVGVybWluYXRpb25EYXRlIjogIjk5OTktMTItMzFUMDk6MDg6MjYuMDAwWiIsCiAgICAicGxhbk51bWJlciI6ICJUZXN0MSIsCiAgICAibWF4aW11bU1vbnRobHlDbGFpbUJlbmVmaXRBbW91bnQiOiAxLAogICAgImVsaWdpYmlsaXR5SG91cnNBbW91bnQiOiAxLAogICAgImNvdmVyYWdlVHlwZSI6ICJDUkVMSSIsCiAgICAibWF4aW11bUNsYWltQmVuZWZpdFRlcm0iOiAxLAogICAgIm1pbmltdW1Jc3N1ZUFnZSI6IDEsCiAgICAibWF4aW11bUlzc3VlQWdlIjogMSwKICAgICJtaW5pbXVtQ292ZXJhZ2VBbXQiOiAxLAogICAgImNvbW1lbnQiOiAiVGVzdEFkZENvdmVyYWdlIiwKICAgICJtYXhpbXVtSW5zdXJhYmxlTG9hblBlcmlvZFJlZ3VsYXIiOiAxLAogICAgImNlcnRpZmljYXRlRmVlIjogMQogIH0sCiAgInByb2R1Y3RJbmZvIjogewogICAgInByb2R1Y3RCdXNpbmVzc01vZGVsIjogIk1lcmNoYW50IiwKICAgICJwcm9kdWN0RWZmZWN0aXZlRGF0ZSI6ICIyMDIxLTA2LTE0VDAwOjAwOjAwLjAwMFoiLAogICAgInByb2R1Y3RJZCI6ICIxMTIiLAogICAgInByb2R1Y3RTdGF0dXMiOiAiQWN0aXZlIiwKICAgICJwcm9kdWN0VHlwZSI6ICJUZXN0VHlwZSIsCiAgICAicHJvZHVjdE5hbWUiOiAiVGVzdDEiCiAgfQp9";
         this.coverageList = JSON.parse(atob(data));
 
         // //to retrive Coverage Type
@@ -321,10 +403,9 @@ export class ProductMaintenanceComponent implements OnInit {
               coverageTypeArray.push(parsedData[i]);
             }
             this.coverageTypeList = coverageTypeArray;
+            this.selectedTab = 6;
+            this.isAddCoverage = true;
           })
-        this.selectedTab = 6;
-        this.isAddCoverage = true;
-
       });
   }
 
@@ -390,6 +471,7 @@ export class ProductMaintenanceComponent implements OnInit {
   onClickOfViewRatingFactor(event) {
     debugger;
     this.isViewRatingFactor = false;
+    this.productPlanClientName = event.planProductInfo.clientName;
     this.viewRatingFactorId = event.planProductInfo.clientIdentifier;
     let formVariable = { "planCoverageInfoId": event.coverageInfo.planCoverageInfoId }
 
@@ -412,6 +494,7 @@ export class ProductMaintenanceComponent implements OnInit {
   onRatingFactorRowSelect(event) {
     debugger;
     this.isAddRatingFactor = false;
+    this.productPlanClientName = this.productPlanClientName;
     this.addRatingFactorTabName = "Rating Factor Details";
     this.rateFactorList = {};
 
@@ -433,6 +516,7 @@ export class ProductMaintenanceComponent implements OnInit {
       });
   }
 
+
   @HostListener('click', ['$event.target'])
   onClick(element) {
     // debugger;
@@ -446,6 +530,10 @@ export class ProductMaintenanceComponent implements OnInit {
     if (element.textContent == "Coverage Details") {
       this.isAddRatingFactor = false;
     }
+
+    // if (element.textContent == "Coverage Search") {
+    //   this.isAddCoverage = false;
+    // }
   }
 
 

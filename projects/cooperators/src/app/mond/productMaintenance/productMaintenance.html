@@ -56,9 +56,11 @@
                                         <div class="col-md-6 m-0 p-0">
                                             <h2 class="md-lbl ml-2 mb-1">Product Maintenance</h2>
                                         </div>
-                                        <div class="col-md-6 pt-0 pb-0 pr-2 pl-0">
-                                            <button (click)="onClickOfAddProduct()" class="btn btn-primary float-right">
-                                                <i class="fa fa-plus-square"></i> Add Product</button>
+                                    <div class="col-md-6 pt-0 pb-0 pr-2 pl-0">
+                                                <button (click)="onClickOfAddProduct()" class="btn btn-primary float-right">
+                                                    <i class="fa fa-plus-square mr-1"></i> Add Product</button>
+                                                    <button (click)="onClickOfCopyProduct()" class="btn btn-primary float-right mr-2">
+                                                        <i class="ace-icon fa fa-files-o mr-1"></i>Copy Product</button>
                                         </div>
                                     </div>
                                     <div class="row ml-2 mb-0 mr-0 mt-2 pt-0 pb-0 md-bgClr">
@@ -73,8 +75,9 @@
                                             [autoLayout]="true" (onRowSelect)="onProductListRowSelect($event)">
                                             <ng-template pTemplate="header">
                                                 <tr class="ptableHeader">
+                                                    <th style="width: 37px;"></th>
                                                     <th style="width: 8rem;">Product Type</th>
-                                                    <th style="width: 15rem;">Product Name</th>
+                                                    <th style="width: 12rem;">Product Name</th>
                                                     <th style="width: 12rem;">Product Business Model</th>
                                                     <th style="width: 9rem;">Product Status</th>
                                                     <th style="width: 185px;">Last Update Date</th>
@@ -83,11 +86,17 @@
                                             </ng-template>
                                             <ng-template pTemplate="body" let-responseData>
                                                 <tr [pSelectableRow]="responseData" *ngIf="isShowTblRow">
+                                                    <td style="width: 37px;">
+                                                        <div class="md-overFlow">
+                                                            <input type="checkbox" name='copyProductName'
+                                                                (change)="onChangeOfCopyProduct(responseData,$event)">
+                                                        </div>
+                                                    </td>
                                                     <td style="width: 8rem;">
                                                         <div class="md-overFlow" title="{{responseData.productType}}">
                                                             {{responseData.productType}}</div>
                                                     </td>
-                                                    <td style="width: 15rem;">
+                                                    <td style="width: 12rem;">
                                                         <div class="md-overFlow" title="{{responseData.productName}}">
                                                             {{responseData.productName}}</div>
                                                     </td>
@@ -145,8 +154,10 @@
                             </app-product-search-coverage-designer>
                         </mat-tab>
                         <mat-tab label="{{addCoverageTabName}}" *ngIf="isAddCoverage">
-                            <app-product-add-coverage-designer [coverageData]="coverageList"
-                                [coverageTypeData]="coverageTypeList" [tabName]="addCoverageTabName" (addRatingFactor)="onClickOfAddRatingFactor($event)" (viewRatingFactor)="onClickOfViewRatingFactor($event)">
+                            <app-product-add-coverage-designer [productPlanClientName]="productPlanClientName"
+                                [coverageData]="coverageList" [coverageTypeData]="coverageTypeList"
+                                [tabName]="addCoverageTabName" (addRatingFactor)="onClickOfAddRatingFactor($event)"
+                                (viewRatingFactor)="onClickOfViewRatingFactor($event)">
                             </app-product-add-coverage-designer>
                         </mat-tab>
                         <mat-tab label="Plan Coverage Bundle Details" *ngIf="isAddCoverageBunlde">
@@ -155,14 +166,69 @@
                             </app-product-Plan-coverage-Bundle-designer>
                         </mat-tab>
                         <mat-tab label="Rating Factor Search" *ngIf="isViewRatingFactor">
-                           <app-product-view-rating-factor-designer [clientIdentifier]="viewRatingFactorId" [ratingFactorMaintenanceData]="ratingFactorMaintenanceList" (ratingFactorRowSelect)="onRatingFactorRowSelect($event)"></app-product-view-rating-factor-designer>
-                          </mat-tab>
+                            <app-product-view-rating-factor-designer [clientIdentifier]="viewRatingFactorId"
+                                [ratingFactorMaintenanceData]="ratingFactorMaintenanceList"
+                                (ratingFactorRowSelect)="onRatingFactorRowSelect($event)">
+                            </app-product-view-rating-factor-designer>
+                        </mat-tab>
                         <mat-tab label="{{addRatingFactorTabName}}" *ngIf="isAddRatingFactor">
-                          <app-product-add-rating-factor-designer [rateFactorList]="rateFactorList" [coverageTypeData]="coverageTypeList"  [tabName]="addRatingFactorTabName" [ratingFactorRowSelectData]="ratingFactorRowSelectData"></app-product-add-rating-factor-designer>
+                            <app-product-add-rating-factor-designer [productPlanClientName]="productPlanClientName"
+                                [rateFactorList]="rateFactorList" [coverageTypeData]="coverageTypeList"
+                                [tabName]="addRatingFactorTabName"
+                                [ratingFactorRowSelectData]="ratingFactorRowSelectData">
+                            </app-product-add-rating-factor-designer>
                         </mat-tab>
                     </mat-tab-group>
                 </div>
             </mat-card>
+        </div>
+    </div>
+</div>
+
+<!-- copy product model -->
+<button type="button" class="btn btn-primary" id="copyProductModelId" data-toggle="modal" data-target="#copyProductModal"
+    style="display: none;">
+    CopyProduct Modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="copyProductModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <b class="md-address">Copy Product</b>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="ym_form_group  row mb-0 pb-0">
+                    <label class="md-lbl" style="font-size: 19px;">Enter Product Number and Effective Date for the new Product</label>
+                </div>
+                <div class="ym_form_group required  row mb-0 pb-0">
+
+                    <label class="md-lbl">Product Number</label>
+                    <input [(ngModel)]="copyProductNumber">
+                </div>
+               
+                <div class="ym_form_group required row mb-0 pb-0">
+
+                    <div class="row" style="margin-left: 1px;">
+                        <label class="md-lbl">Effective Date</label>
+                        <input style="width: 94%;" matInput [matDatepicker]="picker" [(ngModel)]="copyEffectiveDate"
+                            #copyDate>
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker class="col-md-3" #picker></mat-datepicker>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal"><i
+                        class="fa fa-times ml-2 mr-1"></i>Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="onClickOfProductCopyOfSubmit()"><i
+                        class="fa fa-save mr-1"></i>Submit</button>
+            </div>
         </div>
     </div>
 </div>

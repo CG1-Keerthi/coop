@@ -302,7 +302,7 @@
                     <div class="ym_form_group col-3">
                         <label class="md-lbl">Compensation Payable</label>
                         <div class="ym_form_select" style="width: 70%;">
-                            <select #compensationPayableOptionElement formControlName="compensationPayableOption" (change)="onChangeOfPayable($event)">
+                            <select #compensationPayableOptionElement formControlName="compensationPayableOption" (change)="onChangeOfPayable($event,'value')">
                                 <option selected value="">Please select a value</option>
                                 <option value="amount">Amount</option>
                                 <option value="percentage">Percentage</option>

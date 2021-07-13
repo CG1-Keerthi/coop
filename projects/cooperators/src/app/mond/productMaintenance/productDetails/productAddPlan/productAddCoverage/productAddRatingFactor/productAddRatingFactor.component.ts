@@ -20,9 +20,15 @@ export class ProductAddRatingFactorComponent implements OnInit {
     this.coverageRatingFactorTabName = name;
   }
 
+    @Input() set productPlanClientName(clientName) {
+    debugger
+    this.clientName = clientName;
+  }
+
   @Input() set rateFactorList(data) {
-    // debugger;
+    debugger;
     if (Object.keys(data).length > 0) {
+      data.planProductInfo.clientName =  this.clientName;
       this.rateFactorDetails = data;
     }
   }
@@ -34,6 +40,7 @@ export class ProductAddRatingFactorComponent implements OnInit {
 
   @Input() set ratingFactorRowSelectData(rowData) {
     if (Object.keys(rowData).length > 0) {
+      rowData.planProductInfo.clientName =  this.clientName;
       this.rateFactorDetails = rowData;
     }
   }
@@ -62,6 +69,7 @@ export class ProductAddRatingFactorComponent implements OnInit {
   public isRatingFactorInUseFiledreadOnly: boolean = false;
   public isRatingFactorSubmitBtn: boolean;
   public isUpdateRatingFactor: boolean;
+  public clientName: any;
 
   @ViewChild('ratingFactorStatusElement') ratingFactorStatusElement: ElementRef;
   @ViewChild('businessList') businessList: ElementRef;
@@ -181,6 +189,7 @@ export class ProductAddRatingFactorComponent implements OnInit {
     }
     this.coverageRatingFactorDetailsForm.reset();
     this.coverageRatingFactorDetailsForm.patchValue(this.rateFactorDetails);
+    this.onChangeOfPayable("",this.rateFactorDetails.coverageRatingFactorInfo.compensationPayableOption);
   }
 
   ngAfterViewInit() {
@@ -291,25 +300,46 @@ export class ProductAddRatingFactorComponent implements OnInit {
     }
   }
 
-  onChangeOfPayable(event) {
+  onChangeOfPayable(event,val) {
     debugger;
-    if (event.target.value == "amount") {
-      this.payableFieldLabel = "Compensation Payable Amount $";
-      this.refundFieldLabel = "Compensation Refundable Amount $";
-      this.nonRefundFieldLabel = "Compensation Non-Refundable  Amount $";
+    if(event.target != undefined){
+      if (event.target.value == "amount") {
+        this.payableFieldLabel = "Compensation Payable Amount $";
+        this.refundFieldLabel = "Compensation Refundable Amount $";
+        this.nonRefundFieldLabel = "Compensation Non-Refundable  Amount $";
+      }
+      if (event.target.value == "percentage") {
+        this.payableFieldLabel = "Compensation Payable %";
+        this.refundFieldLabel = "Compensation Refundable %";
+        this.nonRefundFieldLabel = "Compensation Non-Refundable %";
+      }
+  
+      if (event.target.value == "") {
+        this.payableFieldLabel = "Compensation Payable";
+        this.refundFieldLabel = "Compensation Refundable";
+        this.nonRefundFieldLabel = "Compensation Non-Refundable";
+      }
+    }else{
+      if (val == "amount") {
+        this.payableFieldLabel = "Compensation Payable Amount $";
+        this.refundFieldLabel = "Compensation Refundable Amount $";
+        this.nonRefundFieldLabel = "Compensation Non-Refundable  Amount $";
+      }
+      if (val== "percentage") {
+        this.payableFieldLabel = "Compensation Payable %";
+        this.refundFieldLabel = "Compensation Refundable %";
+        this.nonRefundFieldLabel = "Compensation Non-Refundable %";
+      }
+  
+      if (val == "") {
+        this.payableFieldLabel = "Compensation Payable";
+        this.refundFieldLabel = "Compensation Refundable";
+        this.nonRefundFieldLabel = "Compensation Non-Refundable";
+      }
     }
+   
 
-    if (event.target.value == "percentage") {
-      this.payableFieldLabel = "Compensation Payable %";
-      this.refundFieldLabel = "Compensation Refundable %";
-      this.nonRefundFieldLabel = "Compensation Non-Refundable %";
-    }
-
-    if (event.target.value == "") {
-      this.payableFieldLabel = "Compensation Payable";
-      this.refundFieldLabel = "Compensation Refundable";
-      this.nonRefundFieldLabel = "Compensation Non-Refundable";
-    }
+   
   }
 
   onClickOfCoverageRatingFactorSubmit() {

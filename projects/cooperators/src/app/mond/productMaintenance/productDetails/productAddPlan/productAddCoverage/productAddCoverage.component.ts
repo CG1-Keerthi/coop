@@ -19,11 +19,19 @@ export class ProductAddCoverageComponent implements OnInit {
     this.coverageTabName = name;
   }
   @Input() set coverageTypeData(list) {
-    debugger;
+    // debugger;
     this.coverageTypeList = list;
   }
+
+  @Input() set productPlanClientName(clientName){
+    debugger
+    this.clientName = clientName;
+  }
   @Input() set coverageData(data) {
-    // debugger;
+    debugger;
+    if(this.clientName != undefined){
+      data.planProductInfo.clientName =  this.clientName;
+    }  
     this.coverageDetailList = data;
   }
 
@@ -73,6 +81,7 @@ export class ProductAddCoverageComponent implements OnInit {
   public isCoverageTypeSubmitted: boolean;
   public isCEDSubmitted: boolean;
   public isCoverageStatusSubmitted: boolean;
+  public clientName: string;
 
 
   @ViewChild('businessList') businessList: ElementRef;
@@ -174,7 +183,13 @@ export class ProductAddCoverageComponent implements OnInit {
 
 
     debugger;
-
+    if (this.coverageDetailList.coverageInfo.generalLedgerAccountNumber == undefined) {
+      this.coverageDetailList.coverageInfo.generalLedgerAccountNumber = "Please select a value";
+    }
+   
+    if (this.coverageDetailList.coverageInfo.terminationDueToClaim == undefined) {
+      this.coverageDetailList.coverageInfo.terminationDueToClaim = "Please select a value";
+    }
     this.coverageDetailsForm = this.coverageDetailService.form;
     this.coverageDetailsForm.reset();
     this.coverageDetailsForm.patchValue(this.coverageDetailList);

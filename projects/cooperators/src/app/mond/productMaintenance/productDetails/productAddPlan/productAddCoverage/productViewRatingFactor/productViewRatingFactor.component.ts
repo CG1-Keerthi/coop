@@ -15,7 +15,9 @@ export class ProductViewRatingFactorComponent implements OnInit {
   @Input() set clientIdentifier(id) {
     this.clientId = id;
   }
-  @Input() set ratingFactorMaintenanceData(data){
+
+  @Input() set ratingFactorMaintenanceData(data) {
+    // data.planProductInfo.clientName =  this.clientName;
     this.ratingFactorMaintenanceList = data;
   }
   @Output() ratingFactorRowSelect = new EventEmitter();
@@ -32,7 +34,7 @@ export class ProductViewRatingFactorComponent implements OnInit {
   public selectedPlanNumber: any;
   public ratingFactorMaintenanceList: any;
   public isSpinnerShow: boolean;
-
+  public clientName: any;
 
   constructor(private mdMondService: MDMondServiceDS,
     private mdCodeListHeaderDS: MDCodeListHeaderDS) {
@@ -132,7 +134,7 @@ export class ProductViewRatingFactorComponent implements OnInit {
     )
   }
 
-  onClickOfRatingFactorReset(){
+  onClickOfRatingFactorReset() {
     debugger;
     this.planNumber = "";
     this.lineOfBusiness = "";
@@ -141,7 +143,7 @@ export class ProductViewRatingFactorComponent implements OnInit {
     this.ratingFactorMaintenanceList = [];
   }
 
-  onRatingFactorRowSelect(item){
+  onRatingFactorRowSelect(item) {
     debugger;
     this.ratingFactorRowSelect.emit(item);
   }

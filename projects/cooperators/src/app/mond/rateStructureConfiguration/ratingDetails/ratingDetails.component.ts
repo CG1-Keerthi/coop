@@ -32,7 +32,7 @@ export class RatingDetailsComponent implements OnInit {
                         this.createRow();
                     }
                     for (let j = 0; j < this.rateFormArray.length; j++) {
-                        // if formcontrol have length greater than or less than from rategrid array
+                        // if formcontrol have length greater than or less than from rategrid array                       
                         if (this.rateFormArray.length < this.rateGridData.length) {
                             this.createRow();
                         } else if (this.rateFormArray.length > this.rateGridData.length) {
@@ -44,6 +44,11 @@ export class RatingDetailsComponent implements OnInit {
                         }
                     }
                 }
+                this.checkGrid();
+            }
+            this.checkGrid();
+            if (this.rateFormArray.length != this.rateGridData.length) {
+                this.checkGrid();
             }
             this.rateDetailsForm.reset();
             this.rateDetailsForm.patchValue(data);
@@ -185,6 +190,19 @@ export class RatingDetailsComponent implements OnInit {
                 rateStructureHeaderId: ['']
             })
         )
+    }
+
+    checkGrid() {
+        if (this.rateFormArray.length != this.rateGridData.length) {
+            debugger;
+            for (let j = 0; j < this.rateFormArray.length; j++) {
+                if (this.rateFormArray.length > this.rateGridData.length) {
+                    {
+                        (<FormArray>this.rateDetailsForm.get('planRatingStructureHeader.PlanRatingStructureDetails')).removeAt(j);
+                    }
+                }
+            }
+        }
     }
 
     deleteRow(index) {

@@ -1,208 +1,248 @@
 <div class="ym_content">
-    <div class="col-md-12 col-lg-12 col-sm-12 mt-2 container">
+    <div class="p-1 m-1">
         <div class="row md-breadCrumbs">
             Creditor Certificate Maintenance
         </div>
-        <mat-card class="w-100 mt-2 md-border">
-        <div class="row">
-            <mat-tab-group class="col-md-12" [(selectedIndex)]="selectedTab">
-                <mat-tab label="Search Certificate" class="mx-3">
-                    <form>
-                        <div>
-                            <div class="m-0 pt-2 pb-2 row my-3 justify-content-center md-bgClr">
-                                <h2>Certificate Maintenance</h2>
-                            </div>
+        <div class="row ml-0 mr-0 pr-0 pt-1 mt-1 pl-0 pb-0 mb-0">
+            <mat-card class="w-100 md-border md-mat-card p-0">
+                <div class="row p-1 m-1">
+                    <mat-tab-group class="col-md-12 p-0" [(selectedIndex)]="selectedTab">
+                        <mat-tab label="Search Certificate" class="mx-3">
+                            <form>
+                                <div>
+                                    <div class="mt-2 pt-2 row justify-content-center md-bgClr">
+                                        <h2>Certificate Maintenance</h2>
+                                    </div>
 
-                            <div class="row">
-                                <div class="ym_form_group  col-4">
-                                    <label class="md-lbl">File Identifier</label>
-                                    <input placeholder="File Identifier" [(ngModel)]="fileIdentifier"
-                                        [ngModelOptions]="{standalone: true}">
-                                </div>
-                                <div class="ym_form_group  col-4">
-                                    <label class="md-lbl">Client Name</label>
-                                    <input placeholder="Client Name" [(ngModel)]="clientName"
-                                        [ngModelOptions]="{standalone: true}">
-                                </div>
-                                <div class="ym_form_group  col-4">
-                                    <label class="md-lbl">Certificate Number</label>
-                                    <input placeholder="Certificate Number" [(ngModel)]="certificateNumber"
-                                        [ngModelOptions]="{standalone: true}">
-                                </div>
-                            </div>
-                            <div class="row" style="margin-left: -10px;">
-                                <div class="ym_form_group  col-4">
-                                    <div class="row">
-                                        <label class="md-lbl">Certificate Effective Date Greater Than
-                                        </label>
-                                        <input class="col-md-9" matInput [matDatepicker]="picker"
-                                            [(ngModel)]="CEDGreaterThan" [ngModelOptions]="{standalone: true}">
-                                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                                        <mat-datepicker class="col-md-3" #picker></mat-datepicker>
+                                    <div class="row mt-2">
+                                        <div class="ym_form_group  col-4">
+                                            <label class="md-lbl">File Identifier</label>
+                                            <input placeholder="File Identifier" [(ngModel)]="fileIdentifier"
+                                                [ngModelOptions]="{standalone: true}" style="width: 70%;">
+                                        </div>
+                                        <div class="ym_form_group  col-4">
+                                            <label class="md-lbl">Client Name</label>
+                                            <input placeholder="Client Name" [(ngModel)]="clientName"
+                                                [ngModelOptions]="{standalone: true}" style="width: 70%;">
+                                        </div>
+                                        <div class="ym_form_group  col-4">
+                                            <label class="md-lbl">Certificate Number</label>
+                                            <input placeholder="Certificate Number" [(ngModel)]="certificateNumber"
+                                                [ngModelOptions]="{standalone: true}" style="width: 70%;">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="ym_form_group  col-4">
-                                    <div class="row">
-                                        <label class="md-lbl">Certificate Effective Date Less Than</label>
-                                        <input class="col-md-9" matInput [matDatepicker]="picker2"
-                                            [(ngModel)]="CEDLessThan" [ngModelOptions]="{standalone: true}">
-                                        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-                                        <mat-datepicker class="col-md-3" #picker2></mat-datepicker>
+                                    <div class="row md-row-mt" style="margin-left: -10px;">
+                                        <div class="ym_form_group  col-4">
+                                            <div class="row">
+                                                <label class="md-lbl">Certificate Effective Date Greater Than
+                                                </label>
+                                                <input matInput [matDatepicker]="picker"
+                                                    [(ngModel)]="CEDGreaterThan" [ngModelOptions]="{standalone: true}" style="width: 69%;">
+                                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                                <mat-datepicker class="col-md-3" #picker></mat-datepicker>
+                                            </div>
+                                        </div>
+                                        <div class="ym_form_group  col-4">
+                                            <div class="row">
+                                                <label class="md-lbl">Certificate Effective Date Less Than</label>
+                                                <input matInput [matDatepicker]="picker2"
+                                                    [(ngModel)]="CEDLessThan" [ngModelOptions]="{standalone: true}" style="width: 69%;">
+                                                <mat-datepicker-toggle matSuffix [for]="picker2">
+                                                </mat-datepicker-toggle>
+                                                <mat-datepicker class="col-md-3" #picker2></mat-datepicker>
+                                            </div>
+                                        </div>
+                                        <div class="ym_form_group  col-4">
+                                            <label class="md-lbl">Client Location Number</label>
+                                            <input placeholder="Client Location Number"
+                                                [(ngModel)]="clientLocationNumber"
+                                                [ngModelOptions]="{standalone: true}" style="width: 70%;">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="ym_form_group  col-4">
-                                    <label class="md-lbl">Client Location Number</label>
-                                    <input placeholder="Client Location Number" [(ngModel)]="clientLocationNumber"
-                                        [ngModelOptions]="{standalone: true}">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="ym_form_group  col-4">
-                                    <label class="md-lbl">First Name</label>
-                                    <input placeholder="First Name" [(ngModel)]="firstName"
-                                        [ngModelOptions]="{standalone: true}">
-                                </div>
-                                <div class="ym_form_group  col-4">
-                                    <label class="md-lbl">Last Name</label>
-                                    <input placeholder="Last Name" [(ngModel)]="lastName"
-                                        [ngModelOptions]="{standalone: true}">
-                                </div>
-                                <div class="ym_form_group  col-4">
-                                    <label class="md-lbl">Client Certificate Number</label>
-                                    <input placeholder="Client Certificate Number" [(ngModel)]="clientCertificateNo"
-                                        [ngModelOptions]="{standalone: true}">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="ym_form_group  col-4">
-                                    <label class="md-lbl">Additional Search Field</label>
-                                    <div class="ym_form_select">
-                                        <select [(ngModel)]="additionalSearchField"
-                                            [ngModelOptions]="{standalone: true}">
-                                            <option selected value="">Select Option...</option>
-                                            <option value="posNumber">POS Number</option>
-                                        </select>
+                                    <div class="row md-row-mt">
+                                        <div class="ym_form_group  col-4">
+                                            <label class="md-lbl">First Name</label>
+                                            <input placeholder="First Name" [(ngModel)]="firstName"
+                                                [ngModelOptions]="{standalone: true}" style="width: 70%;">
+                                        </div>
+                                        <div class="ym_form_group  col-4">
+                                            <label class="md-lbl">Last Name</label>
+                                            <input placeholder="Last Name" [(ngModel)]="lastName"
+                                                [ngModelOptions]="{standalone: true}" style="width: 70%;">
+                                        </div>
+                                        <div class="ym_form_group  col-4">
+                                            <label class="md-lbl">Client Certificate Number</label>
+                                            <input placeholder="Client Certificate Number"
+                                                [(ngModel)]="clientCertificateNo" [ngModelOptions]="{standalone: true}" style="width: 70%;">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="ym_form_group  col-4">
-                                    <label class="md-lbl">Additional Search Value</label>
-                                    <input placeholder="Additional Search Value" [(ngModel)]="additionalSearchValue"
-                                        [ngModelOptions]="{standalone: true}">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-4">
-                                </div>
-                                <div class="ym_form_group  col-4">
-                                    <!-- <label class="md-lbl">Client Number</label> -->
-                                    <input placeholder="rows found" value="{{rowsfound}}">
-                                </div>
-                                <div class="col-4">
-                                </div>
-                            </div>
+                                    <div class="row md-row-mt">
+                                        <div class="ym_form_group  col-4">
+                                            <label class="md-lbl">Additional Search Field</label>
+                                            <div class="ym_form_select" style="width: 70%;">
+                                                <select [(ngModel)]="additionalSearchField"
+                                                    [ngModelOptions]="{standalone: true}">
+                                                    <option selected value="">Select Option...</option>
+                                                    <option value="posNumber">POS Number</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="ym_form_group  col-4">
+                                            <label class="md-lbl">Additional Search Value</label>
+                                            <input placeholder="Additional Search Value"
+                                                [(ngModel)]="additionalSearchValue"
+                                                [ngModelOptions]="{standalone: true}" style="width: 70%;">
+                                        </div>
+                                    </div>
+                                    <div class="row md-row-mt">
+                                        <div class="col-4">
+                                        </div>
+                                        <div class="ym_form_group  col-4">
+                                            <!-- <label class="md-lbl">Client Number</label> -->
+                                            <input placeholder="rows found" value="{{rowsfound}}" style="width: 70%;">
+                                        </div>
+                                        <div class="col-4">
+                                        </div>
+                                    </div>
 
-                            <div class="ym_form_group row">
-                                <button class="float-right  ym_button" (click)="onClickOfCreditorCertificate()"><i
-                                        class="fa fa-search mr-1"></i>Search</button>
-                                <button class="float-right ym_button" style="margin-right: 10px;"><i
-                                        class="fa fa-times"></i> Clear</button>
-                            </div>
-                        </div>
-                    </form>
-                    <div class="mx-3">
-                        <div class="p-1 p-table-caption-container  md-bgClr" style="margin-top: 3rem; height: 4rem;">
-                            <div class="row">
-                                <div class="col-md-6  pt-3 ">
-                                    <h3 class="p-table-caption ">Certificate List</h3>
+                                    <div class="ym_form_group row md-row-mt">
+                                        <button class="float-right  btn btn-primary"
+                                            (click)="onClickOfCreditorCertificate()"><i
+                                                class="fa fa-search mr-1"></i>Search</button>
+                                        <button class="float-right btn btn-primary" style="margin-right: 10px;"><i
+                                                class="fa fa-times"></i> Clear</button>
+                                    </div>
                                 </div>
-                                <div class="col-md-6 pt-2" style="padding-left: 26rem;">
+                            </form>
+                            <div class="m-0">
+                                <div class="p-1 p-table-caption-container  md-bgClr"
+                                    style="margin-top: 3rem; height: 4rem;">
                                     <div class="row">
-                                        <span class="mt-2">No. of rows to fetch</span>
-                                        <div class="col-3">
-                                            <div class="ym_form_group">
-                                                <div class="ym_form_select">
-                                                    <select [(ngModel)]="numberOfRecordsToFetch"
-                                                        [ngModelOptions]="{standalone: true}">
-                                                        <option selected value="50">50</option>
-                                                        <option value="100">100</option>
-                                                        <option value="500">500</option>
-                                                    </select>
+                                        <div class="col-md-6  pt-3 ">
+                                            <h3 class="p-table-caption ">Certificate List</h3>
+                                        </div>
+                                        <div class="col-md-6 pt-2" style="padding-left: 26rem;">
+                                            <div class="row">
+                                                <span class="mt-2" style="color: white;">No. of rows to fetch</span>
+                                                <div class="col-3">
+                                                    <div class="ym_form_group">
+                                                        <div class="ym_form_select">
+                                                            <select [(ngModel)]="numberOfRecordsToFetch"
+                                                                [ngModelOptions]="{standalone: true}">
+                                                                <option selected value="50">50</option>
+                                                                <option value="100">100</option>
+                                                                <option value="500">500</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
+
                                         </div>
                                     </div>
 
                                 </div>
+                                <mat-spinner class="md-spinner" *ngIf="isSpinnerShow" style="margin-left: 41rem;">
+                                </mat-spinner>
+                                <div id="creditorCertficateId" (scroll)="onScroll($event)">
+                                    <p-table [value]="creditorCertificateList" selectionMode="single"
+                                        [responsive]="true" (onRowSelect)="onClickOfCreditorRow($event)">
+                                        <ng-template pTemplate="header">
+                                            <tr class="ptableHeader">
+                                                <th style="width: 3rem;">No</th>
+                                                <th style="width: 150px;">Certificate Number</th>
+                                                <th style="width: 65px;">Client Name</th>
+                                                <th style="width: 94px;">Client Certificate Number</th>
+                                                <th style="width: 98px;">Certificate Effective Date</th>
+                                                <th style="width: 93px;">Certificate Status</th>
+                                                <th style="width: 100px;">Certificate Sub Status</th>
+                                                <th style="width: 76px;">Product Type</th>
+                                                <th style="width: 12rem;">Applicant Name</th>
+                                                <th style="width: 11rem;">Co-Applicant Name</th>
+                                                <th style="width: 69px;">Logical Delete</th>
+                                                <th style="width: 94px;">Processed with Errors</th>
+                                                <th style="width: 93px;">Processed with Warning</th>
+                                            </tr>
+                                        </ng-template>
+                                        <ng-template pTemplate="body" let-responseData>
+                                            <tr [pSelectableRow]="responseData">
+                                                <td>{{responseData.No}}</td>
+                                                <td>
+                                                    <div class="md-overFlow"
+                                                        title="  {{responseData.certificateNumber}}">
+                                                        {{responseData.certificateNumber}}
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="md-overFlow" title="{{responseData.partnerName}}">
+                                                        {{responseData.partnerName}}</div>
+                                                </td>
+                                                <td>
+                                                    <div class="md-overFlow"
+                                                        title="{{responseData.uniqueCertificateIdentifier}}">
+                                                        {{responseData.uniqueCertificateIdentifier}}</div>
+                                                </td>
+                                                <td>
+                                                    <div class="md-overFlow"
+                                                        title="{{responseData.certificateEffectiveDate.split('T')[0]}}">
+                                                        {{responseData.certificateEffectiveDate.split('T')[0]}}</div>
+                                                </td>
+                                                <td>
+                                                    <div class="md-overFlow" title="{{responseData.certificateStatus}}">
+                                                        {{responseData.certificateStatus}}</div>
+                                                </td>
+                                                <td>
+                                                    <div class="md-overFlow"
+                                                        title="{{responseData.certificateSubStatus}}">
+                                                        {{responseData.certificateSubStatus}}</div>
+                                                </td>
+                                                <td>
+                                                    <div class="md-overFlow" title="{{responseData.productType}}">
+                                                        {{responseData.productType}}</div>
+                                                </td>
+                                                <td>
+                                                    <div class="md-overFlow" title="{{responseData.applicantName}}">
+                                                        {{responseData.applicantName}}</div>
+                                                </td>
+                                                <td>
+                                                    <div class="md-overFlow" title="{{responseData.coapplicantName}}">
+                                                        {{responseData.coapplicantName}}</div>
+                                                </td>
+                                                <td><input type="checkbox" [(ngModel)]="responseData.logicalDeleteFlag"
+                                                        [ngModelOptions]="{standalone: true}"
+                                                        style="margin-left: 17px;"></td>
+                                                <td><input type="checkbox"
+                                                        [(ngModel)]="responseData.processedWithErrors"
+                                                        [ngModelOptions]="{standalone: true}"
+                                                        style="margin-left: 35px;"></td>
+                                                <td><input type="checkbox"
+                                                        [(ngModel)]="responseData.processedWithWarningFlag"
+                                                        [ngModelOptions]="{standalone: true}"
+                                                        style="margin-left: 35px;"></td>
+                                            </tr>
+                                        </ng-template>
+                                    </p-table>
+                                </div>
                             </div>
-
-                        </div>
-                        <mat-spinner class="md-spinner" *ngIf="isSpinnerShow" style="margin-left: 41rem;"></mat-spinner>
-                        <div id="creditorCertficateId" (scroll)="onScroll($event)">
-                            <p-table [value]="creditorCertificateList" selectionMode="single" 
-                                [responsive]="true" 
-                                [resizableColumns]="isResizeTrue" columnResizeMode="expand"
-                                (onRowSelect)="onClickOfCreditorRow($event)">
-                                <ng-template pTemplate="header">
-                                    <tr class="ptableHeader">                                   
-                                        <th style="width: 3rem;">No</th>
-                                        <th pResizableColumn>Certificate Number</th>
-                                        <th>Client Name</th>
-                                        <th>Client Certificate Number</th>
-                                        <th>Certificate Effective Date</th>
-                                        <th>Certificate Status</th>
-                                        <th>Certificate Sub Status</th>
-                                        <th>Product Type</th>
-                                        <th>Applicant Name</th>
-                                        <th>Co-Applicant Name</th>
-                                        <th>Logical Delete</th>
-                                        <th>Processed with Errors</th>
-                                        <th>Processed with Warning</th>
-                                    </tr>
-                                </ng-template>
-                                <ng-template pTemplate="body" let-responseData>
-                                    <tr [pSelectableRow]="responseData">
-                                        <td>{{responseData.No}}</td>
-                                        <td class="ui-resizable-column">
-                                            <div class="md-overFlow">
-                                                {{responseData.certificateNumber}}
-                                            </div></td>
-                                        <td>{{responseData.partnerName}}</td>
-                                        <td>{{responseData.uniqueCertificateIdentifier}}</td>
-                                        <td>{{responseData.certificateEffectiveDate.split('T')[0]}}</td>
-                                        <td>{{responseData.certificateStatus}}</td>
-                                        <td>{{responseData.certificateSubStatus}}</td>
-                                        <td>{{responseData.productType}}</td>
-                                        <td>{{responseData.applicantName}}</td>
-                                        <td>{{responseData.coapplicantName}}</td>
-                                        <td><input type="checkbox" [(ngModel)]="responseData.logicalDeleteFlag"
-                                                [ngModelOptions]="{standalone: true}" style="margin-left: 35px;"></td>
-                                        <td><input type="checkbox" [(ngModel)]="responseData.processedWithErrors"
-                                                [ngModelOptions]="{standalone: true}" style="margin-left: 35px;"></td>
-                                        <td><input type="checkbox" [(ngModel)]="responseData.processedWithWarningFlag"
-                                                [ngModelOptions]="{standalone: true}" style="margin-left: 35px;"></td>
-                                    </tr>
-                                </ng-template>
-                            </p-table>
-                        </div>
-
-                    </div>
-                </mat-tab>
-                <mat-tab label="Certificate Details">
-                    <app-certificateDetails-designer *ngIf="isShowCertificateDetail"
-                        [certificateDetailsData]="certificateDetails" [premiumHistoryData]="premiumHistory">
-                    </app-certificateDetails-designer>
-                </mat-tab>
-                <mat-tab label="Additional Details">
-                    <app-additionalDetails-designer *ngIf="isShowCertificateDetail"
-                        [additionalDetailsData]="certificateDetails" [param]="param"></app-additionalDetails-designer>
-                </mat-tab>
-                <mat-tab label="Certificate Audit Log">
-                    <app-certificateAuditLog-designer *ngIf="isShowCertificateDetail"
-                        [auditLogData]="certificateDetails" [auditHistoryData]="auditHistoryDetails">
-                    </app-certificateAuditLog-designer>
-                </mat-tab>
-            </mat-tab-group>
+                        </mat-tab>
+                        <mat-tab label="Certificate Details">
+                            <app-certificateDetails-designer *ngIf="isShowCertificateDetail"
+                                [certificateDetailsData]="certificateDetails" [premiumHistoryData]="premiumHistory">
+                            </app-certificateDetails-designer>
+                        </mat-tab>
+                        <mat-tab label="Additional Details">
+                            <app-additionalDetails-designer *ngIf="isShowCertificateDetail"
+                                [additionalDetailsData]="certificateDetails" [param]="param">
+                            </app-additionalDetails-designer>
+                        </mat-tab>
+                        <mat-tab label="Certificate Audit Log">
+                            <app-certificateAuditLog-designer *ngIf="isShowCertificateDetail"
+                                [auditLogData]="certificateDetails" [auditHistoryData]="auditHistoryDetails">
+                            </app-certificateAuditLog-designer>
+                        </mat-tab>
+                    </mat-tab-group>
+                </div>
+            </mat-card>
         </div>
-    </mat-card>
     </div>
 </div>

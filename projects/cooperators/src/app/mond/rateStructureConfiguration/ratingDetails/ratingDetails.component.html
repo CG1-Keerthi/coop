@@ -1,5 +1,5 @@
-<form [formGroup]="rateDetailsForm" class="mx-3 mt-2">
-    <div class="m-0 pt-2 pb-2 row my-3">
+<form [formGroup]="rateDetailsForm" class="m-1 p-1">
+    <div class="row">
         <div class="col-md-6">
         </div>
         <div class="col-md-6">
@@ -11,7 +11,7 @@
         <div class="row">
             <div class="ym_form_group required col-4">
                 <label class="md-lbl">Rate Name</label>
-                <input placeholder="Rate Name" formControlName="rateName" [readonly]="isFieldreadonly">
+                <input placeholder="Rate Name" formControlName="rateName" [readonly]="isFieldreadonly" style="width: 70%;">
                 <div *ngIf="isSubmit && !rateDetailsForm.get('planRatingStructureHeader.rateName').touched">
                     <p class="text-danger">Please Enter Rate Name</p>
                 </div>
@@ -34,10 +34,10 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row md-row-mt">
             <div class="col-4">
                 <label class="md-lbl">Rate Type</label>
-                <div class="ym_form_select required">
+                <div class="ym_form_select required" style="width: 70%;">
                     <select formControlName="rateType">
                         <option selected value="">Please select a value</option>
                         <option value="High">High</option>
@@ -66,7 +66,7 @@
                 </div>
             </div>
         </div>
-        <div class="row" formArrayName="PlanRatingStructureDetails">
+        <div class="row pl-3 pr-3 md-row-mt" formArrayName="PlanRatingStructureDetails">
             <table class="style">
                 <thead>
                     <tr>
@@ -139,7 +139,7 @@
                 </tbody>
             </table>
             <br>
-            <div class="ym_form_group row">
+            <div class="ym_form_group row mt-2">
                 <button class="float-left btn btn-primary" (click)="addTable()"> <i class="fa fa-plus-square"></i> Add
                     Row</button>
             </div>
@@ -147,7 +147,7 @@
 
 
         <div class="ym_form_group row">
-            <button class="float-right btn btn-primary" (click)="onClickOfRateSubmit()" [disabled]="isSubmitBtn"><i
+            <button class="float-right btn btn-primary mb-2" (click)="onClickOfRateSubmit()" [disabled]="isSubmitBtn"><i
                     class="fa fa-save mr-1"></i>Submit</button>
             <!-- <button class="float-right btn btn-primary" style="margin-right: 10px;"><i class="fa fa-times"></i>
                 Clear</button> -->

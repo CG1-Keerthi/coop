@@ -65,7 +65,7 @@ export class creditorCertificateComponent implements OnInit {
         this.creditorListCount = JSON.parse(atob(data.value)).certificateTotalCount;
         this.getCreditorList();
       }, error => {
-        debugger;
+        // debugger;
         this.mdMondServiceDS.MDError(error);
         // let data = { "key": "key", "value": "eyJjZXJ0aWZpY2F0ZVRvdGFsQ291bnQiOiI4MCJ9" };
         // this.creditorListCount = JSON.parse(atob(data.value)).certificateTotalCount;
@@ -190,7 +190,6 @@ export class creditorCertificateComponent implements OnInit {
     )
   }
   fetchTransactionAuditHistory(event) {
-    debugger;
     let auditHistoryFormvariables = {
       fileHeaderId: event.data.fileHeaderIdentifier,
       certificateNumber: event.data.certificateNumber
@@ -317,13 +316,13 @@ export class creditorCertificateComponent implements OnInit {
       });
   }
 
-  @HostListener('click', ['$event.target'])
-  onClick(element) {
-      debugger;
-      this.isResizeTrue = true;
-      setTimeout(() => {
-          this.isResizeTrue = false;
-      }, 2000)
-  }
+  // @HostListener('click', ['$event.target'])
+  // onClick(element) {
+  //     debugger;
+  //     this.isResizeTrue = true;
+  //     setTimeout(() => {
+  //         this.isResizeTrue = false;
+  //     }, 2000)
+  // }
 
 }

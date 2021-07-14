@@ -1,15 +1,16 @@
 <div class="ym_content">
-    <div class="col-md-12 col-lg-12 col-sm-12 mt-2 container">
+    <div class="p-1 m-1">
+        <mat-card class="w-100 md-border md-mat-card p-2">
         <mat-accordion>
-            <mat-expansion-panel [expanded]="true">
+            <mat-expansion-panel [expanded]="true" class="mt-1 pt-1">
                 <mat-expansion-panel-header class="md-bgClr">
                     <mat-panel-title style="color: white;">
                         Download Logical Delete and Processed with Errors Report
                     </mat-panel-title>
                 </mat-expansion-panel-header>
-                <div class="row" style="padding: 0  16px;">
+                <div class="row">
 
-                    <div class="col-3 ym_form_group required">
+                    <div class="col-3 ym_form_group required m-0">
                         <div class="row">
                             <label class="md-lbl">From Date
                             </label>
@@ -22,7 +23,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-3 ym_form_group required">
+                    <div class="col-3 ym_form_group required m-0">
                         <div class="row">
                             <label class="md-lbl">To Date
                             </label>
@@ -35,7 +36,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-3 mt-4">
+                    <div class="col-3" style="margin-top: 1.8rem!important;">
                         <button mat-button mat-raised-button class="md-bgClr md-Btn btn btn-primary md-btn-width" (click)="onClickOfLogicalDeleteReset()">
                             <mat-icon>refresh</mat-icon>Reset
                         </button>
@@ -47,5 +48,6 @@
                 </div>
             </mat-expansion-panel>
         </mat-accordion>
+    </mat-card>
     </div>
 </div>

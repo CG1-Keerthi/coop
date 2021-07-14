@@ -421,6 +421,10 @@ color: white !important;
     /* color: #008acc; */
     color: #00456A !important;
 }
+.md-white-clr{
+    color: white !important;
+}
+
 .md-bgClr{
     background: #00456A !important;
 }
@@ -505,6 +509,7 @@ mat-panel-title{
 .md-row-mt{
     margin-top: -15px;
 }
+
 
 
 

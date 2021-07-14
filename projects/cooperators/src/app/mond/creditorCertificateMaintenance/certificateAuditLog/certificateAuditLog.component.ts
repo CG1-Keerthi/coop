@@ -44,14 +44,14 @@ export class CertificateAuditLogComponent implements OnInit {
         this.certificateAuditHistory = applicantLoanAuditHistory;
    }
 
-   @HostListener('click', ['$event.target'])
-   onClick(element) {
-       debugger;
-       this.isResizeTrue = true;
-       setTimeout(() => {
-           this.isResizeTrue = false;
-       }, 2000)
-   }
+//    @HostListener('click', ['$event.target'])
+//    onClick(element) {
+//        debugger;
+//        this.isResizeTrue = true;
+//        setTimeout(() => {
+//            this.isResizeTrue = false;
+//        }, 2000)
+//    }
 
 }
 

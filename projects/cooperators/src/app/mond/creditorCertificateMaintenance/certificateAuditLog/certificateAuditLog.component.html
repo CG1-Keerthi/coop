@@ -1,6 +1,6 @@
 <!-- <div>certificateAuditLog works!</div> -->
 <div class="ym_content">
-    <div class="col-md-12 col-lg-12 col-sm-12 container md-top">
+    <div class="md-top">
         <div>
             <mat-accordion>
                 <mat-expansion-panel [expanded]="true">
@@ -10,31 +10,34 @@
                         </mat-panel-title>
                     </mat-expansion-panel-header>
                     <div class="row">
-                        <div class="ym_form_group  col-6">
+                        <div class="ym_form_group  col-6 mb-0">
                             <label class="md-lbl">Client Certificate Number
                             </label>
-                            <input placeholder="Client Certificate Number"
+                            <input class="md-input-width" placeholder="Client Certificate Number"
                                 value="{{parsedAuditLogList[0]?.uniqueCertificateNumber}}" [readonly]="isFieldreadonly">
                         </div>
                     </div>
 
-                    <div id="ptableId">
+                    <div id="ptableId" class="mb-1 pb-1">
                         <p-table [value]="parsedAuditLogList" selectionMode="single" [scrollable]="true"
-                            [responsive]="true" scrollHeight="200px" [autoLayout]="true"
-                            [resizableColumns]="isResizeTrue" columnResizeMode="expand">
+                            [responsive]="true" scrollHeight="200px" [autoLayout]="true">
                             <ng-template pTemplate="header">
                                 <tr class="ptableHeader">
-                                    <th pResizableColumn>File Load Date and Time</th>
+                                    <th>File Load Date and Time</th>
                                     <th>Transaction Type</th>
                                     <th>File Name</th>
                                 </tr>
                             </ng-template>
                             <ng-template pTemplate="body" let-transactionHistoryResponseData>
                                 <tr [pSelectableRow]="transactionHistoryResponseData">
-                                    <td class="ui-resizable-column">{{transactionHistoryResponseData?.fileLoadDateTime.split('T')[0]}}
+                                    <td
+                                        title="{{transactionHistoryResponseData?.fileLoadDateTime.split('T')[0]}} {{transactionHistoryResponseData?.fileLoadDateTime.split('T')[1]}}">
+                                        {{transactionHistoryResponseData?.fileLoadDateTime.split('T')[0]}}
                                         {{transactionHistoryResponseData?.fileLoadDateTime.split('T')[1]}}</td>
-                                    <td>{{transactionHistoryResponseData?.transactionType}}</td>
-                                    <td>{{transactionHistoryResponseData?.fileName}}</td>
+                                    <td title="{{transactionHistoryResponseData?.transactionType}}">
+                                        {{transactionHistoryResponseData?.transactionType}}</td>
+                                    <td title="{{transactionHistoryResponseData?.fileName}}">
+                                        {{transactionHistoryResponseData?.fileName}}</td>
                                 </tr>
                             </ng-template>
                         </p-table>
@@ -42,7 +45,7 @@
                 </mat-expansion-panel>
             </mat-accordion>
         </div>
-
+        <hr class="m-0 p-0">
         <!-- Certificate Audit History -->
         <div class="mt-2">
             <mat-accordion>
@@ -53,13 +56,11 @@
                         </mat-panel-title>
                     </mat-expansion-panel-header>
                     <div>
-                        <p-table [value]="certificateAuditHistory" selectionMode="single"
-                        [scrollable]="true"
-                        [responsive]="true" scrollHeight="300px" [autoLayout]="true"
-                        [resizableColumns]="isResizeTrue" columnResizeMode="expand">
+                        <p-table [value]="certificateAuditHistory" selectionMode="single" [scrollable]="true"
+                            [responsive]="true" scrollHeight="280px" [autoLayout]="true">
                             <ng-template pTemplate="header">
                                 <tr class="ptableHeader">
-                                    <th pResizableColumn>Transaction Type</th>
+                                    <th>Transaction Type</th>
                                     <th>Transaction Date</th>
                                     <th>Application/Co-Applicant</th>
                                     <th>Coverage</th>
@@ -70,13 +71,20 @@
                             </ng-template>
                             <ng-template pTemplate="body" let-auditHistoryResponseData>
                                 <tr [pSelectableRow]="auditHistoryResponseData">
-                                    <td class="ui-resizable-column">{{auditHistoryResponseData?.transactionType}}</td>
-                                    <td>{{auditHistoryResponseData?.transactionDate}}</td>
-                                    <td>{{auditHistoryResponseData?.applicantName}}</td>
-                                    <td>{{auditHistoryResponseData?.coverageCode}}</td>
-                                    <td>{{auditHistoryResponseData?.updatedUIFieldName}}</td>
-                                    <td>{{auditHistoryResponseData?.oldValue}}</td>
-                                    <td>{{auditHistoryResponseData?.newValue}}</td>
+                                    <td title="{{auditHistoryResponseData?.transactionType}}">
+                                        {{auditHistoryResponseData?.transactionType}}</td>
+                                    <td title="{{auditHistoryResponseData?.transactionDate}}">
+                                        {{auditHistoryResponseData?.transactionDate}}</td>
+                                    <td title="{{auditHistoryResponseData?.applicantName}}">
+                                        {{auditHistoryResponseData?.applicantName}}</td>
+                                    <td title="{{auditHistoryResponseData?.coverageCode}}">
+                                        {{auditHistoryResponseData?.coverageCode}}</td>
+                                    <td title="{{auditHistoryResponseData?.updatedUIFieldName}}">
+                                        {{auditHistoryResponseData?.updatedUIFieldName}}</td>
+                                    <td title="{{auditHistoryResponseData?.oldValue}}">
+                                        {{auditHistoryResponseData?.oldValue}}</td>
+                                    <td title="{{auditHistoryResponseData?.newValue}}">
+                                        {{auditHistoryResponseData?.newValue}}</td>
                                 </tr>
                             </ng-template>
                         </p-table>

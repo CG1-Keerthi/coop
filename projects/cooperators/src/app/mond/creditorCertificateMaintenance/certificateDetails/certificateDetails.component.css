@@ -5,5 +5,13 @@ mat-expansion-panel-header{
     width: 100%;
 }
 .md-top{
-    margin-top: -3rem;
+    margin-top: -55px;
   }
+  
+  .md-card-hdr{
+    background: #00456A;
+    margin: 0.5px;
+}
+.md-input-width{
+    width: 70%;
+}

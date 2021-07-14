@@ -1,13 +1,14 @@
 mat-expansion-panel-header{
     height: 39px !important;
 }
-
-
-
   /* #ptableId{
     overflow-y: auto;
     height: 232px;
   } */
   .md-top{
-    margin-top: -3rem;
+    margin-top: -55px;
   }
+
+  .md-input-width{
+    width: 50%;
+}

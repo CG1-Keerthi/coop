@@ -3,5 +3,11 @@ mat-expansion-panel-header{
 }
 
 .md-top{
-    margin-top: -3rem;
+    margin-top: -55px;
+}
+.md-input-width{
+    width: 70%;
+}
+.md-date-alignment{
+    margin-left: 1px;
 }

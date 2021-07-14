@@ -1,6 +1,10 @@
 .md-spinner{
     margin-left: 30rem;
 }
+.md-refine-card-height{
+  /* height: 27rem !important; */
+  height: 532px !important;
+}
 
 /* .ptableId{
     overflow-y: auto;

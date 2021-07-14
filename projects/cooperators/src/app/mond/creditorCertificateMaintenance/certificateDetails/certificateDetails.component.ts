@@ -118,13 +118,13 @@ export class certificateDetailsComponent implements OnInit {
   }
 
 
-  @HostListener('click', ['$event.target'])
-  onClick(element) {
-      debugger;
-      this.isResizeTrue = true;
-      setTimeout(() => {
-          this.isResizeTrue = false;
-      }, 2000)
-  }
+  // @HostListener('click', ['$event.target'])
+  // onClick(element) {
+  //     debugger;
+  //     this.isResizeTrue = true;
+  //     setTimeout(() => {
+  //         this.isResizeTrue = false;
+  //     }, 2000)
+  // }
 
 }

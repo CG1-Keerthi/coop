@@ -1,21 +1,32 @@
 <div class="ym_content">
-    <div class="col-md-12 col-lg-12 col-sm-12 mt-2 container">
+    <div class="p-1 m-1">
         <div class="row md-breadCrumbs">
             Creditor Data - Admin View
         </div>
         <div class="row">
-            <div class="col-md-9">
-                <mat-card class="w-100 mt-2 md-border">
-                    <mat-tab-group class="col-md-12" [(selectedIndex)]="selectedTab">
+            <div class="col-md-9 pr-2">
+                <mat-card class="w-100 mt-2 p-0 md-border">
+                    <mat-tab-group class="col-md-12 p-1 m-1" [(selectedIndex)]="selectedTab">
                         <mat-tab label="Process Overview">
                             <div class="row pt-2 m-0">
-                                <div class="col-md-3 p-1 md-refine-card">
+                                <div class="col-md-3 p-2 md-refine-card">
                                     <h3 class="md-h3"><i class="fa fa-bars pr-2"></i>Refine your Search</h3>
-                                    <div class="ym_form_group">
+                                    <!-- <div class="ym_form_group row mb-0 pb-0">
                                         <label class="md-lbl">Client</label>
                                         <input type="text" placeholder="Client" [(ngModel)]="clientName">
+                                    </div> -->
+                                    <div class="ym_form_group row mb-0 pb-0">
+                                        <label class="md-lbl">Client</label>
+                                        <input type="text" placeholder="Pick one" aria-label="Number" matInput
+                                            (keyup)="clientNameKeyup($event)" [(ngModel)]="clientName"
+                                            [matAutocomplete]="auto">
+                                        <mat-autocomplete #auto="matAutocomplete">
+                                            <mat-option *ngFor="let list of clientNameVal" [value]="list.value">
+                                                {{list.value}}
+                                            </mat-option>
+                                        </mat-autocomplete>
                                     </div>
-                                    <div class="ym_form_group">
+                                    <div class="ym_form_group row mb-0 pb-0">
                                         <label class="md-lbl">File Status</label>
                                         <div class="ym_form_select">
                                             <select [(ngModel)]="fileStatus">
@@ -35,71 +46,80 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="ym_form_group md-group-Btn">
-                                        <button class="ym_button" style="margin-right: 10px;"><i class="fa fa-undo"></i>
+                                    <div class="ym_form_group_mat_btn row mb-0 pb-0">
+                                        <button class="btn btn-primary" style="margin-right: 10px;" (click)="onClickOfOverviewReset()"><i
+                                                class="fa fa-undo"></i>
                                             Reset</button>
-                                        <button class="ym_button" (click)="onClickOfProcessOverviewSearch()"><i
+                                        <button class="btn btn-primary" (click)="onClickOfProcessOverviewSearch()"><i
                                                 class="fa fa-search"></i>
                                             Search</button>
                                     </div>
                                 </div>
                                 <div class="col-9"></div>
-                                <div class="row mt-4" style="margin-left: -1px;">
-                                    <mat-accordion>
-                                        <mat-expansion-panel [expanded]="true">
-                                            <mat-expansion-panel-header class="md-bgClr">
-                                                <mat-panel-title style="color: white;">
-                                                    Process Summary
-                                                </mat-panel-title>
-                                            </mat-expansion-panel-header>
-                                            <div class="row md-top">
-                                                <div class="col-12 col-md-12 col-sm-12 col-lg-12 md-width"
-                                                    id="processSummaryId" style="margin-left: -8px !important;">
-                                                    <p-table [value]="processSummaryList" [scrollable]="true"
-                                                        [responsive]="true" scrollHeight="400px" [autoLayout]="true"
-                                                        [resizableColumns]="isResizeTrue" columnResizeMode="expand">
-                                                        <ng-template pTemplate="header">
-                                                            <tr class="ptableHeader">
-                                                                <th pResizableColumn>File Name</th>
-                                                                <th>Client</th>
-                                                                <th>File Submission Date</th>
-                                                                <th>File Processing Status</th>
-                                                                <th>Process Instance Number</th>
-                                                                <th>View</th>
-                                                            </tr>
-                                                        </ng-template>
-                                                        <ng-template pTemplate="body" let-processSummaryListData>
-                                                            <tr [pSelectableRow]="processSummaryListData">
-                                                                <td style="color: royalblue;"
-                                                                    (click)="onClickOfFileName(processSummaryListData)"
-                                                                    class="ui-resizable-column">
-                                                                    {{processSummaryListData?.fileIdentifier}}
-                                                                    <br>
-                                                                    <div class="md-overFlow"
-                                                                        title="{{processSummaryListData?.fileName}}">
-                                                                        {{processSummaryListData?.fileName}}</div>
-                                                                </td>
-                                                                <td>{{processSummaryListData?.partnerName}}</td>
-                                                                <td>{{processSummaryListData?.fileSubmissionDate.split('T')[0]}}
-                                                                </td>
-                                                                <td>{{processSummaryListData?.fileProcessingStatus}}
-                                                                </td>
-                                                                <td>{{processSummaryListData?.processInstanceNumber}}
-                                                                </td>
-                                                                <td><button type="button"
-                                                                        class="btn btn-primary md-group-Btn"
-                                                                        (click)="onClickOfViewSplitFiles(processSummaryListData)">View
-                                                                        Split
-                                                                        Files</button></td>
-                                                            </tr>
-                                                        </ng-template>
-                                                    </p-table>
-                                                </div>
-                                            </div>
-                                        </mat-expansion-panel>
-                                    </mat-accordion>
-                                </div>
                             </div>
+                            <div class="mt-2 mr-2">
+                                <mat-accordion>
+                                    <mat-expansion-panel [expanded]="true">
+                                        <mat-expansion-panel-header class="md-bgClr">
+                                            <mat-panel-title style="color: white;">
+                                                Process Summary
+                                            </mat-panel-title>
+                                        </mat-expansion-panel-header>
+                                        <div class="row md-top">
+                                            <div class="col-12 col-md-12 col-sm-12 col-lg-12" id="processSummaryId">
+                                                <p-table [value]="processSummaryList" [scrollable]="true"
+                                                    [responsive]="true" scrollHeight="400px" [autoLayout]="true"
+                                                    [resizableColumns]="isResizeTrue" columnResizeMode="expand">
+                                                    <ng-template pTemplate="header">
+                                                        <tr class="ptableHeader">
+                                                            <th pResizableColumn>File Name</th>
+                                                            <th>Client</th>
+                                                            <th>File Submission Date</th>
+                                                            <th>File Processing Status</th>
+                                                            <th>Process Instance Number</th>
+                                                            <th>View</th>
+                                                        </tr>
+                                                    </ng-template>
+                                                    <ng-template pTemplate="body" let-processSummaryListData>
+                                                        <tr [pSelectableRow]="processSummaryListData">
+                                                            <td style="color: royalblue;"
+                                                                (click)="onClickOfFileName(processSummaryListData)"
+                                                                class="ui-resizable-column">
+                                                                <div title="{{processSummaryListData?.fileIdentifier}}">
+                                                                    {{processSummaryListData?.fileIdentifier}}
+                                                                </div>
+                                                                <div class="md-overFlow"
+                                                                    title="{{processSummaryListData?.fileName}}">
+                                                                    {{processSummaryListData?.fileName}}</div>
+                                                            </td>
+                                                            <td title="{{processSummaryListData?.partnerName}}">
+                                                                {{processSummaryListData?.partnerName}}</td>
+                                                            <td
+                                                                title="{{processSummaryListData?.fileSubmissionDate.split('T')[0]}}">
+                                                                {{processSummaryListData?.fileSubmissionDate.split('T')[0]}}
+                                                            </td>
+                                                            <td
+                                                                title="{{processSummaryListData?.fileProcessingStatus}}">
+                                                                {{processSummaryListData?.fileProcessingStatus}}
+                                                            </td>
+                                                            <td
+                                                                title="{{processSummaryListData?.processInstanceNumber}}">
+                                                                {{processSummaryListData?.processInstanceNumber}}
+                                                            </td>
+                                                            <td><button type="button"
+                                                                    class="btn btn-primary md-group-Btn"
+                                                                    (click)="onClickOfViewSplitFiles(processSummaryListData)">View
+                                                                    Split
+                                                                    Files</button></td>
+                                                        </tr>
+                                                    </ng-template>
+                                                </p-table>
+                                            </div>
+                                        </div>
+                                    </mat-expansion-panel>
+                                </mat-accordion>
+                            </div>
+                            <!-- </div> -->
                         </mat-tab>
                         <mat-tab label="Split Files">
                             <app-splitFiles-designer *ngIf="isShowSplitView" [splitData]="splitDataList">
@@ -109,8 +129,8 @@
                 </mat-card>
 
             </div>
-            <div class="col-3 col-md-3">
-                <div class="widget-body" style="background-color: #FAFAFA; border-radius: 5px; margin-top: 11px;">
+            <div class="col-3 col-md-3 pl-0">
+                <div class="widget-body" style="background-color: #FAFAFA; border-radius: 5px; margin-top: 8px;">
                     <br>
                     <h4 class="md-clr" style="padding-left: 6px; margin-top: 10px;margin-bottom: 10px">
                         Instructions</h4>
@@ -150,11 +170,11 @@
                         <mat-card-header>
                             <mat-card-title class="md-clr md-font">
                                 <div class="row col-xs-12">
-                                    <div class="col-8 col-xs-8" style="margin-left: -9px;">
-                                        <span class="md-clr" style="margin-left: -24px;">
+                                    <div class="col-8 col-xs-8">
+                                        <span class="md-clr" style="margin-left: -13px;">
                                             <mat-icon>signal_cellular_alt</mat-icon>
-                                            <p style="margin-top: -27px;
-                                         font-size: 15px;">For future enhancement</p>
+                                            <p style="margin-top: -28px;
+                                         font-size: 15px;margin-left: 11px;">For future enhancement</p>
                                         </span>
                                     </div>
                                     <div class="col-4 col-xs-4">
@@ -176,7 +196,7 @@
                         </mat-card-header>
                         <mat-divider></mat-divider>
                         <mat-card-content class="mt-3">
-                            <table align="right" id="md-enhancement"> 
+                            <table align="right" id="md-enhancement">
                                 <tr style="cursor: default;">
                                     <td class="legendColorBox" style="cursor: default;">
                                         <div style="padding: 1px; cursor: default;">

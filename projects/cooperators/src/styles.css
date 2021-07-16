@@ -406,8 +406,10 @@ color: white !important;
 
 @media (min-width: 992px){
     .md-width{
-    flex: 24 0 67rem;
-    max-width: 70rem;
+    flex: 58 0 71rem;
+    max-width: 73rem;
+    /* flex: 24 0 67rem;
+    max-width: 70rem; */
     }
 }
 

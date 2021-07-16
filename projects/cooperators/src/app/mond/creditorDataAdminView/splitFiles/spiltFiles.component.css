@@ -10,3 +10,6 @@ mat-expansion-panel-header{
 overflow-y: auto!important;
 height: 30rem!important;
 }
+.md-refine-card{
+    height: 16rem !important;
+}

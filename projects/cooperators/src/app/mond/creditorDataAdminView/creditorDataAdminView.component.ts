@@ -21,6 +21,7 @@ export class CreditorDataAdminViewComponent implements OnInit {
     public isShowSplitView: boolean = false;
     public creditorData: any;
     public isResizeTrue: boolean = false;
+    public clientNameVal: any;
     constructor(private mdMondServiceDS: MDMondServiceDS,
         private router: Router,
         private mdCommonGetterSetter: MDCommonGetterSetter) { }
@@ -42,7 +43,7 @@ export class CreditorDataAdminViewComponent implements OnInit {
             data => {
                 this.processSummaryList = JSON.parse(atob(data.value)).creditorDataFileProcessingInfo_creditorDataFileProcessingInfo;
             }, error => {
-                debugger;
+                // debugger;
                 this.mdMondServiceDS.MDError(error);
                 // let data = { "key": "key", "value": "eyJjcmVkaXRvckRhdGFGaWxlUHJvY2Vzc2luZ0luZm9fY3JlZGl0b3JEYXRhRmlsZVByb2Nlc3NpbmdJbmZvIjpbeyJmaWxlTmFtZSI6IkV4dHJhY3QgMjAyMTA1MDEgdG8gMjAyMTA1MzAtU2NlbmFyaW8xLUNhbmNlbGxhdGlvbl9Db29wX1RTXzFfVENfMTUueGxzeCIsImJhbGFuY2luZ0luZm8iOlt7InRyYW5zYWN0aW9uVHlwZSI6Ik5ldyBCdXNpbmVzcyIsInRvdGFsTnVtYmVyT2ZSZWNvcmRzIjoyLCJudW1iZXJPZlJlY29yZHNJbkVycm9yIjoyLCJ0b3RhbE51bWJlck9mRHVwbGljYXRlUmVjb3JkcyI6MCwibnVtYmVyT2ZSZWNvcmRzUG9zdGVkIjowfSx7InRyYW5zYWN0aW9uVHlwZSI6IkNhbmNlbGxhdGlvbiIsInRvdGFsTnVtYmVyT2ZSZWNvcmRzIjoxLCJudW1iZXJPZlJlY29yZHNJbkVycm9yIjoxLCJ0b3RhbE51bWJlck9mRHVwbGljYXRlUmVjb3JkcyI6MCwibnVtYmVyT2ZSZWNvcmRzUG9zdGVkIjowfV0sImZpbGVQcm9jZXNzaW5nU3RhdHVzIjoiRmlsZSBQcm9jZXNzZWQgUGFydGlhbGx5IiwicGFydG5lck5hbWUiOiJMR00iLCJmaWxlSWRlbnRpZmllciI6IjAwMDAxMDczIiwiZmlsZVByb2Nlc3NpbmdEYXRlIjoiMjAyMS0wNS0xOVQxNTo0ODozOC4xODJaIiwiZmlsZUZ1bmN0aW9uVHlwZSI6IlBvbGljeSBGZWVkIiwiZmlsZVN1Ym1pdHRlZEJ5IjoiRlRQIiwiZmlsZVN1Ym1pc3Npb25EYXRlIjoiMjAyMS0wNS0xOVQxNTo0ODoxMS4xMzNaIiwicHJvZHVjdFR5cGUiOiJTUCJ9LHsidG90YWxOdW1iZXJPZlJlY29yZHMiOjIsImZpbGVOYW1lIjoiTEFJUy0gRXh0cmFjdCBSIFVwZGF0ZWRfRmlsZVZhbGlkYXRpb25DaGVjay54bHN4IiwiZmlsZVByb2Nlc3NpbmdTdGF0dXMiOiJGaWxlIFByb2Nlc3NlZCBDb21wbGV0ZWx5IiwicGFydG5lck5hbWUiOiJMQUlTIiwiZmlsZUlkZW50aWZpZXIiOiIwMDAwMTA2MSIsImZpbGVQcm9jZXNzaW5nRGF0ZSI6IjIwMjEtMDUtMTlUMTI6MzY6MDQuNDAyWiIsImZpbGVTdWJtaXR0ZWRCeSI6IkZUUCIsIm51bWJlck9mUmVjb3Jkc1Bvc3RlZCI6MiwiZmlsZVN1Ym1pc3Npb25EYXRlIjoiMjAyMS0wNS0xOVQxMjozMTowMC4wNTFaIiwibnVtYmVyT2ZSZWNvcmRzSW5FcnJvciI6MCwidG90YWxOdW1iZXJPZkR1cGxpY2F0ZVJlY29yZHMiOjAsImJhbGFuY2luZ0luZm8iOltdLCJmaWxlRnVuY3Rpb25UeXBlIjoiUmVpbnN0YXRlbWVudCIsInByb2R1Y3RUeXBlIjoiU1AifSx7InRvdGFsTnVtYmVyT2ZSZWNvcmRzIjoxMywiZmlsZU5hbWUiOiJDb29wZXJhdG9ycyBFeHRyYWN0IDIwMTcwOTEwIChVVEYtOCktVGVtcC50eHQiLCJmaWxlUHJvY2Vzc2luZ1N0YXR1cyI6IkZpbGUgcHJvY2Vzc2VkIHdpdGggZXJyb3JzIiwicGFydG5lck5hbWUiOiJDcmVsb2dpeCIsImZpbGVJZGVudGlmaWVyIjoiMDAwMDA5MjQiLCJmaWxlUHJvY2Vzc2luZ0RhdGUiOiIyMDIxLTA0LTI4VDA1OjExOjA0LjYxNloiLCJmaWxlU3VibWl0dGVkQnkiOiJGVFAiLCJudW1iZXJPZlJlY29yZHNQb3N0ZWQiOjEwLCJmaWxlU3VibWlzc2lvbkRhdGUiOiIyMDIxLTA0LTI4VDA1OjExOjA0LjYxNloiLCJudW1iZXJPZlJlY29yZHNJbkVycm9yIjozLCJ0b3RhbE51bWJlck9mRHVwbGljYXRlUmVjb3JkcyI6MCwiYmFsYW5jaW5nSW5mbyI6W10sImZpbGVQcm9jZXNzaW5nRXJyb3JzIjoiXG5DZXJ0aWZpY2F0ZSAzOTk3NTM1NSBkb2VzIG5vdCBleGlzdCBmb3IgY2FuY2VsbGF0aW9uXG5DZXJ0aWZpY2F0ZSAzOTc2MzIyMyBkb2VzIG5vdCBleGlzdCBmb3IgY2FuY2VsbGF0aW9uXG5DZXJ0aWZpY2F0ZSAzOTU5MjEwNSBkb2VzIG5vdCBleGlzdCBmb3IgY2FuY2VsbGF0aW9uIiwiZmlsZUZ1bmN0aW9uVHlwZSI6Ik5ldyBCdXNpbmVzcyIsInByb2R1Y3RUeXBlIjoiU1AifSx7InRvdGFsTnVtYmVyT2ZSZWNvcmRzIjozLCJmaWxlTmFtZSI6IkxHTV9OZXdCdXNpbmVzcy0zUmVjX1Byb3Blck1heENvdmVyYWdlQW1vdW50IExpZmUudHh0IiwiZmlsZVByb2Nlc3NpbmdTdGF0dXMiOiJGaWxlIHJlamVjdGVkIiwicGFydG5lck5hbWUiOiJMR00iLCJmaWxlSWRlbnRpZmllciI6IjAwMDAwOTYxIiwiZmlsZVByb2Nlc3NpbmdEYXRlIjoiMjAyMS0wNS0wN1QxMzowMDozMi42NzZaIiwiZmlsZVN1Ym1pdHRlZEJ5IjoiRlRQIiwibnVtYmVyT2ZSZWNvcmRzUG9zdGVkIjowLCJmaWxlU3VibWlzc2lvbkRhdGUiOiIyMDIxLTA1LTA3VDEzOjAwOjI5LjUzM1oiLCJudW1iZXJPZlJlY29yZHNJbkVycm9yIjozLCJ0b3RhbE51bWJlck9mRHVwbGljYXRlUmVjb3JkcyI6MCwiYmFsYW5jaW5nSW5mbyI6W10sImZpbGVGdW5jdGlvblR5cGUiOiJOZXcgQnVzaW5lc3MiLCJwcm9kdWN0VHlwZSI6IlNQIn0seyJ0b3RhbE51bWJlck9mUmVjb3JkcyI6MywiZmlsZU5hbWUiOiJMR01fTmV3QnVzaW5lc3MtM1JlY19Qcm9wZXJNYXhDb3ZlcmFnZUFtb3VudCBMaWZlLnR4dCIsImZpbGVQcm9jZXNzaW5nU3RhdHVzIjoiRmlsZSByZWplY3RlZCIsInBhcnRuZXJOYW1lIjoiTEdNIiwiZmlsZUlkZW50aWZpZXIiOiIwMDAwMDk2MiIsImZpbGVQcm9jZXNzaW5nRGF0ZSI6IjIwMjEtMDUtMDdUMTM6MDA6MzIuNjc2WiIsImZpbGVTdWJtaXR0ZWRCeSI6IkZUUCIsIm51bWJlck9mUmVjb3Jkc1Bvc3RlZCI6MCwiZmlsZVN1Ym1pc3Npb25EYXRlIjoiMjAyMS0wNS0wN1QxMzowMDoyOS41MzNaIiwibnVtYmVyT2ZSZWNvcmRzSW5FcnJvciI6MywidG90YWxOdW1iZXJPZkR1cGxpY2F0ZVJlY29yZHMiOjAsImJhbGFuY2luZ0luZm8iOltdLCJmaWxlRnVuY3Rpb25UeXBlIjoiTmV3IEJ1c2luZXNzIiwicHJvZHVjdFR5cGUiOiJTUCJ9LHsidG90YWxOdW1iZXJPZlJlY29yZHMiOjMsImZpbGVOYW1lIjoiTEdNX05ld0J1c2luZXNzLTNSZWNfUHJvcGVyTWF4Q292ZXJhZ2VBbW91bnQgTGlmZS50eHQiLCJmaWxlUHJvY2Vzc2luZ1N0YXR1cyI6IkZpbGUgcmVqZWN0ZWQiLCJwYXJ0bmVyTmFtZSI6IkxHTSIsImZpbGVJZGVudGlmaWVyIjoiMDAwMDA5NjMiLCJmaWxlUHJvY2Vzc2luZ0RhdGUiOiIyMDIxLTA1LTA3VDEzOjAwOjMyLjY3NloiLCJmaWxlU3VibWl0dGVkQnkiOiJGVFAiLCJudW1iZXJPZlJlY29yZHNQb3N0ZWQiOjAsImZpbGVTdWJtaXNzaW9uRGF0ZSI6IjIwMjEtMDUtMDdUMTM6MDA6MjkuNTMzWiIsIm51bWJlck9mUmVjb3Jkc0luRXJyb3IiOjMsInRvdGFsTnVtYmVyT2ZEdXBsaWNhdGVSZWNvcmRzIjowLCJiYWxhbmNpbmdJbmZvIjpbXSwiZmlsZUZ1bmN0aW9uVHlwZSI6Ik5ldyBCdXNpbmVzcyIsInByb2R1Y3RUeXBlIjoiU1AifSx7InRvdGFsTnVtYmVyT2ZSZWNvcmRzIjozLCJmaWxlTmFtZSI6IkxHTV9OZXdCdXNpbmVzcy0zUmVjX1Byb3Blck1heENvdmVyYWdlQW1vdW50IExpZmUudHh0IiwiZmlsZVByb2Nlc3NpbmdTdGF0dXMiOiJGaWxlIHJlamVjdGVkIiwicGFydG5lck5hbWUiOiJMR00iLCJmaWxlSWRlbnRpZmllciI6IjAwMDAwOTY0IiwiZmlsZVByb2Nlc3NpbmdEYXRlIjoiMjAyMS0wNS0wN1QxMzowMDozMi42NzZaIiwiZmlsZVN1Ym1pdHRlZEJ5IjoiRlRQIiwibnVtYmVyT2ZSZWNvcmRzUG9zdGVkIjowLCJmaWxlU3VibWlzc2lvbkRhdGUiOiIyMDIxLTA1LTA3VDEzOjAwOjI5LjUzM1oiLCJudW1iZXJPZlJlY29yZHNJbkVycm9yIjozLCJ0b3RhbE51bWJlck9mRHVwbGljYXRlUmVjb3JkcyI6MCwiYmFsYW5jaW5nSW5mbyI6W10sImZpbGVGdW5jdGlvblR5cGUiOiJOZXcgQnVzaW5lc3MiLCJwcm9kdWN0VHlwZSI6IlNQIn0seyJ0b3RhbE51bWJlck9mUmVjb3JkcyI6MywiZmlsZU5hbWUiOiJMR01fTmV3QnVzaW5lc3MtM1JlY19Qcm9wZXJNYXhDb3ZlcmFnZUFtb3VudCBMaWZlLnR4dCIsImZpbGVQcm9jZXNzaW5nU3RhdHVzIjoiRmlsZSByZWplY3RlZCIsInBhcnRuZXJOYW1lIjoiTEdNIiwiZmlsZUlkZW50aWZpZXIiOiIwMDAwMDk2NSIsImZpbGVQcm9jZXNzaW5nRGF0ZSI6IjIwMjEtMDUtMDdUMTM6MDA6MzIuNjc2WiIsImZpbGVTdWJtaXR0ZWRCeSI6IkZUUCIsIm51bWJlck9mUmVjb3Jkc1Bvc3RlZCI6MCwiZmlsZVN1Ym1pc3Npb25EYXRlIjoiMjAyMS0wNS0wN1QxMzowMDoyOS41MzNaIiwibnVtYmVyT2ZSZWNvcmRzSW5FcnJvciI6MywidG90YWxOdW1iZXJPZkR1cGxpY2F0ZVJlY29yZHMiOjAsImJhbGFuY2luZ0luZm8iOltdLCJmaWxlRnVuY3Rpb25UeXBlIjoiTmV3IEJ1c2luZXNzIiwicHJvZHVjdFR5cGUiOiJTUCJ9XX0=" }
                 // this.processSummaryList = JSON.parse(atob(data.value)).creditorDataFileProcessingInfo_creditorDataFileProcessingInfo;
@@ -50,10 +51,22 @@ export class CreditorDataAdminViewComponent implements OnInit {
         )
     }
 
+    clientNameKeyup(event) {
+        this.mdMondServiceDS.getFormDataFromMondService('Creditor Self Admin', 'FetchListOfClientNames', JSON.stringify({ "clientName": event.target.value }), null).subscribe(
+            data => {
+                this.clientNameVal = JSON.parse(atob(data.value)).response_response;
+            }, error => {
+                this.mdMondServiceDS.MDError(error);
+                // this.clientNameVal = [{ "companyId": 6883, "inheritFromCompanyId": -1, "companyIdentifier": "24002", "companyName": "Crelogix", "password": "", "baseCompanyFl": false, "selectedCompany": false, "createUser": 67, "updateUser": 156, "createDate": "Oct 13, 2017 5:43:01 AM", "updateDate": "Oct 14, 2017 1:23:27 PM", "partnerCompLogo": "", "as2Identifier": "", "emailDomain": "", "companyTZ": "-05:00", "companyLogo": "", "dunsNumber": "", "rnifLocation": "", "rnifPartnerURL": "", "rnifIdentifier": "", "groupFl": false, "groupCompanyId": -1, "archiveToS3": false, "archiveYears": 0, "archiveAfterDays": 0, "userBelongToFl": 0, "decodedPassword": "", "invalidLoginAllowed": 3, "marconnCompanyRole": 1, "adminChannel": -1, "purgeAfterDays": 60, "moveToBackupDays": 30, "mdCompanyFl": true, "mcCompanyFl": false, "dmsCompanyFl": false, "bpmCompanyFl": false, "homeFolderId": 0, "authIdentifier": 1 }, { "companyId": 7102, "inheritFromCompanyId": -1, "companyIdentifier": "24003", "companyName": "LAIS", "password": "", "baseCompanyFl": false, "selectedCompany": false, "createUser": 67, "updateUser": 67, "createDate": "Apr 12, 2019 5:13:34 AM", "updateDate": "Apr 12, 2019 5:13:34 AM", "partnerCompLogo": "", "as2Identifier": "", "emailDomain": "", "companyTZ": "", "companyLogo": "", "dunsNumber": "", "rnifLocation": "", "rnifPartnerURL": "", "rnifIdentifier": "", "groupFl": false, "groupCompanyId": -1, "archiveToS3": false, "archiveYears": 0, "archiveAfterDays": 0, "userBelongToFl": 0, "decodedPassword": "", "invalidLoginAllowed": 3, "marconnCompanyRole": 1, "adminChannel": -1, "purgeAfterDays": 60, "moveToBackupDays": 30, "mdCompanyFl": true, "mcCompanyFl": false, "dmsCompanyFl": false, "bpmCompanyFl": false, "homeFolderId": 0, "authIdentifier": 1 }]
+                //     let data =   {"key":"key","value":"eyJyZXNwb25zZV9yZXNwb25zZSI6W3siaWQiOiIzIiwidmFsdWUiOiJMQUlTIn0seyJpZCI6IjEiLCJ2YWx1ZSI6IkxHTSJ9LHsiaWQiOiI0IiwidmFsdWUiOiJMR00yIn1dfQ\u003d\u003d"}
+                //    this.clientNameVal = JSON.parse(atob(data.value)).response_response;
+            }
+        )
+    }
+
     onClickOfFileName(event) {
         this.mdCommonGetterSetter.setProcessSummaryRowData(event);
         this.router.navigate(['/home/creditorDataProcessingOverview'], { skipLocationChange: true });
-
     }
 
     onClickOfViewSplitFiles(event) {
@@ -75,14 +88,20 @@ export class CreditorDataAdminViewComponent implements OnInit {
 
     }
 
-    @HostListener('click', ['$event.target'])
-    onClick(element) {
-        debugger;
-        this.isResizeTrue = true;
-        setTimeout(() => {
-            this.isResizeTrue = false;
-        }, 2000)
+    onClickOfOverviewReset() {
+        this.clientName = "";
+        this.fileStatus = "";
+        this.processSummaryList = [];
     }
+
+    // @HostListener('click', ['$event.target'])
+    // onClick(element) {
+    //     debugger;
+    //     this.isResizeTrue = true;
+    //     setTimeout(() => {
+    //         this.isResizeTrue = false;
+    //     }, 2000)
+    // }
 
 
 

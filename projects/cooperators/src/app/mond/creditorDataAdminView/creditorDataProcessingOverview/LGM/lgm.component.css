@@ -2,7 +2,7 @@ mat-expansion-panel-header{
     height: 39px !important;
 }
 .md-group{
-    margin: 1rem 0rem 1rem 0rem !important;
+    margin: 0rem 0rem 0rem 0rem !important;
     display: inline-block !important;
 }
 .md-icon{
@@ -21,6 +21,10 @@ mat-expansion-panel-header{
 
 .md-text-area-width{
     width: 99%;
+}
+.md-card-hdr{
+    background: #00456A;
+    margin: 0.5px;
 }
 .md-imgConfigBlue{
     background-color: #6fb3e0;

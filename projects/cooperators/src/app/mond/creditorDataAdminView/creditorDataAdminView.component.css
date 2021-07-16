@@ -15,8 +15,9 @@ background: blue !important;
 #processSummaryId{
 overflow-x: hidden;
 width: 1063px;
-overflow-y: auto!important;
-height: 30rem!important;
+/* overflow-y: auto!important; */
+overflow-y: hidden;
+height: 401px !important;
 }
 
 ul{
@@ -42,5 +43,8 @@ h4 {
   }
   .mad-card-height{
     height: 16rem;
+  }
+  .md-refine-card{
+    height: 253px !important;
   }
  
